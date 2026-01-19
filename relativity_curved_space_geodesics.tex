@@ -1,0 +1,697 @@
+ \documentclass[12 pt]{article}
+\usepackage{amsmath, amssymb, mathtools, slashed, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{tikz-cd}
+\usepackage{tikz} 
+\usepackage{tikz-feynman}
+\tikzfeynmanset{compat=1.1.0}
+\usepackage[shortlabels]{enumitem}
+
+% Commonly used sets of numbers
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\PR}{\mathbb{P}}
+\newcommand{\F}{\mathbb{F}}
+
+
+% Shortcuts for text formatting
+\newcommand{\tb}[1]{\textbf{#1}}
+\newcommand{\ti}[1]{\textit{#1}}
+
+% Math fonts
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+
+% Shortcuts for inner product spaces
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \left| #2 \right\rangle \right.}
+\newcommand{\Ip}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\nm}[1]{\left\| #1 \right\|}
+
+% Shortcuts for the section of 3D rotations
+\newcommand{\lo}{\textbf{L}_1}
+\newcommand{\ltw}{\textbf{L}_2}
+\newcommand{\lt}{\textbf{L}_3}
+
+
+% Shortcuts for geometric vectors
+\newcommand{\U}{\textbf{u}}
+\newcommand{\V}{\textbf{v}}
+\newcommand{\W}{\textbf{w}}
+\newcommand{\B}[1]{\mathbf{#1}}
+\newcommand{\BA}[1]{\hat{\mathbf{#1}}}
+
+% Other shortcuts
+
+\newcommand{\G}{\gamma}
+\newcommand{\LA}{\mathcal{L}}
+\newcommand{\X}{\Vec{x}}
+\newcommand{\x}{\Vec{x}}
+
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+\newcommand{\HI}{\mathcal{H}}
+\newcommand{\AL}{\mathcal{A}}
+
+\newcommand{\D}{\partial}
+
+\newcommand{\bs}{\textbackslash}
+
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\arr}{\mathcal{R}}
+
+\numberwithin{equation}{section}
+\setcounter{section}{0}
+
+
+
+
+
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+
+
+
+\begin{document}
+
+\title{Notes on Special Relativity, Curved Space, and Geodesics}
+\author{Mathew Calkins\\
+  \textit{Center for Cosmology and Particle Physics},\\
+  \textit{New York University}\\
+  \texttt{mc8558@nyu.edu}.
+}
+
+\date{\today}
+
+\maketitle
+
+
+\abstract{Some supplementary discussion of geodesics, plus reviews of special relativity and curved spacetime}
+
+
+\tableofcontents
+
+
+\section{Review of Special Relativity}
+
+\subsection{Lorentz and Poincar\'{e} Transformations}
+
+We first learned Newtonian mechanics in the background of Galilean relativity. Here every two inertial references frames are equally valid and mutually indistinguishable, and the transformations that relate two such frames are arbitrary compositions of rotations, Galilean boosts, and translations. \\
+\\
+\
+Rotations are implemented by matrices. For example, if an observer in frame $S'$ is rotated by an angle $\theta$ relative to an observer in frame $S$, their coordinates are related as \begin{equation*}
+\begin{bmatrix}
+x' \\ y'
+\end{bmatrix} = \begin{bmatrix}
+\cos \theta & - \sin \theta \\
+\sin \theta & \cos \theta
+\end{bmatrix} \begin{bmatrix}
+x \\ y
+\end{bmatrix}
+\end{equation*}
+or if we include all of our spacetime coordinates \begin{equation*}
+\begin{bmatrix}
+t' \\ x' \\ y' \\ z'
+\end{bmatrix} = \begin{bmatrix}
+1 & 0 & 0 & 0  \\
+0 & \cos \theta & - \sin \theta & 0 \\
+0 & \sin \theta & \cos \theta & 0 \\
+0 & 0 & 0 & 1 
+\end{bmatrix} \begin{bmatrix}
+t \\ x \\ y \\ z 
+\end{bmatrix}.
+\end{equation*}
+Galilean boosts are also implemented by matrices. If the primed observer is moving relative to the unprimed observer with velocity $\vec{v} = v \hat{x}$, their coordinates are related as \begin{equation*}
+\begin{bmatrix}
+t' \\ x'
+\end{bmatrix} = \begin{bmatrix}
+1 & 0 \\
+-v & 1
+\end{bmatrix} \begin{bmatrix}
+t \\ x
+\end{bmatrix}.
+\end{equation*}
+which can similarly be padded to give a full map $(t,x,y,z) \mapsto (t',x',y',z')$. Finally, if the primed observer takes their origin displaced by a constant vector $\vec{a}$ and starts their stopwatch at a time $a_t$ (both relative to the unprimed observer), then the primed and unprimed coordinates are related as \begin{align*}
+t' & = t - a_t, \\
+\vec{x}' & = \vec{x} - \vec{a}.
+\end{align*}
+The transformation laws for special relativity work exactly the same way, except that Galilean boosts are replaced by Lorentz boosts. For the same example given above, we have \begin{equation*}
+\begin{bmatrix}
+t' \\ x'
+\end{bmatrix} = \gamma_v \begin{bmatrix}
+1 & -v \\
+-v & 1
+\end{bmatrix} \begin{bmatrix}
+t \\ x
+\end{bmatrix} \mbox{ where } \gamma_v := \frac{1}{\sqrt{1 - v^2}}.
+\end{equation*}
+\tb{Exercise}
+Restore explicit factors of $c$ and show that, in the limit $v/c \to 0$ at $v$ fixed, Lorentz boosts approach Galilean boosts.\\
+\\
+\
+An arbitrary transformation built from rotations, Lorentz boosts, and translations is called a \ti{Poincar\'{e} transformation}. If we exclude translations (if only because they're less interesting) the result is called a \ti{Lorentz transformation}.\\
+\\
+\
+Since rotations and boosts act on the coordinates by matrix multiplication and translations act by adding a constant vector, we can write an arbitrary Poincar\'{e} transformation as \begin{equation*}
+{x'}^\mu = \Lambda^\mu _{ \ \nu} x^\nu + a^\nu
+\end{equation*}
+as long as $\Lambda$ corresponds to something built from rotations and Lorentz boosts. Then restricting to Lorentz transformations is as simple as taking $a = 0$.
+
+
+\subsection{The Minkowski Metric and Spacetime}
+We can derive all this by one of two equivalent routes. One is to take Einstein's two classical axioms \begin{enumerate}
+\item Any two inertial frames are equally valid.
+\item Any two inertial frames agree on the speed of light.
+\end{enumerate}
+and perform some choice thought experiments involving observers with flashbulbs on and off trains and so on. More abstractly, we could start by declaring that spacetime has a natural background metric $\eta$ which, in every inertial frame, has constant components \begin{align*}
+\eta_{\mu \nu} & = \begin{cases}
+-1 & \mu = \nu = 0, \\
+1 & \mu = \nu \neq 0, \\
+0 & \mbox{otherwise.}
+\end{cases} \\
+\ & = \mbox{diag}(-1,+1,+1,+1).
+\end{align*}
+We can use this object to compute the inner product between arbitrary four-vectors, written variously as \begin{equation*}
+A \cdot B = \eta(A,B) = A^\mu \eta_{\mu \nu} B^\nu = A^0 B^0 - \vec{A} \cdot \vec{B}.
+\end{equation*}
+We can in particular use it to measure the squared distance between any two events. If events $A,B$ have coordinates $x_A,x_B$ and relative locations $\Delta x := x_B  - x_A$, then the \ti{invariant interval} between the two events is by definition \begin{equation*}
+\Delta s^2 := \Delta x^\mu \eta_{\mu \nu} \Delta x^\nu = - (\Delta t)^2 + \Delta \vec{x} \cdot \Delta \vec{x}.
+\end{equation*}
+If you sat down and found all of the coordinate transformations which always preserve this invariant interval between events (and which can be continuously built up from infinitesimal transformations, unlike time-reversal or certain reflections), you would find exactly the Lorentz transformations plus translations. In fact, in terms of this metric we can write down another even more abstract characterization of a Lorentz transformation, namely a coordinate transformation $x \mapsto x' = \Lambda x$ where $\Lambda$ satisfies \begin{equation*}
+\Lambda^\rho _{ \ \mu} \Lambda^\sigma _{ \ \nu} \eta_{\rho \sigma} = \eta_{\mu \nu}.
+\end{equation*}
+\tb{Exercise} Show that $x' \mapsto \Lambda x$ preserves the invariant interval between arbitrary events exactly when this latest condition is satisfied.\\
+\\
+\
+It is useful to classify a general four-vector based on the sign of its squared length, written variously as $A^2 = \nm{A}^2 = A^\mu \eta_{\mu \nu} A^\nu$. We say that \begin{equation*}
+A \mbox{ is } \begin{cases}
+\mbox{timelike} & \mbox{if } \nm{A}^2 < 0, \\
+\mbox{spacelike} & \mbox{if } \nm{A}^2 > 0, \\
+\mbox{null/lightlike} & \mbox{if } \nm{A}^2 = 0.
+\end{cases}
+\end{equation*}
+Applying this to two events as above, we say that \begin{equation*}
+x_A \mbox{ and } x_B \mbox{ are } \begin{cases}
+\mbox{timelike} & \mbox{if } \Delta s^2 < 0, \\
+\mbox{spacelike} & \mbox{if } \Delta s^2 > 0, \\
+\mbox{null/lightlike} & \mbox{if } \Delta s^2 = 0.
+\end{cases}
+\end{equation*}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.5\textwidth]{lightcone.png}
+\caption{A lightcone in a (2+1)-dimensional spacetime.}
+\label{Fig:plot1}
+\end{figure}
+\
+\\
+\
+This turns to out essentially classify the possible causal relationships between the two events. It is helpful to consider the diagram in Fig. 1., where for simplicity we place $x_A$ at the origin and consider all of the different regions where $x_B$ could be found. Some essential features of this diagram are: \begin{itemize}    \item If the points are spacelike separated, by invariance of the invariant interval they will remains spacelike separated under a change of inertial reference frame. \begin{itemize}
+    \item In this case and only in this case, we can perform a Lorentz boost to arbitrarily place event $B$ in the future, past, or exact present of event $A$. That is, it is exactly in this case that simultaneity is relative.
+    \item In this case, the two events are too far spatially separated relative to their temporal separation for a signal to propagate from $A$ to $B$. Physically, this means there can be no causal influence between the events. This is why the ambiguity in their temporal ordering gives no paradox. 
+\end{itemize}
+\item If the points are timelike separated, they will remain timelike separated under a change of inertial reference frame. \begin{itemize}
+    \item In this case $x_B$ must geometrically be inside either the future lightcone or the past lightcone of $x_A$. No Lorentz boost can take $x_B$ from the future interior lightcone to the past interior lightcone nor vice versa.
+    \item Physically, these events are close enough in space relative to their temporal displacement that a signal can travel from one to the other. This is why it \tb{must} be impossible to change their temporal ordering by a Lorentz transformation. We would run into paradoxes if two events that can influence one another had amibiguous ordering.
+\end{itemize}
+\item If the points are lightlike separated, they will will remain lightlike separated under a change of inertial reference frame. \begin{itemize}
+    \item Here we say that $x_B$ lies exactly on the lightcone (either past or future) of $x_A$, not in its interior. 
+    \item This is exactly on the threshold of causal influence. If the events were any further apart in space or closer in time, they would be unable to influence each other. Because they are in causal contact, just like in the timelike case we must have unambiguous causal ordering, \ti{i.e.}, all observers must agree on the sign of $t_B - t_A$.
+\end{itemize}
+\end{itemize}
+
+
+
+\subsection{Relativistic Kinematics}
+To lift Newtonian mechanics up to a relativistic theory, we must take its basic characters (trajectories, forces, momenta, and so on) and lift them up to nice covariant objects. The first step to doing so is to stop thinking of a trajectory as a position $\vec{x}$ parametrized by time $t$, and start thinking of it as a path through spacetime where both $\vec{x}, \vec{t}$ are functions of some other parameter. \begin{equation*}
+(t,\vec{x}) = (t(\lambda), \vec{x}(\lambda)) = (x^\mu(\lambda)).
+\end{equation*}
+The path through spacetime that a particle traces out over its history is called its \ti{worldline}. With respect to this parametrization our particle has velocity \begin{equation*}
+V = \frac{dx^\mu}{d \lambda}.
+\end{equation*}
+But measuring the change in spacetime position per change in $\lambda$ value gives a notion of velocity which depends on how we parametrize, in much the same way that our Newtonian velocity will take a different numerical value if we measure the change in location per minute or per second. To make things unambiguous we can parametrize by $\lambda = \tau$, the proper time along the particle's worldline.  This gives the \ti{four-velocity} \begin{equation*}
+U^\mu := \frac{dx^\mu}{d \tau}.
+\end{equation*}
+There is still the much smaller ambiguity of what point along the trajectory we take to be at $\tau = 0$ (physically, when the particle's internal clock is set to midnight), but this doesn't affect the definition of $d \tau$.\\
+\\
+\
+We know that $dt$ and $d \tau$ are related as \begin{equation*}
+d \tau = \sqrt{1 - v^2} d t \implies dt = \gamma d \tau.
+\end{equation*}
+which is exactly the statement of time dilation. Plugging this into our definition of four-velocity gives equivalently \begin{equation*}
+\LP U^\mu \RP = \LP \frac{dt}{d \tau}, \frac{dx}{d \tau}, \frac{dy}{d \tau}, \frac{dz}{d \tau} \RP = \LP \gamma, \gamma \frac{dx}{dt}, \gamma \frac{dy}{dt}, \gamma \frac{dz}{dt} \RP = \LP \gamma, \gamma \dot{\vec{x}} \RP
+\end{equation*}
+where we use Newton's flyspeck notation to denote total derivatives with respect to coordinate time. We also know that the squared norm of a four-vector must give a Lorentz-invariant scalar. In this case that scalar comes out to \begin{align*}
+U^\mu U^\nu \eta_{\mu \nu} & = - (U^0)^2 + \vec{U} \cdot \vec{U} \\
+\ & = - \gamma^2 \LP 1 + \dot{\vec{x}} \cdot \dot{\vec{x}} \RP \\
+\ & = -1
+\end{align*}
+where in the last step we apply the definition of $\gamma$. This property that $U \cdot U = -1$ is another characterization of proper time.\\
+\\
+\
+Differentiating again with respect to proper time gives the four-acceleration \begin{equation*}
+A^\mu := \frac{dU^\mu}{d \tau} = \frac{d^2 x^\mu}{d \tau^2}
+\end{equation*}
+and so on\footnote{One could in principle continue to define four-jerk, four-jounce, and so on but these won't be used in this course.}. We can similarly lift a massive particle's linear three-momentum $\vec{p} = m \dot{\vec{x}} $ up to a four-vector by defining \begin{equation*}
+\LP p^\mu \RP := \LP m U^\mu \RP = \LP \gamma m, \gamma m \dot{\vec{x}} \RP
+\end{equation*}
+from which we identify $p^0 = \gamma m \equiv E$ as the particle's intrinsic mechanical energy. In every frame we have \begin{equation*}
+p^\mu = m U^\mu \implies p \cdot p = m^2 U \cdot U = - m^2
+\end{equation*}
+so in the particle's rest frame $\dot{\vec{x}} = 0$ we have in particular \begin{equation*}
+- m^2 = - E^2
+\end{equation*}
+or restoring explicit factors of $c$ \begin{equation*}
+E = m c^2.
+\end{equation*}
+If our particle is subject to a four-force with components $F^\mu$, then Newton's second law takes the covariant form \begin{equation*}
+F^\mu = \frac{d}{d \tau} p^\mu.
+\end{equation*}
+If our particle is influenced only by its interaction with some conservative potential $\Phi$ (which is not always the case, as you saw in your homework problems involving the vector potential $\vec{A}$) then we will have \begin{equation*}
+\frac{d}{d \tau} p^\mu = - \PA{\Phi}{x^\mu} =: - \D_\mu \Phi.
+\end{equation*}
+
+
+\subsection{Lagrangians}
+Rather than using Newton-style framing, we can formulate particle dynamics in special relativity (as well as in Galilean or even general relativity, as we'll soon see) in terms of Lagrangians and action principles. To do so, we use the worldline picture and write down a Lagrangian \begin{equation*}
+L = L \LP x(\lambda), \frac{dx(\lambda)}{d\lambda}, \lambda \RP
+\end{equation*}
+then use this to define an action, which is a machine that takes in a worldline between to fixed values $\lambda_i,\lambda_f$ and returns a number. \begin{equation*}
+S[x] = \int_{\lambda_i}^{\lambda_f} L \LP x(\lambda), \frac{dx(\lambda)}{d\lambda}, \lambda \RP.
+\end{equation*}
+This encodes dynamics in the sense that a particle's equations of motion are equivalent to the condition that the trajectory $x(\lambda)$ must extremize the action, within the space of all trajectories with fixed initial and final points $x(\lambda_i),x(\lambda_f)$. \begin{equation*}
+x \mbox{ satisfies equations of motion} \iff \delta S [x] = 0.
+\end{equation*}
+Practically, we extract the equations of motion by noting that this extremization condition is equivalent to the Euler-Lagrange equations \begin{equation*}
+\delta S [x] = 0 \iff \PA{L}{x^\mu} = \frac{d}{d\lambda} \PA{L}{\LP \frac{dx^\mu}{d\lambda} \RP }.
+\end{equation*}
+This also gives us a natural language for talking about symmetries. Any way of changing our trajectory (say, by performing an active rotation) is said to be a \ti{symmetry} if it always takes solutions of the equations of motions to other solutions. Phenomenologically, this means an observer will see the particle obeying the same laws before and after the transformation. \\
+\\
+\
+In terms of action principles, this means taking extrema of $S$ to other extrema of $S$. Generally this is accomplished by cooking up a transformation which preserves the variation of $S$. \begin{equation*}
+\delta S[x] = \delta S[x'].
+\end{equation*}
+At the Lagrangian level, for this to happen it is sufficient if the Lagrangian changes by at most a total $\lambda$-derivative \begin{equation*}
+L \LP x'(\lambda), \frac{dx'(\lambda)}{d\lambda}, \lambda \RP = L \LP x(\lambda), \frac{dx(\lambda)}{d\lambda}, \lambda \RP + \frac{d}{d\lambda} F \LP x(\lambda), \frac{dx(\lambda)}{d\lambda}, \lambda \RP
+\end{equation*}
+to leading order in infinitesimal $x' - x$. Then the corresponding actions will differ by the constant $F(\lambda_f) - F(\lambda_i)$, which doesn't affect the variation since these by definition leave the endpoints fixed.\\
+\\
+\
+For a free particle in special relativity, the action is exactly the invariant length (\ti{i.e.}, the proper time) of the relevant segment of the particle's worldline. \begin{equation*}
+S_{\mbox{\scriptsize{free}}} = \int d \tau = \int \sqrt{1 - \dot{\vec{x}} \cdot \dot{\vec{x}}} d t
+\end{equation*}
+though in the presence of outside forces the action will acquire more terms.
+
+
+
+
+\subsection{Transformation Laws}
+Any vector $V$ has components $V^\mu$ which transform under a change of reference frame as \begin{equation*}
+{A'}^\mu = \Lambda^\mu _{ \ \nu} A^\nu.
+\end{equation*}
+We could find this by remembering that, without indices, the transformation law must look like matrix multiplication \begin{equation*}
+A' = \Lambda A
+\end{equation*}
+then adding in indices in the unique way allowed by our summation conventions. But remember that the vector itself doesn't change. What's happening is that our change of reference frame brings a change of basis, hence a change in the coefficients when we expand in that basis. But the vector itself is unchanged. If we write the basis vectors before and after the change as $\LP \tb{e}_\mu \RP$ and $\LP \tb{e}'_\mu \RP$, then we have \begin{equation*}
+A = A^\mu \tb{e}_\mu = {A'}^\mu \tb{e}'_\mu
+\end{equation*}
+which in turn implies that the new basis vectors must be related to the old ones as \begin{equation*}
+\tb{e}'_\mu = \Lambda^\nu _{ \ \mu} \tb{e}_\nu.
+\end{equation*}
+Covectors, at the present level of abstraction, are objects $B$ whose components $B_\mu$ carry a single lowered index, such as that gradient of a scalar field \begin{equation*}
+B_\mu = \PA{\phi}{x^\mu}.
+\end{equation*}
+These transform as \begin{equation*}
+B'_\mu = \Lambda^\nu _{ \ \mu} B_\nu.
+\end{equation*}
+There are more exotic objects with multiple indices, such as the Maxwell field strength \begin{equation*}
+(F^{\mu \nu}) = \begin{bmatrix}
+0 & - E_x & - E_y & - E_z \\
+E_x & 0 & - B_z & B_y \\
+E_y & B_z & 0 & - B_x \\
+E_z & - B_y & B_x & 0
+\end{bmatrix}.
+\end{equation*}
+This transforms like a four-vector except now we have two $\Lambda$ factors, one for each raised index. \begin{equation*}
+{F'}^{\mu \nu} = \Lambda^\mu _{ \ \rho} \Lambda^\nu _{ \ \sigma} F^{\rho \sigma}.
+\end{equation*}
+
+
+
+
+\section{Review of Curved Spacetime}
+
+In classical electromagnetism we learned two qualitatively different sets of laws. On one hand, background electromagnetic fields accelerate charged particles according to the Lorentz force law. Conversely, charged particles source the electromagnetic fields according to the Maxwell equations, though the fields have their own nontrivial dynamics even in the absence of sources. \\
+\\
+\
+Something analogous happens in general relativity, which is Einstein's successful unification of gravity with special relativity. Here we have one set of laws called the \ti{Einstein field equations} describing how matter and energy source the gravitational field, while a certain action principle will turn out to describe how particles move about in a given gravitation background. \\
+\\
+\
+For now we will only concern ourselves with this latter principle. That is, we will study how gravitational effects arise as manifestations of the nontrivial geometry of spacetime, and for now we won't worry about how exactly spacetime acquired that geometry. In short, we will study particle mechanics in the background of some fixed spacetime metric.
+
+
+
+
+\subsection{Spacetime Geometry}
+We can most easily describe general relativity by saying how it departs from special relativity, since we are now experts on the latter. Speaking loosely and intuitively, the principle departure is that spacetime is now curved, more like a sphere or some wobbly higher-dimensional surface than like Euclidean or Minkowski space. More formally, this means that in place of our constant metric $\eta$ we have some background metric $g$ whose components in some coordinates $x$ measure infinitesimal distances near a point $p$ as \begin{equation*}
+\left. ds^2 \right|_p = g_{\mu \nu}(x(p)) \left. dx^\nu \right|_p \left. dx^\mu \right|_p .
+\end{equation*}
+Besides measuring distances this gives us an inner product between any two vectors $A_p, B_p$ based at the point $p$. We can write this variously as \begin{equation*}
+A_p \cdot B_p = ds^2(A_p, B_p) = g(A_p, B_p) = g_{\mu \nu} A_p^\mu B_p^\nu.
+\end{equation*}
+As before, this quantity is a scalar, taking the same value no matter what coordinates $x$ we chose. In terms of the coordinate basis $\LP \tb{e}_\mu(x) \RP$ for vectors based at $p$, we can also write the metric as \begin{equation*}
+g_{\mu \nu}(x(p)) =  g \LP  \tb{e}_\mu(x), \tb{e}_\nu(x) \RP = \tb{e}_\mu(x) \cdot \tb{e}_\nu(x).
+\end{equation*}
+Moving forward we will often be too lazy to explicitly write out the point at which everything is being measured.\\
+\\
+\
+One measure of the departure of our general geometry from that of Minkowski space is that, not only do we have $g_{\mu \nu} \neq \eta_{\mu \nu}$ in general, we cannot even pick a coordinate system that makes this true everywhere simultaneously. The best we can do is to pick \ti{local inertial coordinates} around an event $p_0$. By definition these are coordinates in which $g_{\mu \nu} \neq \eta_{\mu \nu}$ exactly at $p_0$, with all first derivatives vanishing so that corrections to this equality as we move away from $p_0$ arise only at second order. In terms of the Taylor series, we can equivalently say that there always exists some set of coordinates $\xi$ such that \begin{equation*}
+g_{\mu \nu}(\xi(p)) = \underbrace{g_{\mu \nu}(\xi(p_0))}_{ = \eta_{\mu \nu}} + (\xi^\rho(p) - \xi^\rho(p_0)) \underbrace{\PA{g_{\mu \nu}}{\xi^\rho} (\xi(p))}_{ = 0} + \LP \mbox{quadratic or higher in $\xi(p) - \xi(p_0)$} \RP
+\end{equation*}
+Conversely, if you find a set of coordinates $\xi$ such that $g_{\mu \nu}(\xi) = \eta_{\mu \nu}$ everywhere, you have discovered that your spacetime is indeed flat, even if it was originally written in a coordinate system that obscured this fact.
+
+
+\subsection{Transformation Laws}
+As in special relativity, we can classify the various kinds of geometric objects we encounter by the ways that they transform if we move from one coordinate system $x$ to another $\tilde{x}$. For example, a vector's components in the two coordinate systems are related as \begin{equation*}
+\tilde{A}^\mu = \PA{\tilde{x}^\mu}{x^\nu} A^\nu
+\end{equation*}
+so that invariance \begin{equation*}
+A = A^\mu \tb{e} = \tilde{A}^\mu \tilde{\tb{e}}_\mu
+\end{equation*}
+(here we don't bother writing the explicit point at which everything is being evaluated) then uniquely fixes the transformation laws for the vectors in the coordinate basis to be \begin{equation*}
+\tilde{\tb{e}}_\mu = \PA{x^\nu}{\tilde{x}^\mu} \tb{e}_\nu.
+\end{equation*}
+A covector, as you might guess from special relativity, transforms as \begin{equation*}
+\tilde{B}_\mu = \PA{x^\nu}{\tilde{x}^\mu} B_\nu
+\end{equation*}
+so that if we take a vector and a covector together and sum over their joint index, we get a scalar. \begin{equation*}
+A^\mu B_\mu = \tilde{A}^\mu \tilde{B}_\mu = \mbox{same value for all coordinate systems.}
+\end{equation*}
+Objects with even more indices just get more Jacobian factors. For example, the metric transforms as \begin{equation*}
+\tilde{g}_{\mu \nu} = \PA{x^\rho}{\tilde{x}^\mu} \PA{x^\sigma}{\tilde{x}^\nu} g_{\rho \sigma}.
+\end{equation*}
+This holds for an arbitrary coordinate transformation $x \to \tilde{x}$, so we can in particular let our first coordinate system be the locally inertial coordinates $\xi$ and write $x$ for the new coordinates this law. Then this becomes \begin{equation*}
+g_{\mu \nu} = \PA{\xi^\rho}{x^\mu} \PA{\xi^\sigma}{x^\nu} \eta_{\rho \sigma}.
+\end{equation*}
+Conversely, the Maxwell stress tensor transforms as \begin{equation*}
+\tilde{F}^{\mu \nu} = \PA{\tilde{x}^\mu}{x^\rho} \PA{\tilde{x}^\nu}{x^\sigma} F^{\rho \sigma}. 
+\end{equation*}
+The general rule is that each raised index brings with it a Jacobian factor $\D \tilde{x} / \D x$ while each lowered index brings an inverse Jacobian factor $\D x / \D \tilde{x}$.
+
+
+
+
+\section{Actions and Geodesics}
+
+
+\subsection{Worldlines Extremize Proper Time}
+
+Just as in special relativity, we can describe particle dynamics in curved spacetimes via an action principle. Even better, in the absence of forces other than gravity (which should be thought of as in some sense always present, since it manifests through the background geometry) the action of is still the invariant length of the segment of the worldline that we are considering. \begin{equation*}
+S = \int d \tau = \int \sqrt{-ds^2}.
+\end{equation*}
+If we work in coordinates $x$, parametrize as $x = x(\lambda)$, and keep all arguments totally explicit, we can write this as \begin{equation*}
+S = \int \sqrt{ - g_{\mu \nu} dx^\mu dx^\nu } = \int_{\lambda_i}^{\lambda_f} \sqrt{ - g_{\mu \nu} (x(\lambda)) \frac{dx^\mu}{d \lambda} \frac{dx^\nu}{d \lambda} } d \lambda
+\end{equation*}
+from which we can identify our Lagrangian as \begin{equation*}
+L \LP x, \frac{dx}{d\lambda} \RP = \sqrt{ - g_{\mu \nu} (x(\lambda)) \frac{dx^\mu}{d \lambda} \frac{dx^\nu}{d \lambda} }.
+\end{equation*}
+In a general geometry, a path from point $A$ to point $B$ which extremizes the invariant length is called a \ti{geodesic}. In Minkowski or Euclidean space, we can run through Euler-Lagrange directly to confirm our intuition that geodesics in that edge case are exactly straight lines. \\
+\\
+\
+\tb{Exercise} Do this calculation, and explain why the result describes a straight line.\\
+\\
+\
+So conceptually this isn't so different from the action principle in special relativity. The new practical complication is that now we are in a general metric, so extremizing this functional is mechanics more difficult. \\
+\\
+\
+In the case of a background Minkowski metric \begin{equation*}
+S_{\mbox{\scriptsize{Minkowski}}} = \int \sqrt{-\eta_{\mu\nu} dx^\mu dx^\nu} = \int \sqrt{dt^2 - d \vec{x} \cdot d \vec{x}}
+\end{equation*}
+we can differentiate directly, or else simply guess from the covariant form of Newton's second law, to find that that the equations come out to be \begin{equation*}
+\frac{d^2 x^\mu}{d\tau^2} = 0.
+\end{equation*}
+In a general background metric things are just a bit more complicated. As it turns out, if we work out the equations of motion \begin{equation*}
+\PA{L}{x^\mu} = \frac{d}{d \lambda} \PA{L}{\LP \frac{d x^\mu}{d \lambda} \RP }
+\end{equation*}
+and then at the last step rephrase everything in terms of proper time, we will find that the geodesic equation of motion take the form \begin{equation*}
+\frac{d^2 x^\mu}{d\tau^2} = -\Gamma^\mu_{\nu \rho} \frac{dx^\nu}{d \tau} \frac{dx^\rho}{d \tau}.
+\end{equation*}
+where the position-dependent coefficients $\Gamma^\mu_{\nu \rho}(x) = \Gamma^\mu_{\rho \nu}(x)$ are called the \ti{Christofell symbols} and characterize the background geometry. To convince yourself of this, it's best to work through an example. This will also serve as a practical guide to the kinds of techniques you might use to find geodesics in a given background.
+
+
+
+
+\subsubsection{Subtleties on Parametrization}
+Before we start calculation we make some careful notes on parametrization. The form we just wrote is that taken if we parametrize by proper time (that is, by the path's invariant length), but we can relax that condition slightly and still get an equation of motion of the same form. If we instead use a parameter $\omega$ which is $\tau$ up to a constant rescaling $a \neq 0$ and a constant shift $b$ \begin{equation*}
+\omega = a \tau + b \implies d \omega = a d \tau
+\end{equation*}
+then the factors of $a$ cancel on each side and we get a structurally identical geodesic equation. \begin{equation*}
+\frac{d^2 x^\mu}{d\omega^2} = -\Gamma^\mu_{\nu \rho} \frac{dx^\nu}{d \omega} \frac{dx^\rho}{d \omega}.
+\end{equation*}
+What can we say about such a parameter $\omega$ for general $a,b$? If $\tau$ parametrizes by invariant length, then $\omega$ is a general parametrization whose increments are proportionate to invariant length. If we imagine placing tick marks along a trajectory at fixed values $\omega = 0,1,2,3$ and so on, then as measured by our metric these tick marks would be at equally spaced points along the trajectory. Such a parametrization is called an \ti{affine parametrization}\footnote{Like many other ideas we have come across, this also have a more abstract definition, but for now this will suffice.} \\
+\\
+\
+This is not true of a general parametrization, and indeed a general parametrization will give a messier equation of motion upon varying our action. We conventionally reserve the term \ti{geodesic equation} for the neat equation of motion above that we get in an affine parametrization.
+
+
+\subsection{The Wormhole Geometry: Naive Lagrangian}
+The \ti{wormhole geometry} is the spacetime with metric \begin{equation*}
+ds^2 = - dt^2 + dr^2 + (b^2 + r^2) (d \theta^2 + \sin^2 \theta d \phi^2)
+\end{equation*}
+for $b$ some real constant. In this geometry our action principle is governed by the Lagrangian \begin{align*}
+L \LP x, \frac{dx}{d\lambda} \RP & = \sqrt{ - g_{\mu \nu} (x(\lambda)) \frac{dx^\mu}{d \lambda} \frac{dx^\nu}{d \lambda} } \\
+\ & = \sqrt{ \LP \frac{dt}{d \lambda} \RP^2 - \LP \frac{dr}{d \lambda} \RP^2 - (b^2 + r^2) \left[ \LP \frac{d \theta}{d \lambda} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{d \lambda} \RP^2 \right] } \\
+\ & \equiv \left[ - \frac{dx}{d \lambda} \cdot \frac{d x}{d \lambda} \right]^{1/2}.
+\end{align*}
+where as always $\cdot$ denotes the inner product between vectors as computed by our metric $g$. As already noted, the equations of motion are \begin{equation*}
+\PA{L}{x^\mu} = \frac{d}{d \lambda} \PA{L}{\LP \frac{d x^\mu}{d \lambda} \RP }
+\end{equation*}
+To illustrate our ideas, it will be enough to work out in detail the equations of motion for just one component of $(x^\mu)$. We consider in particular the equation of motion for $r$. \begin{equation*}
+\PA{L}{r} = \frac{d}{d \lambda} \PA{L}{\LP \frac{d r}{d \lambda} \RP }.
+\end{equation*}
+To massage this into a useful form, we only partially work out the partial derivative on the LHS, rewriting it as a partial derivative of the quantity sitting under the square root. Explicitly, we have \begin{align*}
+\PA{L}{r} & = \PA{}{r} \LP \left[ - \frac{dx}{d \lambda} \cdot \frac{d x}{d \lambda} \right]^{1/2} \RP \\
+\ & = \frac{1}{2} \left[ - \frac{dx}{d \lambda} \cdot \frac{d x}{d \lambda} \right]^{- 1/2} \PA{}{r} \left[ - \frac{dx}{d \lambda} \cdot \frac{d x}{d \lambda} \right] \\
+\ & = \frac{1}{2L} \PA{}{r} \left[ - \frac{dx}{d \lambda} \cdot \frac{d x}{d \lambda} \right].
+\end{align*}
+The key step here is that the square root structure of the Lagrangian gives us a $1/L$ term all the way on the outside. So far this is totally general. Now we can finish working out the derivative using the particular metric we're working in. \begin{align*}
+\PA{L}{r} & = \frac{1}{2L} \PA{}{r} \left[ \LP \frac{dt}{d \lambda} \RP^2 - \LP \frac{dr}{d \lambda} \RP^2 - (b^2 + r^2) \left[ \LP \frac{d \theta}{d \lambda} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{d \lambda} \RP^2 \right] \right] \\
+\ & = - \frac{r}{L} \left[ \LP \frac{d \theta}{d \lambda} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{d \lambda} \RP^2 \right].
+\end{align*}
+Now we perform a trick, so neat it almost seems like cheating. By definition our action is the particle's proper time, so we have \begin{equation*}
+\int d \tau = \int L d \lambda \implies d \tau = L d \lambda.
+\end{equation*}
+Plugging this in carefully, we have equivalently \begin{align*}
+\PA{L}{r} & = - rL \left[ \LP \frac{d \theta}{L d \lambda} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{L d \lambda} \RP^2 \right] \\
+\ & = - rL \left[ \LP \frac{d \theta}{d \tau} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{d \tau} \RP^2 \right]
+\end{align*}
+So one side of our Euler-Lagrange equation for $r$ is now in terms of $\tau$ rather than $\lambda$. The innermost partial derivative on the RHS works similarly, and we can use the same trick. \begin{align*}
+\PA{L}{\LP \frac{d r}{d \lambda} \RP } & = \frac{1}{2L} \PA{}{\LP \frac{d r}{d \lambda} \RP } \left[ - \frac{dx}{d \lambda} \cdot \frac{d x}{d \lambda} \right] \\
+\ & = \frac{1}{2L} \PA{}{\LP \frac{d r}{d \lambda} \RP } \left[ - \LP \frac{dr}{d \lambda} \RP^2 - (b^2 + r^2) \left[ \LP \frac{d \theta}{d \lambda} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{d \lambda} \RP^2 \right] \right] \\
+\ & = - \frac{1}{L} \frac{dr}{d \lambda} \\
+\ & = - \frac{dr}{d \tau}.
+\end{align*}
+Great! We're nearly done. Now our Euler-Lagrange equation for $r$ has simplified to \begin{equation*}
+- rL \left[ \LP \frac{d \theta}{d \tau} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{d \tau} \RP^2 \right] = \frac{d}{d \lambda} \LP - \frac{dr}{d \tau} \RP
+\end{equation*}
+Canceling minus signs, dividing $L$ over, and again applying the relation $L d \lambda = d \tau$ then gives \begin{equation*}
+\frac{d^2r}{d \tau^2} = r \left[ \LP \frac{d \theta}{d \tau} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{d \tau} \RP^2 \right].
+\end{equation*}
+Now we have our equation of motion for $r$ purely in terms of $\tau$, even though we started with $\lambda$. \\
+\\
+\
+From this we get automatically some of the components of our Christofell symbols. The geodesic equation we wrote earlier has $r$ component \begin{equation*}
+\frac{d^2 r}{d\tau^2} = - \Gamma^r_{\nu \rho} \frac{dx^\nu}{d \tau} \frac{dx^\rho}{d \tau}.
+\end{equation*}
+By comparison with our equation of motion for $r$, we can then read off \begin{align*}
+\Gamma^r_{\theta \theta} & = -r, \\
+\Gamma^r_{\phi \phi} & = - r \sin^2 \theta 
+\end{align*}
+with all other components $\Gamma^r_{\nu \rho}$ vanishing.\\
+\\
+\
+Finding the remaining equations of motion proceeds by identical logic, and gives us the components $\Gamma^\mu_{\nu \rho}$ for $\mu = t,\theta, \phi$. The full results are given in Hartle Examples 8.2 and 8.3.
+
+
+
+
+
+\subsection{The Wormhole Geometry: Hook Lagrangian}
+We can do the same calculation in a slightly slicker way using the Hook Lagrangian that we have seen in lecture. Recall that this is simply the square of our Lagrangian above. \begin{align*}
+L_{\mbox{\scriptsize{Hook}}} \LP x, \frac{dx}{d\lambda} \RP & := - g_{\mu \nu} (x(\lambda)) \frac{dx^\mu}{d \lambda} \frac{dx^\nu}{d \lambda} \\
+\ & = \LP \frac{dt}{d \lambda} \RP^2 - \LP \frac{dr}{d \lambda} \RP^2 - (b^2 + r^2) \left[ \LP \frac{d \theta}{d \lambda} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{d \lambda} \RP^2 \right]  \\
+\ & = \frac{dx}{d \lambda} \cdot \frac{d x}{d \lambda}.
+\end{align*}
+The great utility of the Hook Lagrangian is that its equations of motion are exactly what the naive Lagrangian yields in the special case that the latter is written in terms of an affine parameter. Practically, this means we can write out our Hook Lagrangian in terms of proper term and vary directly, without having to entertain the $L d \lambda = d\tau$ game we played above. To illustrate this, we again proceed by working through the calculation. In terms of proper time $\lambda = \tau$ our Hook Lagrangian here is \begin{equation*}
+L_{\mbox{\scriptsize{Hook}}} \LP x, \frac{dx}{d\tau} \RP = \LP \frac{dt}{d \tau} \RP^2 - \LP \frac{dr}{d \tau} \RP^2 - (b^2 + r^2) \left[ \LP \frac{d \theta}{d \tau} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{d \tau} \RP^2 \right]
+\end{equation*}
+and the Euler-Lagrange equation of motion for $r$ is \begin{equation*}
+\PA{L_{\mbox{\scriptsize{Hook}}}}{r} = \frac{d}{d \tau} \PA{L_{\mbox{\scriptsize{Hook}}}}{\LP \frac{d r}{d \tau} \RP }.
+\end{equation*}
+The LHS derivative is \begin{align*}
+\PA{L_{\mbox{\scriptsize{Hook}}}}{r} & = \PA{}{r} \left[ \LP \frac{dt}{d \tau} \RP^2 - \LP \frac{dr}{d \tau} \RP^2 - (b^2 + r^2) \left[ \LP \frac{d \theta}{d \tau} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{d \tau} \RP^2 \right] \right] \\
+\ & = - 2 r \left[ \LP \frac{d \theta}{d \tau} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{d \tau} \RP^2 \right].
+\end{align*}
+The innermost RHS derivative is \begin{align*}
+\PA{L_{\mbox{\scriptsize{Hook}}}}{\LP \frac{d r}{d \tau} \RP } & = \PA{}{\LP \frac{d r}{d \tau} \RP } \left[ \LP \frac{dt}{d \tau} \RP^2 - \LP \frac{dr}{d \tau} \RP^2 - (b^2 + r^2) \left[ \LP \frac{d \theta}{d \tau} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{d \tau} \RP^2 \right] \right] \\
+\ & = - 2 \frac{dr}{d \tau}
+\end{align*}
+So our equations of motion for $r$ are \begin{equation*}
+\frac{d^2r}{d \tau^2} = r \left[ \LP \frac{d \theta}{d \tau} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{d \tau} \RP^2 \right].
+\end{equation*}
+
+
+
+\subsection{The Wormhole Geometry: The Metric}
+We learned in lecture that there is another characterization of the Christofell symbols in terms of the metric, namely \begin{equation*}
+g_{\mu \sigma} \Gamma^\sigma_{\nu \rho} = \frac{1}{2} \LP \D_\rho g_{\mu \nu} + \D_\nu g_{\mu \rho} - \D_\mu g_{\nu \rho} \RP.
+\end{equation*}
+where as before we use the shorthand \begin{equation*}
+\D_\mu := \PA{}{x^\mu}.
+\end{equation*}
+This uniquely defines $\Gamma$ since $g$ is invertible as a matrix, but computing $\Gamma$ this way is often much more tedious than varying the Hook Lagrangian. For completeness we will do the calculation nonetheless. Still working in the wormhole geometry \begin{equation*}
+ds^2 = - dt^2 + dr^2 + (b^2 + r^2) (d \theta^2 + \sin^2 \theta d \phi^2) = g_{\mu \nu} dx^\mu \nu
+\end{equation*}
+and ordering our coordinates as $(x^\mu) = (t,r,\theta,\phi)$, we read off our metric components as \begin{equation*}
+(g_{\mu \nu}) = \begin{bmatrix}
+g_{t t} & g_{t r} & g_{t \theta} & g_{t \phi} \\
+g_{r t} & g_{r r} & g_{r \theta} & g_{r \phi} \\
+g_{\theta t} & g_{\theta r} & g_{\theta \theta} & g_{\theta \phi} \\
+g_{\phi t} & g_{\phi r} & g_{\phi \theta} & g_{\phi \phi}
+\end{bmatrix} = \begin{bmatrix}
+-1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & b^2 + r^2 & 0 \\
+0 & 0 & 0 & (b^2 + r^2) \sin^2 \theta
+\end{bmatrix}.
+\end{equation*}
+Now we do our index manipulations carefully. First, we take our equation above for the Christofell symbols and set the free index $\mu$ to be $r$. This gives \begin{equation*}
+g_{r \sigma} \Gamma^\sigma_{\nu \rho} = \frac{1}{2} \LP \D_\rho g_{r \nu} + \D_\nu g_{r \rho} - \D_r g_{\nu \rho} \RP.
+\end{equation*}
+Now the LHS has a sum over the dummy index $\sigma$, but we see that the components of $g$ form a diagonal matrix, so $g_{r \sigma}$ is nonzero only at $\sigma = r$ at which point we have $g_{rr} = 1$. So we can do the LHS sum and find \begin{equation*}
+\Gamma^r_{\nu \rho} = \frac{1}{2} \LP \D_\rho g_{r \nu} + \D_\nu g_{r \rho} - \D_r g_{\nu \rho} \RP.
+\end{equation*}
+The last step is to work out the RHS for each pair $\nu,\rho$, though with experience one can sometimes spot a symmetry that tells us in advance that some components will vanish. For example, we can set $\nu = \rho = \theta$ to find \begin{align*}
+\Gamma^r_{\theta \theta} & = \frac{1}{2} \LP \D_\theta g_{r \theta} + \D_\nu g_{r \theta} - \D_r g_{\theta \theta} \RP \\
+\ & = \frac{1}{2} \LP \D_\theta (0) + \D_\nu (0) - \D_r (b^2 + r^2) \RP \\
+\ & = -r
+\end{align*}
+as we found earlier. Repeating this process for all pairs $\nu, \rho$ yields \begin{align*}
+\Gamma^r_{\theta \theta} & = -r, \\
+\Gamma^r_{\phi \phi} & = - r \sin^2 \theta 
+\end{align*}
+with all other components $\Gamma^r_{\nu \rho}$ vanishing, as we found before. Now that we have all of our $\Gamma^r_{\nu \rho}$ components, we can plug them into our geodesic equation \begin{equation*}
+\frac{d^2 x^\mu}{d\tau^2} = -\Gamma^\mu_{\nu \rho} \frac{dx^\nu}{d \tau} \frac{dx^\rho}{d \tau}
+\end{equation*}
+at $\mu = r$ to find \begin{align*}
+\frac{d^2 r}{d\tau^2} & = -\Gamma^r_{\nu \rho} \frac{dx^\nu}{d \tau} \frac{dx^\rho}{d \tau} \\
+\ & = - \LP \Gamma^r_{\theta \theta} \frac{d\theta}{d \tau} \frac{d\theta}{d \tau} + \Gamma^r_{\phi \phi} \frac{d\phi}{d \tau} \frac{d\phi}{d \tau} + \mbox{vanishing terms} \RP \\
+\ & = r \left[ \LP \frac{d \theta}{d \tau} \RP^2 + \sin^2 \theta \LP \frac{d \phi}{d \tau} \RP^2 \right]
+\end{align*}
+just as we found before.\\
+\\
+\
+The moral here is that we can go either way: we can derive the geodesic equation by variational methods and from that read off the Christofell symbols, or we can compute the Christofell symbols directly and from them build the geodesic equation. In practice, for a geometry simple enough to work out by hand, the simplest method will usually be to vary the Hook Lagrangian.
+
+
+
+
+
+\subsection{Conserved Quantities and Killing Vectors}
+We have seen before that writing down a physical model in terms of an action principle makes it more natural to talk about symmetries and conserved quantities. We learned about the general machinery of Noether's theorem and so on, but here we will do something slightly simpler, though in exchange it will be less systematic.\\
+\\
+\
+The appropriate notion of a Noether charge in solving the geodesic equation is a \ti{Killing vector}. Loosely speaking\footnote{yet another thing we'll have to make more precise later} a Killing vector is a vector field $\xi$ such that an active transformation along the direction $\xi$ doesn't change the metric. Of course at this point we don't know systematically what it means to do an active transformation on a general tensor, so for now we restrict ourselves to the easiest-to-spot flavor of killing vector.\\
+\\
+Here is the practical rule: if someone hands you a metric, and the metric doesn't explicitly depend on some coordinate, then the corresponding coordinate basis vector is a Killing vector. For example, in the wormhole geometry we see that nothing actually depends on $t$, so the vector \begin{equation*}
+(\xi^\mu) = (\xi^t, \xi^r, \xi^\theta, \xi^\phi) = (1,0,0,0)
+\end{equation*}
+is a Killing vector. The same reasoning applies to the coordinate $\phi$. As we noted already, this isn't quite systematic enough, and not every Killing vector will take this form. But even with its limits this method is useful enough that we note it now.\\
+\\
+\
+But why, in turn, is it useful to spot a Killing vector? Just as we found earlier in slightly different language, Noether tells us that continuous symmetries give rise to conservation laws. In the language of geodesics, this manifests itself in the fact that, given any Killing vector $\xi$, the quantity \begin{equation*}
+\xi \cdot u = \xi^\mu g_{\mu \nu} \frac{dx^\nu}{d \tau}
+\end{equation*}
+is constant along any geodesic. For the Killing vector $(\xi^\mu) = (1,0,0,0)$ in the wormhole geometry for example, we proceed carefully to find \begin{align*}
+\xi \cdot \mu & = \xi^\mu g_{\mu \nu} \frac{dx^\nu}{d \tau} \\
+\ & = \xi^t g_{t \nu} \frac{dx^\nu}{d \tau} \mbox{ (because $\xi$ has only one nonzero component)} \\
+\ & = g_{t \nu} \frac{dx^\nu}{d \tau} \\
+\ & = g_{tt} \frac{dt}{d \tau} \mbox{ (because $g_{\mu \nu}$ is diagonal)} \\
+\ & = \frac{dt}{d \tau}.
+\end{align*}
+So any solution of the geodesic equation in the background of the wormhole geometry obeys the constraint \begin{equation*}
+\frac{dt}{d \tau} = a
+\end{equation*}
+for $a$ a constant. We can then integrate to find \begin{equation*}
+t(\tau) = a \tau + b
+\end{equation*}
+for $b$ a constant of integration. And just like that, we have solved for $t(\tau)$. For a messier component like $r(\tau)$ it may take a bit more work and explicit reference to the geodesic equation, but the general principle stands: This is incredibly useful if you attempt to actually solve the geodesic equation, for exactly the same reason that solving equations of motion in Newtonian mechanics becomes easier or sometimes even totally trivial if you have enough independent conserved quantities. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
