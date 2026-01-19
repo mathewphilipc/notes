@@ -1,0 +1,504 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usepackage{tikz-feynman}
+\tikzfeynmanset{compat=1.1.0}
+\usepackage[shortlabels]{enumitem}
+
+
+
+
+% Commonly used sets of numbers
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\PR}{\mathbb{P}}
+\newcommand{\F}{\mathbb{F}}
+
+
+% Shortcuts for text formatting
+\newcommand{\tb}[1]{\textbf{#1}}
+\newcommand{\ti}[1]{\textit{#1}}
+
+% Math fonts
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+
+% Shortcuts for inner product spaces
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \left| #2 \right\rangle \right.}
+\newcommand{\Ip}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\nm}[1]{\left\| #1 \right\|}
+
+% Shortcuts for the section of 3D rotations
+\newcommand{\lo}{\textbf{L}_1}
+\newcommand{\ltw}{\textbf{L}_2}
+\newcommand{\lt}{\textbf{L}_3}
+
+
+% Shortcuts for geometric vectors
+\newcommand{\U}{\textbf{u}}
+\newcommand{\V}{\textbf{v}}
+\newcommand{\W}{\textbf{w}}
+\newcommand{\B}[1]{\mathbf{#1}}
+\newcommand{\BA}[1]{\hat{\mathbf{#1}}}
+
+% Other shortcuts
+
+\newcommand{\G}{\gamma}
+\newcommand{\LA}{\mathcal{L}}
+\newcommand{\X}{\Vec{x}}
+\newcommand{\x}{\Vec{x}}
+
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+
+
+
+
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+\newcommand{\HI}{\mathcal{H}}
+\newcommand{\AL}{\mathcal{A}}
+
+\newcommand{\D}{\partial}
+
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+
+\title{Notes on Geometry in Curved Backgrounds}
+\author{Mathew Calkins\\
+  \textit{Center for Cosmology and Particle Physics},\\
+  \textit{New York University}\\
+  \texttt{mc8558@nyu.edu}.
+}
+
+\date{\today}
+
+\maketitle
+
+
+\abstract{Some supplementary discussion of geometry in curved backgrounds}
+
+
+\tableofcontents
+
+
+\section{Review: Coordinates and Metrics on Spacetime}
+In the last week we have learned a great deal of formalism for studying the geometry of curved spacetimes. We begin by reviewing the essential facts.
+
+
+
+\subsection{Fact 1: Spacetime is Admits Local Coordinates}
+Spacetime\footnote{You can think of $M$ as standing for either Minkowski or manifold.} $M$ in general relativity is to be regarded as a smooth geometric space, akin to sphere, cylinder, or torus. Poinst $p \in M$ are events. Like all three of the examples just given, spacetime can be described by smoothly assigning local coordinates. Abstractly, this means that within local regions $R$ in spacetime (formally, $R \subset M$), we can describe each event $p$ in the region (formally, $p \in R$) by numbers \begin{equation*}
+(x^\mu(p))_{\mu=0, \ldots, 3} = \LP x^0(p), x^1(p), x^2(p), x^3(p) \RP = (t(p), x(p), y(p), z(p))
+\end{equation*}
+in such a way that no two events get mapped to the same number and each component $x^\mu(p)$ depends smoothly on $p$. We call this choice of region $R$ and coordinate description $x^\mu$ a \ti{local chart} or \ti{local coordinate system}. \\
+\\
+\
+We should think of the event $p$ as a kind of intrinsic object, which exists whether or not we choose this or that coordinate system. On the other hand, the numbers $x^\mu(p)$ are an artifact of how we choose our coordinates. No matter how we choose them, we will always find we need exactly four numbers. This is analogous to the fact that any two bases for a finite-dimensional vector space will have the same number of basis vectors, and abstractly is what we mean when we say that $M$ is four-dimensional. \\
+\\
+\
+It is always possible to give well-behaved local coordinates, but it may not be possible to use a single set of coordinates for the entire spacetime all at once, \ti{i.e.}, to find good \ti{global coordinates}. This is a phenomena you have seen before. We learned in our youths that any point $p$ on the unit sphere (formally, $p \in S^2$) can be described be coordinates $(\theta, \phi)$. This coordinate system covers the entire sphere, but at the cost of some funny business at the north $(\theta = 0)$ and south ($\theta = \pi)$ poles, where every value of $\phi$ corresponds to the same point. If we want to avoid this kind of behavior and only use coordinate systems where points and coordinates are in a neat one-to-one correspondence, we will generally need multiple different coordinate systems for different parts of our spacetime. \\
+\\
+\
+Physically, a choice of local coordinates $(x^\mu)$ around some event $p$ corresponds to a choice of reference frame for an observer passing through the event $p$. This is a generalization of the fact that, in Minkowski space, a choice of inertial reference frame is equivalent to choosing a basis.
+
+
+
+\subsection{Fact 2: Local Coordinates Given Local Bases}
+Suppose we have some vector $V_p$ based at a point $p \in M$. For example, maybe we have a parametrized path $p(\lambda)$ with coordinate description $x^\mu(\lambda) := x^\mu(p(\lambda))$ which passes through $p$ at $\lambda = \lambda_0$ and whose velocity at that point is $V_p$. Intuitively then we expect $V$ should have components \begin{equation*}
+V_p^\mu = \left. \frac{dx^\mu}{d\lambda} \right|_{\lambda = \lambda_0}
+\end{equation*}
+But we know that assigning components to $V_p$ means we are implicitly expanding it in a basis. We call the basis that gives the above components the \ti{coordinate basis} \begin{equation*}
+\mbox{coordinate basis at p} = \tb{e}_0(x), \tb{e}_1(x), \tb{e}_2(x), \tb{e}_3(x).
+\end{equation*}
+In other words, \begin{equation*}
+V_p = V_p^\mu \tb{e}_\mu(x).
+\end{equation*}
+If we moved to some other coordinate system $\tilde{x}^\mu$, we would get some new basis and corresponding new components. The chain rule tells us that \begin{align*}
+\tilde{V}_p^\mu & = \frac{d\tilde{x}^\mu}{d\lambda} \\
+\ & = \PA{\tilde{x}^\mu}{x^\nu} \frac{dx^\nu}{d\lambda} \\
+\ & = \PA{\tilde{x}^\mu}{x^\nu} V_p^\nu.
+\end{align*}
+In fact we can run this logic backwards. Given any vector $A_p$ based at $p$, consider a trajectory through spacetime which passes through $p$ with exactly velocity $A_p$, then follow the argument above. This tells us that the transformation rule we just wrote down must be the general rule for how vector components change between coordinate systems. \begin{equation*}
+\tilde{A}_p^\mu =  \PA{\tilde{x}^\mu}{x^\nu} A_p^\nu
+\end{equation*}
+where the Jacobian matrix of partial derivatives is to be evaluated at the point $p$. On the other hand, we know that a vector is equal to itself no matter what basis we expand it in. \begin{equation*}
+V_p = V_p^\mu \tb{e}_\mu(x) = \tilde{V}_p^\mu \tilde{\tb{e}}_\mu(\tilde{x})
+\end{equation*}
+Insisting on this equality and using the above transformation law for the components of $V$ turns out to uniquely fix the transformation law for the coordinate basis to be \begin{equation*}
+\tilde{\tb{e}}_\mu(\tilde{x}) = \PA{x^\nu}{\tilde{x}^\mu} \tb{e}_\nu(x).
+\end{equation*}
+\tb{Exercise (Tricky)} Prove this.\\
+\\
+\
+Given some vector space, we are always free to consider any convenient basis we like. This holds true in particular for the space of vectors based at a point $p \in M$. Even if we have made a choice of coordinate system, there is no reason we can't pick some completely unrelated set of basis vectors $\tb{e}_a$ and expand our vector in this basis as \begin{equation*}
+V_p = V_p^a \tb{e}_a.
+\end{equation*}
+We could even mix things up, expanding the $\mu$th coordinate basis vector in this unrelated basis \begin{equation*}
+\tb{e}_\mu = \LP \tb{e}_\mu \RP^a \tb{e}_a
+\end{equation*}
+or take our $a$th element of our unrelated basis and expand it in the coordinate basis \begin{equation*}
+\tb{e}_a = \LP \tb{e}_a \RP^\mu \tb{e}_\mu
+\end{equation*}
+A final, slightly more formal note: The curious reader might be interested to know that the intuitive idea of a ``vector based at $p$" can indeed be formalized as something called a \ti{tangent vector}, or more explicitly a \ti{vector tangent to $M$ at $p$}. We call the space of all such vectors the \ti{tangent space} at $p$, written as $T_p M$. Then if $V_p$ is such a vector we write abstractly $V_p \in T_p M$.
+
+
+
+
+
+\subsection{Fact 3: The Metric Gives Spacetime Geometry and Inner Products}
+We have seen over and over that a space's geometric properties like length and angle can all be derived from the way that local distances work. More concretely, they all come from specifying the distance between arbitrary pairs of infinitesimally separated points. In local coordinates $(x^\mu)$, specifying this means giving an expression for the squared infinitesimal distance \begin{equation*}
+ds^2 = g_{\mu \nu} dx^\mu dx^\nu = \begin{bmatrix}
+dx^0 & dx^1 & dx^2 & dx^3
+\end{bmatrix}
+\begin{bmatrix}
+g_{00} & g_{01} & g_{02} & g_{03} \\
+g_{10} & g_{11} & g_{12} & g_{13} \\
+g_{20} & g_{21} & g_{22} & g_{23} \\
+g_{30} & g_{31} & g_{32} & g_{33}
+\end{bmatrix} \begin{bmatrix}
+dx^0 \\ dx^1 \\ dx^2 \\ dx^3
+\end{bmatrix}
+\end{equation*}
+It's important to keep in mind that this equality holds at each point $p$ in our local coordinate system. $ds^2$ is really the distance to an arbitrary point near $p$, $dx^\mu$ is really small coordinate displacement starting from $p$ and moving away, and each component $g_{\mu \nu}$ depends on the coordinates $x^\mu$ of the point $p$. Totally explicitly, we might instead write \begin{equation*}
+\left. ds^2 \right|_p = g_{\mu \nu}(x(p)) \left. dx^\nu \right|_p \left. dx^\nu \right|_p
+\end{equation*}
+Just as we found for the Minkowski metric, this object $g$ can be used not only to compute local distances but more generally to compute inner products. Given any two vectors $A_p,B_p$ based at the point $p$, we can compute their inner product written variously as \begin{equation*}
+A_p \cdot B_p = ds^2(A_p, B_p) = g(A_p, B_p) = g_{\mu \nu} A_p^\mu B_p^\nu.
+\end{equation*}
+Note that this last line is \tb{not} a calculation. These are all just various choices of notation for the inner product between the two vectors.\\
+\\
+\
+As we have seen in Euclidean contexts, this inner product lets us define lengths implicitly by \begin{equation*}
+\nm{A_p}^2 := A_p \cdot A_p.
+\end{equation*}
+Just like in special relativity, we say that \begin{equation*}
+A_p \mbox{ is } \begin{cases}
+\mbox{timelike} & \mbox{if } A_p \cdot A_p < 0, \\
+\mbox{spacelike} & \mbox{if } A_p \cdot A_p > 0, \\
+\mbox{null/lightlike} & \mbox{if } A_p \cdot A_p = 0.
+\end{cases}
+\end{equation*}
+As before, it always makes sense to talk about $\nm{A_p}^2$, though we must take care when we try to talk about $\nm{A_p}$ directly since $\nm{A_p}^2 = 0$ for $A_p$ null and and $\nm{A_p}^2 < 0$ for $A_p$ time-like. \\
+\\
+\
+We can then define the angle $\theta$ between our vectors by declaring \begin{equation*}
+A_p \cdot B_p = \nm{A} \nm{B} \cos \theta
+\end{equation*}
+This comes with the same caveats for timelike or null vectors.\\
+\\
+\
+Just as we found in special relativity, taking the inner product between two vectors give a scalar. Under a change of coordinates we will generally find that $A^\mu, B^\nu, g_{\mu \nu}$ all change, but in exactly such a way that everything cancels out and lets $A_p \cdot B_p$ invariant. \begin{equation*}
+g_{\mu \nu} A^\mu_p B^\nu_p = \tilde{g}_{\mu \nu} \tilde{A}^\mu_p \tilde{B}^\nu_p
+\end{equation*}
+Finally, we note that the metric is closely related to our discussion above about choices of basis. In the coordinate basis $(\tb{e}_\mu)$ (though things works similarly in a general basis), by linearity of the inner product with respect to its two arguments we can expand \begin{align*}
+g_{\mu \nu} A_p^\mu B_p^\nu & = g(A_p, B_p) \\
+\ & = g \LP A_p^\mu \tb{e}_\mu(x), B_p^\nu \tb{e}_\nu(x) \RP \\
+\ & = g \LP  \tb{e}_\mu(x), \tb{e}_\nu(x) \RP A_p^\mu B_p^\nu
+\end{align*}
+so by comparison we see that the components of our metric are exactly \begin{equation*}
+g_{\mu \nu}(x(p)) =  g \LP  \tb{e}_\mu(x), \tb{e}_\nu(x) \RP = \tb{e}_\mu(x) \cdot \tb{e}_\nu(x).
+\end{equation*}
+
+
+
+
+
+
+\subsection{Fact 4: We Can Always Pick Local Inertial Coordinates}
+In a general coordinate system $(x^\mu)$ on a general spacetime $M$ and metric $g$, the components of our metric will not be as simple as the metric we learned about in special relativity. \begin{equation*}
+g_{\mu \nu}(x(p)) \neq \eta_{\mu \nu}.
+\end{equation*}
+However, by various physical and geometric arguments given in lecture, at any fixed point $p_0$ we can always pick coordinates $(\xi^\mu)$ so that not only is the metric exactly $\eta$ at our given point \begin{equation*}
+g_{\mu \nu}(\xi(p_0)) = \eta_{\mu \nu}
+\end{equation*}
+but the components of the metric have vanishing first derivatives at this point \begin{equation*}
+\left. \PA{g_{\mu \nu}}{\xi^\rho} \right|_{\xi(p_0)} = 0.
+\end{equation*}
+So even if the metric isn't exactly the constant $\eta$ metric in a neighborhood of $p_0$, it is to first order in our deviations away from $p_0$. That is, if we Taylor expand $g_{\mu \nu}(\xi(p))$ about $\xi(p_0)$ as \begin{equation*}
+g_{\mu \nu}(\xi(p)) = \underbrace{g_{\mu \nu}(\xi(p_0))}_{ = \eta_{\mu \nu}} + (\xi^\rho(p) - \xi^\rho(p_0)) \underbrace{\PA{g_{\mu \nu}}{\xi^\rho} (\xi(p))}_{ = 0} + \LP \mbox{quadratic or higher in $\xi(p) - \xi(p_0)$} \RP
+\end{equation*}
+the constant term is $\eta$ and the linear term vanishes, with corrections appearing only at second order.
+
+
+
+
+
+\section{Area and Volume and So On}
+Suppose we have some spacetime $M$ with metric $g$ and have chosen local coordinates $(x^\mu)$. We have seen that this gives a notion of geometry on $M$ and a way to describe it with numbers, but as it turns out it also gives the geometry on nice subsets of $M$, even though which are strictly lower-dimensional such as worldlines or spatial slices.
+
+
+\subsection{Four-Volume}
+Just like length and distance and angle, the metric on spacetime defines a notion of volume, or more precisely four-volume. To see how to squeeze this out, we'll need to recall a few facts and pick convenient coordinate systems. Around some point $p$, let $(x^\mu)$ be a totally general coordinate system and let $(\xi^\mu)$ be a locally inertial coordinate system. Then the metric in these two coordinate systems exactly at the point $p$ looks like \begin{equation*}
+ds^2 = g_{\mu \nu} dx^\mu dx^\nu = \eta_{\mu \nu} d\xi^\mu d\xi^\nu.
+\end{equation*}
+We know how volume works in flat Minkowski space works, so in terms of our inertial coordinates a little volume element at $p$ has the form \begin{equation*}
+d\mbox{Vol} = d \xi^0 d \xi^1 d \xi^2 d \xi^3.
+\end{equation*}
+We also recall from vector calculus how expression for volumes vary between coordinate systems\footnote{The careful reader, or the reader familiar with differential forms, should note that we are talking about an \ti{unsigned} volume here. This is the volume of the parallelipiped spanned by the four basis differentials, without regard for their orientation.} . In particular, \begin{equation*}
+d \xi^0 d \xi^1 d \xi^2 d \xi^3 = \left| \det \LP \PA{\xi}{x} \RP \right| dx^0 dx^1 dx^2 dx^3
+\end{equation*}
+where the matrix appearing inside the determinant is the Jacobian matrix, whose $(\mu,\nu)$th entry is the partial derivative of $\xi^\mu$ with respect to $x^\nu$. Our last step will be to notice another nice expression for this Jacobian. To do so, we take our two expressions above for $ds^2$ and expand each $d \xi$ by the chain rule as \begin{align*}
+g_{\mu \nu} dx^\mu dx^\nu & = \eta_{\mu \nu} d\xi^\mu d\xi^\nu \\
+\ & = \eta_{\mu \nu} \PA{\xi^\mu}{x^\rho} \PA{\xi^\nu}{x^\sigma} dx^\rho dx^\sigma \\
+\ & = \eta_{\rho \sigma} \PA{\xi^\rho}{x^\mu} \PA{\xi^\sigma}{x^\nu} dx^\mu dx^\nu.
+\end{align*}
+Now since $dx$ is arbitrary we have \begin{equation*}
+g_{\mu \nu} = \PA{\xi^\rho}{x^\mu} \eta_{\rho \sigma}  \PA{\xi^\sigma}{x^\nu}.
+\end{equation*}
+The indices here match up exactly so that we can interpreting this as an equality between matrices \begin{equation*}
+[g] = \left[ \PA{\xi}{x} \right]^T [\eta]  \left[ \PA{\xi}{x} \right].
+\end{equation*}
+where $[\D \xi / \D x]$ is the matrix whose $(\mu,\nu)$th entry is the partial derivative of $\xi^\mu$ with respect to $x^\nu$.\\
+\\
+\
+\tb{Exercise} Look carefully at how we have defined our matrices and explain why the first term on the RHS appears under a transpose.\\
+\\
+\
+After taking determinants we have \begin{equation*}
+\det([g]) = - \det \LP \left[ \PA{\xi}{x} \right] \RP^2.
+\end{equation*}
+This is exactly what we needed! Plugging this into our earlier expressions, we have \begin{equation*}
+d \mbox{Vol} = \sqrt{|\det([g])|} dx^0 dx^1 dx^2 dx^3 \equiv \sqrt{|\det([g])|} d^4 x.
+\end{equation*}
+This expression is important enough that we enough abuse notation and write $g$ for this determinant of the metric in components. \begin{equation*}
+g \equiv \det([g]) \equiv \det \LP \begin{bmatrix}
+g_{00} & g_{01} & g_{02} & g_{03} \\
+g_{10} & g_{11} & g_{12} & g_{13} \\
+g_{20} & g_{21} & g_{22} & g_{23} \\
+g_{30} & g_{31} & g_{32} & g_{33}
+\end{bmatrix} \RP.
+\end{equation*}
+Since we have one timelike direction with negative squared norm and three spacelike directions with positive squared norms, we know that $g_{\mu \nu}$ like $\eta_{\mu \nu}$ will generally have determinant -1, so we can swap out the absolute value for a minus sign and write \begin{equation*}
+d \mbox{Vol} = \sqrt{-g} d^4 x.
+\end{equation*}
+This turns out to be true for a general manifold with metric. The only difference is that form an $n$-dimensional manifold we have $d^n x$ instead of $d^4 x.$
+
+
+
+\subsection{Geometry on Paths}
+Consider a parametrized path through spacetime. Abstractly this looks like $p(\lambda)$, or in coordinates $x^\mu(\lambda) := x^\mu(p(\lambda))$. With respect to this parametrization, this path has a velocity vector with components \begin{equation*}
+V^\mu(\lambda) := \frac{dx^\mu(\lambda)}{d \lambda}
+\end{equation*}
+from which we can compute the speed as \begin{equation*}
+\nm{V(\lambda)}^2 = g_{\mu \nu}(x(\lambda)) V^\mu(\lambda) V^\nu(\lambda) = g_{\mu \nu}(x(\lambda)) \frac{dx^\mu(\lambda)}{d \lambda} \frac{dx^\nu(\lambda)}{d \lambda}.
+\end{equation*}
+If the path is strictly spacelike so that $\nm{V(\lambda)}^2 > 0$, we can compute a length of some segment by integration. \begin{equation*}
+L(\lambda_i \to \lambda_f) = \int_{\lambda_i}^{\lambda_f} \underbrace{\sqrt{g_{\mu \nu}(x(\lambda)) \frac{dx^\mu(\lambda)}{d \lambda} \frac{dx^\nu(\lambda)}{d \lambda}} d \lambda}_{\mbox{\scriptsize{infinitesimal distance along path}}}.
+\end{equation*}
+If the path is strictly timelike, we can compute proper time along the path in nearly the same way. \begin{equation*}
+\tau(\lambda_i \to \lambda_f) = \int_{\lambda_i}^{\lambda_f} \underbrace{\sqrt{- g_{\mu \nu}(x(\lambda)) \frac{dx^\mu(\lambda)}{d \lambda} \frac{dx^\nu(\lambda)}{d \lambda}} d \lambda}_{\mbox{\scriptsize{infinitesimal proper time along path}}}.
+\end{equation*}
+We can derive the same formula just by cranking through the chain rule to find the length of an infinitesimal segment of the path, not bothering to explicitly write out arguments. \begin{align*}
+ds^2 & = g_{\mu \nu} dx^\mu dx^\nu \\
+\ & = g_{\mu \nu} \LP \frac{dx^\mu}{d \lambda} d \lambda \RP \LP \frac{dx^\nu}{d \lambda} d \lambda \RP \\
+\ & = \LP g_{\mu \nu} \frac{dx^\mu}{d \lambda} \frac{dx^\nu}{d \lambda} \RP d \lambda
+\end{align*}
+It is useful to think of the parametrized path as a kind of one-dimensional geometric space and $\lambda$ as a coordinate system on the path. With respect to this single coordinate, we expect our path to have a metric represented by a $1 \times 1$ array with single component $g_{\lambda \lambda}$, \ti{i.e.}, \begin{equation*}
+ds^2_{\mbox{\scriptsize{path}}} = g^{\mbox{\scriptsize{path}}}_{\lambda \lambda} d \lambda d \lambda.
+\end{equation*}
+Comparing these two expressions, we see that our path has induced metric \begin{equation*}
+g^{\mbox{\scriptsize{path}}}_{\lambda \lambda} = g_{\mu \nu} \frac{dx^\mu}{d \lambda} \frac{dx^\nu}{d \lambda}.
+\end{equation*}
+The moral here is that, by embedding our one-dimensional space inside of a larger four-dimensional space, the smaller space naturally inherits a metric from the larger one. We sometimes call this the \ti{induced} metric on the path. \begin{equation*}
+g^{\mbox{\scriptsize{ind}}}_{\lambda \lambda} = g_{\mu \nu} \frac{dx^\mu}{d \lambda} \frac{dx^\nu}{d \lambda}.
+\end{equation*}
+As a nice application, suppose our path is the trajectory of some massive particle so that $V^\mu$ is timelike everywhere, and freely parametrize by proper time $\lambda = \tau$. By definition this means our particle has \begin{equation*}
+\mbox{squared speed} = g_{\mu \nu} \frac{dx^\mu}{d \tau} \frac{dx^\nu}{d \tau} = -1
+\end{equation*}
+everywhere along its worldline, so our induced metric is exactly \begin{equation*}
+g^{\mbox{\scriptsize{path}}}_{\tau \tau} = -1.
+\end{equation*}
+This is yet another characterization of what it means to parametrize by proper time: it is a parametrization in which the induced metric's single component is -1.
+
+
+\subsection{Geometry of Surfaces}
+We could also consider the exactly dual situation. Rather than a one-dimensional path, we consider a three-dimensional surface\footnote{Sometimes we say such a space has \ti{codimension one} and call it a \ti{hypersurface}.} $\Sigma$ which runs strictly in a spacelike direction. More precisely, we assume that every normal vector any any point on the surface is timelike velocity vector. You might imagine that we have picked a coordinate system $(x^\mu)$ where the $t = x^0$ coordinate is timelike and the rest are spacelike, then built our surface by restricting to the fixed value of $t$. \begin{equation*}
+\Sigma = \{ \mbox{events $p$ such that } t(p) = t_0\}.
+\end{equation*}
+As it turns out, any spacelike hypersurface can be built this way, at least locally.\\
+\\
+\
+Above we noted that a one-dimensional space such as a worldline inherits an induced metric from the ambient spacetime, found by using the spacetime metric to measure the distances between nearby points on the worldline. Exactly the same logic applies here. If we use the spacetime metric to compare nearby points on our hypersurface $\Sigma$, this defines an induced metric on $\Sigma$. Our coordinate description of $\Sigma$ lets us describe this especially nicely. To start, we know that the squared distance between any two nearby points on our surface is given by \begin{equation*}
+ds^2 = g_{\mu \nu} dx^\mu dx^\nu.
+\end{equation*}
+This is a sum over 4 values of $\mu$ and 4 indepenent values of $\nu$. We can decompose this sum into cases where neither of $(\mu,\nu)$ is 0, one of them is 0, or both are 0. Using Latin indices $i,j$ to represent values from 1 to 3, this decomposition gives exactly \begin{align*}
+ds^2 & = g_{ij} dx^i dx^j + g_{\mu 0} dx^\mu dx^0 + g_{0 \nu} dx^0 dx^\nu + g_{0 0} dx^0 dx^0.
+\end{align*}
+But by definition any two points along $\Sigma$ have the same $x^0 = t$ value, so $dx^0 = 0$ along our surface and we have more simply \begin{align*}
+ds^2 & = g_{ij} dx^i dx^j.
+\end{align*}
+We often write this induced metric as $\gamma$. \begin{equation*}
+ds^2_\Sigma = \gamma_{ij} dx^i dx^j.
+\end{equation*}
+
+
+
+\section{Polar Coordinate Revisited}
+
+\subsection{The Metric}
+To make things concrete, we follow the same logic for the first set of nonlinear coordinates most of us ever saw, namely polar coordinates on $\R^2$. Normally these are written \begin{align*}
+x & = r \cos \theta, \\
+y & = r \sin \theta
+\end{align*}
+but to highlight the general structure we can just as well write \begin{align*}
+x^1 & = \tilde{x}^1 \cos (\tilde{x}^2), \\
+x^2 & = \tilde{x}^1 \sin (\tilde{x}^2).
+\end{align*}
+We know what the metric looks like in terms of our flat Cartesian coordinates \begin{equation*}
+ds^2 = (dx)^2 + (dy)^2 = (dx^1)^2 + (dx^2)^2
+\end{equation*}
+or equivalently \begin{equation*}
+\begin{bmatrix}
+g_{11} & g_{12} \\
+g_{21} & g_{22}
+\end{bmatrix} = \begin{bmatrix}
+g_{xx} & g_{xy} \\
+g_{yx} & g_{yy}
+\end{bmatrix} = \begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix}.
+\end{equation*}
+But what does it look like in our new coordinate system? On one hand we can compute this the old fashioned way, taking differentials \begin{align*}
+dx^1 & = \cos (\tilde{x}^2) d\tilde{x}^1 - \cos (\tilde{x}^1) d\tilde{x}^2, \\
+dx^2 & = \sin (\tilde{x}^2) d\tilde{x}^1 + \cos (\tilde{x}^2) d\tilde{x}^1
+\end{align*}
+and letting everything simplify by trig identities to find \begin{align*}
+ds^2 & = (dx^1)^2 + (dx^2)^2 \\
+\ & = \LP \cos (\tilde{x}^2) d\tilde{x}^1 - \tilde{x}^1 \sin (\tilde{x}^2) d\tilde{x}^2 \RP^2 + \LP \sin (\tilde{x}^2) d\tilde{x}^1 + \tilde{x}^1 \cos (\tilde{x}^2) d\tilde{x}^2 \RP^2 \\
+\ & = \mbox{(work out the algebra)} \\
+\ & = \LP d \tilde{x}^1 \RP^2 + \LP \tilde{x}^1 \RP^2 \LP d \tilde{x}^2 \RP^2 \\
+\ & = dr^2 + r^2 d \theta^2.
+\end{align*}
+As a matrix, this means \begin{equation*}
+[\tilde{g}] = \begin{bmatrix}
+\tilde{g}_{11} & \tilde{g}_{12} \\
+\tilde{g}_{21} & \tilde{g}_{22}
+\end{bmatrix} = \begin{bmatrix}
+g_{rr} & g_{r \theta} \\
+g_{\theta r} & g_{\theta \theta}
+\end{bmatrix} = \begin{bmatrix}
+1 & 0 \\
+0 & r^2
+\end{bmatrix}
+\end{equation*}
+We can also do this calculation by using general transformation laws for tensors. We saw earlier that objects with a single raised index like the components of a vector transform like \begin{equation*}
+\tilde{A}_p^\mu =  \PA{\tilde{x}^\mu}{x^\nu} A_p^\nu
+\end{equation*}
+while objects with a single lowered index like the elements of the coordinate basis transform in the opposite way \begin{equation*}
+\tilde{\tb{e}}_\mu(\tilde{x}) = \PA{x^\nu}{\tilde{x}^\mu} \tb{e}_\nu(x).
+\end{equation*}
+In special relativity, we saw that the transformation rules for objects with single raised or lowered indices extended naturally to objects with more indices. The exact same is true here. We'll later go into more detail, but it turns out that the components of the metric (or any other object with two lowered indices, for that matter) transform as \begin{align*}
+\tilde{g}_{\mu \nu} = \PA{x^\rho}{\tilde{x}^\mu} \PA{x^\sigma}{\tilde{x}^\nu} g_{\rho \sigma}.
+\end{align*}
+As we have done before, to practically compute this it is useful to think of this as matrix multiplication. Following the same logic as we applied in Section 2.1, we can write \begin{equation*}
+[\tilde{g}] = \left[ \PA{x}{\tilde{x}} \right]^T [g]  \left[ \PA{x}{\tilde{x}} \right].
+\end{equation*}
+Breaking out all components, this tells us \begin{align*}
+\begin{bmatrix}
+g_{rr} & g_{r \theta} \\
+g_{\theta r} & g_{\theta \theta}
+\end{bmatrix} & = \begin{bmatrix}
+\PA{x}{r} & \PA{x}{\theta} \\
+\PA{y}{r} & \PA{y}{\theta} \\
+\end{bmatrix}^T \begin{bmatrix}
+g_{xx} & g_{xy} \\
+g_{yx} & g_{yy}
+\end{bmatrix} \begin{bmatrix}
+\PA{x}{r} & \PA{x}{\theta} \\
+\PA{y}{r} & \PA{y}{\theta} \\
+\end{bmatrix} \\
+\ & = \begin{bmatrix}
+\cos \theta & \sin \theta \\
+- r \sin \theta & r \cos \theta
+\end{bmatrix} \begin{bmatrix}
+\cos \theta & - r \sin \theta \\
+\sin \theta & r \cos \theta
+\end{bmatrix} \\
+\ & = \begin{bmatrix}
+1 & 0 \\
+0 & r^2
+\end{bmatrix}
+\end{align*}
+exactly as we found above.
+
+
+\subsection{Area and Volume}
+Since $\R^2$ is a two-dimensional space, the appropriate notion of $n$-dimensional volume is area. The metric in either coordinate system seen so far lets us directly compute expression for infinitesimal volume. In Cartesian coordinates, we have \begin{align*}
+d\mbox{Vol}_2 & = d\mbox{Area} \\
+\ & = \sqrt{|\det([g])|} dx^1 dx ^2 \\
+\ & = dx dy
+\end{align*}
+where our determinant is easy to compute since $[g]$ is just the identity matrix. In polar coordinates, our determinant factor is \begin{align*}
+\sqrt{\det([\tilde{g}])} & = \sqrt{\det \LP \begin{bmatrix}
+1 & 0 \\
+0 & r^2
+\end{bmatrix} \RP} \\
+\ & = r
+\end{align*}
+so that \begin{align*}
+d\mbox{Area} & = \sqrt{\det([\tilde{g}])} d \tilde{x}^1 d \tilde{x}^2 \\
+\ & = r dr d \theta
+\end{align*}
+as we expected.
+
+
+
+\subsection{Induced Metrics}
+Since we are working in a two-dimensional space, the interesting subspaces are one-dimensional. The simplest and most familiar example is the circle centered at the origin of some fixed radius $R$, which we write as $S^1_R$. \begin{equation*}
+S^1_R := \{\mbox{points with coordinates } (x,y) \in \R^2 \mbox{ such that } x^2 + y^2 = R^2 \}.
+\end{equation*}
+In polar coordinates this set is even simpler to describe: it is exactly all of the points with coordinates $(R,\theta)$ for arbitrary $\theta$. From this we see that infinitesimal squared distances on $S^1_R$ look like \begin{align*}
+ds^2 & = \left. \LP dr^2 + r^2 d \theta^2
+ \RP \right|_{r = R = \mbox{\scriptsize{{fixed}}}} \\
+ \ & = R^2 d \theta^2.
+\end{align*}
+In the language of induced metrics, we can say that $S^1_R$ is a one-dimensional space with a coordinate system given by the single coordinate $\theta$. Then in this coordinate system the metric is described by a $1 \times 1$ array whose single component $g_{\theta \theta}$ is \begin{equation*}
+g^{\mbox{\scriptsize{ind}}}_{\theta \theta} = R^2.
+\end{equation*}
+We can use this to measure the distance along $S^1_R$ from some angle $\theta_A$ to some other angle $\theta_B$. For simplicity we assume $\theta_B$ is a larger angle than $\theta_A$, but not by more than $2 \pi$. \begin{equation*}
+0 \leq \theta_B - \theta_A < 2 \pi.
+\end{equation*}
+Then our distance comes by integrating $ds$. \begin{align*}
+\mbox{arclength} & = \int ds \\
+\ & = \int \sqrt{ds^2} \\
+\ & = \int_{\theta_A}^{\theta_B} R d \theta \\
+\ & = R (\theta_B - \theta_A).
+\end{align*}
+This agrees with the classical result that an arc of angular length $\Delta \theta$ along a circle of radius $R$ has length $R \Delta \theta$.
+
+\end{document}

@@ -1,0 +1,434 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usepackage{tikz-feynman}
+\tikzfeynmanset{compat=1.1.0}
+\usepackage[shortlabels]{enumitem}
+
+
+
+
+% Commonly used sets of numbers
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\PR}{\mathbb{P}}
+\newcommand{\F}{\mathbb{F}}
+
+
+% Shortcuts for text formatting
+\newcommand{\tb}[1]{\textbf{#1}}
+\newcommand{\ti}[1]{\textit{#1}}
+
+% Math fonts
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+
+% Shortcuts for inner product spaces
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \left| #2 \right\rangle \right.}
+\newcommand{\Ip}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\nm}[1]{\left\| #1 \right\|}
+
+% Shortcuts for the section of 3D rotations
+\newcommand{\lo}{\textbf{L}_1}
+\newcommand{\ltw}{\textbf{L}_2}
+\newcommand{\lt}{\textbf{L}_3}
+
+
+% Shortcuts for geometric vectors
+\newcommand{\U}{\textbf{u}}
+\newcommand{\V}{\textbf{v}}
+\newcommand{\W}{\textbf{w}}
+\newcommand{\B}[1]{\mathbf{#1}}
+\newcommand{\BA}[1]{\hat{\mathbf{#1}}}
+
+% Other shortcuts
+
+\newcommand{\G}{\gamma}
+\newcommand{\LA}{\mathcal{L}}
+\newcommand{\X}{\Vec{x}}
+\newcommand{\x}{\Vec{x}}
+
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+
+
+
+
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+\newcommand{\HI}{\mathcal{H}}
+\newcommand{\AL}{\mathcal{A}}
+
+\newcommand{\D}{\partial}
+
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{Invariants and Electromagnetism}
+\author{Mathew Calkins\\
+  \textit{Center for Cosmology and Particle Physics},\\
+  \textit{New York University}\\
+  \texttt{mc8558@nyu.edu}.
+}
+
+\date{\today}
+
+\maketitle
+
+
+\abstract{Some supplementary discussion of electromagnetism in relativistic notation, plus some extra material on computing Lorentz invariants.}
+
+
+\tableofcontents
+
+
+\section{Lorentz Invariants}
+
+\subsection{Computing the Minkowski Inner Product is Easy}
+Last time we found that there was an easy way to built a Lorentz scalar out of two four-vectors $A,B$: just take their inner product using $\eta$. We can write this variously as \begin{equation*}
+A \cdot B = \eta (A, B) = A^\mu \eta_{\mu \nu} B^\nu = \begin{bmatrix}
+A^0 & A^1 & A^2 & A^3 
+\end{bmatrix} \begin{bmatrix}
+-1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix} \begin{bmatrix}
+B^0 \\ B^1 \\ B^2 \\ B^3
+\end{bmatrix}.
+\end{equation*}
+This is all well and good, but doesn't make it immediately clear that \tb{computing the inner product is easy}. Not just conceptually straightforward, or easy enough to do without a calculator - it takes no thought at all. To see this, we work out the matrix multiplication on the RHS to see \begin{align*}
+A \cdot B & = \begin{bmatrix}
+A^0 & A^1 & A^2 & A^3 
+\end{bmatrix} \begin{bmatrix}
+- B^0 \\ B^1 \\ B^2 \\ B^3
+\end{bmatrix} \\
+\ & = - A^0 B^0 + \vec{A} \cdot \vec{B}.
+\end{align*}
+It's exactly like the regular Euclidean dot product, but with a minus sign in front of the time component. In the particular case $A = B$ this reduces to \begin{equation*}
+A \cdot A = \eta(A, A) = - (A^0)^2 + \vec{A} \cdot \vec{A}.
+\end{equation*}
+For example, the invariant interval between two infinitesimally separated events is  \begin{equation*}
+ds^2 = dx^\mu \eta_{\mu \nu} dx^\nu = \begin{bmatrix}
+dx^0 & dx^1 & dx^2 & dx^3 
+\end{bmatrix} \begin{bmatrix}
+-1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix} \begin{bmatrix}
+dx^0 \\ dx^1 \\ dx^2 \\ dx^3
+\end{bmatrix} = - dt^2 + d \vec{x} \cdot d \vec{x}.
+\end{equation*}
+
+
+
+
+
+
+
+
+
+\subsection{Example: Proper Time}
+As an immediate application, we can use these ideas to derive an expression for the proper time along some particle's trajectory. To be concrete, we start in some coordinate system $(t,x,y,z)$ and observe a particle moving along a not-necessarily-uniform trajectory $x^\mu(\lambda)$.  Consider two infinitesimally separated events along the path of the particle, say, $x^\mu(\lambda + d \lambda)$ and $x^\mu(\lambda)$, separated by a displacement \begin{equation*}
+dx^\mu = x^\mu(\lambda + d \lambda) - x^\mu(\lambda).
+\end{equation*}
+On one hand, we can measure the squared distance between these events in the coordinate system we're already using. \begin{equation*}
+ds^2 = - dt^2 + d \vec{x} \cdot d \vec{x}.
+\end{equation*}
+On the other hand, we could measure it in a very special frame $(t',x',y',z')$, namely the frame following an inertial observer who also passes the the point $x^\mu(\lambda)$ with the same velocity. This is a perfectly valid inertial frame since it is defined by an observer in uniform motion, and just at the event $x^\mu(\lambda)$ this frame by construction measures the particle as being stationary in space, moving only in time. We could think of this as the inertial frame \tb{instantaneously defined} by our particle at the point $x^\mu(\lambda)$.\\
+\\
+\
+In this frame, since our particle is stationary its spatial displacement is 0, and the infinitesimal time displacement is exactly the little bit of proper time (that is, time as measure by the particle's internal clock) between the two events. In other words, the squared distance is \begin{equation*}
+ds^2 = - \underbrace{{dt'}^2}_{\mbox{\scriptsize{proper time}}} +  \underbrace{d \vec{x}' \cdot d \vec{x}'}_{\mbox{\scriptsize{vanishes}}} = - d \tau^2.
+\end{equation*}
+But $ds^2 = ds^2$ no matter what frame we measure it in, so we have \begin{align*}
+- dt^2 + d \vec{x} \cdot d \vec{x} = - d \tau^2.
+\end{align*}
+Now moving minus signs around and taking square roots, we find \begin{align*}
+d \tau & = \sqrt{dt^2 - d \vec{x} \cdot d \vec{x}} \\
+\ & = \sqrt{1 - \frac{d \vec{x}}{dt} \cdot \frac{d \vec{x}}{{dt}}} dt \\
+\ & = \sqrt{1 - v^2} dt
+\end{align*}
+where $\vec{v}$ is the three-velocity as measured in our original coordinate system and $v = \nm{\vec{v}}$. From the minus sign under the square root we can immediately read off the effect of time dilation. As long as $\vec{v} \neq 0$, the time the particle experiences between any two events along its worldline is strictly less than the time we observe passing between those events. By restoring explicit factors of $c$ we have \begin{equation*}
+d \tau = \sqrt{1 - \frac{v^2}{c^2}} dt
+\end{equation*}
+so the effect is imperceptible unless $v$ is an appreciable fraction of $c$.
+
+
+
+
+
+
+\section{Relativistic Electromagnetism}
+
+
+
+
+\subsection{Maxwell and Galileo}
+After studying Lorentz transformations and contractions and dilations and so on, one of the first orders of business was to figure out how to take Newtonian mechanics and reformulate it to be consistent with relativity. Since our first iteration of Newtonian mechanics was designed to be consistent with Galilean relativity, corrections had to be made. For example, we had to adjust our definition of linear momentum \begin{equation*}
+\vec{p} = m \vec{v} \xmapsto{\mbox{\scriptsize{correction}}} \gamma m \vec{v}.
+\end{equation*}
+Do we need to update electromagnetism? Since the Lorentz force law \begin{equation*}
+m \vec{a} = q (\vec{E} + \vec{v} \times \vec{B})
+\end{equation*}
+is a particular instance of Newton's second law, we can safely guess it will need to be updated, at least by replacing $\vec{v}$ and $\vec{a}$ with appropriate relativistic quantities. But what about the laws governing the fields themselves? Recall that, while the Lorentz force law tells us how a given set of background fields $\vec{E}, \vec{B}$ influence a charged particle's trajectory, the \ti{Maxwell equations} tell us how $\vec{E}, \vec{B}$ are sourced by a charge density $\rho$ and a current density $\vec{J}$. In natural units where $\epsilon_0 = \mu_0 = c = 1$, these are \begin{align*}
+\nabla \cdot \vec{E} & = \rho, \\
+\nabla \cdot \vec{B} & = 0, \\
+\nabla \times \vec{E} & = - \PA{\vec{B}}{t}, \\
+\nabla \times \vec{B} & = \vec{J} + \PA{\vec{E}}{t}.
+\end{align*}
+These are written in Newton-friendly notation that treats space and time very differently, so you might fairly guess that they need to be updated to accord with relativity. Remarkably, this is not the case! These equations are invariant under Lorentz boosts and \tb{not} under Galilean boosts. This fact was known before Einstein, and to pre-relativity physicists suggested that the Maxwell equations might be wrong and need to be updated to accord with Galilean relativity. In fact the reverse turned out to be true. In this tension between Galilean physics and the Maxwell equations, Maxwell won out.
+
+
+\subsection{The Maxwell Tensor}
+If these equations are to be true exactly, the the various components of $\vec{E}$ and $\vec{B}$ must somehow fit into larger objects with nice Lorentz transformation laws. On one hand, these are now both written as 3-vectors, so you might guess that there are corresponding 4-vectors \begin{align*}
+(E^\mu)& \stackrel{?}{=} (E^0, \vec{E}), \\
+(B^\mu)& \stackrel{?}{=} (B^0, \vec{B}).
+\end{align*}
+But this turns out not to be the case. Indeed, if it were we would expect to see $E^0$ and $B^0$ appearing somewhere in the Maxwell equations. It turns out Nature's trick here is to store the components of $\vec{E}$ and $\vec{B}$ not in two four-vectors, but together in a single object with two indices. We will call this object the \ti{Maxwell tensor}, but it is also variously called the electromagnetic tensor, the electromagnetic field tensor, the field strength tensor, the Faraday tensor, or the Maxwell bivector. Explicitly, this object has components \begin{equation*}
+(F^{\mu \nu}) = \begin{bmatrix}
+F^{00} & F^{01} & F^{02} & F^{03} \\
+F^{10} & F^{11} & F^{12} & F^{13} \\
+F^{20} & F^{21} & F^{22} & F^{23} \\
+F^{30} & F^{31} & F^{32} & F^{33} \\
+\end{bmatrix} = \begin{bmatrix}
+0 & - E_x & - E_y & - E_z \\
+E_x & 0 & - B_z & B_y \\
+E_y & B_z & 0 & - B_x \\
+E_z & - B_y & B_x & 0
+\end{bmatrix}.
+\end{equation*}
+An object with two indices isn't so strange. We've seen one before in the metric tensor $\eta_{\mu \nu}$, though that had lowered indices. By contrast with the metric tensor which was symmetric \begin{equation*}
+\eta_{\mu \nu} = \eta_{\nu \mu}
+\end{equation*}
+we notice that the Maxwell tensor is antisymmetric \begin{equation*}
+F^{\mu \nu} = - F^{\nu \mu}.
+\end{equation*}
+This is something we could have perhaps guessed ahead of time by counting degrees of freedom. A general two-indexed object has $4 \times 4 = 16$ independent components, while a symmetric one has $10$ and an antisymmetric on has $6$. On the other hand, here we have 6 independent quantities to encode ($\vec{E}$ and $\vec{B}$ each have 3 components), so an antisymmetric tensor is just the right size.\\
+\\
+\
+We can also invert the above relations to write the components of $\vec{E}, \vec{B}$ in terms of the components of $F$. Being careful with our notation, we denote \begin{align*}
+(E^1, E^2, E^3) & \equiv (E_x, E_y, E_z), \\
+(B^1, B^2, B^3) & \equiv (B_x, B_y, B_z).
+\end{align*}
+Then the components of $\vec{E}$ are given in terms of the components of $F$ as \begin{equation*}
+E^i = F^{i0} = - F^{0i}.
+\end{equation*}
+Meanwhile, term by term we see that \begin{align*}
+B^1 & = F^{32} = - F^{23}, \\
+B^2 & = F^{13} = - F^{31}, \\
+B^3 & = F^{21} = - F^{21}
+\end{align*}
+or packaged together in a single rule \begin{equation*}
+B^i = - \frac{1}{2} \epsilon^{ijk} F^{jk}
+\end{equation*}
+
+
+
+\subsection{The Source Terms and Charge Conservation}
+We saw how to encode $\vec{E}$ and $\vec{B}$ into a single relativistic object. What about the sources $\rho$ and $\vec{J}$? Here we might count degrees of freedom (3 + 1 = 4) and guess that these should form the time and space parts of a four-vector, and we would be right! With no need for correcting anything, we have a single four-vector $J$ with components \begin{equation*}
+(J^\mu) = (J^0, J^1, J^2, J^3) = (\rho, \vec{J}).
+\end{equation*}
+To see how we could have guessed this, recall that in electromagnetism the charge and current densities are mutually constrained by the law of \ti{local conservation of charge}. Over some finite solid region $V$ with boundary $\D V$, this says that the total flow of current out through $\D V$ is exactly the negative of the rate at which the charge enclosed inside $V$ changes. \begin{equation*}
+\mbox{flux of $\vec{J}$ out through $\D V$} = \frac{d}{dt} Q_{\mbox{\scriptsize{enc}}}(V).
+\end{equation*}
+Here both quantities being compared are defined implicitly in terms of integrals of $\rho$ and $\vec{J}$. The divergence theorem (or roughly, taking $V$ to be an infinitesimal region) turns this into the local statement \begin{equation*}
+\nabla \cdot \vec{J} = - \PA{\rho}{t}.
+\end{equation*}
+But we know that $\nabla$ and $\D_t$ naturally combine into the four-gradient, written variously as \begin{equation*}
+(\D_\mu) := \LP \PA{}{x^\mu} \RP = (\D_t, \D_x, \D_y, \D_z) = (\D_0, \D_1, \D_2, \D_3).
+\end{equation*}
+So the law of local charge conservation becomes \begin{align*}
+0 & = \PA{\rho}{t} + \nabla \cdot \vec{J} \\
+\ & = \D_0 J^0 + \D_1 J^1 + \D_2 J^2 + \D_3 J^3 \\
+\ & = \D_\mu J^\mu.
+\end{align*}
+So this law too was secretly Lorentz-compatible the whole time, as long as we knew that $\rho, \vec{J}$ were secretly four-vector components. In reverse, knowing that that $\D_\mu$ form the components of a covector operator, we might have noticed that local charge conservation takes this form and thereby deduced that $(\rho, \vec{J})$ form a four-vector.
+
+
+\subsection{The Maxwell Equations}
+If everything we've said so far is true, we ought to be able to write the Maxwell equations in relativistic notation, and indeed we can. The only caveat is that two of the Maxwell equations will turn out to need slightly more mathematical technology to write down, so for today we'll have to be content with just the sourced equations \begin{align*}
+\nabla \cdot \vec{E} & = \rho, \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{(Gauss's law)} \\
+\nabla \times \vec{B} & = \vec{J} + \PA{\vec{E}}{t}. \ \ \ \ \ \mbox{(Amp\`{e}re-Maxwell equation)}
+\end{align*}
+Our claim is that these can be written equivalently in terms of a PDE for $F$ written in relativistic notation. To show this, we could go the hard way and try to reverse-engineer a law for $F$, and indeed you should do so once in your life. But instead we'll simply state what the law is for $F$, and show that it's true by breaking out components and showing it reproduces the laws in the form we already know. Now the punchline: the relativistic form of the sourced Maxwell equations is \begin{equation*}
+\D_\mu F^{\mu \nu} = J^\nu.
+\end{equation*}
+As you might guess, for $\nu = 0$ this reproduces Gauss's law, and for $\nu=1,2,3$ it gives the Amp\`{e}re-Maxwell equation. As we said, showing this doesn't involve anything high-brow. We just plug in the definition of $F$ and expand in components. For $\nu = 0$ this gives \begin{align*}
+\rho & = J^0 \\
+\ & = \D_\mu F^{\mu 0} \\
+\ & = \D_0 F^{0 0} + \D_1 F^{1 0} + \D_2 F^{2 0} + \D_3 F^{3 0} \\
+\ & = \D_0 (0) + \D_1 E^1 + \D_2 E^2 + \D_3 E^3 \\
+\ & = \D_x E_x + \D_y E_y + \D_z E_z \\
+\ & = \nabla \cdot \vec{E}
+\end{align*}
+which is exactly Gauss's law. To get the Amp\`{e}re-Maxwell equation, to keep things simple we'll just show that we can reproduce the $x$ component \begin{equation*}
+J_x + \D_t E_x = \D_y B_z - \D_z B_y
+\end{equation*}
+since the other components come out by identical logic. We do this by following exactly the same kind of calculation as we use for Gauss's law. Setting $\nu = 1$ in our law $\D_\mu F^{\mu \nu} = J^\nu$, we have \begin{align*}
+J_x & = J^1 \\
+\ & = \D_\mu F^{\mu 1} \\
+\ & = \D_0 F^{0 1} + \D_1 F^{1 1} + \D_2 F^{2 1} + \D_3 F^{3 1} \\
+\ & = \D_0 (-E_x) + \D_1 (0) + \D_2 (B_z) + \D_3 (-B_y) \\
+\ & = \D_y B_z - \D_z B_y - \D_t E_x.
+\end{align*}
+Great! Just as we claimed, setting $\nu = 1$ recovered the $x$ component of the Amp\`{e}re-Maxwell equation\\
+\\
+\
+\tb{Exercise} Repeat this logic and show that setting $\nu = 2,3$ respectively recovers the $y,z$ components of the Amp\`{e}re-Maxwell equation.
+
+
+\subsection{Boosting $\vec{E}$ and $\vec{B}$}
+We have shown that assembling $\vec{E},\vec{B}$ into $F$ lets us equivalently rewrite two of the Maxwell equations, but that doesn't tell us anything new. However, if you buy that $F^{\mu \nu}$ is a Lorentz-covariant object, you can now get something else for free, namely the rules for how $\vec{E}$ and $\vec{B}$ transform under Lorentz transformations. To see how, recall that under a Lorentz transformation \begin{equation*}
+x^\mu \to {x'}^\mu = \Lambda^\mu _{ \ \nu} x^\nu
+\end{equation*}
+an object $A$ whose components carry a single raised index - that is, a four-vector - transforms as \begin{equation*}
+A^\mu \to {A'}^\mu = \Lambda^\mu _{ \ \nu} A^\nu.
+\end{equation*}
+An object like $F$ whose components $F^{\mu \nu}$ carry two raised indices transforms in a similar way. The only difference is that, since we now have two free indices, we need two factors of $\Lambda$. The exact rule is \begin{equation*}
+F^{\mu \nu} \to {F'}^{\mu \nu} = \Lambda^\mu _{ \ \rho} \Lambda^\rho _{ \ \sigma} F^{\rho \sigma}.
+\end{equation*}
+Pause to notice that the pattern is similar. Each free index in $F^{\mu \nu}$ after transforming becomes a free index on one of the $\Lambda$'s, and the remaining $\Lambda$ index is a dummy index summed against the same index appearing on $F$. To remember how this works, you could imagine (this isn't true in general, but gives the right rule) that $F$ is component-wise a product of two four-vectors like \begin{equation*}
+F^{\mu \nu} = A^\mu B^\nu
+\end{equation*}
+and then apply the rules for $A$ and $B$ individually. \begin{align*}
+{F'}^{\mu \nu} & = {A'}^\mu {B'}^\nu \\
+\ & = \LP \Lambda^\mu _{ \ \rho} A^\rho \RP \LP \Lambda^\nu _{ \ \sigma} B^\sigma \RP \\
+\ & = \Lambda^\mu _{ \ \rho} \Lambda^\nu _{ \ \sigma} A^\rho B^\sigma \\
+\ & = \Lambda^\mu _{ \ \rho} \Lambda^\nu _{ \ \sigma} F^{\rho \sigma}.
+\end{align*}
+This isn't a coincidence - not every two-indexed object is the product of four-vectors, but the componentwise product of four-vectors always gives a Lorentz-covariant two-indexed object! But the full story here will have to wait until later.\\
+\\
+\
+In order to apply this to $F$, it's helpful to note that the transformation law for $F$ can be put in terms of matrix multiplication. Writing $[F]$ for the matrix whose $(\mu, \nu)$th entry is $F^{\mu \nu}$ and $[\Lambda]$ for the matrix with corresponding entries $\Lambda^\mu _{ \ \nu}$, we see that (writing the order of terms in a slightly different order) \begin{align*}
+{F'}^{\mu \nu} = \Lambda^\mu _{ \ \rho} F^{\rho \sigma} \Lambda^\nu _{ \ \sigma}
+\end{align*}
+is exactly the component version of the matrix equality \begin{equation*}
+[F'] = [\Lambda] [F] [\Lambda]^T
+\end{equation*}
+In some situations it will be conceptually easier to keep track of calculations if we write the transformation rule like this in terms of matrix operations instead of in index notation.\\
+\\
+\
+So what does this tell us about the transformation rules for $\vec{E}$ and $\vec{B}$? Recall that rotations work the same way in Galilean and special relativity, so we don't need to study these. It's enough to study boosts along, say, the $x$ axis. In this case our Lorentz transformation matrix is \begin{equation*}
+[\Lambda] = \begin{bmatrix}
+\Lambda^0_{ \ 0} & \Lambda^0_{ \ 1} & \Lambda^0_{ \ 2} & \Lambda^0_{ \ 3} \\
+\Lambda^1_{ \ 0} & \Lambda^1_{ \ 1} & \Lambda^1_{ \ 2} & \Lambda^1_{ \ 3} \\
+\Lambda^2_{ \ 0} & \Lambda^2_{ \ 1} & \Lambda^2_{ \ 2} & \Lambda^2_{ \ 3} \\
+\Lambda^3_{ \ 0} & \Lambda^3_{ \ 1} & \Lambda^3_{ \ 2} & \Lambda^3_{ \ 3}
+\end{bmatrix} = 
+\begin{bmatrix}
+\gamma & - \gamma v & 0 & 0 \\
+- \gamma v & \gamma & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+\end{equation*}
+So our transformation rule says \begin{equation*}
+\begin{bmatrix}
+0 & - E'_x & - E'_y & - E'_z \\
+E'_x & 0 & - B'_z & B'_y \\
+E'_y & B'_z & 0 & - B'_x \\
+E'_z & - B'_y & B'_x & 0
+\end{bmatrix} = \begin{bmatrix}
+\gamma & - \gamma v & 0 & 0 \\
+- \gamma v & \gamma & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix} \begin{bmatrix}
+0 & - E_x & - E_y & - E_z \\
+E_x & 0 & - B_z & B_y \\
+E_y & B_z & 0 & - B_x \\
+E_z & - B_y & B_x & 0
+\end{bmatrix} \begin{bmatrix}
+\gamma & - \gamma v & 0 & 0 \\
+- \gamma v & \gamma & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}.
+\end{equation*}
+Now all that remains is to work out the matrix multiplication on the right. We can do this however we want. The curious reader might note that the author used the following Mathematica code: \begin{verbatim}
+Lambda = {{gamma, -gamma*v, 0, 0},
+          {-gamma*v, gamma, 0, 0},
+          {0, 0, 1, 0},
+          {0, 0, 0, 1}};
+F = {{0, -Ex, -Ey, -Ez},
+     {Ex, 0, -Bz, By},
+     {Ey, Bz, 0, -Bx},
+     {Ez, -By, Bx, 0}};
+Fprime = Lambda.F.Lambda;
+TableForm[FullSimplify[Fprime/.{v->gamma^2+1}]]
+\end{verbatim}
+However we do the matrix multiplication, we find \begin{equation*}
+\begin{bmatrix}
+0 & - E'_x & - E'_y & - E'_z \\
+E'_x & 0 & - B'_z & B'_y \\
+E'_y & B'_z & 0 & - B'_x \\
+E'_z & - B'_y & B'_x & 0
+\end{bmatrix} = \begin{bmatrix}
+0 & - E_x & \gamma(-E_y + v B_z) & \gamma(- E_z - v B_y) \\
+E_x & 0 & \gamma(- B_z + v E_y) & \gamma( B_y + v E_z) \\
+\gamma(E_y - v B_z) & \gamma(B_z - v E_y) & 0 & - B_x \\
+\gamma(E_z + v B_y) & \gamma( - B_y - v E_z) & B_x & 0
+\end{bmatrix}.
+\end{equation*}
+Equating components of $\vec{E}$ across this equality gives us transformation laws for $\vec{E}$. \begin{align*}
+E'_x & = E_x, \\
+E'_y & = \gamma(E_y - v B_z), \\
+E'_z & = \gamma(E_z + v B_y).
+\end{align*}
+Since we are working under a boost by a velocity $\vec{v} = v_x \hat{x}$, we can write this equivalently as \begin{equation*}
+\vec{E}' = \gamma \LP \vec{E} + \vec{v} \times \vec{B} \RP + (1 - \gamma)( \vec{E} \cdot \hat{v}) \hat{v}
+\end{equation*}
+where $\hat{v}$ is the unit vector pointing along $\vec{v}$. You can convince yourself that, by rotational invariance, this must be the general form, not just true for boosts along the $x$ direction. By the same logic, we can equate components to find the transformation laws for $\vec{B}$ as \begin{align*}
+B_x' & = B_x, \\
+B_y' & = \gamma(B_y + v E_z), \\
+B_z' & + \gamma(B_z - v E_y)
+\end{align*}
+or in more compressed notation \begin{equation*}
+\vec{B}' = \gamma \LP \vec{B} - \vec{v} \times \vec{E} \RP + (1 - \gamma)( \vec{B} \cdot \hat{v}) \hat{v}.
+\end{equation*}
+\tb{Exercise} Try this yourself in Mathematica to find the transformation laws under a rotation.\\
+\\
+\
+Finally, we temporarily restore explicit factors of $c$ to find that these transformation laws in unnatural units are \begin{align*}
+\vec{E}' & = \gamma \LP \vec{E} + \vec{v} \times \vec{B} \RP + (1 - \gamma)( \vec{E} \cdot \hat{v}) \hat{v}, \\
+\vec{B}' & = \gamma \LP \vec{B} - \frac{\vec{v} \times \vec{E}}{c^2} \RP + (1 - \gamma)( \vec{B} \cdot \hat{v}) \hat{v}.
+\end{align*}
+So in the nonrelativistic limit $v/c \to 0$ with $v$ fixed we find \begin{align*}
+\vec{E}' & \approx \vec{E} + \gamma \vec{v} \times \vec{B}, \\
+\vec{B}' & \approx \vec{B}.
+\end{align*}
+
+\end{document}

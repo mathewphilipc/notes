@@ -1,0 +1,366 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usepackage{tikz-feynman}
+\tikzfeynmanset{compat=1.1.0}
+\usepackage[shortlabels]{enumitem}
+
+
+
+
+% Commonly used sets of numbers
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\PR}{\mathbb{P}}
+\newcommand{\F}{\mathbb{F}}
+
+
+% Shortcuts for text formatting
+\newcommand{\tb}[1]{\textbf{#1}}
+\newcommand{\ti}[1]{\textit{#1}}
+
+% Math fonts
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+
+% Shortcuts for inner product spaces
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \left| #2 \right\rangle \right.}
+\newcommand{\Ip}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\nm}[1]{\left\| #1 \right\|}
+
+% Shortcuts for the section of 3D rotations
+\newcommand{\lo}{\textbf{L}_1}
+\newcommand{\ltw}{\textbf{L}_2}
+\newcommand{\lt}{\textbf{L}_3}
+
+
+% Shortcuts for geometric vectors
+\newcommand{\U}{\textbf{u}}
+\newcommand{\V}{\textbf{v}}
+\newcommand{\W}{\textbf{w}}
+\newcommand{\B}[1]{\mathbf{#1}}
+\newcommand{\BA}[1]{\hat{\mathbf{#1}}}
+
+% Other shortcuts
+
+\newcommand{\G}{\gamma}
+\newcommand{\LA}{\mathcal{L}}
+\newcommand{\X}{\Vec{x}}
+\newcommand{\x}{\Vec{x}}
+
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+
+
+
+
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+\newcommand{\HI}{\mathcal{H}}
+\newcommand{\AL}{\mathcal{A}}
+
+\newcommand{\D}{\partial}
+
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\title{Notes on Isometries and Coordinate Changes}
+\author{Mathew Calkins\\
+  \textit{Center for Cosmology and Particle Physics},\\
+  \textit{New York University}\\
+  \texttt{mc8558@nyu.edu}.
+}
+
+\date{\today}
+
+\maketitle
+
+
+\abstract{Notes on active and passive transformations in physics and geometry.}
+
+
+\tableofcontents
+
+
+\section{Prelude: Active and Passive Transformations}
+We begin with a hypothetical. Suppose that somebody approaches you and tells you to consider the scaling ``transformation" \begin{equation*}
+(x,y,z) \mapsto (x',y',z') = (\lambda x, \lambda y, \lambda z)
+\end{equation*}
+or in slicker notation \begin{equation*}
+\vec{x} \mapsto \vec{x}' = \lambda \vec{x}
+\end{equation*}
+and asks whether this is a ``symmetry" of Newtonian physics. What would you say?\\
+\\
+\
+The point we wish to make is that the only correct, careful answer is that it depends! More precisely, you should asks your interrogator what they mean by ``transformation." There are two very different meanings of this word (even though physicists tend to represent both senses of the word using arrows like $\to$ and $\mapsto$), and depending on which kind of transformation we're talking about, the answer to the original question could be yes or no!
+
+
+
+
+\subsection{Active Transformations}
+On one hand, by the above equation we could mean an \ti{active transformation}. This means that, if we have particles 1 through $n$, we take every particle with trajectory $\vec{x}_i(t)$ and give it the new trajectory $\vec{x}_i'(t) = \lambda \vec{x}_i(t)$. To call this transformation a \ti{symmetry} of nature is to say that, if the original set of trajectory taken together satisfy the laws of Newtonian mechanics, then so must the new set of trajectories.\\
+\\
+\
+To give a concrete example, we consider a system of a single particle with position $\vec{x}(t)$ and mass $m$ orbiting some much larger body of mass $M$ sitting at the origin. If $M$ is much greater than $m$, we can neglect the smaller body's influence on the larger one and approximate the larger as staying fixed at the origin, at least for the duration of our experiment. We also place the larger body at the origin of our coordinate system for simplicity, so that its location is unchanged by our scaling transformation. In that case, the dynamics of our smaller body are given by Newton's second law in the presence of Newtonian gravity. \begin{equation*}
+\frac{d^2 \vec{x}}{dt^2} = - \frac{GMm}{|\vec{x}|^2} \hat{x}
+\end{equation*}
+Does $\vec{x}'(t) = \lambda \vec{x}(t)$ satisfy the same law? We can check by equivalently writing \begin{equation*}
+\vec{x} = \frac{\vec{x}'}{\lambda}
+\end{equation*}
+and noting that two vectors related by a positive scaling have the same unit vectors \begin{equation*}
+\hat{x} = \hat{x}'
+\end{equation*}
+then plugging these both into our law for $\vec{x}$. We find \begin{align*}
+\frac{d^2 (\lambda^{-1} \vec{x}') }{dt^2} = - \frac{GMm}{|\lambda^{-1} \vec{x}'|^2} \hat{x}
+\end{align*}
+or after canceling common factors and moving $\lambda$ around \begin{align*}
+\frac{d^2 \vec{x}' }{dt^2} = - \frac{\lambda^3 GMm}{| \vec{x}'|^2} \hat{x}.
+\end{align*}
+So if $\vec{x}(t)$ obeys Newton's laws, the trajectory $\lambda \vec{x}(t)$ does not, except for the trivial case $\lambda = 1$. The latter obeys what we could think of as a modified version of Newtonian gravity, with a rescaled gravitational constant $\lambda G$. The slick slogan here is that Newtonian gravity is not a \ti{scale-invariant} theory. This is something our brains know intuitively!\\
+\\
+\
+\tb{Exercise} Watch the clip https://www.youtube.com/watch?v=EjNYWCH-fJw from the original 1954 Godzilla film. Despite the excellent work by kaiju actors Haruo Nakajima and Katsumi Tezuka, your brain can immediately tell that you aren't actually seeing a monster hundreds of feet tall. The monster's gait seems too quick, and objects seem to rise and fall too quickly under gravity. Convince yourself that this intuitive unnaturalness is the consequence of Newtonian gravity not being scale-invariant.
+
+
+
+
+\subsection{Passive Transformations}
+
+Now we do something very delicate: we write exactly the same sequence of equations as above, but we assign completely different meanings to them. We write down the same transformation \begin{equation*}
+\vec{x} \mapsto \vec{x}' = \lambda \vec{x}
+\end{equation*}
+but now the transformation relates two different coordinate systems used by two corresponding observers. If the first observer measures a particle as being at coordinate $\vec{x}$, the second measures the same particle as being at coordinate $\vec{x}' = \lambda \vec{x}$ (perhaps the second observer bought a low-quality yard stick, warped by a factor of $\lambda$). Now we are talking about a \ti{passive} transformation. Just as before, if the first observer sees an orbiting particle satisfying \begin{equation*}
+\frac{d^2 \vec{x}}{dt^2} = - \frac{GMm}{|\vec{x}|^2} \hat{x}
+\end{equation*}
+then a couple of lines of algebra tells us the second will see \begin{align*}
+\frac{d^2 \vec{x}' }{dt^2} = - \frac{\lambda^3 GMm}{| \vec{x}'|^2} \hat{x}.
+\end{align*}
+But now we put totally different words around the conclusion. The laws of physics are the same to both observers. After all, they are observing exactly the same physical system, just measuring positions by different methods! It just happens that, due to observer 2's strange choice of system of measure, in his units he finds a different value for Newton's constant.\\
+\\
+\
+The moral here: an active transformation may or may not be a symmetry of the laws of physics. For Newtonian gravity for example, scaling is not a symmetry, but rotation and translation are (more on these below). But a passive transformation is always \tb{trivially} a symmetry, even if it's interesting to see which passive transformations change the form of the laws and which don't.\\
+\\
+\
+As we've said many times already, one of the great insights of general relativity is that reconciling Newtonian gravity and special relativity requires that we write the gravitational laws in terms of the geometry of spacetime. So we must study active and passive transformations of geometric spaces.
+
+
+
+\section{Isometries of the Plane}
+
+
+\subsection{What are Isometries?}
+We begin with the simplest example of a 2D space: Euclidean space $\R^2$ described using Cartesian coordinates. Intuitively we know that this space has a large number of \ti{isometries}, that is, ways that we can move points around while respectively distances and angles and so on. For example, if we take every point in $\R^2$ in Cartesian coordinates and shift each point's $x$ coordinate by a constant \begin{equation*}
+(x,y) \mapsto (x + a, y)
+\end{equation*}
+then intuitively we know that any two points will be the same distance apart before and after the shift. \\
+\\
+\
+But we must be careful with the conceptual story. Earlier we wrote down functions that took in coordinates and spat out other coordinates, and we thought of them as prescriptions for changing from one coordinate system to another. Then $(x,y)$ and $(x',y')$ corresponded to the same geometric location, just described in two different ways. That's not what we're doing here! One might say that we are considering the dual situation. We have fixed a coordinate system, and we are actually moving points from one location to another. \\
+\\
+\
+Abstractly, we have some rule that takes in a point (or equivalently its coordinates, since we're using a single coordinate system the whole time) and spits out another point, like \begin{equation*}
+\vec{F}: \R^2 \to \R^2, \ \ \ \vec{F}(x,y) = (x+a,y).
+\end{equation*}
+We have said already that $\vec{F}$ is an isometry exactly when it respects distances. More precisely, if $\vec{x}_1 = (x_1, y_1)$ and $\vec{x}_2 = (x_2, y_2)$ are the coordinates of two points in $\R^2$, then $\vec{F}$ must act on these in a way that doesn't change the distance between them. Putting words into equations, this means \begin{equation*}
+\mbox{dist}\LP \vec{F} \LP \vec{x}_1 \RP, \vec{F} \LP \vec{x}_2 \RP \RP = \mbox{dist}\LP \vec{x}_1, \vec{x}_2 \RP.
+\end{equation*}
+We know that the distance between two points in $\R^2$ is computed by subtracting the two points and computing the squared norm, so we can break this down further as \begin{equation}
+\nm{\vec{F} \LP \vec{x}_1 \RP - \vec{F} \LP \vec{x}_2 \RP}^2 = \nm{\vec{x}_1 - \vec{x}_2}^2
+\end{equation}
+or even further as \begin{equation*}
+\nm{\vec{F} \LP \vec{x}_1 \RP - \vec{F} \LP \vec{x}_2 \RP}^2 = (x_1 - x_2)^2 + (y_1 - y_2)^2.
+\end{equation*}
+
+\subsection{Translations}
+If this is the right abstraction for a symmetry of the space, then the shift function $\vec{F}$ we started with sure better have this property. Let's check, just to be sure. This is easiest to do if we use the slightly different notation \begin{equation*}
+\vec{F}(\vec{x}) = \vec{x} + a \hat{x}.
+\end{equation*}
+Equipped with this, we verify \begin{align*}
+\nm{\vec{F} \LP \vec{x}_1 \RP - \vec{F} \LP \vec{x}_2 \RP}^2 & = \nm{(\vec{x}_1 + a \hat{x}) - (\vec{x}_2 + a \hat{x}) }^2 \\
+\ & = \nm{\vec{x}_1 - \vec{x}_2 }^2
+\end{align*}
+as we hoped. By identical reasoning, we see that any function that transforms $\vec{x}$ by a constant translation \begin{equation*}
+\vec{x} \mapsto \vec{x} + \vec{a} \mbox{ for constant } \vec{a} \in \R^2
+\end{equation*}
+is also an isometry.
+
+
+
+
+\subsection{Rotations and Reflectiosn}
+What about slightly more interesting functions? Say, linear transformations \begin{equation*}
+\vec{F}(\vec{x}) = M \vec{x}
+\end{equation*}
+for a constant real $2 \times 2$ matrix $M$. When is this an isometry? To see, we just assert that our definition above holds and see what this implies about the matrix $M$. Since matrices act linearly, we have \begin{align*}
+\nm{\vec{x}_1 - \vec{x}_2}^2 & = \nm{M \LP \vec{x}_1 \RP - M \LP \vec{x}_2 \RP}^2 \\
+\ & = \nm{M \LP \vec{x}_1 - \vec{x}_2 \RP}^2.
+\end{align*}
+And since the dot product can be equivalently rephrased in terms of transposes, we have further \begin{align*}
+(\vec{x}_1 - \vec{x}_2)^T (\vec{x}_1 - \vec{x}_2) & = \LP M (\vec{x}_1 - \vec{x}_2 ) \RP^T \LP M (\vec{x}_1 - \vec{x}_2 ) \RP \\
+\ & = \LP \vec{x}_1 - \vec{x}_2  \RP^T M^T M \LP \vec{x}_1 - \vec{x}_2 \RP.
+\end{align*}
+So our condition on $M$ is that this equality must hold for all $\vec{x}_1, \vec{x}_2 \in \R^2$. This constraint turns out to be almost counterintuitively strong, and in fact implies that we must have \begin{equation*}
+M^T M = 1.
+\end{equation*}
+\tb{Exercise} Prove this. For this you'll need the convenient fact that any symmetric matrix $A$ satisfies the \ti{polarization identity} \begin{equation*}
+(\vec{u} + \vec{v})^T A (\vec{u} + \vec{v}) = \vec{u} ^T A \vec{u} + \vec{v} ^T A \vec{v} + 2 \vec{u} ^T A \vec{v}.
+\end{equation*}
+See the technical addendum below.\\
+\\
+\
+You may have seen the set of matrices defined by this constraint before. In general dimensions is called the \ti{orthogonal group} \begin{equation*}
+O(n) = \{n \times n \mbox{ real matrices } M \mbox{ such that } M^T M = 1\}.
+\end{equation*}
+In your courses on quantum mechanics you saw that the linear operators $U$ on a Hilbert space which respect the inner product \begin{equation*}
+\IP{\phi'}{\psi'} = \IP{\phi}{\psi}
+\end{equation*}
+are exactly those which are unitary \begin{equation*}
+U^\dagger U = 1 \mbox{ or equivalently} U^\dagger = U^{-1}.
+\end{equation*}
+Orthogonality in a real vector space is directly analogous of unitarity in a complex vector space.\\
+\\
+\
+On the other hand, we humans have excellent geometric intuition for which linear transformations on the plane respect its geometry: these are exactly the rotations \begin{equation*}
+R_{\mbox{\scriptsize{$2D$}}}(\theta) = \begin{bmatrix}
+\cos \theta & - \sin \theta \\
+\sin \theta & \cos \theta
+\end{bmatrix}
+\end{equation*}
+and reflections about axes. In higher dimensions these become rotations along any plane, and reflections across any plane, plus anything that can be built from these by successively composing transformations. If we trust this intuition (and we should, as it is correct) we can argue that $O(n)$ is exactly this set of transformations.\\
+\\
+\
+\tb{Exercise} In $\R^2$ we have only a single kind of rotation, given by the rotation matrix $R_{\mbox{\scriptsize{$2D$}}}(\theta)$ for arbitrary real $\theta$. In $\R^3$ we often think of basic three classes of rotations - those about the $x$, $y$, and $z$ axes - from which we can build up all other rotations. But in $\R^4$ and higher, the notion of rotating ``about an axis" stops making sense. Why? What notion should replace it?
+
+
+
+
+
+
+
+
+\section{Isometries of General Spaces}
+The discussion above simplified enormously because $\R^2$ has the structure of a vector space. We can add and subtract points and compute distances between far-removed points straightforwardly. In some ways this is boring - we are interested in more general geometric spaces. So we now consider the simplest nontrivial geometric space, namely a 2D surface endowed with some notion of local geometry. Since this is 2D we can describe it with coordinates $(x,y)$, and we formalize the idea of local geometry as before in terms of an infinitesimal squared distance \begin{equation*}
+ds^2 = A(x,y) dx^2 + B(x,y) dx dy + C(x,y) dy^2.
+\end{equation*}
+Now if we want to talk about isometries of this more general space, we must consider functions that take in the coordinates of a point and spit out the coordinates of a new point, but do so while respecting infinitesimal distances. \\
+\\
+\
+So let's put equations around those words. Suppose that each point with coordinates $(x,y)$ gets mapped to a new point $(x',y')$ under some smooth function $\varphi$. \begin{equation*}
+(x',y') = \varphi(x,y) \equiv (x'(x,y), y'(x,y)).
+\end{equation*}
+Here we write $\varphi$ with no vector arrow on top, since we are now in a general geometric space and not necessarily a vector space. Now consider some other nearby point $(x + dx, y + dy)$. The squared distance between these neighboring points is exactly \begin{equation*}
+ds^2 = A(x,y) dx^2 + B(x,y) dx dy + C(x,y) dy^2.
+\end{equation*}
+What about the distance between their images under $\varphi$? To leading order in the tiny differences $dx,dy$, we compute \begin{align*}
+\varphi(x + dx, y + dy) & = (x'(x+dx, y+dy), y'(x+dx, y+dy)) \\
+\ & = \LP x' + \PA{x'}{x} dx + \PA{x'}{y} dy, x' + \PA{y'}{x} dx + \PA{y'}{y} dy \RP.
+\end{align*} 
+So we can identify \begin{align*}
+dx' & = \PA{x'}{x} dx + \PA{x'}{y} dy, \\
+dy' & = \PA{y'}{x} dx + \PA{y'}{y} dy
+\end{align*}
+and we see that the distance between the image points is exactly \begin{equation*}
+{ds'}^2 = A(x',y') {dx'}^2 + B(x',y') dx' dy' + C(x',y') {dy'}^2.
+\end{equation*}
+An isometry is a transformation that respects local distances, so our condition for $\varphi$ to be an isometry reduces to the equality \begin{equation*}
+A(x,y) dx^2 + B(x,y) dx dy + C(x,y) dy^2 = A(x',y') {dx'}^2 + B(x',y') dx' dy' + C(x',y') {dy'}^2
+\end{equation*}
+for all points $(x,y)$ and corresponding image points $(x',y')$. Or if we want to compress our notation a great deal, we could write this condition as \begin{equation*}
+ds^2 = {ds'}^2.
+\end{equation*}
+We could also decompress our notation, plugging in our expressions for $dx',dy'$ to find \begin{align*}
+{ds'}^2 & = A(x',y') {dx'}^2 + B(x',y') dx' dy' + C(x',y') {dy'}^2 \\
+\ & = A(x',y') \LP \PA{x'}{x} dx + \PA{x'}{y} dy \RP ^2 + B(x',y') \LP \PA{x'}{x} dx + \PA{x'}{y} dy \RP  \LP \PA{y'}{x} dx + \PA{y'}{y} dy \RP  \\
+\ & \ \ \ + C(x',y') \LP \PA{y'}{x} dx + \PA{y'}{y} dy \RP^2 \\
+\ & = \mbox{(cluster together $dx^2$ terms, $dxdy$ terms, and $dy^2$ terms and simplify)} \\
+\ & = \LP A(x',y') \PA{x'}{x} \PA{x'}{x} + B(x',y') \PA{x'}{x} \PA{y'}{x} + C(x',y') \PA{y'}{x} \PA{y'}{x} \RP dx^2 \\
+\ & \ \ \ + \LP 2 A(x',y') \PA{x'}{x} \PA{x'}{y} + B(x',y') \LP \PA{x'}{x} \PA{y'}{y} +  \PA{y'}{x} \PA{x'}{y} \RP + 2 C(x',y') \PA{y'}{x} \PA{y'}{y} \RP dx dy \\
+\ & \ \ \ + \LP A(x', y') \PA{x'}{y} \PA{x'}{y} + B(x',y') \PA{x'}{y} \PA{y'}{y} + C(x',y') \PA{y'}{y} \PA{y'}{y} \RP dy^2.
+\end{align*}
+If this notation looks like an ugly mess, you have good taste. Just like doing quantum mechanics in a nice, abstract way required that we develop the slick notation of bras and kets, doing these kinds of calculations in geometric spaces will require that we introduce the native notation of differential geometry. But that's a task for future notes.
+
+
+
+
+\section{Coordinate Changes in General Spaces}
+When we studied active versus passive transformations, we found that we could write down the same sets of equations for transformations but interpret them very differently, depending on whether we mean them to represent active or passive transformations. We said that an active transformation only respected the laws of physics in special cases (\ti{e.g.}, rotations and translations for the case of Newtonian gravity). The analog statement in geometry says that we can write down a great variety of active transformations on a space with a notion of local distance, but typically only a small number of these will be isometries.\\
+\\
+\
+On the other hand, we said that a passive transformation between reference frames was in some sense trivially a symmetry of physics itself, even most such transformations change the appearance of the physical laws. In our example above, if you and I measure distances differently due to some difference in our yard sticks and then we jointly go off to observe one body orbiting another, we will find we disagree on the apparent numerical value of Newton's constant. But this doesn't change that we are looking at the same body obeying the same physical laws! Continuing this analogy, when we study geometric spaces we are always free to pick any set of coordinates we like. No matter how messy the coordinate transformation is, it's the same space with the same geometry before and after, even if the expression for $ds^2$ looks radically different between the two systems. \\
+\\
+\
+The first example of this phenomenon most of us learn is the passage from Cartesian to polar coordinates on $\R^2$. These are defined by the rules \begin{align*}
+x & = r \cos \theta, \\
+y & = r \sin \theta.
+\end{align*}
+In Cartesian coordinates we know that $\R^2$ has the metric given to us by Pythagoras \begin{equation*}
+ds^2 = dx^2 + dy^2.
+\end{equation*}
+To work it out in terms of polar coordinates, we could in principle derive a general formula as we did above, and indeed we would find exactly the same mess of partial derivatives, just interpreted differently. But here everything is simple enough that we can work everything out by hand. Applying the single-variable chain rule and some trig identities, we find \begin{align*}
+ds^2 & = dx^2 + dy^2 \\
+\ & = \LP d (r \cos \theta) \RP^2 + \LP d (r \sin \theta) \RP^2 \\
+\ & = \LP \cos \theta dr - r \sin \theta d \theta \RP^2 + \LP \sin \theta dr + r \cos \theta d \theta \RP^2 \\
+\ & = \LP \cos^2 \theta + \sin^2 \theta \RP dr^2  - 2 r \cos \theta \sin \theta + 2 r \sin \theta \cos \theta dr d \theta + (r^2 \sin^2 \theta + r^2 \cos^2 \theta) d\theta^2 \\
+\ & = dr^2 + r^2 d \theta^2.
+\end{align*}
+We finish by emphasizing yet again: here there is no notion of $ds^2$ vs ${ds'}^2$ that we might wish to compare, no notion of whether this transformation respects the geometry. There automatically no change at all to the geometry, because all we have done is moved from one coordinate description of a space to a different coordinate description of the same space. We could write \begin{equation*}
+ds^2 = ds^2
+\end{equation*}
+but this doesn't tell us something about our transformation. It it vacuously true!
+
+
+\section{Technical Addendum: The Polarization Identity}
+Several people in the class have already asked why exactly it's enough to consider just local distances to determine geometry. Why don't we also have to consider, say, local angles?\\
+\\
+\
+The answer lies in a single technical fact about inner products. Recall that all of our notions of geometry in a vector space come from the dot product, or more generally from the \ti{inner product} $\langle \cdot , \cdot \rangle$ that we put on our space. In terms of this we define length, distance, angle, orthogonality and so on by declaring that \begin{equation*}
+\langle \vec{u}, \vec{v} \rangle = \nm{\vec{u}}^2 \nm{\vec{v}}^2 \cos (\theta).
+\end{equation*}
+Two of the defining features of an inner product are that, thought of as a function of two vectors, it is linear in both of its arguments and gives the same output if we swap the order of its arguments. This means that for any two vectors $\vec{u}, \vec{v}$ we can expand \begin{equation*}
+\langle \vec{u} + \vec{v}, \vec{u} + \vec{v} \rangle = \langle \vec{u}, \vec{u} \rangle + \langle \vec{v}, \vec{v} \rangle + 2 \langle \vec{u}, \vec{v} \rangle.
+\end{equation*}
+Simple enough so far. Now we recall that the inner product of a vector with itself gives that vector's squared length, and then we rearrange this last equation to solve for $\langle \vec{u}, \vec{v} \rangle$. This gives \begin{equation}
+\langle \vec{u}, \vec{v} \rangle = \frac{\nm{\vec{u} + \vec{v}}^2 - \nm{\vec{u}}^2 - \nm{\vec{v}}^2}{2}.
+\end{equation}
+But this is remarkable! This tells us that knowing the length of every vector in our space is enough to uniquely fix the inner product between arbitrary vectors. This innucuous equation is called the \ti{polarization identity}. Applying this newfound wisdom to tiny displacements around a point in a geometric space, we see that all of local geometry is fixed if we just know how local distances work.
+
+
+\end{document}
+
+
+
+
+
+
