@@ -1,0 +1,348 @@
+ \documentclass[12 pt]{article}
+\usepackage{amsmath, amssymb, mathtools, slashed, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{tikz-cd}
+\usepackage{tikz} 
+\usepackage{tikz-feynman}
+\tikzfeynmanset{compat=1.1.0}
+\usepackage[shortlabels]{enumitem}
+
+% Commonly used sets of numbers
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\PR}{\mathbb{P}}
+\newcommand{\F}{\mathbb{F}}
+
+
+% Shortcuts for text formatting
+\newcommand{\tb}[1]{\textbf{#1}}
+\newcommand{\ti}[1]{\textit{#1}}
+
+% Math fonts
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+
+% Shortcuts for inner product spaces
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \left| #2 \right\rangle \right.}
+\newcommand{\Ip}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\nm}[1]{\left\| #1 \right\|}
+
+% Shortcuts for the section of 3D rotations
+\newcommand{\lo}{\textbf{L}_1}
+\newcommand{\ltw}{\textbf{L}_2}
+\newcommand{\lt}{\textbf{L}_3}
+
+
+% Shortcuts for geometric vectors
+\newcommand{\U}{\textbf{u}}
+\newcommand{\V}{\textbf{v}}
+\newcommand{\W}{\textbf{w}}
+\newcommand{\B}[1]{\mathbf{#1}}
+\newcommand{\BA}[1]{\hat{\mathbf{#1}}}
+
+% Other shortcuts
+
+\newcommand{\G}{\gamma}
+\newcommand{\LA}{\mathcal{L}}
+
+
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+\newcommand{\HI}{\mathcal{H}}
+\newcommand{\AL}{\mathcal{A}}
+
+\newcommand{\D}{\partial}
+
+\newcommand{\bs}{\textbackslash}
+
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\arr}{\mathcal{R}}
+
+\numberwithin{equation}{section}
+\setcounter{section}{0}
+
+
+
+
+
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+
+
+
+\begin{document}
+
+\title{Notes on Free Fall}
+\author{Mathew Calkins\\
+  \textit{Center for Cosmology and Particle Physics},\\
+  \textit{New York University}\\
+  \texttt{mc8558@nyu.edu}.
+}
+
+\date{\today}
+
+\maketitle
+
+
+\abstract{Some supplementary discussion of parallel transport, free fall, and inertial frames along a worldline.}
+
+
+\tableofcontents
+
+
+
+\section{Parallel Transport}
+
+\subsection{Recall: Set-Up}
+We begin by recalling the basic set up of parallel transport. We take a manifold $M$ (perhaps spacetime, perhaps the surface of a sphere, perhaps something more exotic), a vector field with components $V^\mu$, and some path $C$ (parametrized as $x^\mu = x^\mu(\lambda)$, though the choice of parametrization won't change the result) along $M$. We say that $V$ is parallel-transported along $C$ if any of three equivalent expressions vanishes along $C$.
+\begin{equation*}
+\frac{D V^\mu}{d \lambda} \equiv \frac{dx^\alpha}{d \lambda} \nabla_\alpha V^\mu \equiv  \frac{dx^\alpha}{d \lambda} \LP \D_\alpha V^\mu + \Gamma^\mu_{\alpha \beta} V^\beta \RP = 0
+\end{equation*}
+A quick sanity check is that this indeed only depends on the values of $V^\mu$ along the path $C$. To see this, we can slightly rewrite the rightmost expression as \begin{align*}
+\frac{dx^\alpha}{d \lambda} \LP \D_\alpha V^\mu + \Gamma^\mu_{\alpha \beta} V^\beta \RP & = \frac{dx^\alpha}{d \lambda} \PA{V^\mu}{x^\alpha} + \frac{dx^\alpha}{d \lambda} \Gamma^\mu_{\alpha \beta} V^\beta \\
+\ & = \frac{d V^\mu}{d \lambda} + \frac{dx^\alpha}{d \lambda} \Gamma^\mu_{\alpha \beta} V^\beta .
+\end{align*}
+So the parallel transport condition depends on the values \begin{equation*}
+V^\mu(x(\lambda)) \mbox{ and } \frac{d}{d \lambda} V^\mu(x(\lambda))
+\end{equation*}
+but not on any information about the broader vector field $V^\mu$ defined away from the path, even if our usual formulation of the parallel transport condition doesn't make this immediately clear.\\
+\\
+\
+The next thing to note that is we can think of this process more actively. Instead of defining $V^\mu$ everywhere along $C$ and then asking whether $V^\mu$ is parallel transported, we could define $V^\mu$ just at one end of $C$, then ask how $V^\mu$ changes if we parallel transport it. We won't get into existence and uniqueness theorems for ODEs here, but the moral is that, if we impose the parallel transport equation, just specifying $V^\mu$ at one point along $C$ gives a unique way to extend to $V^\mu$ defined everywhere along $C$.
+
+
+
+
+\subsection{Parallel Transport and Geodesics}
+We next recall that the parallel transport equation gives an equivalent way to reproduce the geodesic equation, namely by insisting that the velocity vector itself \begin{equation*}
+V^\mu = \frac{dx^\mu}{d \lambda}
+\end{equation*}
+is parallel-transported along the curve. This condition then gives us \begin{align*}
+0 & = \frac{D}{d \lambda} \LP \frac{dx^\mu}{d \lambda} \RP \\
+\ & = \frac{dx^\alpha}{d \lambda} \LP \PA{}{x^\alpha} \frac{dx^\mu}{d \lambda} + \Gamma^\mu_{\alpha \beta} \frac{dx^\beta}{d \lambda} \RP \\
+\ & = \underbrace{\LP \frac{dx^\alpha}{d \lambda} \PA{}{x^\alpha} \RP}_{ = \frac{d}{d \lambda} } \frac{dx^\mu}{d \lambda} + \Gamma^\mu_{\alpha \beta} \frac{dx^\alpha}{d \lambda} \frac{dx^\beta}{d \lambda} \\
+\ & =  \frac{d^2 x^\mu}{d \lambda^2 } + \Gamma^\mu_{\alpha \beta} \frac{dx^\alpha}{d \lambda} \frac{dx^\beta}{d \lambda}
+\end{align*}
+which is exactly the geodesic equation. There is a nice intuitive story here: roughly speaking, the parallel transport equation tells us that $V$ is ``constant" along $C$, in an appropriately covariant sense. The geodesic equation with an affine parameter should tell us that whatever body is following the given trajectory has no acceleration; it is not speeding up or slowing down nor making any turns (again, all in an appropriately covariant sense). That is, a particle moving along a geodesic should have covariantly constant velocity. But this is just another way of saying the velocity should be parallel-transported along the path. \\
+\\
+\
+We'll also pause here to note a question that has come up a few times in emails and office hours. As we've noted before, the ``geodesic equation" isn't just the local ODE we get by extremizing the proper length of a path (\ti{i.e.}, by turning the crank on Euler-Lagrange with proper length as our action). It is the particularly nice form that the resulting equation takes when our parameter $\lambda$ is \ti{affine}. \begin{equation*}
+\begin{pmatrix}
+\mbox{extremize length} \\
++ \\
+\mbox{affine parameter}
+\end{pmatrix} \implies \frac{d^2 x^\mu}{d \lambda^2 } + \Gamma^\mu_{\alpha \beta} \frac{dx^\alpha}{d \lambda} \frac{dx^\beta}{d \lambda} = 0.
+\end{equation*}
+To clarify, this reverse is also true. If we solve the geodesic equation on the RHS, the solution is guaranteed not only to extremize length but also to be parametrized in an affine way. \begin{equation*}
+\frac{d^2 x^\mu}{d \lambda^2 } + \Gamma^\mu_{\alpha \beta} \frac{dx^\alpha}{d \lambda} \frac{dx^\beta}{d \lambda} = 0 \implies \begin{pmatrix}
+\mbox{extremize length} \\
++ \\
+\mbox{affine parameter}
+\end{pmatrix}.
+\end{equation*}
+For example, for a timelike path that a massive particle would follow, we have \begin{equation*}
+\frac{d^2 x^\mu}{d \lambda^2 } + \Gamma^\mu_{\alpha \beta} \frac{dx^\alpha}{d \lambda} \frac{dx^\beta}{d \lambda} = 0 \implies u(\lambda) \cdot u(\lambda) = \mbox{ const}.
+\end{equation*}
+
+
+\subsection{Parallel Transport Preserves The Inner Product}
+Now one more property of parallel transport which will be important for the coming calculation. Suppose we have two independent vectors $U,V$, both of which are parallel-transported along the same curve $C$. At each time $\lambda$ we can compute the inner product between these vectors. Making all arguments explicit, we compute this as \begin{equation*}
+U(\lambda) \cdot V(\lambda) = g_{\mu \nu} (x(\lambda)) U^\mu(x(\lambda)) V^\nu(x(\lambda))
+\end{equation*}
+As it turns out, this quantity is constant along $C$. \begin{equation*}
+\frac{d}{d \lambda} U(\lambda) \cdot V(\lambda) = 0.
+\end{equation*}
+Unfortunately, proving this carefully involves a bit more math than we have time to develop here. As a sketch, it turns out that the differential operator appearing in the parallel transport equation \begin{equation*}
+\frac{D}{d \lambda} = \frac{dx^\alpha}{d \lambda} \nabla_\alpha
+\end{equation*}
+satisfies the familiar product rule, so that \begin{align*}
+\frac{D}{d \lambda} \LP g_{\mu \nu} U^\mu V^\nu \RP & = \LP \frac{D}{d \lambda} g_{\mu \nu} \RP U^\mu V^\nu + g_{\mu \nu} \LP \frac{D}{d \lambda} U^\mu \RP V^\nu + g_{\mu \nu} U^\mu \LP \frac{D}{d \lambda} V^\nu \RP
+\end{align*}
+%The second and third terms vanish because $U,V$ are both being parallel-transported. The first vanishes because, as it turns out, the metric and covariant derivatives always conspire to satisfy %\begin{equation*}
+%\nabla_\alpha g_{\mu \nu} = 0.
+%\end{equation*}
+%If you haven't seen this condition in lecture yet (or perhaps aren't even sure what it means to apply $\nabla_\alpha$ to the components of something other than a vector) don't worry.
+
+The second and third terms vanish because $U,V$ are both being parallel-transported. \begin{equation*}
+\frac{D}{d \lambda} U^\mu = \frac{D}{d \lambda} V^\nu = 0
+\end{equation*}
+The first term needs a bit of explaining. As you'll see later on, the definition of the covariant derivative of a vector as the partial derivative plus a correction fine-tuned to make the result tensorial \begin{equation*}
+\nabla_\alpha V^\mu = \D_\alpha V^\mu + \Gamma^\mu_{\alpha \beta} V^\beta
+\end{equation*}
+extends by identical logic to a recipe for dual vectors \begin{equation*}
+\nabla_\alpha A_\mu = \D_\alpha A_\mu - \Gamma^\beta_{\alpha \mu} A_\beta,
+\end{equation*}
+for scalars \begin{equation*}
+\nabla_\alpha \phi = \D_\alpha \phi
+\end{equation*}
+(note we need no correction terms on the RHS, since the gradient is already a perfectly good vector) or for tensors with multiple indices. In this way, we can define a notion of parallel transport for arbitrary tensors. In particular, for a tensor with two lowered indices we have \begin{equation*}
+\nabla_\alpha T_{\mu \nu} = \D_\alpha T_{\mu \nu} - \Gamma^\rho _{\alpha \mu} T_{\rho \nu} - \Gamma^\rho _{\alpha \nu} T_{ \mu \rho}
+\end{equation*} 
+As it turns out, if you apply this rule to compute $\nabla_\alpha g_{\mu \nu}$, keeping in mind how the $\Gamma$'s are built from combinations of metric components and their derivatives, you'll find that \begin{equation*}
+\nabla_\alpha g_{\mu \nu} = 0.
+\end{equation*}
+So the metric is automatically covariantly constant along any curve.
+
+
+
+
+
+
+
+
+\section{Free Fall}
+\subsection{Gravity and Free Fall}
+An object in general relativity is said to be in \ti{free fall} when it is subject only to gravity. If you were in free fall you would feel weightless (barring extreme circumstances where the strength of the gravitational field varies significantly over the length of your body). From a Newtonian perspective, this the happens because every particle in your body is accelerated in the same way under gravity, so your body would experience no compression, shearing, and so on. From an Einsteinian point of view, the fact that trajectories under the influence of gravity don't depend on a test body's mass is formalized by the fact that masses don't appear in the geodesic equation, but the observational result is the same.\\
+\\
+\
+If you stand still and upright, you still aren't actually feeling gravity, per se. You feel a compressive force pushing your head and your feet together, but from a GR perspective the force you're actually feeling is the electrostatic repulsion and Pauli exclusion exerted by the floor on the bottoms of your feet (and your feet on your ankles, and so on). These forces are perceptible because they are pushing you away from the free fall trajectory you would naturally be following if you were subject only to gravity. \\
+\\
+\
+In short, for a test body in general relativity the following are all equivalent conditions. \begin{enumerate}
+\item The body is subject to no forces other than gravity.
+\item The body is in free fall.
+\item The body feels no acceleration (assuming its radius is much smaller than the rate of change of the gravitational field).
+\item The body's worldline is a geodesic.
+\item If affinely parametrized, the worldline satisfies the geodesic equation.
+\item If affinely parametrized, the worldline's velocity satisfies the parallel transport equation.
+\end{enumerate}
+
+
+
+
+
+\subsection{Inertial Frames Along a Geodesic}
+As we learned earlier, at any point $p_0$ in spacetime we have enough degrees of freedom to pick so-called locally inertial coordinates $\xi$, wherein the metric at point $p$ near $p_0$ is the flat-space metric $\eta$ up to corrections that appear only at second order in deviations away from $p_0$. That is, \begin{align*}
+g_{\mu \nu}(\xi(p)) & = \underbrace{g_{\mu \nu}(\xi(p_0))}_{ = \eta_{\mu \nu}} + (\xi^\rho(p) - \xi^\rho(p_0)) \underbrace{\PA{g_{\mu \nu}}{\xi^\rho} (\xi(p_0))}_{ = 0} \\
+\ & \ \ \ + \LP \mbox{quadratic or higher in $\xi(p) - \xi(p_0)$} \RP
+\end{align*}
+When we proved this all we did was count degrees of freedom by doing combinatorics on Jacobians and Taylor series. It was a purely geometric argument, with no need to interpret our manifold as a spacetime nor our point as an event along some observer's worldline.\\
+\\
+\
+Now we want to think about this in a more fleshed-out physical setting. Instead of thinking about an isolated event, we will imagine that our event $p_0$ lies along the worldline $C$ of some observer. We know intuitively that such an observer naturally defines a locally inertial coordinate system (this is roughly the coordinate system that our brains naturally assign to the world around us when we are in free fall). How can we describe this coordinate system more quantitatively?\\
+\\
+\
+One idea is to repeat what we said earlier: the observer's local coordinate system is exactly the one in which the metric takes the form we just described. But this property alone doesn't nail down the coordinate system. Indeed, even in perfectly flat space we have a large number of distinct coordinate systems which are all inertial. So we need to say more.\\
+\\
+\
+It will also be useful to modify our goal very slightly. Rather than asking what the locally inertial coordinate $\xi^\alpha$ are, we can ask what orthonormal frame of basis vectors \begin{equation*}
+e_{\hat{\alpha}} = \PA{}{\xi^{\hat{\alpha}}}, \ \ \ g(e_{\hat{\alpha}}, e_{\hat{\beta}}) = \eta_{\hat{\alpha} \hat{\beta}}
+\end{equation*}
+the observer defines. To figure out the first one, we observe that by construction the observer must be stationary in their own reference frame. As far as they are concerned, they are moving through time but not through space. Geometrically, their temporal unit vector must point in the same direction through spacetime as their own four-velocity. In equations, \begin{equation*}
+e_{\hat{0}} \propto u.
+\end{equation*}
+The condition \begin{equation*}
+g(e_{\hat{\alpha}}, e_{\hat{\beta}}) = \eta_{\hat{\alpha} \hat{\beta}} \implies e_{\hat{0}} \cdot e_{\hat{0}} = -1
+\end{equation*}
+means that our constant of proportionality must be $\pm 1$, where the sign corresponds to whether the observer's stopwatch is increasing or decreasing with time. Assuming the natural choice, we have more strongly \begin{equation*}
+e_{\hat{0}} = u.
+\end{equation*}
+In some general coordinates $(x^\mu)$ (generally not the inertial ones we're currently working to construct) we can equivalently write \begin{equation*}
+\LP e_{\hat{0}}  \RP^\mu = \frac{dx^\mu}{d \tau}.
+\end{equation*}
+What about the spatial components? We can't nail these down exactly (physically, just knowing an observer's path through space isn't enough to tell which directions the observer calls up or right), but we can constrain them. To get the first spatial unit vector, take any unit vector orthogonal to the timelike unit vector \begin{equation*}
+e_{\hat{1}} \cdot e_{\hat{0}} = \LP e_{\hat{1}} \RP^\mu g_{\mu \nu} \frac{dx^\nu}{d \tau} = 0
+\end{equation*}
+and then scale it up or down to have unit length. \begin{equation*}
+e_{\hat{1}} \cdot e_{\hat{1}} = 1.
+\end{equation*}
+We can repeat the same process for the second spatial unit vector. \begin{equation*}
+e_{\hat{2}} \cdot e_{\hat{0}} = e_{\hat{2}} \cdot e_{\hat{1}} = 0 \mbox{ and } e_{\hat{2}} \cdot e_{\hat{2}} = 1.
+\end{equation*}
+If you carefully count degrees of freedom, you'll find that we have exactly enough continuous freedom to pick $e_{\hat{3}}$ to be a final unit vector orthogonal to the other three. \begin{equation*}
+e_{\hat{3}} \cdot e_{\hat{0}} = e_{\hat{3}} \cdot e_{\hat{1}} = e_{\hat{3}} \cdot e_{\hat{2}} = 0 \mbox{ and } e_{\hat{3}} \cdot e_{\hat{3}} = 1.
+\end{equation*}
+The only remaining ambiguity is a single discrete bit, which we can spend to make our spatial coordinate system right-handed.
+
+
+
+
+\subsection{Parallel-Transporting the Frame}
+We have shown how to reconstruct a local frame of unit vectors satisfying (with various choices of notation) \begin{equation*}
+e_{\hat{\alpha}} \cdot e_{\hat{\beta}} = g(e_{\hat{\alpha}}, e_{\hat{\beta}}) = g_{\mu \nu} (e_{\hat{\alpha}})^\mu (e_{\hat{\beta}})^\nu = \eta_{\hat{\alpha} \hat{\beta}}.
+\end{equation*}
+But an observer doesn't just define a single point, they exist along a whole worldline $C$. So at each point $x(\lambda)$ we should have an orthonormal frame of unit vectors $e_{\hat{\alpha}}(\lambda)$. We could in principle run our process above for every separate $\lambda$, but an observer certainly wouldn't pick a totally new spatial coordinate system every nanosecond. They would pick one notion of up, down, left, right, forward, back and stick with it! So besides satisfying \begin{equation*}
+e_{\hat{\alpha}}(\lambda) \cdot e_{\hat{\beta}}(\lambda) = \eta_{\hat{\alpha} \hat{\beta}}
+\end{equation*}
+we expect $e_{\hat{\alpha}}(\lambda)$, in some geometrically natural sense, to be ``constant" along $\lambda$. \\
+\\
+\
+But we have just developed the theory of vectors which are ``constant" along a curve, and we found that it automatically satisfied our demand that the inner product be constant. What we want is to parallel transport our frame! The solution to our problem, then, is to define $e_{\hat{\alpha}}(\lambda_0)$ at some initial $\lambda_0$, then extend this to a frame everywhere else on the worldline by insisting (after making a slightly different choice of dummy indices to avoid having $\alpha$'s and $\hat{\alpha}'s$ in the same expressions) \begin{align*}
+0 & = \frac{D}{d \lambda} (e_{\hat{\alpha}})^\mu \\
+\ & = \frac{dx^\rho}{d \lambda} \LP \D_\rho (e_{\hat{\alpha}})^\mu + \Gamma^\mu_{\rho \sigma} (e_{\hat{\alpha}})^\sigma \RP \\
+\ & = \frac{d}{d \lambda} (e_{\hat{\alpha}})^\mu + \frac{dx^\rho}{d \lambda} \Gamma^\mu_{\rho \sigma} (e_{\hat{\alpha}})^\sigma.
+\end{align*}
+So if we built an orthonormal frame of basis vectors at one point along the worldline, then flow all of the vectors independently under parallel transport to some other point on the worldline, the new list of vectors will also be an orthonormal frame.\\
+\\
+\
+Next we illustrate this idea by explicitly showing how a particular frame flows in a Schwarzschild background. For this we proceed to the extra notes courtesy of Spring 2023 TA Tony Zhou.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
