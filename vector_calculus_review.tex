@@ -1,22 +1,8 @@
-\documentclass[11pt,letterpaper]{article}
-
-\usepackage{graphicx}           % Graphics package
-\usepackage{amsmath} 
-\usepackage{mathrsfs}
-\usepackage[colorlinks=true]{hyperref} 
-\usepackage{color}
-\usepackage{amsfonts}
-\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
-\usepackage[makeroom]{cancel}
-\usepackage{cite}
-\usepackage{sectsty}
-\usepackage{empheq}
-\usepackage{appendix}
-\usepackage{enumerate} 
-\usepackage{simpler-wick}
-
+ \documentclass[12 pt]{article}
+\usepackage{amsmath, amssymb, mathtools, slashed, amsfonts}
+\usepackage[margin=1in]{geometry}
 \usepackage{tikz-cd}
-\usepackage{tikz}
+\usepackage{tikz} 
 \usepackage{tikz-feynman}
 \tikzfeynmanset{compat=1.1.0}
 \usepackage[shortlabels]{enumitem}
@@ -77,31 +63,47 @@
 
 \newcommand{\D}{\partial}
 
+\newcommand{\bs}{\textbackslash}
 
-\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\arr}{\mathcal{R}}
 
-%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
-\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
-\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+\numberwithin{equation}{section}
+\setcounter{section}{0}
 
-%%%%%%%%%%%%%%%
+
+
+
+
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+
 
 
 \begin{document}
 
 \title{Notes on Vector Calculus}
-
-\author{Mathew Calkins}
+\author{Mathew Calkins\\
+  \textit{Center for Cosmology and Particle Physics},\\
+  \textit{New York University}\\
+  \texttt{mc8558@nyu.edu}.
+}
 
 \date{\today}
 
-
 \maketitle
 
-\abstract{Notes reviewing vector algebra and vector calculus, focused on the needs of classical mechanics and electromagnetism in Galilean (\ti{i.e.}, not relativistic) notation.}
 
-
+\abstract{Notes on vector algebra and vector calculus, focused on the needs of classical mechanics and electromagnetism in Galilean (\ti{i.e.}, not relativistic) notation.}
 
 
 \tableofcontents
@@ -111,7 +113,7 @@
 
 
 
-Vectors are perhaps the must ubiquitous mathematical objects in physics after basic characters like sets and functions. Depending on the context, we could give vectors any of the following increasingly abstract definitions, not all of which are equivalent and not all of which are actually carefully well-defined: \begin{enumerate}
+Vectors are perhaps the most ubiquitous mathematical objects in physics after basic characters like sets and functions. Depending on the context, we could give vectors any of the following increasingly abstract definitions, not all of which are equivalent and not all of which are actually carefully well-defined: \begin{enumerate}
 \item Something with magnitude and direction.
 \item A triple of real numbers $(x, y, z)$.
 \item A tuple of real numbers $(x_1, \ldots, x_n)$.
@@ -145,16 +147,16 @@ a x_1 + b y_1 \\ \vdots \\ a x_n + b y_n
 We will sometimes write $:=$ when an equality holds by definition, with $:$ on the side of the new object being defined.\\
 \\
 \
-This has a nice geometric interpretation. If we picture the vectors $\vec{x}, \vec{y}$ as arrows, then scaling them individually changes the lengths of these arrows by respective ratios $a,b$, and adding corresponds to putting them together head-to-tail. See Feyman Vol 1 Fig 11-4. Abstractly, the ability to combine vectors in this way is their most fundamental property; if one defined vectors as ``objects that can be linearly combined amongst themselves" and unpacked this carefully, one would end up reinventing Definition 8.
+This has a nice geometric interpretation. If we picture the vectors $\vec{x}, \vec{y}$ as arrows, then scaling them individually changes the lengths of these arrows by respective ratios $a,b$, and adding corresponds to putting them together head-to-tail. See Feynman Vol 1 Fig 11-4. Abstractly, the ability to combine vectors in this way is their most fundamental property; if one defined vectors as ``objects that can be linearly combined amongst themselves" and unpacked this carefully, one would end up reinventing Definition 8.
 
 
 
 \subsection{Dot Product}
 A general vector space only needs enough structure to perform linear combinations, but $\R^n$ has an additional piece of structure in the dot product. Operationally, we compute the dot product of two vectors $\vec{x}, \vec{y} \in \R^n$ by taking the sum of products of the respective components. \begin{equation*}
-\vec{x} \cdot \vec{y} := \sum_{n=1}^n x_i y_i.
+\vec{x} \cdot \vec{y} := \sum_{i=1}^n x_i y_i.
 \end{equation*}
 If we endow $\R^n$ with our usual Euclidean notion of distance and angle, then it turns out that this has a nice geometric description. \begin{equation*}
-\vec{x} \cdot \vec{y} = \left\| \vec{x} \right\| \left\| \vec{x} \right\| \cos (\theta)
+\vec{x} \cdot \vec{y} = \left\| \vec{x} \right\| \left\| \vec{y} \right\| \cos (\theta)
 \end{equation*}
 where $\left\| \cdot \right\|$ denotes the length of a vector and where $\theta$ is the angle between the two vectors. In particular, for $\vec{x} = \vec{y}$ this reduces to \begin{equation*}
 \vec{x} \cdot \vec{x} = \left\| \vec{x} \right\|^2
@@ -162,7 +164,7 @@ where $\left\| \cdot \right\|$ denotes the length of a vector and where $\theta$
 which is exactly the $n$-dimensional version of the Pythagorean theorem. Interestingly, we could tell this story backwards: we could start off with the bare algebraic structure of linear combination, introduce the dot product from thin air, then define length in terms of the dot product \begin{equation*}
 \left\| \vec{x} \right\| := \sqrt{\vec{x} \cdot \vec{x}}
 \end{equation*}
-and then take $\vec{x} \cdot \vec{y} = \left\| \vec{x} \right\| \left\| \vec{x} \right\| \cos (\theta)$ as an implicit definition of angles, rather than a derived result. From this point of view, the Pythagorean theorem is demoted to something true by definition! \\
+and then take $\vec{x} \cdot \vec{y} = \left\| \vec{x} \right\| \left\| \vec{y} \right\| \cos (\theta)$ as an implicit definition of angles, rather than a derived result. From this point of view, the Pythagorean theorem is demoted to something true by definition! \\
 \\
 \
 As a hint of material to come, we notice that from this point of view we could try generalizing the dot product to a so-called inner product which combines $\vec{x}$ with $\vec{y}$ in a more general way to produce a number. For example, we might consider \begin{equation*}
@@ -178,9 +180,9 @@ As strange as this sounds, we will see when we study special relativity that spa
 \subsection{Cross Product}
 For the special case $n = 3$ we have another way to combine vectors, namely the cross product. There are various equivalent ways to define this, mostly directly by asserting \begin{equation*}
 \begin{bmatrix}
-x_1 \\ x_2 \\ x_3
+x_1 \\ x_2 \\ x_3 
 \end{bmatrix} \times \begin{bmatrix}
-y_1 \\ y_2 \\ y_3
+y_1 \\ y_2 \\ y_3 
 \end{bmatrix} := \begin{bmatrix}
 x_2 y_3 - x_3 y_2 \\
 x_3 y_1 - x_1 y_3 \\
@@ -205,7 +207,7 @@ Now if we write $\hat{e}_i$ for the $i$th standard basis vector in $\R^3$ so tha
 \end{bmatrix} = x_1 \hat{e}_1 + x_2 \hat{e}_2 + x_3 \hat{e}_3 = \sum_{i=1}^3 x_i \hat{e}_i
 \end{equation*}
 we can equivalently define the cross product by the rule \begin{equation*}
-\vec{x} \times \vec{y} = \sum_{i,j = 1}^3 \epsilon_{ijk} x_i y_j \hat{e}_k.
+\vec{x} \times \vec{y} = \sum_{i,j,k = 1}^3 \epsilon_{ijk} x_i y_j \hat{e}_k.
 \end{equation*}
 \tb{Exercise} Show that this prescription reproduces the definition of the cross product given earlier.\\
 \\
@@ -236,8 +238,8 @@ f: \R \to \R.
 Then differentiating told us things about rates of change, tangent approximations, extrema, and so on. If we want to study vectors using differential calculus, then abstractly we ought to be studying functions that have vectors for their inputs and outputs. These are functions shaped like \begin{equation*}
 \vec{F}: \R^n \to \R^m.
 \end{equation*}
-If we were pure mathematicians, we would proceed by developing definitions and proving theorems that work for totally general values of $n$ and $m$. But we aren't, so we will concentrate on three cases of classical interest which play inportant roles in the geometry and physics of the Euclidean 3D space which we (to an excellent approximation) inhabit. In the above notation, these are: \begin{enumerate}
-    \item The trajectory of a particle moving through space as time passes, whose location at time $t$ is given by the vector $\vec{x}(t)$. This takes in a single real number $t$ and return a triple $(x(t), y(t), z(t))$, so it is modeled by a function $\vec{x}: \R \to \R^3$.
+If we were pure mathematicians, we would proceed by developing definitions and proving theorems that work for totally general values of $n$ and $m$. But we aren't, so we will concentrate on three cases of classical interest which play important roles in the geometry and physics of the Euclidean 3D space which we (to an excellent approximation) inhabit. In the above notation, these are: \begin{enumerate}
+    \item The trajectory of a particle moving through space as time passes, whose location at time $t$ is given by the vector $\vec{x}(t)$. This takes in a single real number $t$ and returns a triple $(x(t), y(t), z(t))$, so it is modeled by a function $\vec{x}: \R \to \R^3$.
     \item Scalar fields, which describe things like the electrostatic potential $\phi(\vec{x})$ or the way that temperature $T(\vec{x})$ varies over space at equilibrium. These are modeled by functions $\phi: \R^3 \to \R$.
     \item Vector fields, such as the electric field $\vec{E}(\vec{x})$, the magnetic field $\vec{B}(\vec{x})$, or the vector potential $\vec{A}(\vec{x})$ at a fixed time. These take in a position vector $\vec{x}$ and return a vector whose tail we imagine as being based at the location $\vec{x}$, so they are modeled by functions $\vec{A}: \R^3 \to \R^3$
 \end{enumerate}
@@ -259,7 +261,7 @@ Differentiating again gives the acceleration \begin{equation*}
 which gives, among other things, the vector form of Newton's second law if $\vec{x}$ describes the location of a classical point particle subject to a net force $\vec{F}$. \begin{equation*}
 \vec{F} = m \frac{d^2\vec{x}}{dt^2}
 \end{equation*}
-We can reason about how compute the length of the path traversed by our particle in two different but ultimately equivalent and complementary ways. On one hand, in a time $dt$ the particle moves a distance \begin{equation*}
+We can reason about how to compute the length of the path traversed by our particle in two different but ultimately equivalent and complementary ways. On one hand, in a time $dt$ the particle moves a distance \begin{equation*}
 d \ell = \mbox{(speed)} dt
 \end{equation*}
 where the speed is the norm of the velocity so that \begin{equation*}
@@ -286,7 +288,7 @@ Crucially, this is the length of the path traversed by the particle, not the net
 \tb{Exercise} Verify this last claim by explicit integration. That is, consider the trajectory \begin{equation*}
 \vec{x}(t) = (R \cos(\omega t + a), R \sin (\omega t + a)) \in \R^2
 \end{equation*}
-for $a, \omega, R$ appropriate real constants. Determine a range of $t$ values corresponding to exactly one period, then integrate to find the length of the corresponding path.
+for $a, \omega, R$ appropriate real constants. Determine a range of $t$ values corresponding to exactly one period, then integrate to find the length of the corresponding path. 
 
 
 
@@ -311,13 +313,13 @@ d \phi (\vec{x}) = \PA{\phi(\vec{x})}{x} dx + \PA{\phi(\vec{x})}{y} dy + \PA{\ph
 If single-variable functions have tangent line approximations, we can think of this geometrically as a tangent plane expansion. In fact some treatments follow this logic backwards, taking a careful version of this last result as the definition of partial derivatives and reverse-engineering the limit characterization. Now dropping the explicit argument $\vec{x}$ to avoid cluttered notation, we can write this more abstractly as \begin{equation*}
 d \phi = \sum_{i=1}^3 \PA{\phi}{x_i} dx_i \mbox{ for } \phi: \R^3 \to \R.
 \end{equation*}
-It is easy to extend this dicussion from $\R^3$ to $\R^n$ - just replace each $3$ with an $n$. We also notice that the last expression above has the form of a dot product. We can rewrite \begin{equation*}
+It is easy to extend this discussion from $\R^3$ to $\R^n$ - just replace each $3$ with an $n$. We also notice that the last expression above has the form of a dot product. We can rewrite \begin{equation*}
 d \phi = \nabla \phi \cdot d \vec{x}
 \end{equation*}
 where the vector field \begin{equation*}
 \nabla \phi := \LP \PA{\phi}{x}, \PA{\phi}{y}, \PA{\phi}{z} \RP
 \end{equation*}
-is called the gradient of $\phi$. Some texts write this as simply grad$(\phi)$. Notice that computing the differential $d \phi$ is totally equivalently to computing the gradient $\nabla \phi$. We have seen gradients before - in electrostatics the electric field is the negative gradient of the electrostatic potential \begin{equation*}
+is called the gradient of $\phi$. Some texts write this as simply grad$(\phi)$. Notice that computing the differential $d \phi$ is totally equivalent to computing the gradient $\nabla \phi$. We have seen gradients before - in electrostatics the electric field is the negative gradient of the electrostatic potential \begin{equation*}
 \vec{E} = - \nabla \phi .
 \end{equation*}
 This in turn owes its namesake to the fact that a particle interacting with a time-independent background potential $V$ experiences a force \begin{equation*}
@@ -336,7 +338,7 @@ H := \begin{bmatrix}
 \PA{^2 \phi}{z \D x} & \PA{^2 \phi}{z \D y} & \PA{^2 \phi}{z^2}
 \end{bmatrix}
 \end{equation*}
-We won't get into this here, except to reiterate that this is a \ti{symmetric} matrix. For any nice scalar field\footnote{For students who know what the following words mean, the exact sufficient condition is that $\phi$ be continuously differentiable.}, the order in which we take repeated partial derivatives does not matter, and in this class we will exclusively consider nice functions.
+We won't get into this here, except to reiterate that this is a \ti{symmetric} matrix. For any nice scalar field\footnote{For students who know what the following words mean, the exact sufficient condition is that $\phi$ be twice continuously differentiable.}, the order in which we take repeated partial derivatives does not matter, and in this class we will exclusively consider nice functions.
 
 
 
@@ -384,7 +386,7 @@ As we said this is a mild abuse of notation, since $\phi$ is only directly a fun
 This is the analogue of the single-variable formulation of chain rule \begin{equation*}
 \frac{d}{du} f(x(u)) = f'(x(u)) x'(u).
 \end{equation*}
-While this may seem like pedantry, it will be important to be careful about such things as we move forward and abstract out to calculus on manifold.
+While this may seem like pedantry, it will be important to be careful about such things as we move forward and abstract out to calculus on manifolds.
 
 
 
@@ -429,7 +431,7 @@ Finally, the cross product between $\nabla$ and a vector field $\vec{A}$ gives t
 \end{bmatrix}
 \end{equation*}
 where we employ the useful shorthand \begin{equation*}
-\D_x := \PA{}{x}, \D_z := \PA{}{z}, \D_z := \PA{}{z}/
+\D_x := \PA{}{x}, \quad \D_y := \PA{}{y}, \quad \D_z := \PA{}{z}.
 \end{equation*}
 This operation appears in two of the Maxwell equations \begin{align*}
 \nabla \times \vec{E} & = - \PA{\vec{B}}{t}, \\
@@ -438,7 +440,7 @@ This operation appears in two of the Maxwell equations \begin{align*}
 and relates the magnetic field $\vec{B}$ to the vector potential $\vec{A}$ as \begin{equation*}
 \vec{B} = \nabla \times \vec{A}.
 \end{equation*}
-All of the first-order operations div, grad, curl have intuitive physical and geometric meaning (see especially Feynman Vol 2 chapter 2) and could be invented by carefully visualizing fluid flow and electrostatic potentials and so on, but it is interesting to see that we can just as well invent all of it just by enumerating everything our notation permits us to do and trying it!
+All of the first-order operations div, grad, curl have intuitive physical and geometric meaning (see especially Feynman Vol 2 chapter 2) and could be invented by carefully visualizing fluid flow and electrostatic potentials and so on, but it is interesting to see that we can just as well invent all of it just by enumerating everything our notation permits us to do and trying it! 
 
 
 
@@ -476,7 +478,7 @@ The same is true of taking the curl twice. \begin{equation*}
 \nabla \times \LP \nabla \times \vec{A} \RP = \mbox{not too interesting either}.
 \end{equation*}
 This doesn't especially lend itself to a neat geometric interpretation, but it is fine to do, and sometimes you'll have to. If you do, it's good to know the following identity \begin{equation*}
-\nabla \times \LP \nabla \times \vec{A} \RP = \nabla \cdot \LP \nabla \cdot \vec{A} \RP - \nabla^2 \vec{A}
+\nabla \times \LP \nabla \times \vec{A} \RP = \nabla  \LP \nabla \cdot \vec{A} \RP - \nabla^2 \vec{A}
 \end{equation*}
 where the rightmost term is shorthand for taking the Laplacian of each component $A_i$ separately.\\
 \\
@@ -515,7 +517,7 @@ Finally we tread into the land of integral calculus. Our initial intuition will 
 The most immediate generalization to $\R^3$ or $\R^n$ is the line integral. We take a path parametrized as $\vec{x}(t)$ for $t_i \leq t \leq t_f$ and a vector field $\vec{A}(\vec{x})$, and use this parametrization to define the integral of $\vec{A}$ along the path $\gamma$. \begin{equation*}
 \int_\gamma \vec{A} \cdot d \vec{\ell} := \int_{t_i}^{t_f} \vec{A}(\vec{x}(t)) \cdot \frac{d \vec{x}(t)}{dt} dt
 \end{equation*}
-\tb{Exercise} What if took the same line through $\R^n$ but parametrized it differently? Maybe we use $\vec{y}(t)$ which starts and ends at the same places as $\vec{x}(t)$ and passes through all the same points, but goes more slowly at some parts and more quickly at others. Explain why this should \tb{not} actually change the value of the integral. In other words, the integral we just defined doesn't actually depend on our choice of $\vec{x}(t)$, just on the path it traces out.\\
+\tb{Exercise} What if we took the same line through $\R^n$ but parametrized it differently? Maybe we use $\vec{y}(t)$ which starts and ends at the same places as $\vec{x}(t)$ and passes through all the same points, but goes more slowly at some parts and more quickly at others. Explain why this should \tb{not} actually change the value of the integral. In other words, the integral we just defined doesn't actually depend on our choice of $\vec{x}(t)$, just on the path it traces out.\\
 \\
 \
 If in single-variable calculus we consider the case where our integrand is a total derivative $f'(x)$, here we ought to consider the case of a vector field which happens to be the gradient of some scalar field \begin{equation*}
@@ -559,7 +561,7 @@ This is the fundamental theorem of area integrals, sometimes called Stokes' theo
 \\
 \
 Now suppose we take a solid 3D region $M$ with boundary $\D M$. If the scalar field we integrate over $M$ happens to be a divergence, then we find \begin{equation*}
-\int_M \LP \nabla \cdot \vec{B} \RP \cdot dV = \int_{\D M} \vec{B} \cdot \hat{n} dA.
+\int_M \LP \nabla \cdot \vec{B} \RP  dV = \int_{\D M} \vec{B} \cdot \hat{n} dA.
 \end{equation*}
 This is the fundamental theorem of volume integrals, sometimes called the divergence theorem.\\
 \\
@@ -574,12 +576,12 @@ Similarly, if we take Faraday's law \begin{equation*}
 \nabla \times \vec{E} = - \PA{\vec{B}}{t}
 \end{equation*}
 and compute the flux of both sides through a surface $S$ with boundary $\D S$, we get the equivalent integral form \begin{equation*}
-\mbox{circulation of $\vec{E}$ around $\D S$} = \frac{d}{dt} \LP \mbox{flux of $\vec{B}$ through $S$} \RP
+\mbox{circulation of $\vec{E}$ around $\D S$} = - \frac{d}{dt} \LP \mbox{flux of $\vec{B}$ through $S$} \RP
 \end{equation*}
-As it turns out these theorems continue to generalize to something called the generalized Stokes' theorem, written \begin{equation*}
+As it turns out these theorems continue to generalize to something called the \textit{generalized Stokes' theorem}, written \begin{equation*}
 \int_M d \omega = \int _{\D M} \omega.
 \end{equation*}
-Here $\omega$ is something called a differential form, and $d \omega$ is its so-called exterior derivative, which in the right notation is a kind of general differential object that takes div, grad, curl as special cases. $M$ is likewise some region with boundary $\D M$. But we'll need to learn more mathematics before we pursue this abstraction any further.
+Here $\omega$ is something called a \textit{differential form}, and $d \omega$ is its \textit{exterior derivative}, which in the right notation is a kind of general differential object that takes div, grad, curl as special cases. $M$ is likewise some region with boundary $\D M$. But we'll need to learn more mathematics before we pursue this abstraction any further.
 
 
 
@@ -594,3 +596,6 @@ Here $\omega$ is something called a differential form, and $d \omega$ is its so-
 This treatment was fairly dry and abstract, and unfortunately had no diagrams or pictures. For a much more intuitive, physics-flavored discussion of mostly the same material see \ti{The Feynman Lectures on Physics} Vol 1 Chapter 11 as well as Vol 2 Chapters 1-3. For similar reasons, see the book \ti{Div, Grad, Curl, and All That} by Schey. To see how div, grad, curl are unified by the notions of exterior derivatives and differential forms, see Chapter 6 of \ti{Vector Calculus, Linear Algebra, and Differential Forms: A Unified Approach} by Hubbard and Hubbard.
 
 \end{document}
+
+
+
