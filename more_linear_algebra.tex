@@ -1,0 +1,467 @@
+ \documentclass[12 pt]{article}
+\usepackage{amsmath, amssymb, mathtools, slashed, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{tikz-cd}
+\usepackage{tikz} 
+\usepackage{tikz-feynman}
+\tikzfeynmanset{compat=1.1.0}
+\usepackage[shortlabels]{enumitem}
+
+% Commonly used sets of numbers
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\PR}{\mathbb{P}}
+\newcommand{\F}{\mathbb{F}}
+
+
+% Shortcuts for text formatting
+\newcommand{\tb}[1]{\textbf{#1}}
+\newcommand{\ti}[1]{\textit{#1}}
+
+% Math fonts
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+
+% Shortcuts for inner product spaces
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \left| #2 \right\rangle \right.}
+\newcommand{\Ip}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\nm}[1]{\left\| #1 \right\|}
+
+% Shortcuts for the section of 3D rotations
+\newcommand{\lo}{\textbf{L}_1}
+\newcommand{\ltw}{\textbf{L}_2}
+\newcommand{\lt}{\textbf{L}_3}
+
+
+% Shortcuts for geometric vectors
+\newcommand{\U}{\textbf{u}}
+\newcommand{\V}{\textbf{v}}
+\newcommand{\W}{\textbf{w}}
+\newcommand{\B}[1]{\mathbf{#1}}
+\newcommand{\BA}[1]{\hat{\mathbf{#1}}}
+
+% Other shortcuts
+
+\newcommand{\G}{\gamma}
+\newcommand{\LA}{\mathcal{L}}
+\newcommand{\X}{\Vec{x}}
+\newcommand{\x}{\Vec{x}}
+
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+\newcommand{\HI}{\mathcal{H}}
+\newcommand{\AL}{\mathcal{A}}
+
+\newcommand{\D}{\partial}
+
+\newcommand{\bs}{\textbackslash}
+
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\arr}{\mathcal{R}}
+
+\numberwithin{equation}{section}
+\setcounter{section}{0}
+
+
+
+
+
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+
+
+
+\begin{document}
+
+\title{Notes on Abstract Linear Algebra}
+\author{Mathew Calkins\\
+  \textit{Center for Cosmology and Particle Physics},\\
+  \textit{New York University}\\
+  \texttt{mc8558@nyu.edu}.
+}
+
+\date{\today}
+
+\maketitle
+
+
+\abstract{Some supplementary discussion of more abstract linear algebra, especially the dual space.}
+
+
+\tableofcontents
+
+
+
+\section{Vector Spaces}
+
+\subsection{Definitions}
+Recall the first thing we learned in recitation this semester.\\
+\\
+\
+\ti{Vectors are perhaps the most ubiquitous mathematical objects in physics after basic characters like sets and functions. Depending on the context, we could give vectors any of the following increasingly abstract definitions, not all of which are equivalent and not all of which are actually well-defined:  \begin{enumerate}
+\item Something with magnitude and direction.
+\item A triple of real numbers $(x, y, z)$.
+\item A tuple of real numbers $(x_1, \ldots, x_n)$.
+\item An element of a tangent space to our favorite manifold.
+\item Something that transforms like a vector.
+\item Something that transforms in the fundamental representation of our favorite group.
+\item A ket.
+\item An element of a vector space.
+\end{enumerate}}
+\
+\\
+\
+Today we start by finally presenting Definition 8. \\
+\\
+\
+\tb{Definition} A \ti{real vector space} is a set $V$ whose elements we call vectors, together with a rule for adding vectors (abstractly, a function $+: V \times V \to V$) and a rule for scalar-multiplying vectors by real numbers (abstractly, a function $\cdot : \R \times V \to V$) satisfying the following properties. \begin{enumerate}
+\item Vector addition is commutative \begin{equation*}
+\vec{u} + \vec{v} = \vec{v} + \vec{u} \mbox{ for all } \vec{u}, \vec{v} \in V.
+\end{equation*}
+\item Vector addition is associative \begin{equation*}
+(\vec{u} + \vec{v}) + \vec{w} = \vec{u} + (\vec{v} + \vec{w}) \mbox{ for all } \vec{u}, \vec{v}, \vec{w} \in V.
+\end{equation*}
+so that we can unambiguously write things like $\vec{u} + \vec{v} + \vec{w}$ without worrying about which addition we perform first.
+\item There exists a vector $\vec{0} \in V$ such that \begin{equation*}
+\vec{0} + \vec{v} = \vec{v} \mbox{ for all } \vec{v} \in V.
+\end{equation*}
+\item Every $\vec{v} \in V$ has an \ti{additive inverse} written $- \vec{v}$ such that \begin{equation*}
+\vec{v} + (- \vec{v}) = \vec{0}.
+\end{equation*}
+\item Scalar multiplication and multiplication of real numbers play nicely together, in the sense that \begin{equation*}
+a(b \vec{v}) = (ab) \vec{v} \mbox{ for all } \vec{v} \in V \mbox{ and } a, b \in \R.
+\end{equation*}
+\item Multiplication by $1 \in \R$ doesn't change vectors. That is, \begin{equation*}
+1 \vec{v} = \vec{v} \mbox{ for all } \vec{v} \in V.
+\end{equation*}
+\item Scalar multiplication distributes over vector addition. That is, \begin{equation*}
+a(\vec{u} + \vec{v}) = a \vec{u} + a \vec{v} \mbox{ for all } \vec{u}, \vec{v} \in V \mbox{ and } a \in \R.
+\end{equation*}
+\item Scalar multiplication distributes over scalar addition. That is, \begin{equation*}
+(a + b)\vec{v} = a \vec{v} + b \vec{v} \mbox{ for all } \vec{v} \in V \mbox{ and } a,b \in \R.
+\end{equation*}
+\end{enumerate}
+A \ti{vector space} in general is exactly the same thing, but replacing $\R$ with, say, the complex numbers $\C$ or the rationals $\Q$. More generally, we could replace $\R$ with any \ti{field}.\footnote{Note that the word \ti{field} here is completely unrelated to the terms \ti{vector space} and \ti{scalar field}. It's just a quirk of English mathematical vocabulary.} If you're curious, a field is a space like $\R,\C,\Q$, where we have a bunch of objects sometimes called \ti{scalars} and with rules for adding and multiplying scalars amongst themselves, satisfying familiar properties like commutative addition, the distributive property, and the ability to divide by any scalar other than 0. Besides $\R,\C,\Q$ there exist more exotic fields, even finite-size fields such as the integers mod $p$, $\Z_p$, for $p$ a prime number. For better or worse, none of these generalities are relevant for us. In general relativity we will exclusively consider real vector spaces, aside from a few fun examples inspired by quantum mechanics where the relevant vector spaces are mostly complex. \\
+\\
+\
+Working carefully from these properties, we can rigorously prove a large number of other properties that seem so basic that one might think they too ought to be part of the definition, such as: \begin{itemize}
+\item The zero vector $\vec{0}$ is unique.
+\item You can find a vector's additive inverse by multiplying it by $-1$. That is, $- \vec{v} = (-1) \vec{v}$.
+\item Adding a vector to itself $n$ times is the same as multiplying it by $n$. For example, $\vec{v} + \vec{v} + \vec{v} = 3 \vec{v}$.
+\end{itemize}
+On the other hand, it is very interesting to notice what properties are \tb{not} part of the definition: \begin{itemize}
+\item A vector space doesn't need to be finite-dimensional.
+\item A vector space doesn't need to have an inner product or a norm, hence a notion of angle/distance/geometry.
+\item A vector space doesn't need to have even a topology. In this case we have no way of talking about sequences and convergence, so we can only ever discuss at most finite linear combinations.
+\end{itemize}
+We also recall the notion of basis and dimension for a vector space.\\
+\\
+\
+\tb{Definition} Given a vector space $V$, a \ti{basis} is a subset $\mc{B} \subset V$ which is spanning (that is, every element of $V$ can be written as a linear combination of elements of $\mc{B}$) and linearly independent (no element of $\mc{B}$ can be written as a linear combination of any other elements, so linear combinations are unique). If there exists a finite such set $\mc{B}$ of size $n < \infty$, we say that $V$ is finite-dimensional and write $\dim(V) = n$. Otherwise, we say that $V$ is \ti{infinite-dimensional} and write $\dim(V) = \infty$.\footnote{It turns out that it is possible to refine this further and classify various distinct infinities, but this won't matter for us.} \\
+\\
+\
+Note that the notion of a ``linear combination" gets slightly more subtle in an infinite-dimensional space. Talking about infinite linear combinations means talking about convergence of infinite series of vectors, which in turn means careful consideration of metrics and topology and so on. We won't get into these weeds here. For the curious reader, note that in such a space the phrase ``every vector can be written as a linear combination" roughly becomes ``every vector can be approximated arbitrarily well by a linear combination."\\
+\\
+\
+\tb{Examples} The standard basis $\{\hat{e}_1, \hat{e}_2\}$ is a basis for $\R^2$. So is the non-standard basis $\{7 \hat{e}_1 + \hat{e}_2, 3 \hat{e}_2 - 5 \hat{e}_1 \}$. The moral: $\R^n$ has a standard basis, but that is not the only basis. What's more, most vector spaces do not have a standard basis.
+
+
+\subsection{Examples}
+Some examples of increasingly non-$\R^n$ real vector spaces are: \begin{itemize}
+\item Euclidean space $\R^n$ ($\dim(V) = n$).
+\item Flat Minkowski space $M^4$ once we've chosen an origin. ($\dim (V) = 4$).
+\item The space $T_p M$ of all vectors tangent to some manifold\footnote{We have defined manifolds so far only loosely. For us a manifold is a nice smooth space of definite dimension, on which we can do differential calculus and on which we can pick local (but not always global) coordinate systems, examples of which include spheres, tori, nice smooth subsets of Euclidean space, and spacetime itself.} $M$ at a point $p \in M$ ($\dim(V) = $ dimension of the manifold). More on this space later!
+\item The space of all polynomials of degree at most 4. That is, \begin{equation*}
+V = \{ P = a + b x + c x^2 + d x^3 + e x^4 \mbox{ such that } a,b,c,d,e \in \R\}
+\end{equation*}
+which has $\dim(V) = 5$. We could use $\{1, x, x^2, x^3, x^4\}$ as a basis for $V$ and this is arguably the most natural basis from a purely typographical point of view, but is far from the only basis. For example, if we define an inner product on $V$ in the most natural way as \begin{equation*}
+\langle P, Q \rangle = \int_a^b P(x) Q(x) dx \mbox{ for some fixed } a < b
+\end{equation*}
+then this basis is not orthonormal. So we see already that the most obvious basis is not automatically the best one for all purposes.
+\item The space of all continuous real-valued functions on the real line. That is, \begin{equation*}
+V = \{ f: \R \to \R \mbox{ such that } f \mbox{ is continuous} \}
+\end{equation*}
+which has $\dim(V) = \infty$. Here there is no natural basis, or at least none that is easy to write down.
+\item The space of all complex-valued functions on $\R$ which are square-integrable. That is, \begin{equation*}
+V = \left\{ \psi: \R \to \C \mbox{ such that } \int_{-\infty}^\infty |\psi(x)|^2 dx < \infty \right\}.
+\end{equation*}
+This is exactly the vector space of normalizable wavefunctions for a nonrelativistic particle in one dimension, as you have seen in quantum mechanics. This space has $\dim(V) = \infty$. Among many possible bases for this space, a popular one is built from the set of Hermite polynomials \begin{equation*}
+\mc{B} = \{H_0, H_1, H_2, H_3, \ldots \}
+\end{equation*} 
+where \begin{align*}
+H_0(x) & = 1, \\
+H_1(x) & = x, \\
+H_2(x) & = x^2 - 1, \\
+H_3(x) & = x^3 - 3x
+\end{align*}
+and so on. These functions themselves aren't orthogonal (they aren't even elements of $V$, since they aren't square-integrable) but the \textit{Hermite functions} $F_n \in V$ we get by scaling these as \begin{equation}
+F_n(x) := \frac{1}{\pi^{1/4} n!} e^{- x^2/2} H_n(x)
+\end{equation}
+form an orthonormal basis \begin{equation}
+\langle F_n, F_m \rangle = \delta_{mn}
+\end{equation} with respect to the  inner product \begin{equation*}
+\langle \psi, \phi \rangle = \int_{-\infty}^\infty \psi^*(x) \phi(x) dx.
+\end{equation*}
+\end{itemize}
+
+
+\subsection{The Moral: Vectors are Not Their Components}
+In a general vector space, the vectors $\vec{u} \in V$ exist whether or not we choose a basis. If we choose a basis $\mc{B} = \{e_i\}_{i=1}^n$ (for notational simplicity we take $n := \dim(V) < \infty$), then we can expand $\vec{v}$ uniquely as \begin{equation*}
+\vec{v} = \sum_{i=1}^n v^i e_i
+\end{equation*}
+and loosely identify $\vec{v}$ with its list of components \begin{equation*}
+\vec{v} \sim (v^1, \ldots, v^n)
+\end{equation*}
+but these numbers are just a nice description for $\vec{v}$. They are \tb{not} synonymous with the underlying object $\vec{v}$, which could be intrinsically a polynomial, or a square-integrable function, or something more exotic.\\
+\\
+\
+The only exception - the only setting where a vector is literally the same entity as its list of components - is in $\R^n$ itself. Here the vectors are by definition $n$-tuples $\vec{v} = (v^1, \ldots, v^n)$. Since this is the first vector space we all meet, it is easy to absorb this intuition and think of vectors as synonymous with their components. But $\R^n$ is the exception, not the rule.
+
+
+
+\section{The Dual Space}
+Now we make yet another leap in abstraction. Given two vector spaces $U,V$ it is natural to talk about linear maps $T: V \to U$. These form a vector space under pointwise linear combination \begin{equation*}
+(a T + b S)(\vec{v}) = a T(\vec{v}) + b S(\vec{v}).
+\end{equation*}
+To study manifolds, hence also to study gravitation, it is especially useful and interesting to consider the case where $U = \R$, \ti{i.e.}, to consider linear maps $T: V \to \R$. We call such a map a \ti{dual vector} and write the space of all such maps as $V^*$. \begin{equation*}
+V^* := \{\mbox{linear maps } \alpha: V \to \R\}
+\end{equation*}
+It is conventional in differential geometry contexts to use Greek letters to denote such maps. This forms a vector space, since we know how to take linear combinations of functions. \begin{equation*}
+(a \alpha + b \beta)(\vec{v}) = a \alpha(\vec{v}) + b \beta(\vec{v})
+\end{equation*}
+and one can verify that, if $\alpha, \beta: V \to \R$ are linear maps, then so is $a \alpha + b \beta: V \to \R$.
+
+
+
+
+
+
+\subsection{Examples}
+Since this is a jump in abstraction, we now move immediately into some examples. \\
+\\
+\
+\tb{Example 1: Euclidean Space} On $\R^2$, we can expand in the standard basis \begin{equation*}
+\vec{v} = (v^1, v^2) = v^1 \hat{e}_1 + v^2 \hat{e}_2 = \begin{bmatrix}
+v^1 \\
+v^2
+\end{bmatrix}
+\end{equation*}
+and define a projection map $\alpha \in (\R^2)^*$ which extracts the first component \begin{equation*}
+\alpha(\vec{v}) := v^1.
+\end{equation*}
+It is at least algebraically straightforward to verify that this is a linear map, since \begin{align*}
+\alpha (a \vec{u} + b \vec{v}) & = \alpha \LP \begin{bmatrix}
+au^1 + bv^1 \\
+au^2 + b v^2
+\end{bmatrix}\RP \\
+\ & = a u^1 + b v^1 \\
+\ & = a \alpha(\vec{u}) + b \alpha (\vec{v}).
+\end{align*}
+For a slightly more involved example, we can define $\beta \in (\R^2)^*$ by \begin{equation*}
+\beta(\vec{v}) := v^2 - v^1.
+\end{equation*}
+This is linear for essentially the same reasons, though to illustrate things in a less $\R^2$-specific way we instead verify this by breaking out in our basis rather than by writing columns.
+\begin{align*}
+\beta (a \vec{u} + b \vec{v}) & = \beta \LP (au^1 + bv^1) \hat{e}_1 +  (au^2 + b v^2) \hat{e}_2\RP \\
+\ & = (au^2 + b v^2) - (au^1 + bv^1) \\
+\ & = a (u^2 - u^1) + b (v^2 - v^1) \\
+\ & = a \beta(\vec{u}) + b \beta (\vec{v}).
+\end{align*}
+You can convince yourself that $\vec{v} \mapsto 7 v^1 - 12 v^2$, or any other map onto a constant linear combination of components, is likewise a dual vector. It is interesting to note that this dual vector can be implemented via left-multiplication by a unique row vector \begin{equation*}
+7 v^1 - 12 v^2 = \begin{bmatrix} 7 & -12 \end{bmatrix} \begin{bmatrix}
+v^1 \\ v^2
+\end{bmatrix}.
+\end{equation*}
+\tb{Exercise} Meditate on this observation and convince yourself that this implies that $V^*$ is at least a two-dimensional vector space.\\
+\\
+\
+\tb{Example 2: Polynomials} On our vector space of polynomials \begin{equation*}
+V = \{ P = a + b x + c x^2 + d x^3 + e x^4 \ | \ a,b,c,d,e \in \R\}
+\end{equation*}
+we can define $\alpha \in V^*$ by taking any linear combination of components, say,  \begin{equation*}
+\alpha(P) = 2 a - 5 c + d.
+\end{equation*}
+This is a linear map by the same calculation as above.\\
+\\
+\
+In the other direction, a totally general dual vector $\beta \in V^*$ can be written in the above form. To see this, we clarify notation slightly by writing \begin{equation*}
+(e_0, \ldots, e_4) = (1, x, \ldots, x^4)
+\end{equation*}
+and correspondingly rewriting the coefficients as \begin{equation*}
+P = a + b x + c x^2 + d x^3 + e x^4 =: a^0 e_0 + \cdots + a^4 e_4
+\end{equation*}
+then expanding by linearity of $\beta \in V^*$
+\begin{align*}
+\beta(P) & = \beta \LP a + b x + c x^2 + d x^3 + e x^4 \RP \\
+\ & =  \beta \LP a^0 e_0 + \cdots + a^4 e_4 \RP \\
+\ & = a^0 \beta (e_0) + \cdots + a^4 \beta ( e_4).
+\end{align*}
+So $\beta \in V^*$ is guaranteed to act on $P \in V$ by mapping $P$ to a linear combination of the components of $P$. The coefficients of this linear combination are exactly the images $\beta(e_i)$ of the basis vectors under the action of $\beta$.\\
+\\
+\
+The moral: once we choose a basis for $V$, a dual vector $\alpha \in V^*$ always acts by mapping $\vec{v} \in V$ to a linear combination of the components $v^i$. This suggests that the vector space $V^*$ should have the same dimension as $V$, but proving this carefully by definition involves picking a basis for $V^*$, proving it is in fact a basis (spanning + linearly independent), and showing that this basis has the same size as a basis for $V$. This will come up on a homework soon, so we won't produce the argument here. \\
+\\
+\
+\tb{Example 3: Smooth functions on an Interval} Now consider the set of all smooth functions on the closed interval $[-1,1]$. \begin{equation*}
+V := C^\infty([-1,1]) = \{ \mbox{smooth } f: [-1,1] \to \R \}
+\end{equation*}
+For those unfamiliar, $[-1,1]$ is the set of all real numbers ranging from -1 to +1 inclusive, while \ti{smooth} means that at every point in its domain $f$ has continuous derivatives of all orders.\\
+\\
+\
+Given any fixed $g \in V$, we can define a dual vector $\alpha_g \in V^*$ which acts on $f \in V$ by integrating it against $g$. \begin{equation*}
+\alpha_g (f) = \int_{-1}^1 g(x) f(x) dx.
+\end{equation*}
+We can also build dual vectors by differentiation. At any fixed point $x_0 \in [-1,1]$ we can define the dual vector $\beta_{x_0}$ which acts on $f$ by computing its derivative at $x_0$. \begin{equation*}
+\beta_{x_0} (f) = f'(x_0).
+\end{equation*}
+Meeting in the middle, we could act on $f$ by simply evaluating at $x_0$. \begin{equation*}
+\delta_{x_0}(f) = f(x_0).
+\end{equation*}
+If we abuse notation very slightly, we could think of this as $\alpha_g$ in the limit where $g$ approaches a delta function spiked at $x_0$. In fact, this is the rigorous way to define the Dirac delta. It isn't a function at all as you have likely heard, but is rather the dual vector to a space of functions which evaluates functions by evaluating them at a point.
+
+
+
+\section{The Metric}
+So far we have seen that, given a space $V$ of vectors, we can construct a corresponding space $V^*$ of dual vectors. As we saw in the case of $\R^2$, if we think of $V$ as the space of columns \begin{equation*}
+\R^2 = \left\{ \begin{bmatrix}
+v^1 \\ v^2
+\end{bmatrix} \mbox{ such that } v^i \in \R \right\}
+\end{equation*}
+then we can think of dual vectors as rows. This means that, at least in the case $V = \R^2$ or more generally $V = \R^n$, there exists a neat map from vectors to dual vectors (abstractly, a map $\R^n \to (\R^n)^*$) - just take the transpose of your column to get a row! But this is all very specific to the structure of $\R^n$, which has a standard basis among other things. Is there a way to construct a nice map $V \to V^*$ for a general vector space $V$? Linguistically, we know what a \ti{dual vector} is, but can we also make sense of \ti{the dual of a particular vector}?
+
+
+\subsection{The Recipe Abstractly}
+It turns out that there isn't a unique way to do this given just the vector space structure, but if we endow $V$ with an inner product then there is a unique way to do this if we avoid making any new arbitrary decisions. Here we make another jump in abstraction, so read the following slowly and carefully. \\
+\\
+\
+Suppose we have endowed $V$ with an inner product, written abstractly as $g: V \times V \to \R$. Fix some vector $\vec{v} \in V$. With the help of $g$, we want to construct a dual vector $v^* \in V^*$, or equivalently a map $v^*: V \to \R$. Since $v^*$ is a function that takes in vectors and returns real numbers, to define $v^*$ we must equivalently define how it acts on an arbitrary test vector $\vec{u} \in V$. So our ingredients so far are as follows. \begin{itemize}
+\item Given: fixed vector $\vec{v} \in V$
+\item Given: fixed metric $g: V \times V \to \R$
+\item Goal: define $v^*(\vec{u}) \in \R$ for arbitrary $\vec{u}$.
+\end{itemize}
+There is exactly one way we can combine our ingredients to reach our goal, so we do so and define \begin{equation*}
+v^*(\vec{u}) = g(\vec{v}, \vec{u}) \mbox{ for arbitrary } \vec{u} \in V.
+\end{equation*}
+By mild abuse of notation, we could write $v^*$ as \begin{equation*}
+v^* = g(\vec{v}, \cdot ) : V \to \R
+\end{equation*}
+where we have left one of the slots of $g( \cdot, \cdot)$ available to feed in whatever vector $v^*$ wants to act on.\\
+\\
+\
+Once again, pause and make sure you understand how everything came together in this construction. \\
+\\
+\
+\tb{Remark: How to Invent Differential Geometry} The game we just played is actually well-known among mathematicians. Given objects $A,B,C,D$ (typically elements of various vector spaces, or maps between such spaces, or maps between spaces of maps, and so on), one wants to construct a new object $E$ of some prescribed type. So we step back, look at the domains and codomains of each of $A,B,C,D$, then compose them amongst themselves in the only legal way that constructs an object of the type we're looking for and call the result $E$. Only then do we step back and study the properties of $E$ to confirm it acts as we expect it should. By this recipe one can invent large swaths of differential geometry.
+
+
+
+
+
+
+\subsection{The Recipe in Components}
+One of the core competencies of a theoretical physicist is to do linear algebra in both abstract language and in terms of components. So we now translate our abstract recipe above into the language of indices.\\
+\\
+\
+Since our general vector space may be Minkowski space, Euclidean space, or something else, to be conservative we will be careful with the placement of our indices. We start by choosing a basis for $V$ and expanding $\vec{v}$ in this basis. \begin{equation*}
+\vec{v} = v^i e_i.
+\end{equation*}
+This is a totally general basis, not necessarily orthonormal. Then the metric acts on pairs of vectors in the way we have seen before. \begin{equation*}
+g(\vec{u}, \vec{v}) = u^i v^j g(e_i, e_j) = u^i v^j g_{ij} \mbox{ where } g_{ij} = g(e_i, e_j).
+\end{equation*}
+Given a general dual vector $\alpha \in V^*$, we define its components as \begin{equation*}
+\alpha_i := \alpha(e_i).
+\end{equation*}
+Notice that our index rules force the components of dual vectors to have lowered indices. \\
+\\
+\
+We could from this expression reverse engineer what basis for $V^*$ we must be expanding in in order to get these as our components, but that will come up on a homework soon and we won't worry about it now. We do, however, note that by linearity this gives a very simple expression for the action of $\alpha \in V^*$ on $\vec{v} \in V$, namely \begin{align*}
+\alpha(\vec{v}) & = \alpha (v^i e_i) \\
+\ & = v^i \alpha(e_i) \\
+\ & = v^i \alpha_i.
+\end{align*}
+So everything is playing nicely with our index notation. Then what are the components of $v^*$ in terms of the components of $\vec{v}$ and of $g$? To find the answer, we take our abstract prescription  \begin{equation*}
+v^*(\vec{u}) = g(\vec{v}, \vec{u})
+\end{equation*}
+and expand both sides in components as \begin{equation*}
+(v^*)_i u^i = g_{ij} v^i u^j.
+\end{equation*}
+Now relabel dummy indices on the RHS and use the fact that $g$ is symmetric (that is, $g_{ij} = g_{ji}$) to find  \begin{align*}
+(v^*)_i u^i & = g_{ij} v^i u^j \\
+\ & = g_{ji} v^j u^i \\
+\ & = g_{ij} v^j u^i.
+\end{align*}
+But this is true for arbitrary $\vec{u} \in V$, so we have the stronger statement \begin{equation*}
+(v^*)_i = g_{ij} v^j.
+\end{equation*}
+But this is nothing new! Indeed, our abstract recipe about mapping $V \to V^*$ and defining $v^*(\vec{u}) = g(\vec{v}, \vec{u})$ is exactly the coordinate-free version of the trick of using the metric to raise and lower indices.\\
+\\
+\
+\tb{Remark: How to Invent Linear Algebra} The game we just played is another well-known game among mathematicians. First, one does a large number of explicit calculations in components, discovers with experience that some quantity is often useful, and gives it a name (for example, the trace of a real or complex matrix is the sum of its diagonal entries). Next, one tries to cook up an object only in abstract terms which, upon choosing a basis, reduces to the first object (for example, the trace of a linear operator over $\R$ or $\C$ is the sum of all of its complex eigenvalues including multiplicities). Finally, one declares that this new definition was of course the definition all along, and that the first definition was merely its component expression.
+
+
+
+
+
+
+
+\subsection{Quantum Mechanics}
+Finally, we remark that this is not just the second time you have seen this construction, but in fact (for most of you) the third time! In quantum mechanics our vector space is a Hilbert space $\mc{H}$, our vectors are kets $\KET{\psi}$, and we write our inner product in bra-ket notation as \begin{equation*}
+g: \mc{H} \times \mc{H} \to \C, \ \ \ g \LP \KET{\psi}, \KET{\phi} \RP = \IP{\psi}{\phi}.
+\end{equation*}
+Our dual vectors are exactly the bras $\BRA{\psi} \in \mc{H}^*$, and given a ket $\KET{\psi}$ we define its dual vector $\BRA{\psi}$ by the rule \begin{equation*}
+\BRA{\psi} \LP \KET{\phi} \RP = \IP{\psi}{\phi}.
+\end{equation*}
+In fewer words, the dictionary here is \begin{align*}
+V & \leftrightarrow \mc{H} \\
+V^* & \leftrightarrow \mc{H}^* \\
+\vec{u}, \vec{v} & \leftrightarrow \KET{\psi}, \KET{\phi} \\
+g(\vec{u}, \vec{v}) & \leftrightarrow  \IP{\psi}{\phi} \\
+v^*(\vec{u}) = g(\vec{v}, \vec{u}) & \leftrightarrow  \BRA{\psi} \LP \KET{\phi} \RP = \IP{\psi}{\phi}
+\end{align*}
+One of the great credits of Dirac bra-ket notation is how easily one can forget that this last equation is nontrivial.
+
+
+
+\subsection{The Many Incarnations of this Recipe}
+We conclude by emphasizing one final time that this is a recipe you all have seen several times before. Indeed, for years we have been constructing dual spaces $V^*$ to spaces $V$ and finding natural mappings $V \to V^*$. \begin{enumerate}
+\item At the level of matrix algebra, we can set $V = \R^2$ and think of vectors as columns. Then from our pneumonic for multiplying matrices (``$m \times n$ times $n \times k$ gives $m \times k$") we know that the machines that take in column vectors are exactly row vector that act by multiplying from the left. \begin{align*}
+V & = \R^2 \approx \{\mbox{columns}\}, \\
+V^* & = (\R^2)^* \approx \{\mbox{rows}\}, \\
+(V \to V^*) & = \mbox{taking the transpose of a column}.
+\end{align*}
+\item In the context of tensor analysis and index gymnastics, vectors are roughly objects with a single raised index in their components while dual vectors are objects with a single lowered index. Then our recipe for building a dual vector from a vector is by lowering indices with the metric. \begin{align*}
+V & = \R^2 \approx \{\mbox{objects with one raised index }\}, \\
+V^* & = (\R^2)^* \approx \{\mbox{objects with one lowered index}\}, \\
+(V \to V^*) & = (A_\alpha = g_{\alpha \beta} A^\beta).
+\end{align*}
+\item In the context of quantum mechanics, vectors are kets and dual vectors are bras, and we build the latter from the former with our dagger symbol. \begin{align*}
+V & = \R^2 \approx \{\mbox{kets}\}, \\
+V^* & = (\R^2)^* \approx \{\mbox{bras}\}, \\
+(V \to V^*) & = \LP \BRA{\psi} = (\KET{\psi})^\dagger \RP
+\end{align*}
+\end{enumerate} 
+
+
+
+
+
+\end{document}
+
