@@ -123,7 +123,7 @@ Vectors are perhaps the most ubiquitous mathematical objects in physics after ba
 \item A ket.
 \item An element of a vector space.
 \end{enumerate}
-Undergraduate physicists famously struggle to reconcile these inequivalent definitions. By the end of this course we will mostly work with Definition 4 per the demands of calculus on manifolds, and as you mature you will eventually find Definition 8 most useful and think of the rest as special cases. At present we are interested in vectors as they appear in undergraduate courses on classical mechanics and electrodynamics, so we will use Definition 3, and taking Definition 2 as a useful special case.\\
+Undergraduate physicists famously struggle to reconcile these inequivalent definitions. By the end of this course we will mostly work with Definition 4 per the demands of calculus on manifolds, and as you mature you will eventually find Definition 8 most useful and think of the rest as special cases. At present we are interested in vectors as they appear in undergraduate courses on classical mechanics and electrodynamics, so we will use Definition 3, taking Definition 2 as a useful special case.\\
 \\
 \
 Said plainly, we are interested in $n$-dimensional Euclidean space $\R^n$. As a set, this is the collection of all ordered tuples $\vec{x} = (x_1, \ldots, x_n)$ where each $x_i$ is a real number. Borrowing a bit of useful notation from pure mathematics, we sometimes write \begin{equation*}
@@ -198,7 +198,7 @@ Semantics aside, the Levi-Civita tensor $\epsilon$ has components $\epsilon_{ijk
 and then declaring that $\epsilon_{ijk}$ is antisymmetric in its indices, picking up a minus sign whenever we swap any two of them. \begin{equation*}
 \epsilon_{ijk} = - \epsilon_{jik} = - \epsilon_{kji} = - \epsilon_{ikj}.
 \end{equation*}
-\tb{Exercise} Show that that this uniquely fixes all values of $\epsilon_{ijk}$, and in particular that $\epsilon_{ijk} = 0$ unless $i,j,k$ are all distinct numbers. \\
+\tb{Exercise} Show that this uniquely fixes all values of $\epsilon_{ijk}$, and in particular that $\epsilon_{ijk} = 0$ unless $i,j,k$ are all distinct numbers. \\
 \\
 \
 Now if we write $\hat{e}_i$ for the $i$th standard basis vector in $\R^3$ so that, for example, \begin{equation*}
@@ -241,7 +241,7 @@ Then differentiating told us things about rates of change, tangent approximation
 If we were pure mathematicians, we would proceed by developing definitions and proving theorems that work for totally general values of $n$ and $m$. But we aren't, so we will concentrate on three cases of classical interest which play important roles in the geometry and physics of the Euclidean 3D space which we (to an excellent approximation) inhabit. In the above notation, these are: \begin{enumerate}
     \item The trajectory of a particle moving through space as time passes, whose location at time $t$ is given by the vector $\vec{x}(t)$. This takes in a single real number $t$ and returns a triple $(x(t), y(t), z(t))$, so it is modeled by a function $\vec{x}: \R \to \R^3$.
     \item Scalar fields, which describe things like the electrostatic potential $\phi(\vec{x})$ or the way that temperature $T(\vec{x})$ varies over space at equilibrium. These are modeled by functions $\phi: \R^3 \to \R$.
-    \item Vector fields, such as the electric field $\vec{E}(\vec{x})$, the magnetic field $\vec{B}(\vec{x})$, or the vector potential $\vec{A}(\vec{x})$ at a fixed time. These take in a position vector $\vec{x}$ and return a vector whose tail we imagine as being based at the location $\vec{x}$, so they are modeled by functions $\vec{A}: \R^3 \to \R^3$
+    \item Vector fields, such as the electric field $\vec{E}(\vec{x})$, the magnetic field $\vec{B}(\vec{x})$, or the vector potential $\vec{A}(\vec{x})$ at a fixed time. These take in a position vector $\vec{x}$ and return a vector whose tail we imagine as being based at the location $\vec{x}$, so they are modeled by functions $\vec{A}: \R^3 \to \R^3$.
 \end{enumerate}
 
 
@@ -270,7 +270,7 @@ d \ell = \nm{\vec{v}} dt = \sqrt{v_x^2 + v_y^2 + v_z^2} dt.
 By another route, we could argue that by the 3D version of the Pythagorean theorem, the squared infinitesimal distance must be the sum of the squared infinitesimal changes along each axis \begin{equation*}
 d \ell^2 = dx^2 + dy^2 + dz^2.
 \end{equation*}
-But by the chain we can write in nice suggestive Leibniz notation \begin{equation*}
+But by the chain rule we can write in nice suggestive Leibniz notation \begin{equation*}
 dx = \frac{dx}{dt} dt
 \end{equation*}
 and likewise for $dy,dz$, so that \begin{align*}
@@ -383,7 +383,7 @@ Comparing this last equation to the one before it, we find another way to rephra
 As we said this is a mild abuse of notation, since $\phi$ is only directly a function of $\vec{x}$. Making all arguments explicit gives us the slightly more precise phrasing \begin{equation*}
 \PA{\phi(\vec{x}(\vec{u}))}{u_j} = \sum_{i=1}^n \left. \PA{\phi(\vec{x})}{x_i} \right|_{\vec{x} = \vec{x}(\vec{u})} \PA{x_i(\vec{u})}{u_j}.
 \end{equation*}
-This is the analogue of the single-variable formulation of chain rule \begin{equation*}
+This is the analogue of the single-variable formulation of the chain rule \begin{equation*}
 \frac{d}{du} f(x(u)) = f'(x(u)) x'(u).
 \end{equation*}
 While this may seem like pedantry, it will be important to be careful about such things as we move forward and abstract out to calculus on manifolds.
@@ -408,7 +408,7 @@ While this may seem like pedantry, it will be important to be careful about such
 Now we move to studying the differential calculus of vector fields. We saw that the basic natural operation on a scalar field $\phi$ is to take its gradient $\nabla \phi$. Abstracting only slightly, we can think of $\nabla$ as a standalone object, a kind of vector whose components are differential operators rather than numbers. \begin{equation*}
 \nabla = \LP \PA{}{x}, \PA{}{y}, \PA{}{z} \RP
 \end{equation*}
-But what are the natural ways to differentiate vector fields? We have seen that have several natural ways to turn existing vectors and scalars into new ones: Multiplying a vector and a scalar gives a new vector, taking the dot product of two vectors gives a scalar, and in $\R^3$ taking the cross product of two vectors gives a new vector. These operators on vector and scalars extend naturally to operations on vector fields and scalar fields. For example, we can take the dot product between vector fields $\vec{A}, \vec{B}$ by simply taking their dot products at each point. \begin{equation*}
+But what are the natural ways to differentiate vector fields? We have seen that we have several natural ways to turn existing vectors and scalars into new ones: Multiplying a vector and a scalar gives a new vector, taking the dot product of two vectors gives a scalar, and in $\R^3$ taking the cross product of two vectors gives a new vector. These operators on vectors and scalars extend naturally to operations on vector fields and scalar fields. For example, we can take the dot product between vector fields $\vec{A}, \vec{B}$ by simply taking their dot products at each point. \begin{equation*}
 \LP \vec{A} \cdot \vec{B} \RP(\vec{x}) := \vec{A} (\vec{x}) \cdot \vec{B} (\vec{x})
 \end{equation*}
 Using the vector operator $\nabla$, this zoo of legal moves also tells us how we can differentiate vector fields. \\
@@ -456,7 +456,7 @@ Following the same program, we ought to consider what kinds of second derivative
   \arrow[loop right, "curl"]
 \end{tikzcd}
 \]
-This flow chart tells us all the valid ways to start with either a scalar or a vector field and apply $\nabla$ twice, so we can invent second-order differential calculus for vector by trying every allowed combination. We start with an especially nice and useful legal move, taking the divergence of the gradient of the scalar field. We call this the Laplacian. \begin{equation*}
+This flow chart tells us all the valid ways to start with either a scalar or a vector field and apply $\nabla$ twice, so we can invent second-order differential calculus for vectors by trying every allowed combination. We start with an especially nice and useful legal move, taking the divergence of the gradient of the scalar field. We call this the Laplacian. \begin{equation*}
 \nabla \cdot \nabla \phi = \nabla^2 \phi = \sum_i \PA{^2 \phi}{x_i^2}.
 \end{equation*}
 Combining our earlier equations relating the electrostatic field to the charge density and to the electrostatic potential, we find for example \begin{equation*}
@@ -465,7 +465,7 @@ Combining our earlier equations relating the electrostatic field to the charge d
 The PDE \begin{equation*}
 \nabla^2 \phi(\vec{x}) = f(\vec{x})
 \end{equation*}
-for $f$ a known function is called Poisson's equation. In the special case $f = 0$ is it the Laplace equation. Both are ubiquitous in theoretical physics. Solutions to these equations are well-studied and have many deep properties, which are responsible for a large number of nice results ranging from fluid mechanics to complex analysis. These are beyond the scope of the present notes, unfortunately.\\
+for $f$ a known function is called Poisson's equation. In the special case $f = 0$ it is the Laplace equation. Both are ubiquitous in theoretical physics. Solutions to these equations are well-studied and have many deep properties, which are responsible for a large number of nice results ranging from fluid mechanics to complex analysis. These are beyond the scope of the present notes, unfortunately.\\
 \\
 \
 Next we note a couple of combinations which turn out not to be too interesting, or at least not to correspond to anything geometric and thus tend not to show up directly in physical laws. The first is taking the gradient of the divergence of a vector field. \begin{equation*}
@@ -498,7 +498,7 @@ Now a final aside on vector differential calculus. Rephrasing this last equation
 The curious reader might wonder if the converse is true. If a vector field has vanishing curl, must it be the gradient of some scalar? \begin{equation*}
 \mbox{Does } \nabla \times \vec{A} = 0 \mbox{ imply } \vec{A} = \nabla \phi \mbox{ ?}
 \end{equation*}
-The answer is yes, and in fact it's not too difficult to cook up an expression for $\phi$ by hand, but this fact is sensitive to the shape of our space! For example, if we take $\R^3$ and remove the $z$ axis, it is no longer true. There are vector fields on this slightly smaller space with have vanishing curl but which are \ti{not} the gradient of any scalar field. There is an analogous statement for the vanishing of the divergence of the curl. \\
+The answer is yes, and in fact it's not too difficult to cook up an expression for $\phi$ by hand, but this fact is sensitive to the shape of our space! For example, if we take $\R^3$ and remove the $z$ axis, it is no longer true. There are vector fields on this slightly smaller space that have vanishing curl but which are \ti{not} the gradient of any scalar field. There is an analogous statement for the vanishing of the divergence of the curl. \\
 \\
 \
 Physically, this turns out to be a very important fact. It underlies, for example, the Aharonov-Bohm effect in quantum mechanics, and related facts are responsible for a large number of deep phenomena in quantum field theory and condensed matter physics. Mathematically, investigating these facts and their generalizations will lead you down the road of something called de Rham cohomology. Unfortunately all of this is beyond the scope of these notes or even of this course, but it's hard to resist at least mentioning it in passing.
@@ -548,7 +548,7 @@ First, consider a two-dimensional surface $S$, and suppose we make the arbitrary
 Since this measures how much $\vec{B}$ flows out through $S$, it is sometimes called the flux of $\vec{B}$.\\
 \\
 \
-Now consider a three-dimensional solid region $M$. We can naturally define the integral of a scalar field over this region, which no need to worry about orientation. We just integrate as though we were computing the volume of $M$, but with our scalar field as a weighting factor.\begin{equation*}
+Now consider a three-dimensional solid region $M$. We can naturally define the integral of a scalar field over this region, with no need to worry about orientation. We just integrate as though we were computing the volume of $M$, but with our scalar field as a weighting factor.\begin{equation*}
 \mbox{Integral of $\phi$ over $M$} = \int_M \phi dV
 \end{equation*}
 For example, if $M$ represented a region of fluid and $\phi(\vec{x})$ represented the density of the fluid at the point $\vec{x}$, this integral would compute the total mass of fluid enclosed in the region. \\
