@@ -1,28 +1,11 @@
-\documentclass[11pt,letterpaper]{article}
-
-\usepackage{graphicx}           % Graphics package
-\usepackage{amsmath} 
-\usepackage{mathrsfs}
-\usepackage[colorlinks=true]{hyperref} 
-\usepackage{color}
-\usepackage{amsfonts}
-\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
-\usepackage[makeroom]{cancel}
-\usepackage{cite}
-\usepackage{sectsty}
-\usepackage{empheq}
-\usepackage{appendix}
-\usepackage{enumerate} 
-\usepackage{simpler-wick}
-
+ \documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, mathtools, slashed, amsfonts}
+\usepackage[margin=1in]{geometry}
 \usepackage{tikz-cd}
-\usepackage{tikz}
+\usepackage{tikz} 
 \usepackage{tikz-feynman}
 \tikzfeynmanset{compat=1.1.0}
 \usepackage[shortlabels]{enumitem}
-
-
-
 
 % Commonly used sets of numbers
 \newcommand{\R}{\mathbb{R}}
@@ -46,7 +29,7 @@
 % Shortcuts for inner product spaces
 \newcommand{\KET}[1]{\left| #1 \right\rangle }
 \newcommand{\BRA}[1]{\left\langle #1 \right| }
-\newcommand{\IP}[2]{\left\langle #1 \left| #2 \right\rangle \right.}
+\newcommand{\IP}[2]{\left\langle #1 \middle| #2 \right\rangle}
 \newcommand{\Ip}[2]{\left\langle #1, #2 \right\rangle}
 \newcommand{\nm}[1]{\left\| #1 \right\|}
 
@@ -67,14 +50,9 @@
 
 \newcommand{\G}{\gamma}
 \newcommand{\LA}{\mathcal{L}}
-\newcommand{\X}{\Vec{x}}
-\newcommand{\x}{\Vec{x}}
 
 \newcommand{\LP}{\left(}
 \newcommand{\RP}{\right)}
-
-
-
 
 \newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
 
@@ -83,15 +61,30 @@
 
 \newcommand{\D}{\partial}
 
+\newcommand{\bs}{\textbackslash}
 
-\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\arr}{\mathcal{R}}
 
-%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
-\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
-\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+\numberwithin{equation}{section}
+\setcounter{section}{0}
 
-%%%%%%%%%%%%%%%
+
+
+
+
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+
 
 
 \begin{document}
@@ -107,9 +100,9 @@
 
 \maketitle
 
-
-\abstract{Some supplementary discussion of Lagrangians and Noether charges.}
-
+\begin{abstract}
+Some supplementary discussion of Lagrangians and Noether charges.    
+\end{abstract}
 
 \tableofcontents
 
@@ -135,7 +128,7 @@ L = L(q_\alpha(t), \dot{q}_\alpha(t), t).
 A \ti{symmetry} of our physics is a rule for  actively transforming all of our configuration variables $q_\alpha \to q'_\alpha$ in such a way that, if the trajectories $q_\alpha(t)$ satisfy the equations of motion, so do the new trajectories $q'_\alpha(t)$. Usually this happens because this replacement leaves the Lagrangian unchanged up to a total time derivative. \begin{equation*}
 L(q'(t), \dot{q}'(t), t) = L(q(t), \dot{q}(t), t) + \frac{df}{dt}
 \end{equation*}
-for $f = f(q(t), \dot{q}(t), t)$\footnote{Be careful with notation here. Dots like $\dot{q}$ denote time derivatives, while primes like $q'$ denote a transformed quantity. You should pause and convince yourself that the notation $\hat{q}'$ is unambiguous, \ti{i.e.}, that the transformed value of the time derivative of the transformed coordinate.}. We saw in lecture that this is enough to ensure that $q_\alpha \to q_\alpha'$ takes extrema of the action to extrema of the action, and thus takes physical solutions to physical solutions.\\
+for $f = f(q(t), \dot{q}(t), t)$\footnote{Be careful with notation here. Dots like $\dot{q}$ denote time derivatives, while primes like $q'$ denote a transformed quantity. You should pause and convince yourself that the notation $\dot{q}'$ is unambiguous, \ti{i.e.}, that the transformed value of the time derivative is the time derivative of the transformed coordinate.}. We saw in lecture that this is enough to ensure that $q_\alpha \to q_\alpha'$ takes extrema of the action to extrema of the action, and thus takes physical solutions to physical solutions.\\
 \\
 \
 Many but not all\footnote{An example of non-continuous symmetry might be reflection across some spatial plane.} symmetries we are familiar with are \ti{continuous symmetries}. For example, consider a system of a single particle moving freely around 3D Euclidean space. The natural choice of configuration variables is just its position vector which we could write variously as \begin{equation*}
@@ -160,8 +153,8 @@ q'_\alpha = G_\alpha(q, \lambda).
 where we freely parametrize so that $\lambda = 0$ corresponds to no transformation at all. Note in particular that the argument $q$ on the RHS is shorthand for all of the original values. For rotations about the $z$ axis for example, $q_1'$ depends on both $q_1$ and $q_2$, not just on $q_1$. \\
 \\
 \
-Since we have parametrized our transformation so that $\lambda = 0$ corresponds not changing anything we know that $G_\alpha(q,0) = g_\alpha$. So setting $\lambda = \epsilon$ and working out to leading order gives an expansion of the form \begin{align*}
-G_\alpha(q, \epsilon) & \approx G_\alpha(q,0) + \epsilon \left. \frac{d G_\alpha(q,\lambda)}{\lambda} \right|_{\lambda = 0} \\
+Since we have parametrized our transformation so that $\lambda = 0$ corresponds not changing anything we know that $G_\alpha(q,0) = q_\alpha$. So setting $\lambda = \epsilon$ and working out to leading order gives an expansion of the form \begin{align*}
+G_\alpha(q, \epsilon) & \approx G_\alpha(q,0) + \epsilon \left. \PA{G_\alpha(q,\lambda)}{ \lambda} \right|_{\lambda = 0} \\
 \ & = q_\alpha + \epsilon g_\alpha(q)
 \end{align*}
 where $g_\alpha$ is just shorthand for the derivative appearing in the first line. \\
@@ -235,13 +228,13 @@ we can directly differentiate to find \begin{equation*}
 Putting this all together, our expression for the conserved quantity associated with rotation about the $z$ axis is \begin{align*}
 Q_z & = \sum_\alpha \PA{L}{\dot{q}_\alpha} g_\alpha - f \\
 \ & = \PA{L}{\dot{q}_1} g_1 + \PA{L}{\dot{q}_2} g_2 + \PA{L}{\dot{q}_3} g_3 - 0 \\
-\ & = \LP m \dot{q}_1 \RP \LP -q_2 \RP + \LP m \dot{q}_2 \RP \LP q_1 \RP + \LP m \dot{q}_1 \RP \LP 0 \RP \\
+\ & = \LP m \dot{q}_1 \RP \LP -q_2 \RP + \LP m \dot{q}_2 \RP \LP q_1 \RP + \LP m \dot{q}_3 \RP \LP 0 \RP \\
 \ & = m (x \dot{y} - y \dot{x}) \\
 \ & = x p_y - y p_x \\
-\ & = - \LP \vec{x} \times \vec{p} \RP_z \\
-\ & = - L_z.
+\ & = \LP \vec{x} \times \vec{p} \RP_z \\
+\ & = L_z.
 \end{align*}
-Since $Q$ being conserved is exactly the same statement as $-Q$ being conserved, we can be a bit glib and say that the minus sign here isn't important. The moral is that invariance under rotation about the $z$ axis implies conservation of the $z$ component of angular momentum! This suggests several immediate generalizations, which are good to do by hand but should at least by meditated on. \\
+So invariance under rotation about the $z$ axis implies conservation of the $z$ component of angular momentum! This suggests several immediate generalizations, which are good to do by hand but should at least be meditated on. \\
 \\
 \
 \tb{Generalization 1} Consider rotations about the $x$ and $y$ axes. Show that these correspond to conservation of $L_x$ and $L_y$.\\
@@ -273,7 +266,7 @@ Naively, this seems at odds with the Lagrangian phrasing of particle mechanics. 
 where $x_i$ and $t$ play very different roles.\\
 \\
 \
-To fix this problem, we sometimes say that we \ti{promote} time from an operator to an observable. Geometrically, this means that instead of describing a trajectory with a vector-valued function $\vec{x}(t)$ moving through space \begin{equation*}
+To fix this problem, we sometimes say that we \ti{promote} time from a parameter to an observable. Geometrically, this means that instead of describing a trajectory with a vector-valued function $\vec{x}(t)$ moving through space \begin{equation*}
 (x(t),y(t),z(t)) \in \mbox{space} \approx \R^3
 \end{equation*}
 we think of the path that a particle traces out in \ti{spacetime}. This means each of $x,y,z,t$ become coordinates in a four-dimensional space of \ti{events}, and over the course of a particle's history it traces out a path called its \ti{worldline}. We know that studying curves with differential calculus typically requires that we parametrize them, so in our Lagrangian framework we now work with a parametrized curve \begin{equation*}
@@ -294,13 +287,4 @@ Following the same logic, we have new Euler-Lagrange equations which more clearl
 \end{align*}
 But this doesn't mean our work is done. In Newtonian mechanics we had to be careful to write down only Lagrangians that had rotation and translation invariance as appropriate. Now we need to figure out how to write down Lagrangians that are invariant under all the transformations of special relativity.
 
-
-
-
 \end{document}
-
-
-
-
-
-
