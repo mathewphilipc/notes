@@ -1,0 +1,10 @@
+# gitignore 
+
+# Various auxiliary files from LaTeX compilation
+*.aux
+*.log
+*.toc
+*.out
+*.fdb_latexmk
+*.fls
+*.gz
