@@ -1,28 +1,11 @@
-\documentclass[11pt,letterpaper]{article}
-
-\usepackage{graphicx}           % Graphics package
-\usepackage{amsmath} 
-\usepackage{mathrsfs}
-\usepackage[colorlinks=true]{hyperref} 
-\usepackage{color}
-\usepackage{amsfonts}
-\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
-\usepackage[makeroom]{cancel}
-\usepackage{cite}
-\usepackage{sectsty}
-\usepackage{empheq}
-\usepackage{appendix}
-\usepackage{enumerate} 
-\usepackage{simpler-wick}
-
+ \documentclass[12 pt]{article}
+\usepackage{amsmath, amssymb, mathtools, slashed, amsfonts}
+\usepackage[margin=1in]{geometry}
 \usepackage{tikz-cd}
-\usepackage{tikz}
+\usepackage{tikz} 
 \usepackage{tikz-feynman}
 \tikzfeynmanset{compat=1.1.0}
 \usepackage[shortlabels]{enumitem}
-
-
-
 
 % Commonly used sets of numbers
 \newcommand{\R}{\mathbb{R}}
@@ -73,9 +56,6 @@
 \newcommand{\LP}{\left(}
 \newcommand{\RP}{\right)}
 
-
-
-
 \newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
 
 \newcommand{\HI}{\mathcal{H}}
@@ -83,15 +63,30 @@
 
 \newcommand{\D}{\partial}
 
+\newcommand{\bs}{\textbackslash}
 
-\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\arr}{\mathcal{R}}
 
-%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
-\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
-\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+\numberwithin{equation}{section}
+\setcounter{section}{0}
 
-%%%%%%%%%%%%%%%
+
+
+
+
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+
 
 
 \begin{document}
@@ -124,17 +119,17 @@ or in slicker notation \begin{equation*}
 and asks whether this is a ``symmetry" of Newtonian physics. What would you say?\\
 \\
 \
-The point we wish to make is that the only correct, careful answer is that it depends! More precisely, you should asks your interrogator what they mean by ``transformation." There are two very different meanings of this word (even though physicists tend to represent both senses of the word using arrows like $\to$ and $\mapsto$), and depending on which kind of transformation we're talking about, the answer to the original question could be yes or no!
+The point we wish to make is that the only correct, careful answer is that it depends! More precisely, you should ask your interrogator what they mean by ``transformation." There are two very different meanings of this word (even though physicists tend to represent both senses of the word using arrows like $\to$ and $\mapsto$), and depending on which kind of transformation we're talking about, the answer to the original question could be yes or no!
 
 
 
 
 \subsection{Active Transformations}
-On one hand, by the above equation we could mean an \ti{active transformation}. This means that, if we have particles 1 through $n$, we take every particle with trajectory $\vec{x}_i(t)$ and give it the new trajectory $\vec{x}_i'(t) = \lambda \vec{x}_i(t)$. To call this transformation a \ti{symmetry} of nature is to say that, if the original set of trajectory taken together satisfy the laws of Newtonian mechanics, then so must the new set of trajectories.\\
+On one hand, by the above equation we could mean an \ti{active transformation}. This means that, if we have particles 1 through $n$, we take every particle with trajectory $\vec{x}_i(t)$ and give it the new trajectory $\vec{x}_i'(t) = \lambda \vec{x}_i(t)$. To call this transformation a \ti{symmetry} of nature is to say that, if the original set of trajectories taken together satisfy the laws of Newtonian mechanics, then so must the new set of trajectories.\\
 \\
 \
 To give a concrete example, we consider a system of a single particle with position $\vec{x}(t)$ and mass $m$ orbiting some much larger body of mass $M$ sitting at the origin. If $M$ is much greater than $m$, we can neglect the smaller body's influence on the larger one and approximate the larger as staying fixed at the origin, at least for the duration of our experiment. We also place the larger body at the origin of our coordinate system for simplicity, so that its location is unchanged by our scaling transformation. In that case, the dynamics of our smaller body are given by Newton's second law in the presence of Newtonian gravity. \begin{equation*}
-\frac{d^2 \vec{x}}{dt^2} = - \frac{GMm}{|\vec{x}|^2} \hat{x}
+\frac{d^2 \vec{x}}{dt^2} = - \frac{GM}{|\vec{x}|^2} \hat{x}
 \end{equation*}
 Does $\vec{x}'(t) = \lambda \vec{x}(t)$ satisfy the same law? We can check by equivalently writing \begin{equation*}
 \vec{x} = \frac{\vec{x}'}{\lambda}
@@ -143,12 +138,12 @@ and noting that two vectors related by a positive scaling have the same unit vec
 \hat{x} = \hat{x}'
 \end{equation*}
 then plugging these both into our law for $\vec{x}$. We find \begin{align*}
-\frac{d^2 (\lambda^{-1} \vec{x}') }{dt^2} = - \frac{GMm}{|\lambda^{-1} \vec{x}'|^2} \hat{x}
+\frac{d^2 (\lambda^{-1} \vec{x}') }{dt^2} = - \frac{GM}{|\lambda^{-1} \vec{x}'|^2} \hat{x}
 \end{align*}
 or after canceling common factors and moving $\lambda$ around \begin{align*}
-\frac{d^2 \vec{x}' }{dt^2} = - \frac{\lambda^3 GMm}{| \vec{x}'|^2} \hat{x}.
+\frac{d^2 \vec{x}' }{dt^2} = - \frac{\lambda^3 GM}{| \vec{x}'|^2} \hat{x}.
 \end{align*}
-So if $\vec{x}(t)$ obeys Newton's laws, the trajectory $\lambda \vec{x}(t)$ does not, except for the trivial case $\lambda = 1$. The latter obeys what we could think of as a modified version of Newtonian gravity, with a rescaled gravitational constant $\lambda G$. The slick slogan here is that Newtonian gravity is not a \ti{scale-invariant} theory. This is something our brains know intuitively!\\
+So if $\vec{x}(t)$ obeys Newton's laws, the trajectory $\lambda \vec{x}(t)$ does not, except for the trivial case $\lambda = 1$. The latter obeys what we could think of as a modified version of Newtonian gravity, with a rescaled gravitational constant $\lambda^3 G$. The slick slogan here is that Newtonian gravity is not a \ti{scale-invariant} theory. This is something our brains know intuitively!\\
 \\
 \
 \tb{Exercise} Watch the clip https://www.youtube.com/watch?v=EjNYWCH-fJw from the original 1954 Godzilla film. Despite the excellent work by kaiju actors Haruo Nakajima and Katsumi Tezuka, your brain can immediately tell that you aren't actually seeing a monster hundreds of feet tall. The monster's gait seems too quick, and objects seem to rise and fall too quickly under gravity. Convince yourself that this intuitive unnaturalness is the consequence of Newtonian gravity not being scale-invariant.
@@ -162,10 +157,10 @@ Now we do something very delicate: we write exactly the same sequence of equatio
 \vec{x} \mapsto \vec{x}' = \lambda \vec{x}
 \end{equation*}
 but now the transformation relates two different coordinate systems used by two corresponding observers. If the first observer measures a particle as being at coordinate $\vec{x}$, the second measures the same particle as being at coordinate $\vec{x}' = \lambda \vec{x}$ (perhaps the second observer bought a low-quality yard stick, warped by a factor of $\lambda$). Now we are talking about a \ti{passive} transformation. Just as before, if the first observer sees an orbiting particle satisfying \begin{equation*}
-\frac{d^2 \vec{x}}{dt^2} = - \frac{GMm}{|\vec{x}|^2} \hat{x}
+\frac{d^2 \vec{x}}{dt^2} = - \frac{GM}{|\vec{x}|^2} \hat{x}
 \end{equation*}
 then a couple of lines of algebra tells us the second will see \begin{align*}
-\frac{d^2 \vec{x}' }{dt^2} = - \frac{\lambda^3 GMm}{| \vec{x}'|^2} \hat{x}.
+\frac{d^2 \vec{x}' }{dt^2} = - \frac{\lambda^3 GM}{| \vec{x}'|^2} \hat{x}.
 \end{align*}
 But now we put totally different words around the conclusion. The laws of physics are the same to both observers. After all, they are observing exactly the same physical system, just measuring positions by different methods! It just happens that, due to observer 2's strange choice of system of measure, in his units he finds a different value for Newton's constant.\\
 \\
@@ -181,7 +176,7 @@ As we've said many times already, one of the great insights of general relativit
 
 
 \subsection{What are Isometries?}
-We begin with the simplest example of a 2D space: Euclidean space $\R^2$ described using Cartesian coordinates. Intuitively we know that this space has a large number of \ti{isometries}, that is, ways that we can move points around while respectively distances and angles and so on. For example, if we take every point in $\R^2$ in Cartesian coordinates and shift each point's $x$ coordinate by a constant \begin{equation*}
+We begin with the simplest example of a 2D space: Euclidean space $\R^2$ described using Cartesian coordinates. Intuitively we know that this space has a large number of \ti{isometries}, that is, ways that we can move points around while respecting distances and angles and so on. For example, if we take every point in $\R^2$ in Cartesian coordinates and shift each point's $x$ coordinate by a constant \begin{equation*}
 (x,y) \mapsto (x + a, y)
 \end{equation*}
 then intuitively we know that any two points will be the same distance apart before and after the shift. \\
@@ -219,7 +214,7 @@ is also an isometry.
 
 
 
-\subsection{Rotations and Reflectiosn}
+\subsection{Rotations and Reflections}
 What about slightly more interesting functions? Say, linear transformations \begin{equation*}
 \vec{F}(\vec{x}) = M \vec{x}
 \end{equation*}
@@ -240,7 +235,7 @@ M^T M = 1.
 See the technical addendum below.\\
 \\
 \
-You may have seen the set of matrices defined by this constraint before. In general dimensions is called the \ti{orthogonal group} \begin{equation*}
+You may have seen the set of matrices defined by this constraint before. In general dimensions this is called the \ti{orthogonal group} \begin{equation*}
 O(n) = \{n \times n \mbox{ real matrices } M \mbox{ such that } M^T M = 1\}.
 \end{equation*}
 In your courses on quantum mechanics you saw that the linear operators $U$ on a Hilbert space which respect the inner product \begin{equation*}
@@ -249,7 +244,7 @@ In your courses on quantum mechanics you saw that the linear operators $U$ on a 
 are exactly those which are unitary \begin{equation*}
 U^\dagger U = 1 \mbox{ or equivalently} U^\dagger = U^{-1}.
 \end{equation*}
-Orthogonality in a real vector space is directly analogous of unitarity in a complex vector space.\\
+Orthogonality in a real vector space is directly analogous to unitarity in a complex vector space.\\
 \\
 \
 On the other hand, we humans have excellent geometric intuition for which linear transformations on the plane respect its geometry: these are exactly the rotations \begin{equation*}
@@ -285,7 +280,7 @@ ds^2 = A(x,y) dx^2 + B(x,y) dx dy + C(x,y) dy^2.
 \end{equation*}
 What about the distance between their images under $\varphi$? To leading order in the tiny differences $dx,dy$, we compute \begin{align*}
 \varphi(x + dx, y + dy) & = (x'(x+dx, y+dy), y'(x+dx, y+dy)) \\
-\ & = \LP x' + \PA{x'}{x} dx + \PA{x'}{y} dy, x' + \PA{y'}{x} dx + \PA{y'}{y} dy \RP.
+\ & = \LP x' + \PA{x'}{x} dx + \PA{x'}{y} dy, y' + \PA{y'}{x} dx + \PA{y'}{y} dy \RP.
 \end{align*} 
 So we can identify \begin{align*}
 dx' & = \PA{x'}{x} dx + \PA{x'}{y} dy, \\
@@ -318,7 +313,7 @@ If this notation looks like an ugly mess, you have good taste. Just like doing q
 When we studied active versus passive transformations, we found that we could write down the same sets of equations for transformations but interpret them very differently, depending on whether we mean them to represent active or passive transformations. We said that an active transformation only respected the laws of physics in special cases (\ti{e.g.}, rotations and translations for the case of Newtonian gravity). The analog statement in geometry says that we can write down a great variety of active transformations on a space with a notion of local distance, but typically only a small number of these will be isometries.\\
 \\
 \
-On the other hand, we said that a passive transformation between reference frames was in some sense trivially a symmetry of physics itself, even most such transformations change the appearance of the physical laws. In our example above, if you and I measure distances differently due to some difference in our yard sticks and then we jointly go off to observe one body orbiting another, we will find we disagree on the apparent numerical value of Newton's constant. But this doesn't change that we are looking at the same body obeying the same physical laws! Continuing this analogy, when we study geometric spaces we are always free to pick any set of coordinates we like. No matter how messy the coordinate transformation is, it's the same space with the same geometry before and after, even if the expression for $ds^2$ looks radically different between the two systems. \\
+On the other hand, we said that a passive transformation between reference frames was in some sense trivially a symmetry of physics itself, even though most such transformations change the appearance of the physical laws. In our example above, if you and I measure distances differently due to some difference in our yard sticks and then we jointly go off to observe one body orbiting another, we will find we disagree on the apparent numerical value of Newton's constant. But this doesn't change that we are looking at the same body obeying the same physical laws! Continuing this analogy, when we study geometric spaces we are always free to pick any set of coordinates we like. No matter how messy the coordinate transformation is, it's the same space with the same geometry before and after, even if the expression for $ds^2$ looks radically different between the two systems. \\
 \\
 \
 The first example of this phenomenon most of us learn is the passage from Cartesian to polar coordinates on $\R^2$. These are defined by the rules \begin{align*}
@@ -332,13 +327,13 @@ To work it out in terms of polar coordinates, we could in principle derive a gen
 ds^2 & = dx^2 + dy^2 \\
 \ & = \LP d (r \cos \theta) \RP^2 + \LP d (r \sin \theta) \RP^2 \\
 \ & = \LP \cos \theta dr - r \sin \theta d \theta \RP^2 + \LP \sin \theta dr + r \cos \theta d \theta \RP^2 \\
-\ & = \LP \cos^2 \theta + \sin^2 \theta \RP dr^2  - 2 r \cos \theta \sin \theta + 2 r \sin \theta \cos \theta dr d \theta + (r^2 \sin^2 \theta + r^2 \cos^2 \theta) d\theta^2 \\
+\ & = \LP \cos^2 \theta + \sin^2 \theta \RP dr^2  - 2 r \cos \theta \sin \theta d r d \theta + 2 r \sin \theta \cos \theta dr d \theta + (r^2 \sin^2 \theta + r^2 \cos^2 \theta) d\theta^2 \\
 \ & = dr^2 + r^2 d \theta^2.
 \end{align*}
-We finish by emphasizing yet again: here there is no notion of $ds^2$ vs ${ds'}^2$ that we might wish to compare, no notion of whether this transformation respects the geometry. There automatically no change at all to the geometry, because all we have done is moved from one coordinate description of a space to a different coordinate description of the same space. We could write \begin{equation*}
+We finish by emphasizing yet again: here there is no notion of $ds^2$ vs ${ds'}^2$ that we might wish to compare, no notion of whether this transformation respects the geometry. There is automatically no change at all to the geometry, because all we have done is moved from one coordinate description of a space to a different coordinate description of the same space. We could write \begin{equation*}
 ds^2 = ds^2
 \end{equation*}
-but this doesn't tell us something about our transformation. It it vacuously true!
+but this doesn't tell us something about our transformation. It is vacuously true!
 
 
 \section{Technical Addendum: The Polarization Identity}
@@ -346,21 +341,18 @@ Several people in the class have already asked why exactly it's enough to consid
 \\
 \
 The answer lies in a single technical fact about inner products. Recall that all of our notions of geometry in a vector space come from the dot product, or more generally from the \ti{inner product} $\langle \cdot , \cdot \rangle$ that we put on our space. In terms of this we define length, distance, angle, orthogonality and so on by declaring that \begin{equation*}
-\langle \vec{u}, \vec{v} \rangle = \nm{\vec{u}}^2 \nm{\vec{v}}^2 \cos (\theta).
+\langle \vec{u}, \vec{v} \rangle = \nm{\vec{u}} \nm{\vec{v}} \cos (\theta).
 \end{equation*}
-Two of the defining features of an inner product are that, thought of as a function of two vectors, it is linear in both of its arguments and gives the same output if we swap the order of its arguments. This means that for any two vectors $\vec{u}, \vec{v}$ we can expand \begin{equation*}
+Two of the defining features of a real inner product are that, thought of as a function of two vectors, it is linear in both of its arguments and gives the same output if we swap the order of its arguments. This means that for any two vectors $\vec{u}, \vec{v}$ we can expand \begin{equation*}
 \langle \vec{u} + \vec{v}, \vec{u} + \vec{v} \rangle = \langle \vec{u}, \vec{u} \rangle + \langle \vec{v}, \vec{v} \rangle + 2 \langle \vec{u}, \vec{v} \rangle.
 \end{equation*}
 Simple enough so far. Now we recall that the inner product of a vector with itself gives that vector's squared length, and then we rearrange this last equation to solve for $\langle \vec{u}, \vec{v} \rangle$. This gives \begin{equation}
 \langle \vec{u}, \vec{v} \rangle = \frac{\nm{\vec{u} + \vec{v}}^2 - \nm{\vec{u}}^2 - \nm{\vec{v}}^2}{2}.
 \end{equation}
-But this is remarkable! This tells us that knowing the length of every vector in our space is enough to uniquely fix the inner product between arbitrary vectors. This innucuous equation is called the \ti{polarization identity}. Applying this newfound wisdom to tiny displacements around a point in a geometric space, we see that all of local geometry is fixed if we just know how local distances work.
+But this is remarkable! This tells us that knowing the length of every vector in our space is enough to uniquely fix the inner product between arbitrary vectors. This innocuous equation is called the \ti{polarization identity}. Applying this newfound wisdom to tiny displacements around a point in a geometric space, we see that all of local geometry is fixed if we just know how local distances work.
 
 
 \end{document}
-
-
-
 
 
 
