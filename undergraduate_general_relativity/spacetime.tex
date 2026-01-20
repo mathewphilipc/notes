@@ -1,26 +1,15 @@
-\documentclass[11pt,letterpaper]{article}
-
-\usepackage{graphicx}           % Graphics package
-\usepackage{amsmath} 
-\usepackage{mathrsfs}
-\usepackage[colorlinks=true]{hyperref} 
-\usepackage{color}
-\usepackage{amsfonts}
-\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
-\usepackage[makeroom]{cancel}
-\usepackage{cite}
-\usepackage{sectsty}
-\usepackage{empheq}
-\usepackage{appendix}
-\usepackage{enumerate} 
-\usepackage{simpler-wick}
-
+ \documentclass[12 pt]{article}
+\usepackage{amsmath, amssymb, mathtools, slashed, amsfonts}
+\usepackage[margin=1in]{geometry}
 \usepackage{tikz-cd}
-\usepackage{tikz}
+\usepackage{tikz} 
 \usepackage{tikz-feynman}
 \tikzfeynmanset{compat=1.1.0}
 \usepackage[shortlabels]{enumitem}
+\usepackage{graphicx}
 
+\setlength{\parindent}{0pt}      % no paragraph indentation
+\setlength{\parskip}{1.0em}      % vertical space between paragraphs
 
 
 
@@ -67,14 +56,10 @@
 
 \newcommand{\G}{\gamma}
 \newcommand{\LA}{\mathcal{L}}
-\newcommand{\X}{\Vec{x}}
-\newcommand{\x}{\Vec{x}}
+
 
 \newcommand{\LP}{\left(}
 \newcommand{\RP}{\right)}
-
-
-
 
 \newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
 
@@ -83,15 +68,30 @@
 
 \newcommand{\D}{\partial}
 
+\newcommand{\bs}{\textbackslash}
 
-\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\arr}{\mathcal{R}}
 
-%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
-\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
-\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+\numberwithin{equation}{section}
+\setcounter{section}{0}
 
-%%%%%%%%%%%%%%%
+
+
+
+
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+
 
 
 \begin{document}
@@ -108,10 +108,13 @@
 \maketitle
 
 
-\abstract{Some supplementary discussion of spacetime in special relativity.}
+\begin{abstract}
+Some supplementary discussion of spacetime in special relativity.
+\end{abstract}
 
 
-\tableofcontents
+{\setlength{\parskip}{0pt}\tableofcontents}
+
 
 
 \section{Galileo, Poincare, and Lorentz}
@@ -151,23 +154,21 @@ Finally, we have a set of transformations so simple that they are sometimes left
 t' & = t - a_t, \\
 \vec{x}' & = \vec{x} - \vec{a}
 \end{align*}
-for $a_t,\vec{a}$ constants. These correspond to shifting the origin of our spatial coordinate system by the constant vector $\vec{a}$ or changing when we start our stopwatch by an amount $a_t$. The \ti{Galilean group} is the set of all of these transformations, plus anything new we can build up by composing these together.\\
-\\
-\
+for $a_t,\vec{a}$ constants. These correspond to shifting the origin of our spatial coordinate system by the constant vector $\vec{a}$ or changing when we start our stopwatch by an amount $a_t$. The \ti{Galilean group} is the set of all of these transformations, plus anything new we can build up by composing these together.
+
 \tb{Exercise} Convince yourself that, if we allow arbitrary compositions, the resulting group is exactly all the transformations of the form \begin{align*}
-t' & = t + a_t, \\
+t' & = t - a_t, \\
 \vec{x}' & = R \vec{x} - \vec{v} t - \vec{a}
 \end{align*}
-for $a_t,\vec{a}, \vec{v}$ constants and $R$ a rotation matrix (abstractly a special orthogonal matrix, concretely one satisfying $R^T = R^{-1}$ and $\det(R) = 1$). \\
-\\
-\
+for $a_t,\vec{a}, \vec{v}$ constants and $R$ a rotation matrix (abstractly a special orthogonal matrix, concretely one satisfying $R^T = R^{-1}$ and $\det(R) = 1$).
+
 As we noted above, the pure translation part is comparatively boring, so we often don't bother studying it. We can do this arbitrarily by simply declaring that we only consider the Galilean transformations with $\vec{a},a_t$ vanishing. Slightly less arbitrarily, we can ignore these by studying only the \tb{differences} between events. Given two different events with coordinates $(t_1,\vec{x}_1)$ and $(t_2, \vec{x}_2)$ we can consider the coordinates of the second event relative to the first \begin{align*}
 \Delta \vec{x} & := \vec{x}_2 - \vec{x}_1, \\
 \Delta t & := t_2 - t_1
 \end{align*}
 plus the corresponding statement in the primed coordinate system. Then from the individual transformation laws \begin{align*}
-t_i' & = t_i + a_t, \\
-\vec{x}_i' & = R \vec{x}_i + \vec{v} t_i + \vec{a}
+t_i' & = t_i - a_t, \\
+\vec{x}_i' & = R \vec{x}_i - \vec{v} t_i - \vec{a}
 \end{align*}
 we see that $\vec{a}, a_t$ drop out when we subtract, so the differences obey the simpler laws \begin{align*}
 \Delta t' & = \Delta t, \\
@@ -182,7 +183,7 @@ Now we can say in a very compact way how the transformation rules of special rel
 t' \\ x'
 \end{bmatrix} = \begin{bmatrix}
 1 & 0 \\
--vt & 1
+-v & 1
 \end{bmatrix} \begin{bmatrix}
 t \\ x
 \end{bmatrix}.
@@ -197,7 +198,7 @@ t' \\ x'
 t \\ x
 \end{bmatrix} \mbox{ where } \gamma_v := \frac{1}{\sqrt{1 - v^2}}.
 \end{equation*}
-As a sanity check we should verify that for boosts by velocities must smaller than $c$, this approximately reduces to our Galilean rule. A convenient way to do this is to explicitly restore all factors of $c$, and then work in the limit where $c \gg v$\footnote{More precisely, we take the limit $v/c \to 0$ while carefully not taking $v \to 0$}. We can do this in a unique way (up to common global constants between the two sides of our equation) just by insisting that all of the dimensions make sense in the SI system of units. So we replace each $t \to ct$ so that our coordinates have the same units in all of their components, then replace each $v \to v/c$ so that $\gamma$ and the tranformation matrix are both dimensionless. The result is \begin{equation*}
+As a sanity check we should verify that for boosts by velocities much smaller than $c$, this approximately reduces to our Galilean rule. A convenient way to do this is to explicitly restore all factors of $c$, and then work in the limit where $c \gg v$\footnote{More precisely, we take the limit $v/c \to 0$ while carefully not taking $v \to 0$}. We can do this in a unique way (up to common global constants between the two sides of our equation) just by insisting that all of the dimensions make sense in the SI system of units. So we replace each $t \to ct$ so that our coordinates have the same units in all of their components, then replace each $v \to v/c$ so that $\gamma$ and the transformation matrix are both dimensionless. The result is \begin{equation*}
 \begin{bmatrix}
 ct' \\ x'
 \end{bmatrix} = \gamma_v \begin{bmatrix}
@@ -227,9 +228,8 @@ t' \\ x'
 t \\ x
 \end{bmatrix} \mbox{ since } \gamma_v \approx 1.
 \end{equation*}
-As we claimed, Lorentz boosts by velocities much smaller than $c$ are approximately Galilean boosts. This kind of analysis is broadly useful for predicting relativistic corrections to Galilean physics. We can take the expression above for the boost (or any other quantity you like from relativistic physics), and instead of going all the way to $v/c \to 0$ we expand as a Taylor series in powers $(v/c)^n$ about $v/c = 0$. You may have seen this kind of analysis used to study the hyperfine splitting in the hydrogen atom.\\
-\\
-\
+As we claimed, Lorentz boosts by velocities much smaller than $c$ are approximately Galilean boosts. This kind of analysis is broadly useful for predicting relativistic corrections to Galilean physics. We can take the expression above for the boost (or any other quantity you like from relativistic physics), and instead of going all the way to $v/c \to 0$ we expand as a Taylor series in powers $(v/c)^n$ about $v/c = 0$. You may have seen this kind of analysis used to study the hyperfine splitting in the hydrogen atom.
+
 The group of transformations that can be built up from rotations, Lorentz boosts, and spacetime translations is called the \ti{Poincar\'{e} group}. If we don't include spacetime translations (which we often don't, if only because they aren't very interesting) we get the \ti{Lorentz group}, whose elements are called \ti{Lorentz transformations}.
 
 
@@ -243,7 +243,7 @@ Lorentz transformations respect the slightly different quadratic form \begin{equ
 - c^2 {t'}^2 + {x'}^2 + {y'}^2 + {z'}^2 = - c^2 t^2 + x^2 + y^2 + z^2
 \end{equation*}
 where we have restored explicit factors of $c$ for the moment. If we include spacetime translation (that is, we consider the full Poincar\'{e} group, not just the Lorentz group) then we get the slightly weaker statement that our transformations preserve the \ti{invariant interval} between events \begin{equation*}
-- c^2 (\Delta t')^2 + (\Delta x')^2 + (\Delta y')^2 + (\Delta z')^2 = - c^2 (\Delta t')^2 + (\Delta x')^2 + (\Delta y')^2 + (\Delta z')^2
+- c^2 (\Delta t')^2 + (\Delta x')^2 + (\Delta y')^2 + (\Delta z')^2 = - c^2 (\Delta t)^2 + (\Delta x)^2 + (\Delta y)^2 + (\Delta z)^2
 \end{equation*}
 From this we can neatly confirm that our mathematical framework does indeed reproduce one of our initial physical axioms. Suppose that, in our unprimed frame, the two events with coordinate difference $\LP \Delta t, \Delta \vec{x} \RP$ in the unprimed frame lie along the trajectory of a photon, which moves along a straight line at the speed of light. Directly from the definition of speed, we see that the spatial and temporal parts of the difference between the two events must be related as \begin{equation*}
 \frac{\nm{\Delta \vec{x}}}{|\Delta t|} = \mbox{speed of photon} = c.
@@ -257,17 +257,15 @@ So the statement \begin{center}
 in terms of an object that passes through both events along a straight line becomes \begin{center}
 \ti{If the first inertial observer sees an object in uniform motion moving at speed $c$, the second does too.}
 \end{center}
-which was one of our starting postulates: everyone must agree on the speed of light!\\
-\\
-\
-Inspired by the physical set up involving a photon, we sometimes say that these two events are \ti{lightlike-separated} or that the displacement vector $(\Delta t, \Delta \vec{x})$ is a \ti{lightlike} vector. Inspired by the equivalent story involving the vanishing of the invariant interval, we sometimes instead say that the events are \ti{null-separated} or that their displacement vector is a \ti{null} vector. \\
-\\
-\
+which was one of our starting postulates: everyone must agree on the speed of light!
+
+Inspired by the physical set up involving a photon, we sometimes say that these two events are \ti{lightlike-separated} or that the displacement vector $(\Delta t, \Delta \vec{x})$ is a \ti{lightlike} vector. Inspired by the equivalent story involving the vanishing of the invariant interval, we sometimes instead say that the events are \ti{null-separated} or that their displacement vector is a \ti{null} vector.
+
 Given some fixed event with coordinates $(t_0, \vec{x}_0)$, the set up of all points which are lightlike-separated from $(t_0, \vec{x}_0)$ is called its \ti{lightcone}, as inspired by the following diagram.\begin{figure}[ht]
 \centering
 \includegraphics[width=0.5\textwidth]{lightcone.png}
 \caption{A lightcone in a (2+1)-dimensional spacetime.}
-\label{Fig:plot1}
+\label{Fig:lightcone}
 \end{figure}
 We can say a great deal about causality in terms of this diagram. Since the speed of light is the upper bound for all physical signal transmission, the interior of the future-directed part of the lightcone is exactly the set of all events that $(t_0, \vec{x}_0)$ can influence. Similarly, the interior of the past-directed lightcone is the set of all events that can influence the physics at $(t_0, \vec{x}_0)$.
 
@@ -281,41 +279,38 @@ We have seen that events which are lightlike-separated stay lightlike-separated 
 we say that they are \ti{timelike-separated}, inspired by the fact that this for one happens when the two events (as measured in our present coordinate system) are at different times $\Delta t \neq 0$ but the same location $\Delta \vec{x} = 0$. In terms of signal propagation, this means that the speed required to get from one event to another by uniform motion is less than the speed of light  \begin{equation*}
 \frac{\nm{\Delta \vec{x}}}{|\Delta t|} < c.
 \end{equation*}
-So it is certainly possible to have causal influence between two such events. \\
-\\
-\
-Since Lorentz transformations preserve the invariant interval, we know that inertial observers must agree as to whether two events are timelike separated. But what can they \tb{disagree} on? Two observers that differ only by a spatial rotation don't tell us much interesting about relativity, so to simplify the analysis we consider just the $t$ and $x$ coordinates, pretending we are in a (1+1)-dimensional spacetime. What might the difference $(\Delta t', \Delta x')$ look like in a boosted framed? The value of the invariant interval in the first frame \begin{equation*}
+So it is certainly possible to have causal influence between two such events.
+
+Since Lorentz transformations preserve the invariant interval, we know that inertial observers must agree as to whether two events are timelike separated. But what can they \tb{disagree} on? Two observers that differ only by a spatial rotation don't tell us much interesting about relativity, so to simplify the analysis we consider just the $t$ and $x$ coordinates, pretending we are in a (1+1)-dimensional spacetime. What might the difference $(\Delta t', \Delta x')$ look like in a boosted frame? The value of the invariant interval in the first frame \begin{equation*}
 - \ell^2 := - c^2 (\Delta t)^2 + (\Delta x)^2 < 0 
 \end{equation*}
 must agree with that measured in the primed frame, so after moving the common minus sign around we have  \begin{equation*}
 c^2 (\Delta t')^2 - (\Delta x')^2 = \ell^2
 \end{equation*}
-But this is exactly the equation for a hyperbola which sits inside the lightcone and asymptotes to it. The solution sets at various values of $\ell$ are represented by red lines in Fig. 2.
+But this is exactly the equation for a hyperbola which sits inside the lightcone and asymptotes to it. The solution sets at various values of $\ell$ are represented by red lines in \ref{Fig:hyperbolas}.
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.5\textwidth]{hyperbolas.png}
 \caption{Timelike and spacelike level sets.}
-\label{Fig:plot1}
-\end{figure}\\
-\\
-\
+\label{Fig:hyperbolas}
+\end{figure}
+
 We can follow an identical discussion for events which are \ti{spacelike-separated}, with a positive invariant interval. \begin{equation*}
 - c^2 (\Delta t)^2 + (\Delta x)^2 + (\Delta y)^2 + (\Delta z)^2 > 0
 \end{equation*}
-These are so named because the prototypical example is two events which (in our chosen coordinate system) are simultaneous $\Delta t = 0$, differing only in their spatial location $\Delta \vec{x} \neq 0$.\\
-\\
-\
-Again restricting to (1+1), in any boosted frame the difference $(\Delta t, \Delta x')$ must lie on the surface
+These are so named because the prototypical example is two events which (in our chosen coordinate system) are simultaneous $\Delta t = 0$, differing only in their spatial location $\Delta \vec{x} \neq 0$.
+
+Again restricting to (1+1), in any boosted frame the difference $(\Delta t', \Delta x')$ must lie on the surface
 \begin{equation*}
 (\Delta x')^2 - c^2 (\Delta t')^2 = \ell^2.
 \end{equation*}
-Example of this surface for various values of $\ell$ are shown as blue lines in Fig. 2.
+Examples of this surface for various values of $\ell$ are shown as blue lines in Fig. \ref{Fig:hyperbolas}.
 
 
 
 
 \subsection{Causality and the Ordering of Events}
-So far this all looks very symmetrical. But there is a key difference between the spacelike and timelike level sets, which becomes even clearer when we move above (1+1)-dimensional space. Just like spatial rotations about a fixed axis have involve a continuous parameter $\theta$ which can be gradually turned on or set to 0, Lorentz boosts have a continuous parameter $v$. So for any particle $\ell \neq 0$, no boost can make the discontinuous jump between the future-pointed part of the hyperbola \begin{equation*}
+So far this all looks very symmetrical. But there is a key difference between the spacelike and timelike level sets, which becomes even clearer when we move above (1+1)-dimensional space. Just like spatial rotations about a fixed axis have a continuous parameter $\theta$ which can be gradually turned on or set to 0, Lorentz boosts have a continuous parameter $v$. So for any particle $\ell \neq 0$, no boost can make the discontinuous jump between the future-pointed part of the hyperbola \begin{equation*}
 \{(\Delta t', \Delta x') \mbox{ such that } c^2 (\Delta t')^2 - (\Delta x')^2 = \ell^2 \mbox{ and } \Delta t' > 0 \}
 \end{equation*}
 and the past-directed part \begin{equation*}
@@ -324,9 +319,8 @@ and the past-directed part \begin{equation*}
 Graphically this is a fairly straightforward fact: the image of $(\Delta t, \Delta x)$ under boosts is constrained to lie on a hyperbola with two disjoint sections, and these sections are individually preserved under boosts. But the physical interpretation is remarkable. Suppose we have two events with coordinates $(t_A, x_A)$ and $(t_B, x_B)$ in our original coordinate system, with difference \begin{equation*}
 \LP \Delta t, \Delta x \RP = \LP t_B - t_A, x_B - x_A \RP.
 \end{equation*}
-So $\Delta t > 0$ means $A$ happens first in our reference frame, $\Delta t < 0$ means $B$ happens first, and $\Delta t = 0$ means our frame sees the events as simultaneous. Then our innocuous graphical result means that \tb{if two events are timelike-separated, then the order in which they occur is observer-independent.} If $c^2 (\Delta t)^2 - (\Delta x)^2 > 0$ and $\Delta t > 0$, then any primed frame will find $\Delta t ' > 0$. This is quite unlike the case for spacelike events, which could be said to be simultaneous or to happen in either order depending on our frame of reference. \\
-\\
-\
+So $\Delta t > 0$ means $A$ happens first in our reference frame, $\Delta t < 0$ means $B$ happens first, and $\Delta t = 0$ means our frame sees the events as simultaneous. Then our innocuous graphical result means that \tb{if two events are timelike-separated, then the order in which they occur is observer-independent.} If $c^2 (\Delta t)^2 - (\Delta x)^2 > 0$ and $\Delta t > 0$, then any primed frame will find $\Delta t ' > 0$. This is quite unlike the case for spacelike events, which could be said to be simultaneous or to happen in either order depending on our frame of reference.
+
 In our earlier discussion of lightcones, we said an A is inside the future lightcone of B exactly when B can influence A. This is closely related to our more recent analysis, and we now have a chain of three equivalent conditions: \begin{enumerate}
 \item $A$ is inside the future lightcone of $B$.
 \item $A$ is timelike-separated from $B$ with $t_A > t_B$ in at least one frame.
@@ -334,4 +328,14 @@ In our earlier discussion of lightcones, we said an A is inside the future light
 \end{enumerate}
 This is good news! We know that special relativity spoils some of Galilean physics's notions of absolute ordering of events, and historically it was once thought that this could lead to nonsensical predictions. But we now see that we at least avoid grandfather-style paradoxes\footnote{This is a classic media trope in which a character goes back in time to kill one of their own ancestors, thus paradoxically preventing themselves from having been born in the first place.}, since any two events which can influence each other have an unambiguous ordering.
 
+
+
+
+
+
+
+
+
+
 \end{document}
+
