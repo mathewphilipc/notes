@@ -1,0 +1,159 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+
+\sectionfont{\fontsize{12}{12}\selectfont}
+\subsectionfont{\fontsize{12}{12}\selectfont}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\D}{\partial}
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \middle| #2 \right\rangle}
+
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+
+\title{Particles and Scattering}
+
+\author{Mathew Calkins}
+
+\date{\today}
+
+ 
+\maketitle
+
+\abstract{Notes on particles and scattering}
+
+\tableofcontents
+
+
+\section{Scattering in the abstract}
+In the standard conventions of, e.g., Weinberg, the whole game of scattering is that complicated physical states evolving under a full Hamiltonian $H$ eventually time-evolve to (linear combinations of) simple states evolving under a simple (in particular, free) Hamiltonian $H_0$. For a given simple state $\KET{\alpha}$ (say, a scattering state consisting of a bunch of electrons and positrons far away from each other, with physical masses and appropriate dressing and so on), we denote by $\KET{\alpha}^{out}$ the \textit{out state}, messy state which eventually ``looks like" $\KET{\alpha}$. In equations, we have \begin{equation}\label{outstatedef}
+e^{- i H t} \KET{\alpha}^{\mbox{\scriptsize{out}}} \approx e^{- i H_0 t} \KET{\alpha} \ \ \ (t \to \infty)
+\end{equation}
+where $\KET{\phi} \approx \KET{\psi}$ means the difference between two states is small as measured by the norm on our Hilbert space (\textit{i.e.}, $\| \phi - \psi \|$). Note that $H_0$ is slightly non-unique: if we want it to describe the asymptotic dynamics of some outgoing scattering channel, this requires different terms depending on what channel this is. Roughly speaking it should look like a free Hamiltonian containing kinetic\footnote{We also  need dressings for these terms if the particles are charged; this is a complication we won't touch here.} terms for all particles\footnote{Here we mean \textit{particle} in the abstract sense of a Lorentz irrep, not the hand-wavey ``excitation of a field" story that fails as soon as we have bound states or confinement or anything else interesting and non-perturbative. So for us, a stable bound state like a proton is a particle no different from an ``elementary" particle like an electron, but a gluon is not a particle. } appearing in the simple state $\KET{\alpha}$, but this definition depends on what scattering experiment we are performing. The closest we can get to an unambiguous $H_0$ is to take it to be a sum over kinetic terms (and dressings and so on) for any particles that we plan to consider in our amplitudes, but it's also fine to think of it as channel-dependent. If we are working in terms of quantum fields in a theory with bound states and dressings and so on, this prescription doesn't make it easy to actually write down $H_0$, but in particle language that's what it ultimately should be. \\
+\\
+\
+If our $\KET{\alpha}, \KET{\alpha}^{out}$ states aren't physical normalizable states, but something less analytically nice like improper basis states, then the condition \eqref{outstatedef} only literally true when we take a collection of such states and smear against some smooth function as \begin{equation}
+e^{- i H t} \int d \alpha g(\alpha) \KET{\alpha}^{\mbox{\scriptsize{out}}} \approx e^{- i H_0 t} \int d \alpha g(\alpha) \KET{\alpha}
+\end{equation}
+but in most calculations we can leave this implicit. In any case, we define in states in exactly the same way except that we take the limit $t \to - \infty$. If in particular we have parametrized a set of energy eigenstates of the free Hamiltonian \begin{equation}
+H_0 \KET{\alpha} = E_\alpha \KET{\alpha}
+\end{equation}
+then we can rewrite \begin{equation}
+\int d \alpha e^{- i E_\alpha t} g(\alpha) \KET{\alpha}^{\mbox{\scriptsize{out}}} \approx \int d \alpha e^{- i E_\alpha t} g(\alpha) \KET{\alpha}.
+\end{equation}
+from which we can deduce \begin{equation}
+H \KET{\alpha}^{\mbox{\scriptsize{out}}} = E_\alpha \KET{\alpha}^{\mbox{\scriptsize{out}}}.
+\end{equation}
+In this case we also have a quantitative estimate for the limit $t \to \infty$: if $g$ has support in energy space of size $\sim \Delta E$, our approximation becomes good when $t \gg 1/\Delta E$.
+\begin{equation}
+e^{- i H t} \KET{\alpha}^{out} \approx e^{- i H_0 t} \KET{\alpha}
+\end{equation}
+No matter what states we happen to be looking at, we define \textit{in states} analogously but taking a limit to the asymptotic past rather than the future. \begin{equation}\label{instatedef}
+e^{- i H t} \KET{\alpha}^{\mbox{\scriptsize{in}}} \approx e^{- i H_0 t} \KET{\alpha} \ \ \ (t \to - \infty).
+\end{equation}
+If a scattering experiment begins with some simple state $\KET{\beta}$, then the amplitude for finding it much later in the simple state $\KET{\alpha}$ is the given by the overlap between the corresponding respective in and out states. We take this overlap to define the $S$ matrix, written variously as \begin{equation*}
+S_{\alpha \beta} \equiv \BRA{\alpha} S \KET{\beta} = \ ^{\mbox{\scriptsize{out}}} \IP{\alpha}{\beta}^{\mbox{\scriptsize{in}}}.
+\end{equation*}
+We can rewrite $S$ usefully but somewhat formally by rewriting our out state definition \eqref{outstatedef}, taking $\KET{\alpha}^{out}$ as a function of $\KET{\alpha}$ as \begin{equation}
+\KET{\alpha}^{out} = \lim_{t \to \infty} e^{i H t} e^{- i H_0 t} \KET{\alpha} \equiv \Omega_- \KET{\alpha}
+\end{equation}
+where $\Omega_-$ is the \textit{outgoing M\o ller operator}. The incoming M\o ller operator $\Omega_+$ is the same but extracts in states \begin{equation}
+\KET{\alpha}^{in} = \lim_{t \to -\infty} e^{i H t} e^{- i H_0 t} \KET{\alpha} \equiv \Omega_+ \KET{\alpha}
+\end{equation}
+so we can equivalently write the $S$ matrix operator as \begin{equation}
+\BRA{\alpha} S \KET{\beta} = \ ^{\mbox{\scriptsize{out}}} \IP{\alpha}{\beta}^{\mbox{\scriptsize{in}}} = \BRA{\alpha} \Omega_-^\dagger \Omega_+ \KET{\beta} \implies S = \Omega_-^\dagger \Omega_+.
+\end{equation}
+Notice that the M\o ller operators don't act on the full Hilbert space, but rather the subspace consisting of what we earlier called ``simple" states. To make this more precise, denote by $V$ the difference between our full and free Hamiltonians \begin{equation}
+H = H_0 + V.
+\end{equation}
+Now being slightly analytically loose, take the definition \eqref{outstatedef} and differentiate both sides with respect to $t$ then apply the definition a second time to find \begin{equation}
+H_0 e^{- i H_0 t}  \KET{\alpha} \approx H e^{- i H t} \KET{\alpha}^{\mbox{\scriptsize{out}}} \approx H e^{- i H_0 t} \KET{\alpha}.
+\end{equation}
+From this we get a reasonable definition of ``simple" states: they are the physical states which, if we time-evolve them long enough under the free Hamiltonian $H_0$, are approximately killed by the interaction potential. \begin{equation}
+\mathcal{H}_{\mbox{\scriptsize{simple}}} = \left\{ \KET{\alpha} \in \mathcal{H} \ | \ \lim_{ t \to \infty} \| V e^{- i H_0 t} \KET{\alpha} \| = 0 \right\}.
+\end{equation}
+If we want to be careful and make sure this is not just a linear subspace but a Hilbert subspace, we should take not just this set but it's closure. A priori we should consider two separate simple subspaces corresponding to the asymptotic future and past \begin{equation}
+\mathcal{H}^{\mbox{\scriptsize{out/in}}}_{\mbox{\scriptsize{simple}}} = \left\{ \KET{\alpha} \in \mathcal{H} \ | \ \lim_{ t \to \pm \infty} \| V e^{- i H_0 t} \KET{\alpha} \| = 0 \right\}
+\end{equation}
+but these often coincide. For example, these spaces agree if we have symmetry under a time-reversal operator $T$ which respects the Hamiltonian decomposition \begin{equation}
+T H_0 T^{-1} = H_0 \mbox{ and } T V T^{-1} = V
+\end{equation}
+then the spaces coincide. Moving forward we'll simply assume that they do. Now we can be more careful and say that the M\o ller operators, which take simple states to their corresponding in/out states, are defined by a limit procedure which only necessarily converges if our input is in fact a simple state. So these operators have function signature \begin{equation}
+\Omega_\pm: \mathcal{H}_{\mbox{\scriptsize{simple}}} \to \mathcal{H}.
+\end{equation}
+We say that the kinds of states that the M\o ller operators spit out (\textit{i.e.}, linear combinations of in and out states) are \textit{scattering states}, and we call the set of all such states the \textit{scattering subspace}. We can write this neatly as simply the image of $\mathcal{H}_{\mbox{\scriptsize{simple}}}$ under the action of the M\o ller operators. \begin{equation}
+\mathcal{H}_{\mbox{\scriptsize{scattering}}} = \Omega_\pm \LP \mathcal{H}_{\mbox{\scriptsize{simple}}} \RP.
+\end{equation}
+The same comments apply about taking closures to ensure the linear subspaces are bona fide Hilbert subspaces.\\
+\\
+\
+(comment about taking a direct sum for maximally inclusive simple and scattering subspaces)
+
+\section{Pertubative Calculations}
+Now in free field theories (or when we perturb around the same) we often begin by Fourier-expanding our field and identifying the coefficients with momentum-space creation and annihilation operators. For example, for a KG field we have \begin{equation}
+\phi(\vec{x}) = \int \frac{d^3 p}{(2 \pi)^3} \frac{1}{2 E_{\vec{p}}} \LP a_{\vec{p}} e^{- i \vec{p} \cdot \vec{x}} + a^\dagger_{\vec{p}} e^{i \vec{p} \cdot \vec{x}} \RP
+\end{equation}
+where $a_{\vec{p}}^\dagger$ in the Fock space picture inserted a $\phi$ particle of momentum $p = (E_{\vec{p}}, \vec{p})$. To relate this to the scattering business, we suppose that our interacting theory's Hamiltonian has a decomposition \begin{equation}
+H = H_0 + V
+\end{equation}
+where $V$ becomes negligible when all particles are sufficiently separated in space. This means in particular that we have performed perturbative regularization or some equivalent scheme, so the free Hamiltonian $H_0$ is built from physical masses and $V$ has appropriate counterterms and so on. In that case, if we want to describe scattering where the final state is two $\phi$ particles moving in different directions, we expand $\phi(\vec{x})$ in modes as above and take our ``simple" incoming state state to be (up to conventions about normalization) \begin{equation}
+\KET{\beta} = \KET{\vec{p}, \vec{p}'} = a^\dagger_{\vec{p}} a^\dagger_{\vec{p}'} \KET{0}.
+\end{equation}
+If we want to be precise, instead of using the naive creation operators (which create plane wave states totally delocalized in space, hence never given negligible interactions) we should smear our creation operators as, say, \begin{equation}
+a^\dagger_{\vec{p}; \sigma} := \int \frac{d ^3 k}{(2 \pi \sigma^2)^{3/2}} e^{- \frac{(\vec{k} - \vec{p})^2}{2 \sigma^2}} a^\dagger_{\vec{p}}
+\end{equation}
+then take $\sigma \to 0$ at a final stage. This regularization is orthogonal to present concerns, so we'll leave it implicit in our notation. Now we can describe $2 \to 2$ scattering of momentum eigenstates $(\KET{\beta} = \KET{\vec{p}, \vec{p}'}) \to (\KET{\alpha} = \KET{\vec{q}, \vec{q}'})$ as \begin{equation}
+S_{\alpha \beta} = \BRA{\alpha} S \KET{\beta} = \BRA{0} a^\dagger_{\vec{q}} a^\dagger_{\vec{q}'}  S a^\dagger_{\vec{p}} a^\dagger_{\vec{p}'} \KET{0}.
+\end{equation}
+\\
+\\
+\
+Continuing to denote by $\KET{0}$ the full physical vacuum, in our 2:2 scattering example above we can write variously \begin{equation}
+\begin{aligned}
+\KET{\beta}^{\mbox{\scriptsize{in}}} & = \Omega_+ \KET{\beta} \\
+& = \Omega_+ a^\dagger_{\vec{p}} a^\dagger_{\vec{p}'} \KET{0} \\
+& = (\Omega_+ a^\dagger_{\vec{p}} \Omega_+^\dagger) (\Omega_+ a^\dagger_{\vec{p}'} \Omega_+^\dagger) \LP \Omega_+ \KET{0} \RP \\
+& \equiv a_{\vec{p}}^{\mbox{\scriptsize{in}} \dagger} a_{\vec{p}'}^{\mbox{\scriptsize{in}} \dagger} \KET{0}^{\mbox{\scriptsize{in}}}
+\end{aligned}
+\end{equation}
+\\
+\\
+\
+
+
+
+
+\bibliography{bibfile}
+\bibliographystyle{utphys}
+
+\end{document}
