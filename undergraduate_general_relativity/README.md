@@ -22,6 +22,6 @@ In Spring 2025 I was the teaching assistant for General Relativity (PHYS-UA 170)
 
 [Recitation 10: More Linear Algebra](https://github.com/mathewphilipc/notes/blob/main/undergraduate_general_relativity/more_linear_algebra.pdf)
 
-(Recitation 11 larged followed previous TA Tony Zhou's notes on the stress tensor)
+(Recitation 11 largely followed previous TA Tony Zhou's notes on the stress tensor)
 
 [Recitation 12: Free Fall](https://github.com/mathewphilipc/notes/blob/main/undergraduate_general_relativity/free_fall.pdf)
