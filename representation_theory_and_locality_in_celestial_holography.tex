@@ -1,0 +1,147 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+\usepackage{amssymb}
+
+\sectionfont{\fontsize{12}{12}\selectfont}
+\subsectionfont{\fontsize{12}{12}\selectfont}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\D}{\partial}
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \middle| #2 \right\rangle}
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+
+\title{Representation Theory and Locality in Celestial Holography}
+
+\author{Mathew Calkins}
+
+\date{\today}
+
+ 
+\maketitle
+
+\abstract{An introduction to celestial holography, leading up to some recent research on multi-collinear singular structures.}
+
+\tableofcontents
+
+
+\section{Motivation}
+TODO
+
+\subsection{AdS/CFT}
+TODO
+
+\subsection{Asymptotically Flat Space}
+TODO
+
+\subsection{Troubles with de Sitter}
+TODO
+
+
+\section{Kinematics of The Celestial Dictionary}
+Though we have discussed generally asymptotically flat spacetimes, we now restrict our attention to flat Minkowski space. We recall the well-known group isomorphism between the Lorentz group in signature $(d+1,1)$ and the Euclidean conformal group in $d$ dimensions. At $d = 2$ this becomes
+\begin{equation}
+SO(3,1) \simeq \mbox{Conf}(2,0).
+\end{equation}
+Here and elsewhere, when we refer to a Lie group we will always mean the its connected component containing the identity. Properly speaking we are therefore referring to the proper orthochronous Lorentz group $SO^\uparrow(3,1)$. On the other side of our isomorphism we are excluding orientation-reversing transformations;  using the standard complex-analytic language we are equivalently restricting to holomorphic functions. Also as usual, the Euclidean conformal group in $d$ dimensions should be thought of not as a group of automorphisms of real Euclidean space $\R^d$, but of its conformal compactification $S^d$.
+TODO: Implement this on the Lie-algebra level?\\
+\\
+\
+Inspired by the symmetry-matching game we played earlier for AdS/CFT, taking this isomorphism seriously leads one to wonder whether physics in Minkowski space might have a dual 2D conformal field theory. If we want this to lift to more general asymptotically flat spacetimes and have a shot and describing bulk quantum gravity, the dictionary ought to be built from bulk ingredients that make sense in such a theory. \\
+\\
+\
+The simplest candidate is the $S$-matrix, and so far this appears to be exactly the right object to use. More specifically, we consider the non-trivial part of the $S$ matrix \begin{equation}
+S = \mathbf{1} + i \mathcal{A}.
+\end{equation}
+Suppressing discrete labels such as spin/helicity and flavor, an $n$-point amplitude has functional dependence \begin{equation}
+\mc{A} \sim \mc{A}_n \LP p_1, \ldots, p_n \RP.
+\end{equation}
+with each $p_i$ transforming as usual under Lorentz transformations. The idea behind the celestial dictionary is to parametrize our momenta and apply an appropriate change of basis after which the RHS transforms under the Lorentz group ($\simeq$ the conformal group) like the $n$-point vacuum correlator of a list of global conformal primaries.\\
+\\
+\
+First, we make a slightly embarrassing admission: at the time of writing, it is not yet clear how to make this story work correctly when any of our bulk particles are massive. We can play the same representation-theoretic game, but the end result turns out not have the locality properties we would expect from a Euclidean $n$-point correlator. We will describe this problem more in detail later, but for now we restrict to the case that all off-shell momenta are massless. 
+
+\subsection{Spinor-Helicity Notation}
+As a first step in constructing the celestial dictionary, we recall one of the first steps in the standard proof of the double cover $\pi: SL(2,\C) \to SO(3,1)$. Given the Pauli matrices \begin{equation}
+\begin{aligned}
+\LP \sigma^0_{\alpha \dot{\alpha}} \RP & = \begin{bmatrix}
+1 & 0 \\ 0 & 1
+\end{bmatrix}, & \LP \sigma^1_{\alpha \dot{\alpha}} \RP & = \begin{bmatrix}
+0 & 1 \\ 1 & 0
+\end{bmatrix}, \\
+\LP \sigma^2_{\alpha \dot{\alpha}} \RP & = \begin{bmatrix}
+0 & -i \\ i & 0
+\end{bmatrix}, & \LP \sigma^3_{\alpha \dot{\alpha}} \RP & = \begin{bmatrix}
+1 & 0 \\ 0 & -1
+\end{bmatrix}
+\end{aligned}
+\end{equation}
+we can build a natural mapping \begin{equation}
+\rho: \R^{3+1} \to SL(2,\C)
+\end{equation}
+given by \begin{equation}
+\rho(p)_{\alpha \dot{a}} = \sigma^\mu_{\alpha \dot{\alpha}} \eta_{\mu \nu} p^\nu \equiv p_{\alpha \dot{\alpha}}
+\end{equation}
+or in components and by mild abuse of notation\begin{equation}
+\LP p_{\alpha \dot{\alpha}} \RP = \begin{bmatrix}
+- p^0 + p^3 & p^1 - i p^2 \\
+p^2 + i p^2 & - p^0 - p^3
+\end{bmatrix}.
+\end{equation}
+
+
+
+
+
+\subsection{Integrating out energy}
+
+
+
+
+\bibliography{bibfile}
+\bibliographystyle{utphys}
+
+\end{document}
+
+
+
+
+
+
+
