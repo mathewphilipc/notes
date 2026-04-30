@@ -32,6 +32,9 @@
 \newcommand{\IP}[2]{\left\langle #1 \middle| #2 \right\rangle}
 \newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
 
+\usepackage{pst-node}
+\usepackage{tikz-cd} 
+\usetikzlibrary{decorations.pathmorphing}
 
 
 %%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
@@ -59,7 +62,10 @@
 \abstract{An introduction to celestial holography, leading up to some recent research on multi-collinear singular structures.}
 
 \tableofcontents
-
+\section{Conventions}
+In Minkowski space we use the mostly-plus metric \begin{equation}
+\eta = \mbox{diag}(-1, +1, \cdots, +1).
+\end{equation}
 
 \section{Motivation}
 TODO
@@ -86,19 +92,48 @@ TODO: Implement this on the Lie-algebra level?\\
 Inspired by the symmetry-matching game we played earlier for AdS/CFT, taking this isomorphism seriously leads one to wonder whether physics in Minkowski space might have a dual 2D conformal field theory. If we want this to lift to more general asymptotically flat spacetimes and have a shot and describing bulk quantum gravity, the dictionary ought to be built from bulk ingredients that make sense in such a theory. \\
 \\
 \
-The simplest candidate is the $S$-matrix, and so far this appears to be exactly the right object to use. More specifically, we consider the non-trivial part of the $S$ matrix \begin{equation}
-S = \mathbf{1} + i \mathcal{A}.
+The simplest candidate is the $S$-matrix, and so far this appears to be exactly the right object to use. An $n$-point amplitude has functional dependence \begin{equation}
+\mc{A} \sim \mc{A}_n \LP p_1, \sigma_1, n_1; \ldots; p_n, \sigma_n, n_n \RP
 \end{equation}
-Suppressing discrete labels such as spin/helicity and flavor, an $n$-point amplitude has functional dependence \begin{equation}
-\mc{A} \sim \mc{A}_n \LP p_1, \ldots, p_n \RP.
+where, following the notation of \cite{Weinberg:1995mt}, the $i$th particle has momentum $p_i$, spin/helicity labeled by $\sigma_i$, and flavor indices given by $n_i$. The idea behind the celestial dictionary is to parametrize our momenta and apply an appropriate change of basis after which the RHS to produce an object which transforms under Lorentz transformations (equivalently, under global conformal transformations) like the $n$-point vacuum correlator of a list of global conformal primaries. That is, we want \begin{equation}
+\mc{A}_n \LP p_1, \sigma_1, n_1; \ldots; p_n, \sigma_n, n_n \RP \xmapsto{\mbox{\tiny{change of basis?}}} \langle \mc{O}_{h_1, \bar{h}_1}(z_1, \bar{z}_1) \cdots \mc{O}_{h_n, \bar{h}_n}(z_n, \bar{z}_n) \rangle
 \end{equation}
-with each $p_i$ transforming as usual under Lorentz transformations. The idea behind the celestial dictionary is to parametrize our momenta and apply an appropriate change of basis after which the RHS transforms under the Lorentz group ($\simeq$ the conformal group) like the $n$-point vacuum correlator of a list of global conformal primaries.\\
+where the RHS is to be computed in some dual theory on the celestial sphere $S^2$. Now the whole game of scattering is that amplitudes can be computed as matrix elements between a set of $m$ incoming and $k$ outgoing states for $m + k = n$. \begin{equation}
+\mc{A}_n \LP p_1, \sigma_1, n_1; \ldots; p_n, \sigma_n, n_n \RP = \BRA{p^{\mbox{\tiny{in}}}_1, \sigma^{\mbox{\tiny{in}}}_1, n^{\mbox{\tiny{in}}}_1; \ldots; p^{\mbox{\tiny{in}}}_m, \sigma^{\mbox{\tiny{in}}}_m, n^{\mbox{\tiny{in}}}_m; } S \KET{p^{\mbox{\tiny{out}}}_1, \sigma^{\mbox{\tiny{out}}}_1, n^{\mbox{\tiny{out}}}_1; \ldots; p^{\mbox{\tiny{out}}}_k, \sigma^{\mbox{\tiny{out}}}_k, n^{\mbox{\tiny{out}}}_k }
+\end{equation}
+By construction these transform under Lorentz as the tensor product of single-particle states, so it suffices to find an appropriate change of basis on single-particle basis states \begin{equation}
+\KET{p, \sigma} \xmapsto{\mbox{\tiny{change of basis?}}} \KET{z_1, \bar{z}_1, h_1, \bar{h}_1}
+\end{equation}
+Before we work out the details of this change of basis, we make a slightly embarrassing admission: at the time of writing, it is not yet clear how to make this story work correctly when any of our bulk particles are massive. We can play the same representation-theoretic game, but the end result turns out not have the locality properties we would expect from a Euclidean $n$-point correlator. We will describe this problem more in detail later, but for now we restrict to the case that all off-shell momenta are massless. 
+
+
+
+
+
+
+\subsection{Canonical and Non-Canonical Group Isomorphisms}
+In order to construct the celestial dictionary, we begin by spelling out the relevant group isomorphisms.
+\[
+\begin{tikzcd}
+SO^+(3,1) \arrow[r, squiggly, leftrightarrow] \arrow[d, leftrightarrow]
+  & SL(2,\C) / \Z_2 \arrow[d, leftrightarrow] \\
+\mbox{Conf}^+(S^2) \arrow[r, squiggly, leftrightarrow]
+  & \mbox{Conf}^+(\C \cup \{\infty\})
+\end{tikzcd}
+\]
+\
 \\
 \
-First, we make a slightly embarrassing admission: at the time of writing, it is not yet clear how to make this story work correctly when any of our bulk particles are massive. We can play the same representation-theoretic game, but the end result turns out not have the locality properties we would expect from a Euclidean $n$-point correlator. We will describe this problem more in detail later, but for now we restrict to the case that all off-shell momenta are massless. 
-
-\subsection{Spinor-Helicity Notation}
-As a first step in constructing the celestial dictionary, we recall one of the first steps in the standard proof of the double cover $\pi: SL(2,\C) \to SO(3,1)$. Given the Pauli matrices \begin{equation}
+We must first distinguish between the conformal automorphisms of the sphere from those the compactified plane. We write these groups respectively as $\mbox{Conf}(S^2)$ and $\mbox{Conf}(\C \cup \{\infty\})$, and use a superscript $^+$ to denote the connected component of any Lie group containing the identity (which for these groups is exactly the subgroup of orientation-preserving such maps). Of course the manifolds $S^2$ and $\C \cup \{\infty\}$ are conformally equivalent, but not canonically so. Equivalently, there are many many to endow $S^2$ with conformal coordinates $(z, \bar{z})$ so that the metric on $S^2$ is some local rescaling of $dz \wedge d \bar{z}$. In the commutative diagram above, we write a squiggly bidirectional arrow to indicate that $\mbox{Conf}(S^2)$ and $\mbox{Conf}(\C \cup \infty\}$ are non-canonically isomorphic groups. More quantitatively, we can describe the degree of non-canonicality by noting that any two conformal maps \begin{equation}
+\phi, \phi': \C \cup \{\infty\} \to S^2
+\end{equation}
+differ exactly by composition with a conformal transformation of $S^2$. \begin{equation}
+\phi' = \psi \circ \phi, \quad \psi = \phi' \circ \phi^{-1} : S^2 \to S^2.
+\end{equation}
+So the ambiguity is exactly the group of canonical automorphisms of $S^2$, which form a Lie group of real dimension 6.\\
+\\
+\
+Now for the top-most edge of our diagram. We recall that $SO^+(3,1)$ has a universal cover of degree 2 isomorphic to $SL(2,\C)$, or equivalently that $SO^+(3,1) \simeq SL(2,\C) / \Z_2$. The usual construction works by introducing the Pauli matrices \begin{equation}
 \begin{aligned}
 \LP \sigma^0_{\alpha \dot{\alpha}} \RP & = \begin{bmatrix}
 1 & 0 \\ 0 & 1
@@ -112,36 +147,137 @@ As a first step in constructing the celestial dictionary, we recall one of the f
 \end{bmatrix}
 \end{aligned}
 \end{equation}
-we can build a natural mapping \begin{equation}
-\rho: \R^{3+1} \to SL(2,\C)
+then building the natural mapping \begin{equation}
+\rho: \R^{3+1} \to \mbox{Her}(2,\C) := \{ \mbox{Hermitian } 2 \times 2 \mbox{ matrices} \}
 \end{equation}
 given by \begin{equation}
-\rho(p)_{\alpha \dot{a}} = \sigma^\mu_{\alpha \dot{\alpha}} \eta_{\mu \nu} p^\nu \equiv p_{\alpha \dot{\alpha}}
+\rho(p)_{\alpha \dot{\alpha}} = \sigma^\mu_{\alpha \dot{\alpha}} \eta_{\mu \nu} p^\nu \equiv p_{\alpha \dot{\alpha}}
 \end{equation}
-or in components and by mild abuse of notation\begin{equation}
+or in components \begin{equation}
 \LP p_{\alpha \dot{\alpha}} \RP = \begin{bmatrix}
 - p^0 + p^3 & p^1 - i p^2 \\
-p^2 + i p^2 & - p^0 - p^3
+p^1 + i p^2 & - p^0 - p^3
 \end{bmatrix}.
+\end{equation}
+Now by direct computation we see that this obeys \begin{equation}\label{detrhop}
+\det \LP p_{\alpha \dot{\alpha}} \RP = \LP p^0 \RP ^2 - \LP p^1 \RP^2 - \LP p^2 \RP^2 - \LP p^3 \RP^2 = - p \cdot p.
+\end{equation}
+So the proper orthochronous Lorentz transformations on $p$ correspond to the determinant- and Hermiticity-preserving linear maps on $\rho(p)$. The latter are exactly the conjugations \begin{equation}
+M \mapsto A M A^\dagger \mbox{ for } A \in SL(2,\C)
+\end{equation}
+so any $A \in SL(2,\C)$ has an associated proper orthchronous Lorentz transformation $\Lambda \in SO^+(3,1)$ defined implicitly by the rule \begin{equation}
+A \rho(p) A^\dagger = \rho(\Lambda p) \mbox{ for all } p \in \R^{3+1}.
+\end{equation}
+This mapping $A \mapsto \Lambda$ is exactly the projection map establishing $SL(2,\C)$ as the double cover of $SO^+(3,1)$. But we made a non-canonical choice: we chose $ \LP \sigma_\mu \RP$ as a real basis for the set of all Hermitian $2 \times 2$ matrices satisfying the determinant condition \eqref{detrhop}. But this choice is non-unique; with a bit of thought, one can see that some other basis $\LP \hat{e}_\mu \RP$ has this property iff \begin{equation}
+\hat{e}^\mu = \Lambda^\mu _{ \ \nu} \hat{e}^\nu
+\end{equation}
+for $\Lambda$ a Lorentz transformation. Again, we see that the degree of ambiguity is parametrized by a Lie group of real dimension 6.\\
+\\
+\
+On the other hand, the isomorphisms indicated by solid bidirectional arrows are canonical. Along the rightmost edge of our diagram, we recall that the the conformal automorphisms of $\C \cup \{\infty\}$ connected to the identity are exactly the fractional linear transformations \begin{equation}
+z \mapsto \frac{az + b}{c z + d}
+\end{equation}
+for $a, b, c, d \in \C$ satisfying WLOG $ad - bc = 1$. So to any special linear matrix we can associate such a mapping as \begin{equation}
+\begin{bmatrix}
+a & b \\ c & d
+\end{bmatrix} \mapsto \LP z \mapsto \frac{az + b}{c z + d} \RP.
+\end{equation}
+This group homomorphism is 2:1, with $\pm M$ having the same image, hence induces a canonical isomorphism between $\mbox{Conf}^+(\C \cup \{\infty\})$ and $SL(2,\C) / \Z_2$.\\
+\\
+\
+The canonical isomorphism between $SO^+(3,1)$ and $\mbox{Conf}(S^2)$ is best described in more geometrical terms. We associate to any nonzero null vector $p = (p^0, \vec{p}) \in \R^{3+1}$ the normalized future-directed null vector $\hat{p}$ by taking \begin{equation}
+p = p^0 \hat{p} \implies \hat{p} = \LP 1, \frac{\vec{p}}{p^0} \RP \mbox{ where } \frac{\vec{p}}{p^0} \in S^2
+\end{equation}
+The unit vectors $\hat{p}$ correspond naturally to points on $S^2$, and they get moved around if we replace $p$ with $\Lambda p$. So any Lorentz transformation $\Lambda \in SO(3,1)$ induces an automorphism (which one can convince oneself is conformal) of $S^2$ given by \begin{equation}
+\hat{p} \mapsto \widehat{\Lambda p}.
+\end{equation}
+This map is well-defined, as it doesn't depend on how at intermediate steps we lift $\hat{p}$ to $p$. It also illustrates exactly why the correct isomorphism is between the proper orthochronous Lorentz Lorentz transformations $\Lambda \in SO^+(3,1)$ and orientation-preserving conformal transformations $f \in \mbox{Conf}^+(S^2)$: any Lorentz transformation which isn't proper orthochronous must be a proper orthochronous one composed with the PT reflection $x^\mu \mapsto - x^\mu$, but such a transformation corresponds to the identity transformation on $S^2$. We see similarly that any Lorentz transformation built from only one of $P$, $T$ is orientation-reversing on $S^2$. So we can lift to a slightly more detailed homomorphism from Minkowski-norm-preserving linear transformations to not-necessarily-orientation-preserving conformal maps \begin{equation}
+\pi: O(3,1) \to \mbox{Conf}(S^2).
+\end{equation}
+The domain has four connected components corresponding to whether a transformation includes $P$ and $T$, the codomain has two corresponding to whether a transformation flips orientation, and the map is 2:1 with kernel $PT$. \\
+\\
+\
+Now we want to parametrize the null external momenta appearing in our scattering amplitude in a way which plays nicely with these isomorphisms. Concretely, we want to put conformal coordinates $(z, \bar{z})$ on $S^2 \simeq \{$normalized null momenta$\}$. For reasons just described this will require some arbitrary choices, but we know that $z$ should transform under a fractional-linear mapping when $p$ transforms under a linear one, and we know that any two momenta differing by overall scaling should correspond to the same point on $S^2$. We therefore follow \cite{Pasterski:2016qvg} and take \begin{equation}
+z = \frac{p^1 + i p^2}{p^0 + p^3}
+\end{equation}
+From this we see immediately that a spatial rotation about the bulk $x^3$-axis and boosts along the same corresponding on the boundary to rotation and dilatations centered at the origin. Equivalently, this corresponds to putting coordinates on $S^2$ via a stereographic projection onto the $x^1 x^2$-plane. \\
+\\
+\
+After some algebraic fiddling modulo the relation $p_\mu p^\mu = 0$ we find \begin{equation}
+\LP \frac{p^1}{p^0}, \frac{p^2}{p^0}, \frac{p^3}{p^0} \RP = \LP \frac{z + \bar{z}}{1 + z \bar{z}}, \frac{-i(z - \bar{z})}{1 + z \bar{z}}, \frac{1 - z \bar{z}}{1 + z \bar{z}} \RP.
+\end{equation}
+So up to an arbitrary choice of normalization (which we make slightly differently than we did above), we decompose \begin{equation}
+p(\omega, z, \bar{z}) = \omega \hat{p}(z, \bar{z}) = \omega \LP 1 + z \bar{z}, z + \bar{z}, -i(z - \bar{z}), 1 - z \bar{z} \RP.
 \end{equation}
 
 
 
 
 
-\subsection{Integrating out energy}
 
 
+
+
+
+
+
+
+\subsection{Mellin-Transformation Diagonalizes Boosts}
+Now given a single-particle state of momentum $p = \omega \hat{p}(z, \bar{z})$ and helicity $H$, we can write \begin{equation}
+\KET{p, H} \equiv \KET{\omega, z, \bar{z}, H}.
+\end{equation}
+We noted above that our goal is to produce from this ket another that transforms under global conformal transformations ``like a global conformal primary." What exactly does this mean? Algebraically, we know \cite{DiFrancesco:1997nk} that under a global transformation \begin{equation}
+z \mapsto z' = \frac{az + b}{cz + d}, \quad ad - bc = 1
+\end{equation}
+a global conformal primary in a 2D CFT with conformal weights $(h, \bar{h})$ transforms as \begin{equation}
+\mc{O}'_{h, \bar{h}}(z', \bar{z}') = \LP \frac{dz'}{dz} \RP^{-h} \LP \frac{d\bar{z}'}{d \bar{z}} \RP^{- \bar{h}} \mc{O}_{h, \bar{h}}(z, \bar{z}) = (cz + d)^{-2h} (\bar{c} \bar{z} + \bar{d})^{-2 \bar{h}} \mc{O}_{h, \bar{h}}(z, \bar{z}).
+\end{equation}
+In terms of Lie algebra elements, $\mc{O}_{h, \bar{h}}(z,\bar{z})$ simultaneously diagonalizes the subgroup of $\mbox{Conf}(\C \cup \{\infty\})$ which leaves $z, \bar{z}$ fixed, \textit{i.e.}, the subgroup generated by rotations and dilatations centered at $(z, \bar{z})$. Inserting our operators at the origin for ease of notation (the general case can be recovered by conjugation by translation), under a rotation $z' = e^{i \theta} z$ we have $(a,b,c,d) = (e^{i \theta/2}, 0, 1, e^{- i \theta/2})$ hence \begin{equation}
+\begin{aligned}
+\mc{O}'_{h, \bar{h}}(0, 0) & = e^{-i \theta (h - \bar{h})} \mc{O}_{h, \bar{h}}(0, 0) \equiv e^{-i \theta s} \mc{O}_{h, \bar{h}}(0, 0).
+\end{aligned}
+\end{equation}
+while under under an origin-centered dilatation $z' = e^{\Omega} z$ we have \begin{equation}
+\mc{O}'_{h, \bar{h}}(0, 0) = e^{- \Omega(h + \bar{h})} \mc{O}'_{h, \bar{h}}(0, 0) \equiv e^{- \Omega \Delta} \mc{O}'_{h, \bar{h}}(0, 0)
+\end{equation}
+So as usual we identify the combinations \begin{equation}
+\LP \Delta, s \RP = \LP h + \bar{h}, h - \bar{h} \RP
+\end{equation}
+as the conformal scaling weight and spin. By conjugation under translation, we see that in general $\mc{O}_{h, \bar{h}}(z, \bar{z})$ simultaneously diagonalized rotations around and dilatations about $(z, \bar{z})$. To match this in bulk Lorentz language, we need a $p(z, \bar{z})$-dependent ket which simultaneously diagonalizes rotation about and boosts along $p(z, \bar{z})$. We have already accomplished half of this: under a spatial rotation by $\theta$ about the spatial part of $p$, precisely by the definition of helicity we have \begin{equation}
+\KET{\omega, z, \bar{z}, H} \xmapsto{R_z(\theta)} e^{- i \theta H} \KET{\omega, z, \bar{z}, H}.
+\end{equation}
+So we have already diagonalized boundary rotations centered at $(z, \bar{z})$ and identify the bulk helicity $H$ with the boundary conformal spin $s$. We have not yet diagonalized boosts along $p$, under which our ket transforms as \begin{equation}
+\KET{\omega, z, \bar{z}, H}  \xmapsto{B_z(\beta)} \KET{e^{\beta} \omega, z, \bar{z}, H}
+\end{equation}
+where $\beta$ is the rapidity of the boost. We can reverse-engineer what integral transform does the job: we define a new ket related to the old one by a Mellin-transform with respect to the scaling parameter $\omega$. \begin{equation}
+\KET{\Delta, z, \bar{z}, s} = \int_0^\infty \frac{d \omega}{\omega} \omega^{\Delta} \KET{\omega, z, \bar{z}, H = s}.
+\end{equation}
+Then under a boost we have \begin{equation}
+\begin{aligned}
+\KET{\Delta, z, \bar{z}, s} & \xmapsto{B_z(\beta)} \int_0^\infty \frac{d \omega}{\omega} \omega^{\Delta} \KET{e^{\beta} \omega, z, \bar{z}, H = s} \\
+& = \int_0^\infty \frac{d  \LP e^{-\beta} \omega \RP}{\LP e^{ -\beta} \omega \RP} \LP e^{- \beta} \omega \RP^{\Delta} \KET{e^{\beta} \LP e^{ -\beta} \omega \RP, z, \bar{z}, H = s} \\
+& = e^{-\beta \Delta} \int_0^\infty \frac{d \omega}{\omega} \omega^{\Delta} \KET{\omega, z, \bar{z}, H = s}  \\
+& = e^{-\beta \Delta} \KET{\Delta, z, \bar{z}, s}.
+\end{aligned}
+\end{equation}
+TODO: Describe why these satisfy the right highest-weight condition to be conformal primaries. So far our argument is consistent with them being descendants.\\
+\\
+\
+Finally, we can write down our proposed celestial dictionary. Given a bulk scattering amplitude between $n$ on-shell external particles each with null momentum $p = \omega \hat{p}(z, \bar{z})$, we integrate out each $\omega$ by a Mellin transform to product an object which, at least kinematically, behaves like an $n$-point correlator in a 2D CFT. \begin{equation}
+\langle \mc{O}_{h_1, \bar{h}_1}(z_1, \bar{z}_1) \cdots \mc{O}_{h_n, \bar{h}_n}(z_n, \bar{z}_n) \rangle = \LP \prod_{i=1}^n \frac{d \omega_i}{\omega_i} \omega_i^{\Delta_i} \RP \mc{A}_n \LP \omega_1 \hat{p}(z_1, \bar{z}_1), H_1, n_1; \ldots; \omega_n \hat{p}(z_n, \bar{z}_n), H_n, n_n \RP.
+\end{equation}
+From this we get our first concrete prediction about the putative dual CFT. For each special of bulk particle with spin $s$, the boundary theory's spectrum includes a continuous family of conformal primaries with conformal weights \begin{equation}
+\LP h, \bar{h} \RP = \LP \frac{\Delta + s}{2}, \frac{\Delta - s}{2} \RP.
+\end{equation}
+parametrized by the continuum of possible values of $\Delta$. So far it is not clear exactly what range of $\Delta$'s should be allowed. One principled statement we can make is that, if we run through this argument in position space for bulk dimension $(d+1,1)$, the conformal primary wavefunctions with weights in the principal series \cite{Pasterski:2017kqt} \begin{equation}
+\Delta \in \frac{d}{2} + i \R
+\end{equation}
+form a complete basis of normalizable solutions to the free wave equation.
 
 
 \bibliography{bibfile}
 \bibliographystyle{utphys}
 
 \end{document}
-
-
-
-
-
 
 
