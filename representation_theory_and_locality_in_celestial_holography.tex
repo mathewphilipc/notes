@@ -80,7 +80,7 @@ TODO
 TODO
 
 
-\section{Kinematics of The Celestial Dictionary}
+\section{Kinematics of The Celestial Dual}
 Though we have discussed generally asymptotically flat spacetimes, we now restrict our attention to flat Minkowski space. We recall the well-known group isomorphism between the Lorentz group in signature $(d+1,1)$ and the Euclidean conformal group in $d$ dimensions. At $d = 2$ this becomes
 \begin{equation}
 SO(3,1) \simeq \mbox{Conf}(2,0).
@@ -275,9 +275,106 @@ parametrized by the continuum of possible values of $\Delta$. So far it is not c
 form a complete basis of normalizable solutions to the free wave equation.
 
 
+
+\subsection{Massive Particles}
+TODO
+
+
+
+
+\section{Dynamics of the Celestial Dual}
+
+\subsection{OPEs Organized by Symmetry}
+One of the miracles of 2D CFTs is that, by repeatedly taking operator product expansions (OPEs), one can write the $n$-point correlator of an arbitrary collection of non-coincident operator insertions in terms of sums and products of lower-point functions. As 2pt and 3pt functions are forced by symmetry up to a finite number of constants, this process almost entirely constrains the dynamics of our theory.\\
+\\
+\
+TODO: Write this more clearly, exactly what is left unfixed by OPEs?\\
+\\
+\
+On the boundary, computing an OPE means considering a correlator \begin{equation}
+\langle A (z_1, \bar{z}_1)
+B (z_2, \bar{z}_2) \cdots \rangle
+\end{equation}
+where we take $(z_1, \bar{z}_1)$ to be asymptotically close to $(z_2, \bar{z}_2)$, and $\cdots$ hides a finite number of other insertions some finite distance from $(z_2, \bar{z}_2)$. Then inside of our correlator we can replace \begin{equation}
+A (z_1, \bar{z}_1)
+B (z_2, \bar{z}_2) = \sum_{n, \bar{n} \in \Z} \frac{\{AB\}_{n, \bar{n}}(z_2, \bar{z}_2)}{z_{12}^n \bar{z}_{12}^{\bar{n}}}
+\end{equation}
+where \begin{equation}
+\LP z_{ij}, \bar{z}_{ij} \RP := \LP z_i - z_j, \bar{z}_i - \bar{z}_j \RP
+\end{equation}
+and where the coefficient fields $\{AB\}_{n, \bar{n}}$ are independent of the remaining insertions, are nonsingular at $(z_2, \bar{z}_2)$, and vanish for sufficiently large $n, \bar{n}$. This series converges exactly when $(z_1, \bar{z}_1)$ is closer to $(z_2, \bar{z}_2)$ then any other point in the correlator is. Knowing the OPE between $A$ and $B$ is equivalent to knowing all of the coefficients $\{AB\}_{n, \bar{n}}$.\\
+\\
+\
+Now we change notation slightly. We write our operators at $\mc{O}_i$, with conformal weights $(h_i, \bar{h}_i)$. By translation covariance we can also expand $(z, \bar{z})$ about the origin rather than $(z_1, \bar{z}_1)$ about $(z_2, \bar{z}_2)$, writing slightly more neatly \begin{equation}
+\mc{O}_1 (z, \bar{z})
+\mc{O}_2 (0,0) = \sum_{n, \bar{n} \in \Z} \frac{\{\mc{O}_1 \mc{O}_2\}_{n, \bar{n}}(0,0)}{z^n \bar{z}^{\bar{n}}}.
+\end{equation}
+Covariance under the conformal group strongly constrains the form of the RHS. For one, the LHS and RHS must transform in the same way under conformal transformations. The LHS has conformal weights $(h_1 + h_2, \bar{h}_1 + \bar{h}_2)$ \begin{equation}
+\mc{O}_1 (z, \bar{z})
+\mc{O}_2 (0,0) \sim (h_1 + h_2, \bar{h}_1 + \bar{h}_2)
+\end{equation}
+while $z^n \bar{z}^{\bar{n}}$ has conformal weights \begin{equation}
+z^n \bar{z}^{\bar{n}} \sim (-n, - \bar{n})
+\end{equation}
+so we can read off the conformal weights of the coefficients as \begin{equation}
+\{\mc{O}_1 \mc{O}_2\}_{n, \bar{n}} \sim (h_1 + h_2 - n, \bar{h}_1 + \bar{h}_2 - \bar{n}).
+\end{equation}
+We can make more progress by working in the basis for local operators given by conformal primaries $\mc{O}_P$ and their descendants $\D^n \bar{\D}^{\bar{n}} \mc{O}_P$. Denoting by $C_{12}^P$ the OPE coefficient of the primary $\mc{O}_P$ and by $\beta_{12 n \bar{n}}^P$ the relative coefficient of the $(n, \bar{n})$th descendant (so by construction $\beta^P_{1200} = 1$), we have \begin{equation}
+\mc{O}_1 (z, \bar{z})
+\mc{O}_2 (0,0) = \sum_P C_{12}^P \sum_{n, \bar{n}} \frac{\beta^P_{12 n \bar{n}}}{z^{h_1 + h_2 - h_P} \bar{z}^{\bar{h}_1 + \bar{h}_2 - \bar{h}_P}} \D_n \bar{\D}_{\bar{n}} \mc{O}_P(0,0).
+\end{equation}
+This form of the OPE is manifestly covariant under translation, rotation, and scaling, but for totally general coefficients $C, \beta$ does not yet enforce covariance under special conformal transformations. As it turns out \cite{Himwich:2021dau}, further enforcing covariant under SCTs (literally applying $[L_1, \cdot]$ and $[\bar{L}_1, \cdot]$ to both sides and equating the results term-by-term) recursively determinants the $\beta$ coefficients, leaving only the $C$'s as free data. In fact in a celestial CFT we can do better, since Lorentz symmetry embeds inside of a broader Poincar\'{e} group, and this extension on the boundary contrains even the leading coefficients $C_{12}^P$. More on this later.
+
+
+\subsection{OPEs from Bulk Scattering}
+We have just seen that boundary global conformal symmetry recursively determines the coefficients of descendants appearing in the OPE between any two primaries, so it suffices to compute just the OPE coefficients $C_{12}^P$ between primaries. We also recall that each continuous family of boundary primaries corresponds to a bulk particle species. Now we make a very nice observation: from our celestial dictionary, we see that taking two insertions $(z_1, \bar{z}_1), (z_1, \bar{z}_2)$ asymptotically close corresponds to taking the corresponding bulk external momenta $p_i = \omega_i \hat{p}(z_i, \bar{z}_i)$ for $i=1,2$ asymptotically collinear. \\
+\\
+\
+Luckily for us, it is straightforward to see in diagrammatic language why (and when) bulk scattering amplitudes diverge in this limit. If we consider a scattering amplitude with external legs $1,2$, and some other particle species $3$ where $1 + 2 \to 3$ scattering has a nonzero amplitude, then a subset of diagrams contributing to $1+2 \to (n-2)$ scattering will have an internal $3$ leg forced by momentum conservation to carry momentum $p_1 + p_2$. In our parametrization, the associated propagator is (modulo convention-dependent constants) \begin{equation}
+\frac{1}{(p_1 + p_2)^2} = \frac{1}{2 p_1 \cdot p_2} = \frac{1}{2\omega_1 \omega_2 \hat{p}(z_1, \bar{z}_1) \cdot \hat{p}(z_2, \bar{z}_2)} = \frac{-1}{4 (z_1 - z_2)(\bar{z}_1 - \bar{z}_2)}.
+\end{equation}
+Not only does this explain why boundary coincident singularities make sense from a bulk scattering perspective, it gives us highly quantitative information: \begin{itemize}
+\item The primaries $P$ appearing in the boundary $12 \to P$ OPE correspond to bulk particle species with a nonzero scattering amplitude against $1+2$, with OPE coefficient scaling with the amplitude for such a process.
+\item The boundary OPEs are most inverse-linear in $z_{12}$ and $\bar{z}_{12}$.
+\end{itemize}
+Conversely, this hints at an analytic subtlety. So far we have been doing all of our complex analysis in a formalism which (at least typographically) treats $z, \bar{z}$ as independent variables. Said more concretely, a complex function which isn't holomorphic may nonetheless admit a local Laurent series involving powers of both $z$ and $\bar{z}$ \begin{equation}
+f: \C \to \C, \quad f(z) = \sum_{n, \bar{n} \in \Z} a_{n \bar{n}} z^n \bar{z}^{\bar{n}}.
+\end{equation}
+This series expansion then defines a function of two complex variables by taking $z, \bar{z} \in \C$ to be independent. We recover $f$ by working on the ``real surface" where $z, \bar{z}$ are conjugates. This is a standard game to play when studying 2D CFTs. On the amplitudes side, however, it raises some concern. \\
+\\
+\
+Like OPEs in a 2D CFT, bulk amplitudes are productively studied by continuing off the real surface. Equivalently, if we use spinor helicity notation to factor our null momenta as \begin{equation}
+p_{\alpha \dot{\alpha}} \equiv p_\mu  \sigma^\mu_{\alpha \dot{\alpha}} = \lambda_\alpha \tilde{\lambda}_{\dot{\alpha}}
+\end{equation}
+it is illuminating to analytically continue to complex momenta by dropping the assumption that $\lambda, \tilde{\lambda}$ be component-wise complex conjugates of one another. But then we have have variously \begin{equation}
+p_1 \cdot p_2 \sim (z_1 - z_2) (\bar{z}_1 - \bar{z}_2) \sim (\lambda_1 \cdot \lambda_2) (\tilde{\lambda}_1 \cdot \tilde{\lambda}_2).
+\end{equation}
+So taking $p_1 \cdot p_2 \to 0$ can be accomplished by taking $z_1 - z_2 \sim \lambda_1 \cdot \lambda_2 \to 0$, or $\bar{z}_2 - \bar{z}_2 \sim \tilde{\lambda}_1 \cdot \tilde{\lambda}_2 \to 0$, and these limits may or may not commute. Certainly from the bulk side it's often unclear the correct limit to take, and much of the amplitudes literature contents itself wih taking the holomorphic limit $z_1 - z_2 \sim \lambda_1 \cdot \lambda_2 \to 0$ with the antiholomorphic variables fixed. From this one can recover the opposite limit by symmetry, though recovering the simultaneous limit is more difficult.\\
+\\
+\
+In any case, if we are happy to worry just about the holomorphic limit we can use known properties of bulk collinear limits to infer the corresponding boundary OPEs in the same kind of limit. The strategy is as described above: any $1 + 2 \to 3$ channel in the bulk gives rise to a contribution $\mc{O}_3$ to the boundary $\mc{O}_1 \mc{O}_2$ OPE with singularity $\sim \frac{1}{z_{12}}$, plus subleading terms corresponding on the boundary to descendants of $\mc{O}_3$. The structure of the bulk 3pt vertex then fixes the finer structure of the boundary OPE.\\
+\\
+\
+In the simplest example, we can consider tree-level pure-glue Yang-Mills \cite{Pate:2019lpp}. Free of loop-level and non-perturbative corrections, our bulk has only two bulk particle species\footnote{Our phrasing here is literal and intentional: under the standard definition of a particle species as a sufficiently small irrep of $SO^+(3,1)$ in our Hilbert space, a positive-helicity gluon cannot be transformed into a negative one. This point is often glossed over.} So tree level $GG \to G$ bulk scattering channel in gives rise to the holomorphic OPE channel \begin{equation}
+\mc{O}_{\Delta_1, s_1} (z_1, \bar{z}_1) \mc{O}_{\Delta_2, s_2} (z_2, \bar{z}_2) \propto \frac{1}{z_{12}} \mc{O}_{\Delta_3, s_3} (z_3, \bar{z}_3) + \mbox{(descendants) + (other channels) + (reg)}
+\end{equation}
+where $\mc{O}_{\Delta, s}$ for $s = \pm 1$ is the celestial dual to a gluon with helicity $s$. While a Mellin transform in a vacuum has $\Delta$ as a free variable, it turns out that bulk physics fixes $\Delta_3$ in the above OPE. In more detail, a 3pt interaction vertex \begin{equation}
+V_{3 \mbox{\tiny{pt}}} \sim \LP \D_{m_1} \Phi_1 \RP \LP \D_{m_2} \Phi_2 \RP \LP \D_{m_3} \Phi_3 \RP \quad m_1 + m_2 + m_3 \equiv m
+\end{equation} 
+has mass dimension $3 + m$\footnote{A bosonic field with a standard kinetic term in $D$ dimensions has mass dimension $\frac{D-2}{2}$, which in $3+1$ reduces to 1.} This gives rise to a $1 + 2 \to 3$ scattering channel with amplitude scaling like $p_3^m$. Schematically, we then have a singularity... TODO: come back to this. Need an elementary argument. Anyway we know \begin{equation}
+\Delta_3 = \Delta_1 + \Delta_2 + d_V - 5.
+\end{equation}
+
+
+
+
+
+
+
+
+
+
 \bibliography{bibfile}
 \bibliographystyle{utphys}
 
 \end{document}
-
-
