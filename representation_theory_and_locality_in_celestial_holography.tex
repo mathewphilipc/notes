@@ -320,7 +320,7 @@ z^n \bar{z}^{\bar{n}} \sim (-n, - \bar{n})
 so we can read off the conformal weights of the coefficients as \begin{equation}
 \{\mc{O}_1 \mc{O}_2\}_{n, \bar{n}} \sim (h_1 + h_2 - n, \bar{h}_1 + \bar{h}_2 - \bar{n}).
 \end{equation}
-We can make more progress by working in the basis for local operators given by conformal primaries $\mc{O}_P$ and their descendants $\D^n \bar{\D}^{\bar{n}} \mc{O}_P$. Denoting by $C_{12}^P$ the OPE coefficient of the primary $\mc{O}_P$ and by $\beta_{12 n \bar{n}}^P$ the relative coefficient of the $(n, \bar{n})$th descendant (so by construction $\beta^P_{1200} = 1$), we have \begin{equation}
+We can make more progress by working in the basis for local operators given by conformal primaries $\mc{O}_P$ and their descendants $\D^n \bar{\D}^{\bar{n}} \mc{O}_P$. Denoting by $C_{12}^P$ the OPE coefficient of the primary $\mc{O}_P$ and by $\beta_{12 n \bar{n}}^P$ the relative coefficient of the $(n, \bar{n})$th descendant (so by construction $\beta^P_{1200} = 1$), we have \begin{equation}\label{generalpairwiseOPE}
 \mc{O}_1 (z, \bar{z})
 \mc{O}_2 (0,0) = \sum_P C_{12}^P \sum_{n, \bar{n}} \frac{\beta^P_{12 n \bar{n}}}{z^{h_1 + h_2 - h_P} \bar{z}^{\bar{h}_1 + \bar{h}_2 - \bar{h}_P}} \D_n \bar{\D}_{\bar{n}} \mc{O}_P(0,0).
 \end{equation}
@@ -438,21 +438,106 @@ Then it turns out that a similarly simple contour integral prescription fixes th
 \end{aligned}
 \end{equation}
 Applying this to a theory with known pairwise OPEs lets us compute multiparticle OPEs directly with no need to compute involved multicollinear amplitudes in the bulk. For example, in (tree-level, matter-free, perturbative about flat space) Einstein gravity we have pairwise OPEs in the holomorphic limit \cite{Pate:2019lpp} \begin{equation}
-G_{\Delta_1}^{s_1} (z_1, \bar{z}_1) G_{\Delta_1}^{s_2} (z_2, \bar{z}_2) = - \delta_{s_1 + s_2 \geq 0} \frac{\kappa}{2} \frac{\bar{z}_{12}}{z_{12}} B(\Delta_1 - 1, \Delta_2 - s_2 + 1) G^{\min (s_1, s_2)}_{\Delta_1 + \Delta_2} (z_2, \bar{z}_2)
+G_{\Delta_1}^{s_1} (z_1, \bar{z}_1) G_{\Delta_1}^{s_2} (z_2, \bar{z}_2) = - \delta_{s_1 + s_2 \geq 0} \frac{\kappa}{2} \frac{\bar{z}_{12}}{z_{12}} B(\Delta_1 - s_1 + 1, \Delta_2 - s_2 + 1) G^{\min (s_1, s_2)}_{\Delta_1 + \Delta_2} (z_2, \bar{z}_2)
 \end{equation}
-
-
-
-\begin{equation} \label{boundary-graviton-holomorphic}
-    \begin{split}
-       G_{\Delta_1}^{s_1}& (z_1,  \bar{z}_1) :G_{\Delta_2}^{s_2} G_{\Delta_3}^{s_3}:(z_3, \bar{z}_3)\\   
-      & \sim \frac{\kappa^2}{4} \frac{\bar{z}_{13}^2}{z_{13}^2}\delta_{s_1 + s_2 +s_3 \geq 0} 
-      \sum_{m=0}^\infty \frac{\bar{z}_{13}^m}{m!}B(2 \bar{h}_1 + 2+m, 2 \bar{h}_2 + 1, 2 \bar{h}_3 + 1) \bar{\partial}^mG_{\Delta_1 + \Delta_2 + \Delta_3}^{ \min( s_1, s_2, s_3)  }(z_3, \bar{z}_3) \\
-      \ & \ \ \ - \frac{\kappa}{2} \frac{\bar{z}_{13}}{z_{13}} \delta_{s_1 + s_2 \geq 0} \sum_{m=0}^\infty \frac{\bar{z}_{13}^m}{m!} B(2 \bar{h}_1 + 1+m, 2 \bar{h}_2 + 1) :\Big(\bar{\partial}^m G^{ \min(s_1, s_2) } _{\Delta_1 + \Delta_2} \Big) G_{\Delta_3}^{s_3}: (z_3, \bar{z}_3)  \\
+Plugging this into the generalized Wick theorem \eqref{generalizedwick} gives at leading order \begin{equation} \label{boundary-graviton-holomorphic-leading}
+\begin{split}
+G_{\Delta_1}^{s_1}& (z_1,  \bar{z}_1) :G_{\Delta_2}^{s_2} G_{\Delta_3}^{s_3}:(z_3, \bar{z}_3)\\   
+& \sim \frac{\kappa^2}{4} \frac{\bar{z}_{13}^2}{z_{13}^2}\delta_{s_1 + s_2 +s_3 \geq 0} B(\Delta_1 - s_1 + 2, \Delta_2 - s_2 + 1, \Delta_3 - s_3 + 1) G_{\Delta_1 + \Delta_2 + \Delta_3}^{ \min( s_1, s_2, s_3)  }(z_3, \bar{z}_3) \\
+\ & \ \ \ - \frac{\kappa}{2} \frac{\bar{z}_{13}}{z_{13}} \delta_{s_1 + s_2 \geq 0} B(\Delta_1 - s_1, \Delta_2 - s_2 + 1) : G^{ \min(s_1, s_2) } _{\Delta_1 + \Delta_2} G_{\Delta_3}^{s_3}: (z_3, \bar{z}_3)  \\
+\ & \ \ \ - \frac{\kappa}{2} \frac{\bar{z}_{13}}{z_{13}}   \delta_{s_1 + s_3 \geq 0} B(\Delta_1 - s_1 + 1, \Delta_3 - s_3 + 1) :G_{\Delta_2}^{s_2} G^{ \min(s_1, s_3) }_{\Delta_1 + \Delta_3}:(z_3, \bar{z}_3).
+\end{split}
+\end{equation}
+If we run through the procedure with all descendants in the pairwise OPEs (and straighten up notation slightly by writing in terms of $(h, \bar{h})$ rather than $(\Delta, s)$) we get more precisely \begin{equation} \label{boundary-graviton-holomorphic}
+\begin{split}
+G_{\Delta_1}^{s_1}& (z_1,  \bar{z}_1) :G_{\Delta_2}^{s_2} G_{\Delta_3}^{s_3}:(z_3, \bar{z}_3)\\   
+& = \frac{\kappa^2}{4} \frac{\bar{z}_{13}^2}{z_{13}^2}\delta_{s_1 + s_2 +s_3 \geq 0}  \sum_{m=0}^\infty \frac{\bar{z}_{13}^m}{m!}B(2 \bar{h}_1 + 2+m, 2 \bar{h}_2 + 1, 2 \bar{h}_3 + 1) \bar{\partial}^mG_{\Delta_1 + \Delta_2 + \Delta_3}^{ \min( s_1, s_2, s_3)  }(z_3, \bar{z}_3) \\
+\ & \ \ \ - \frac{\kappa}{2} \frac{\bar{z}_{13}}{z_{13}} \delta_{s_1 + s_2 \geq 0} \sum_{m=0}^\infty \frac{\bar{z}_{13}^m}{m!} B(2 \bar{h}_1 + 1+m, 2 \bar{h}_2 + 1) :\Big(\bar{\partial}^m G^{ \min(s_1, s_2) } _{\Delta_1 + \Delta_2} \Big) G_{\Delta_3}^{s_3}: (z_3, \bar{z}_3)  \\
 \ & \ \ \ - \frac{\kappa}{2} \frac{\bar{z}_{13}}{z_{13}}   \delta_{s_1 + s_3 \geq 0}\sum_{m=0}^\infty \frac{\bar{z}_{13}^m}{m!}B(2 \bar{h}_1 + 1+m, 2 \bar{h}_3 + 1) :G_{\Delta_2}^{s_2} \Big(\bar{\partial}^m G^{ \min(s_1, s_3) }_{\Delta_1 + \Delta_3}\Big):(z_3, \bar{z}_3).
-    \end{split}
-\end{equation} 
+\end{split}
+\end{equation}
+If we take the general form \eqref{generalpairwiseOPE}, restrict to the celestial case of inverse-linear poles, and run again through the generalized Wick prescription \eqref{generalizedwick}, we find the maximally general result \begin{equation}\label{generalOPE-primary-holomorphic-and-antiholomorphic}
+\begin{split}
+ \mc{O}_1&(z_1, \bar{z}_1) : \mc{O}_2 \mc{O}_3:(z_3, \bar{z}_3) \\
+& \sim \sum_{I,J} \frac{\gamma_{s_I}^{s_1, s_2} \gamma_{s_J}^{s_{I}, s_3}}{z^2_{13}}    \bar{z}_{13}^{p_{12I}+p_{I3J}}  B(2 \bar{h}_1 + p_{12I} + p_{I3J}, 2\bar{h}_2 + p_{12I}, 2\bar{h}_3 + p_{I3J})   \mc{O}_{J} (z_3,\bar{z}_3)  \\
+& \quad+ \sum_{I,J} \frac{\bar{\gamma}_{s_I}^{s_1, s_2} \bar{\gamma}_{s_J}^{s_{I}, s_3}}{\bar{z}^2_{13}}    z_{13}^{\bar{p}_{12I}+\bar{p}_{I3J}}  B(2 h_1 +\bar{p}_{12I}+\bar{p}_{I3J}, 2h_2 +\bar{p}_{12I}, 2h_3+\bar{p}_{I3J})   \mc{O}_{J} (z_3,\bar{z}_3) \\
+& \quad  +\sum_{I,J}\delta_{\bar{p}_{I3J},0}
+\frac{\gamma^{s_1,s_2}_{s_I}  \bar{\gamma}_{s_J}^{s_I,s_3}}{z_{13}}\bar{z}_{13}^{p_{12I}-1}B(2h_1+ 2h_2 -2,2h_3)
+ \\& \quad \quad\quad \quad\quad \quad\quad \quad\quad \quad \times \left[B  (2\bar{h}_1+p_{12I}-1,2\bar{h}_2+p_{12I}) - B (2\bar{h}_1+p_{12I}-1,2 \bar{h}_2 )  \right]{\mathcal{O}}_{J}(z_3, \bar{z}_3)
+           \\
+& \quad  +\sum_{I,J}\delta_{p_{I3J},0}
+\frac{\bar{\gamma}^{s_1,s_2}_{s_I}   \gamma_{s_J}^{s_I,s_3}}{\bar{z}_{13}}z_{13}^{\bar{p}_{12I}-1}B(2\bar{h}_1+ 2\bar{h}_2 -2,2\bar{h}_3)
+ \\& \quad \quad\quad \quad\quad \quad\quad \quad\quad \quad \times \left[B  (2h_1+\bar{p}_{12I}-1,2h_2+\bar{p}_{12I}) - B (2h_1+\bar{p}_{12I}-1,2 h_2 )  \right]{\mathcal{O}}_{J}(z_3, \bar{z}_3)
+           \\
+&\quad+ \sum_{I}\frac{\gamma_{s_I}^{s_1, s_2}}{z_{13}}  \bar{z}_{13}^{p_{12I}} B(2\bar{h}_1 +p_{12I}, 2\bar{h}_2 +p_{12I}) : \mc{O}_{I} \mc{O}_3:(z_3, \bar{z}_3) \\
+& \quad+ \sum_{I}\frac{\bar{\gamma}_{s_I}^{s_1, s_2}}{\bar{z}_{13}}  z_{13}^{\bar{p}_{12I}} B(2h_1 +\bar{p}_{12I}, 2h_2 +\bar{p}_{12I}) : \mc{O}_{I} \mc{O}_3:(z_3, \bar{z}_3) \\
+&\quad + \sum_{I}\frac{\gamma_{s_I}^{s_1, s_3}}{z_{13}}  \bar{z}_{13}^{p_{13I}} B(2\bar{h}_1 +p_{13I}, 2\bar{h}_3 +p_{13I}) :\mc{O}_2   \mc{O}_{I}:(z_3, \bar{z}_3) \\
+& \quad + \sum_{I}\frac{\bar{\gamma}_{s_I}^{s_1, s_3}}{\bar{z}_{13}}  z_{13}^{\bar{p}_{13I}} B(2h_1 +\bar{p}_{13I}, 2h_3+\bar{p}_{13I}) :\mc{O}_2   \mc{O}_{I}:(z_3, \bar{z}_3) 
+\end{split}
+\end{equation}
+plus descendants, where $p$... TODO.
 
+
+
+
+\section{Checks Against Gravitons in the Bulk}
+As noted above, from the bulk scattering perspect it is not at all obvious how single- and multi-particle contributions to the composite OPE should organize themselves. For example, even in the fairly recent paper \cite{Guevara:2024ixn} contains the ansatz for  composite negative-helicity gluons \begin{equation}
+\begin{aligned}
+& \mc{O}_1^{a,-}(z_1, \bar{z}_1) :\mc{O}_2^{b,-} \mc{O}_3^{c,-}:(z_3, \bar{z}_3)
+& \sim \frac{\mc{C}^{a^- b^- c^-}_{ \ \ \ \ \ \ \ \ \ d^-}}{\bar{z}_{13}^2} \mc{O}^{d,-}_p(z_3, \bar{z}_3) + \frac{\mc{D}^{a^- b^- c^-}_{ \ \ \ \ \ \ \ \ \ d^- e^-}}{\bar{z}_{13}} : \mc{O}_p^{d, -} \mc{O}_q^{e,-}:(z_3, \bar{z}_3)
+\end{aligned}
+\end{equation}
+with $\mc{C}, \mc{F}$ treated as independent coefficients to be determined. For tree-level Einstein gravity expanded about flat space, we are able to compute both of these contributions using bulk methods, and find that they agree exactly with the result of our complex-analytic boundary method.
+
+
+\subsection{Leading Single-Particle Contributions}
+As noted above, we already know the pairwise OPE between celestial gravitons in (matter-free tree-level perturbative about flat-space) Einstein. The authors of \cite{Ball:2023sdz, Guevara:2024ixn} use purely bulk methods to infer the leading multicollinear singularity for bulk graviton scattering, then take a Mellin transform to deduce the leading single-particle contributions to the composite OPE. Concretely, they move into spinor-helicity notation \begin{equation}
+\KET{p} = \epsilon \sqrt{2 \omega} \begin{bmatrix} 1 \\ z \end{bmatrix}, \quad [p] = \sqrt{2 \omega} \begin{bmatrix} 1 \\ \bar{z} \end{bmatrix}
+\end{equation}
+and parametrize a holomorpic collinear limit as $\KET{p_i} \approx \KET{p_j}$ with $[p_i], [p_j]$ fixed. They parametrize the 3-collinear limit as \begin{equation}
+z_1 = z_3 + \varepsilon, \quad z_2 = z_2 + \eta \varepsilon.
+\end{equation}
+Then in the regime of asymptotically small $\varepsilon$, we can take $\eta \to \varepsilon, 1, \infty$ to determine the order in which the three limits are taken. At general $\eta$ but at asymptotically small $\varepsilon$, an $n$-point graviton amplitude has leading divergence characterized by a splitting function \begin{equation}
+\mc{A}_n \LP 1^{s_1} 2^{s_2} 3^{s_3} 4^{s_4} \cdots n^{s_n} \RP = \sum_J \underbrace{\mbox{Split} \LP 1^{s_1} 2^{s_2} 3^{s_3} \to J^{s_J} \RP \mc{A}_{n-2} \LP J^{s_J} \cdots n^{s_n} \RP}_{\sim \varepsilon^{-2}} + \mc{O} \LP \varepsilon^{-1} \RP 
+\end{equation}
+where $J^{s_J}$ is the internal graviton that goes on-shell, and where we must sum over the two possible helicities $J$. The authors of \cite{Ball:2023sdz} compute this splitting function by diagrammatic arguments, then Mellin-transform to find \begin{equation}
+\begin{aligned}
+& \mc{O}^{++}_{\Delta_1}(z_1, \bar{z}_1)
+\mc{O}^{++}_{\Delta_2}(z_2, \bar{z}_2)
+\mc{O}^{++}_{\Delta_3}(z_3, \bar{z}_3) \\
+& = \LP \frac{\kappa}{2} \RP^2 \sum_{n=0}^\infty \sum_{m=0}^n \frac{\bar{z}_{13}^m \bar{z}^{n-m}_{23}}{m! (n-m)!} \bar{\D}^n \mc{O}^{++}_{\Delta_1 + \Delta_2 + \Delta_3}(z_3, \bar{z}_3) \Bigg[ B(\Delta_1 + m, \Delta_2 - 1 + n - m, \Delta_3 - 1) \frac{\bar{z}_{12} \bar{z}_{13}}{z_{12} z_{13}} \\
+& \quad + B(\Delta_1 - 1 + m, \Delta_2 + n - m, \Delta_3 - 1) \frac{\bar{z}_{12} \bar{z}_{23}}{z_{12} z_{23}} + B(\Delta_1 - 1 + m, \Delta_2 - 1 + n - m, \Delta_3) \frac{\bar{z}_{13} \bar{z}_{23}}{z_{13} z_{23}} \Bigg]
+\end{aligned}
+\end{equation}
+plus terms that contribute only at subleading order in the 3-collinear divergence. We repeat their calculations to include arbitrary combinations of graviton helicities, manipulate the relevant Laurent series to extract $\mc{O}_1 :\mc{O}_2 \mc{O}_3:$, and from this read off the single-particle contributions to the OPE. We find that the results agree exactly with our boundary calculation by generalized Wick starting from the pairwise OPEs.
+
+
+
+
+\subsection{Multiparticle Contributions and MHV Gravitons}
+To compute the multiparticle contributions to the composite graviton OPE, we restrict our attention to MHV amplitudes and in exchange are granted an exact recursion relation between tree-level graviton amplitudes  \cite{Hodges:2011wm, Guevara:2019ypd}. In spinor-helicity notation, we have 
+\begin{equation} \label{MHV-recursion}
+     \begin{split}
+         \mathcal{A}_{n }^{\mbox{\scriptsize{MHV}}} & = \mathcal{A}_{n }^{\mbox{\scriptsize{MHV}}}(\{\lambda_1, \tilde{\lambda}_1\}, \ldots, \{\lambda_n, \tilde{\lambda}_n\}) \\
+         &= \frac{\kappa}{2} \sum_{i=2}^{n-2} \frac{[1i] \langle ni \rangle \langle (n-1)i \rangle}{\langle 1i\rangle\langle n1 \rangle \langle (n-1)1 \rangle} \mathcal{A}_{n-1}^{\rm MHV} \left(\{\lambda_2, \tilde {\lambda}_{2} \},  \cdots, \left \{ \lambda_i, \tilde \lambda_i +\frac{\langle n1 \rangle}{\langle ni \rangle} \tilde{\lambda}_1 \right\}, \cdots, \left\{ \lambda_n, \tilde \lambda_n +\frac{\langle i1 \rangle}{\langle in \rangle} \tilde{\lambda}_1 \right\} \right).
+     \end{split}
+\end{equation}
+The exact calculation is involved and subtle, but we can say a few words: this relation expression an $n$-point amplitude in terms of an $(n-1)$pt amplitude. Applying it twice gives us an $(n-2)$pt amplitude. This is exactly the kind of relation we ought to hope to find in the bulk, as this kind of recursion in the degree of an amplitude is exactly the bulk dual of computing boundary correlators recursively in the number of correlators. The latter is in turn exactly what we do when we compute an OPE. So it is perhaps not surprising that this bulk recursion relation lets us compute not just the multiparticle contributions to the composite OPE of boundary gravitons, but the single-particle contributions as well. We find  \begin{equation}
+     \begin{split}
+         & \langle G^+_{\Delta_1}(z_1, \bar{z}_1) : G^+_{\Delta_2}G^\pm_{\Delta_3}:(z_3, \bar{z}_3) \cdots\rangle \\
+         & \quad \sim \frac{\kappa^2}{4} \frac{\bar{z}_{13}^2}{z_{13}^2}\sum_{m=0}^\infty \frac{\bar{z}_{13}^{m}}{m!}   B(2 \bar{h}_1 + 2 + m, 2 \bar{h}_2 + 1, 2 \bar{h}_3 + 1) \langle \bar{\partial}^m G^\pm_{\Delta_1+\Delta_2+\Delta_3} (z_3, \bar{z}_3) \cdots \rangle\\
+         &\quad \quad - \frac{\kappa}{2} \frac{\bar{z}_{13}}{z_{13}}\sum_{m=0}^\infty \frac{\bar{z}^{m}_{13}}{m!}  B(2 \bar{h}_1+1 + m, 2 \bar{h}_2 + 1) \langle  :\LP \bar{\D}^m G^{+} _{\Delta_1 + \Delta_2} \RP G_{\Delta_3}^{\pm }: (z_3, \bar{z}_3)\cdots \rangle \\
+         & \quad \quad - \frac{\kappa}{2} \frac{\bar{z}_{13}}{z_{13}}\sum_{m=0}^\infty \frac{\bar{z}^{m}_{13}}{m!}B(2 \bar{h}_1 + 1 + m, 2 \bar{h}_3 + 1) \langle  :G_{\Delta_2}^{+} \bar{\D}^m G^{\pm}_{\Delta_1 + \Delta_3} :(z_3, \bar{z}_3)\cdots \rangle,
+     \end{split}
+\end{equation}
+in exact agreement with our boundary result.
+
+
+
+\section{OPEs from Bulk Poincar\'{e}}
+
+
+\section{It's just Complex Analysis!}
 
 
 \section{TODO}
