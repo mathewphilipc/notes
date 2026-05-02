@@ -31,6 +31,7 @@
 \newcommand{\BRA}[1]{\left\langle #1 \right| }
 \newcommand{\IP}[2]{\left\langle #1 \middle| #2 \right\rangle}
 \newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+\usepackage{simpler-wick}
 
 \usepackage{pst-node}
 \usepackage{tikz-cd} 
@@ -349,7 +350,7 @@ p_{\alpha \dot{\alpha}} \equiv p_\mu  \sigma^\mu_{\alpha \dot{\alpha}} = \lambda
 it is illuminating to analytically continue to complex momenta by dropping the assumption that $\lambda, \tilde{\lambda}$ be component-wise complex conjugates of one another. But then we have have variously \begin{equation}
 p_1 \cdot p_2 \sim (z_1 - z_2) (\bar{z}_1 - \bar{z}_2) \sim (\lambda_1 \cdot \lambda_2) (\tilde{\lambda}_1 \cdot \tilde{\lambda}_2).
 \end{equation}
-So taking $p_1 \cdot p_2 \to 0$ can be accomplished by taking $z_1 - z_2 \sim \lambda_1 \cdot \lambda_2 \to 0$, or $\bar{z}_2 - \bar{z}_2 \sim \tilde{\lambda}_1 \cdot \tilde{\lambda}_2 \to 0$, and these limits may or may not commute. Certainly from the bulk side it's often unclear the correct limit to take, and much of the amplitudes literature contents itself wih taking the holomorphic limit $z_1 - z_2 \sim \lambda_1 \cdot \lambda_2 \to 0$ with the antiholomorphic variables fixed. From this one can recover the opposite limit by symmetry, though recovering the simultaneous limit is more difficult.\\
+So taking $p_1 \cdot p_2 \to 0$ can be accomplished by taking $z_1 - z_2 \sim \lambda_1 \cdot \lambda_2 \to 0$, or $\bar{z}_2 - \bar{z}_2 \sim \tilde{\lambda}_1 \cdot \tilde{\lambda}_2 \to 0$, and these limits may or may not commute. Certainly from the bulk side it's often unclear the correct limit to take, and much of the amplitudes literature contents itself wih taking the holomorphic limit $z_1 - z_2 \sim \lambda_1 \cdot \lambda_2 \to 0$ with the anti-holomorphic variables fixed. From this one can recover the opposite limit by symmetry, though recovering the simultaneous limit is more difficult.\\
 \\
 \
 In any case, if we are happy to worry just about the holomorphic limit we can use known properties of bulk collinear limits to infer the corresponding boundary OPEs in the same kind of limit. The strategy is as described above: any $1 + 2 \to 3$ channel in the bulk gives rise to a contribution $\mc{O}_3$ to the boundary $\mc{O}_1 \mc{O}_2$ OPE with singularity $\sim \frac{1}{z_{12}}$, plus subleading terms corresponding on the boundary to descendants of $\mc{O}_3$. The structure of the bulk 3pt vertex then fixes the finer structure of the boundary OPE.\\
@@ -364,6 +365,15 @@ V_{3 \mbox{\tiny{pt}}} \sim \LP \D_{m_1} \Phi_1 \RP \LP \D_{m_2} \Phi_2 \RP \LP 
 has mass dimension $3 + m$\footnote{A bosonic field with a standard kinetic term in $D$ dimensions has mass dimension $\frac{D-2}{2}$, which in $3+1$ reduces to 1.} This gives rise to a $1 + 2 \to 3$ scattering channel with amplitude scaling like $p_3^m$. Schematically, we then have a singularity... TODO: come back to this. Need an elementary argument. Anyway we know \begin{equation}
 \Delta_3 = \Delta_1 + \Delta_2 + d_V - 5.
 \end{equation}
+In the case of pure-glue tree-level Yang-Mills, the authors of \cite{Pate:2019lpp} use these techniques to determine the leading-order holomorphic singular between celestial positive-helicity gluons to be \begin{equation}
+\mc{O}^{+a}_{\Delta_1} (z_1, \bar{z}_1)
+\mc{O}^{+b}_{\Delta_2} (z_2, \bar{z}_2) = - \frac{if^{ab}_{ \ \ c}}{z_{12}} B(\Delta_1 - 1, \Delta_2 - 1) \mc{O}^{+c}_{\Delta_! + \Delta_2 - 1}(z_2, \bar{z}_2) + \mbox{(descendants) + (reg)}.
+\end{equation}
+Then the recursive structure forced by covariance under special conformal transformations further fixes the descendant contributions and we have more precisely \begin{equation}
+\mc{O}^{+a}_{\Delta_1} (z_1, \bar{z}_1)
+\mc{O}^{+b}_{\Delta_2} (z_2, \bar{z}_2) = - \frac{if^{ab}_{ \ \ c}}{z_{12}} \sum_{n = 0}^\infty \bar{z}_{12}^n B(\Delta_1 + n - 1, \Delta_2 - 1) \bar{\D}^n \mc{O}^{+c}_{\Delta_! + \Delta_2 - 1}(z_2, \bar{z}_2) + \mbox{(reg)}.
+\end{equation}
+Note that the answer is simplified because any holomorphic descendants would contribute only to the regular part. Similar results hold for generalizations to mixed-helicity gluons, to tree-level gravity, and to their combination into tree-level Einstein-Yang-Mills.
 
 
 
@@ -372,9 +382,85 @@ has mass dimension $3 + m$\footnote{A bosonic field with a standard kinetic term
 
 
 
+
+
+
+
+
+
+
+\section{Multicollinear Limits}
+A corner of this picture which has been somewhat obscure until recently is the extension to multicollinear amplitudes. In the simplest case the idea is to take three off-shell momenta to all asymptotically parallel to one another and see what kinds of singularities arise. In more detail, to make the procedure well defined we must take $p_1, p_2$ asymptotically collinear, regularize by throwing out any singularities that arise, then take $p_3$ asymptotically collinear to the first two and see what singularities arise in this second limit. In other words we have $\hat{p}_i \cdot \hat{p}_j$ asymptotically small, but $\hat{p}_1 \cdot \hat{p}_2$ parametrically smaller than $\hat{p}_1 \cdot \hat{p}_3 \approx \hat{p}_2 \cdot \hat{p}_3$.\\
+\\
+\
+Prior to our work \cite{Calkins:2026hpg}, multicollinear limits in celestial CFTs were mainly studied by computing multicollinear bulk amplitudes as just described and Mellin-transforming only at the end. This has a number of disadvantages: \begin{itemize}
+    \item The interaction between holomorphic and anti-holomorphic singularities is obscured and sometimes appears to rely on arbitrary choices.
+    \item Amplitudes are hard to compute exactly, and it is often tractable to compute the leading collinear singularities but not subleading ones. Extracting multicollinear singularities directly often rely on recursive schemes (\textit{e.g.}, \cite{Marquard:2005rh}), which are scarce. Meanwhile, a priori it is possible for the leading multicollinear singularities to receive contributions from subleading collinear singularities.
+    \item In bulk terms it is far from obvious how single- and multi-particle contributions to the multicollinear OPE constrain themselves. Concretely for example, the authors of \cite{Guevara:2024ixn} describe the contributions as essentialls independent. (TODO: Explain this better)
+\end{itemize}
+On the other hand, computing multicollinear OPEs in a 2D CFT is extremely natural, follows straightforward from pairwise OPE data, and involves no arbitrary decisions, essentially due to the highly constrained structure of complex analysis. The principle contributions of \cite{Calkins:2026hpg} were to \begin{itemize}
+    \item Explain the principled boundary-first recipe for computing multicollinear celestial OPEs.
+    \item Compute these directly from the bulk in a few of the rare theories were doing so is tractable by hand, and demonstrate agreement with the boundary calculation.
+    \item Explain why, even if one doubts the existence or niceness of the putative dual CFT, agreement was guaranteed in advance. In some sense the right recipe for computing this multicollinear limits has no physical content, but instead is forced on us by the structure of complex analysis.
+    \item Explain why the structure is similarly forced in terms of the boundary image of the enhancement of Lorentz symmetry to Poincar\'{e}.
+\end{itemize}
+
+
+\subsection{The Recipe from the Boundary: Composite Products and Generalized Wick}
+TODO: Uniformize notation in this section.\\
+\\
+\
+Translating the bulk procedure just described into boundary terms, we want to \begin{itemize}
+    \item Insert operators $\mc{O}_i(z_i, \bar{z}_i)$ for $i=1,2,3$ inside of a correlator along arbitrary other non-coincident insertions.
+    \item Take $(z_2, \bar{z}_2) \to (z_3, \bar{z}_3)$. At this stage one can include only holomorphic singularities, only anti-holomorphic ones, or both, as long as one does the same thing at later steps.
+    \item Throw out the singularities from the previous step. As $z_{12}, \bar{z}_{12} \to 0$ we automatically lose any regular terms of order $z_{12}^n \bar{z}_{12}^{\bar{n}}$ where at least one of $n, \bar{n}$ is strictly positive, so in fact at this point we are extracting the $\mc{O}(1)$ term.
+    \item Now take $(z_1, \bar{z}_1) \to (z_3, \bar{z}_3)$.
+\end{itemize}
+The result of the first three steps is a well-known object called the \textit{composite} or \textit{normal-ordered} product. In standard presentations of QFT the normal-ordered product of a string of coincident insertions is defined in a free theory (or by extension, perhaps in perturbation theory), and is computed by expanding in terms of creation and annihilation modes then reordering to place all annihilation operators on the right (up to signs depending on field statistics). In practice, inside of a correlation function this is supposed to be an equivalent product but with the singular parts subtracted off. In a general interacting theory this recipe ceases to make sense, but in a 2D CFT the structure of complex analysis gives a canonical way to accomplish this game of subtracting off singular parts. Assuming an OPE of the form\footnote{Here we use slightly simpler but equivalent notation to avoid a proliferation of indices.} \begin{equation}
+A(z, \bar{z}) B (w, \bar{w}) = \sum_{n, \bar{n}} \frac{\{ AB \}_{n, \bar{n}}(w, \bar{w})}{(z - w)^n (\bar{z} - \bar{w})^{\bar{n}}}
+\end{equation}
+extracting the value at the coincident limit $(z, \bar{z}) \to (w, \bar{w})$ but with the singular part stripped off means extracting the operator $\{AB\}_{0,0}(0,0)$. So we define\begin{equation}
+:AB:(w, \bar{w}) := \{AB\}_{0,0} (w, \bar{w}).
+\end{equation}
+This definition in terms of Laurent expansions is immediately equivalent to an integral prescription for computing the composite product, as directly from the Cauchy residue theorem we have \begin{equation}
+:AB:(w, \bar{w}) = \oint_w \frac{dz}{2\pi i} \frac{1}{z - w} \oint_{\bar{w}} \frac{d \bar{w}}{2 \pi i} \frac{1}{\bar{z} - \bar{w}} A(z, \bar{z}) B(w, \bar{w}).
+\end{equation}
+Here $\oint_w$ denotes a contour running along a positively-oriented circle around $w$, with a radius smaller enough not to enclose any other insertions appearing inside of the implied correlator but otherwise arbitrary, and similarly for $\oint_{\bar{w}}$.\\
+\\
+\
+Again mirroring the notation used for free fields, we denote by $\wick{\c A(z, \bar{z}) \c B(w, \bar{w})}$ the part of the expansion containing exclusively singular parts. That is, \begin{equation}
+\wick{\c A(z, \bar{z}) \c B(w, \bar{w})} = \sum_{\max (n, \bar{n}) > 0} \frac{\{ AB \}_{n, \bar{n}}(w, \bar{w})}{(z - w)^n (\bar{z} - \bar{w})^{\bar{n}}}.
+\end{equation}
+Then it turns out that a similarly simple contour integral prescription fixes the singular part of the OPE $A:BC:$ in terms of the singular parts of the pairwise OPEs. Concretely, the generalized Wick theorem \cite{DiFrancesco:1997nk} tells us \begin{equation}\label{generalizedwick}
+\begin{aligned}
+& \wick{\c{\mc{O}_1}(z_1, \bar{z}_1) : \c{\mc{O}_2 \mc{O}_3}: (z_3, \bar{z}_3)} \\
+& = \oint_{z_2} \frac{dz_2}{2 \pi i} \frac{1}{z_{23}} \oint_{\bar{z}_2} \frac{d \bar{z}_2}{2 \pi i} \frac{1}{\bar{z}_{23}} \Bigg( \wick{\c{\mc{O}_1} (z_1, \bar{z}_1) \c{\mc{O}_2} }(z_2, \bar{z}_2) \mc{O}_3(z_3, \bar{z}_3) + \wick{ \c{\mc{O}_1}(z_1, \bar{z}_1)  \c{\mc{O}_3}(z_3, \bar{z}_3) } \mc{O}_2(z_2, \bar{z}_2) \Bigg).
+\end{aligned}
+\end{equation}
+Applying this to a theory with known pairwise OPEs lets us compute multiparticle OPEs directly with no need to compute involved multicollinear amplitudes in the bulk. For example, in (tree-level, matter-free, perturbative about flat space) Einstein gravity we have pairwise OPEs in the holomorphic limit \cite{Pate:2019lpp} \begin{equation}
+G_{\Delta_1}^{s_1} (z_1, \bar{z}_1) G_{\Delta_1}^{s_2} (z_2, \bar{z}_2) = - \delta_{s_1 + s_2 \geq 0} \frac{\kappa}{2} \frac{\bar{z}_{12}}{z_{12}} B(\Delta_1 - 1, \Delta_2 - s_2 + 1) G^{\min (s_1, s_2)}_{\Delta_1 + \Delta_2} (z_2, \bar{z}_2)
+\end{equation}
+
+
+
+\begin{equation} \label{boundary-graviton-holomorphic}
+    \begin{split}
+       G_{\Delta_1}^{s_1}& (z_1,  \bar{z}_1) :G_{\Delta_2}^{s_2} G_{\Delta_3}^{s_3}:(z_3, \bar{z}_3)\\   
+      & \sim \frac{\kappa^2}{4} \frac{\bar{z}_{13}^2}{z_{13}^2}\delta_{s_1 + s_2 +s_3 \geq 0} 
+      \sum_{m=0}^\infty \frac{\bar{z}_{13}^m}{m!}B(2 \bar{h}_1 + 2+m, 2 \bar{h}_2 + 1, 2 \bar{h}_3 + 1) \bar{\partial}^mG_{\Delta_1 + \Delta_2 + \Delta_3}^{ \min( s_1, s_2, s_3)  }(z_3, \bar{z}_3) \\
+      \ & \ \ \ - \frac{\kappa}{2} \frac{\bar{z}_{13}}{z_{13}} \delta_{s_1 + s_2 \geq 0} \sum_{m=0}^\infty \frac{\bar{z}_{13}^m}{m!} B(2 \bar{h}_1 + 1+m, 2 \bar{h}_2 + 1) :\Big(\bar{\partial}^m G^{ \min(s_1, s_2) } _{\Delta_1 + \Delta_2} \Big) G_{\Delta_3}^{s_3}: (z_3, \bar{z}_3)  \\
+\ & \ \ \ - \frac{\kappa}{2} \frac{\bar{z}_{13}}{z_{13}}   \delta_{s_1 + s_3 \geq 0}\sum_{m=0}^\infty \frac{\bar{z}_{13}^m}{m!}B(2 \bar{h}_1 + 1+m, 2 \bar{h}_3 + 1) :G_{\Delta_2}^{s_2} \Big(\bar{\partial}^m G^{ \min(s_1, s_3) }_{\Delta_1 + \Delta_3}\Big):(z_3, \bar{z}_3).
+    \end{split}
+\end{equation} 
+
+
+
+\section{TODO}
+Explain why bulk physics constraints $\Delta_3$. Mention in particular that this is why the weights conspire to enforce integer powers in the OPE.
 
 
 \bibliography{bibfile}
 \bibliographystyle{utphys}
 
 \end{document}
+
