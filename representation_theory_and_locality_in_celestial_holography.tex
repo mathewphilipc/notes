@@ -592,9 +592,67 @@ in exact agreement with our boundary result.
 
 
 \section{OPEs from Bulk Poincar\'{e}}
+Now we return to a story we alluded to earlier, wherein the structure of an OPE can be largely fixed from symmetry considerations. Consider a general celestial OPE between global conformal primaries that is consistent with boundary scaling, rotations and translations  
+\begin{equation}\label{single-single-ansatz}
+\begin{aligned}
+\mc{O}_{h_1, \bar{h}_1} (z, \bar{z}) \mc{O}_{h_2, \bar{h}_2} (0, 0) & = \frac{1}{z}  \sum_{m=0}^\infty C_p^{(m)}(\bar{h}_1, \bar{h}_2) \bar{z}^{p + m} \bar{\D}^m \mc{O}_{h_1+h_2-1, \bar{h}_1+\bar{h}_2+p}(0,0)  + \mc{O} \LP z^0 \RP.
+\end{aligned}
+\end{equation}
+Here we write $\mc{O}_{h_i, \bar{h}_i}$ rather than $\mc{O}_i$ to be slightly more explicit. The operator $\mc{O}_{h_1+h_2-1, \bar{h}_1+\bar{h}_2+p}(0,0)$ is a global conformal primary, and a sum over conformal families is implied (by linearity, for our argument it will suffice to consider just a single primary). $p$ is just a useful notation for the shift in weights, and we can write variously as\begin{equation}
+p = \bar{h}_P - \bar{h}_1 - \bar{h}_2 = s_1 + s_2 - s_P - 1.
+\end{equation}
+The coefficients depend in general on $(h_1, h_2, \bar{h}_1, \bar{h}_2)$, but we think of them equivalently as functions of $(s_1, s_2, \bar{h}_1, \bar{h}_2)$ and suppress the spin-dependence in our notation.\\
+\\
+\
+Now this ansatz for our OPE already enforces covariance under most generators of the boundary conformal group, but does not yet enforce covariance under special conformal transformations. To get this, we recall (or deduce from the OPE against the stress tensor) that the antiholomorphic generator of special conformal transformations acts on conformal primaries as \begin{equation}
+\begin{aligned}
+\left[ \bar{L}_n, \mc{O}_{h, \bar{h}}(z, \bar{z}) \right] & = \bar{z}^n \LP(n+1) \bar{h} + \bar{z} \bar{\D} \RP \mc{O}_{h, \bar{h}}(z, \bar{z}) \\
+\implies \left[ \bar{L}_1, \mc{O}_{h, \bar{h}}(z, \bar{z}) \right] & = \bar{z} \LP 2 \bar{h} + \bar{z} \bar{\D} \RP \mc{O}_{h, \bar{h}}(z, \bar{z}).
+\end{aligned}
+\end{equation}
+As was shown in \cite{Himwich:2021dau}, applying $\left[ \bar{L}_1, \cdot \right]$ this to both sides of our ansatz \eqref{single-single-ansatz} and equating the results term by term gives the recursion relation for the OPE coefficients
+\begin{equation} \label{single-particle-m-recursion}
+\LP 2\bar{h}_1 +p+ m  \RP C_p^{(m)} (\bar{h}_1, \bar{h}_2) = (m +1)(2\bar{h}_1 + 2\bar{h}_2 + 2p + m) C_p^{(m+1)}(\bar{h}_1, \bar{h}_2).
+\end{equation} 
+Observe that the spins play no role here. This lets us recursively solve for $C^{(m+1)}$ in terms of $C^{(m)}$, but we can do better. Bulk Lorentz symmetry is embedded inside of bulk Poincar\'{e}, and covariance under bulk translations has a celestial image acting as \begin{equation}
+\left[ P_{m,n}, \mc{O}_{h, \bar{h}}(z, \bar{z}) \right] = \frac{1}{2} z^{m + \frac{1}{2}} \bar{z}^{n + \frac{1}{2}} \mc{O}_{h + \frac{1}{2}, \bar{h} + \frac{1}{2}} (z, \bar{z}), \quad m, n = \pm \frac{1}{2}.
+\end{equation}
+Together with the global conformal generators these form a closed algebra \begin{equation}
+\begin{aligned}
+[L_k, L_\ell] & = (k - \ell)L_{k + \ell}, \\
+[L_k, P_{m,n}] & = \LP \frac{k}{2} - m \RP P_{m+k, n}.
+\end{aligned}
+\end{equation}
+If we play the same game with $\left[ P_{- \frac{1}{2}, - \frac{1}{2}}, \cdot \right]$, applying it to both sides of \eqref{single-single-ansatz} and equating the results term-by-term, we can the fixed-$m$ constraint \cite{Himwich:2021dau} \begin{equation}
+C^{(m)}_p\LP \bar{h}_1 + \frac{1}{2}, \bar{h}_2 \RP + C^{(m)}_p\LP \bar{h}_1, \bar{h}_2 + \frac{1}{2} \RP = C^{(m)}_p\LP \bar{h}_1, \bar{h}_2 \RP .
+\end{equation} 
+Repeating this logic with $P_{- \frac{1}{2}, \frac{1}{2} }$ gives \begin{equation}
+C^{(m)}_p\LP \bar{h}_1 + \frac{1}{2}, \bar{h}_2 \RP = (m+1) C^{(m+1)}_p\LP \bar{h}_1, \bar{h}_2 \RP.
+\end{equation}
+Taking appropriate linear combinations of these constraints at $m = 0$ fixes $C^{(0)}_p(\bar{h}_1, \bar{h}_2)$, and subsequently applying the recursive constraint in $m$ \eqref{single-particle-m-recursion} fixes the general-$m$ coefficient to take the form 
+\begin{equation}
+C^{(m)}_p(\bar{h}_1, \bar{h}_2) = \frac{\gamma_{s_I}^{s_1, s_2}}{m!} B( 2\bar{h}_1 + p+ m, 2\bar{h}_2+p),
+\end{equation}
+where $s_I = s_1+s_2-p-1$. So by purely representation-theoretic means we can fix the OPE structure up to a single leading constant depending on the involves spins, which can be thought of as essentially the coupling constant for the corresponding bulk 3pt vertex.\\
+\\
+\
+In the work \cite{Calkins:2026hpg}, we generalize this game. We work out the action of bulk Poincar\'{e} on composite operators with derivative insertions, take a more general ansatz \begin{equation} \label{ansatz-single-particle-multi-OPE}
+\begin{aligned}
+& \mathcal{O}_{h_1, \bar{h}_1}(z , \bar{z} ) : \mathcal{O}_{h_2, \bar{h}_2} \mathcal{O}_{h_3,\bar{h}_3}:(0,0) \\
+& = \sum_{p \geq 0} \sum_{m=0}^\infty C_p^{(m)}(\bar{h}_1, \bar{h}_2, \bar{h}_3) \frac{\bar{z}^{p+m}}{z^2} \bar{\partial}^m \mathcal{O}_{h_1+h_2+h_3-2, \bar{h}_1+\bar{h}_2+\bar{h}_3+p} (0,0) \\
+& \quad + \sum_{p \geq 0} \sum_{m=0}^\infty D_p^{(m)}(\bar{h}_1, \bar{h}_2, \bar{h}_3) \frac{\bar{z}^{p+m}}{z} : \left(\bar{\partial}^m \mathcal{O}_{h_1+h_2-1, \bar{h}_1+\bar{h}_2+p} \right) \mathcal{O}_{h_3, \bar{h}_3}: (0,0)\\
+&  \quad  +\sum_{p \geq 0} \sum_{m=0}^\infty E_p^{(m)}(\bar{h}_1, \bar{h}_2, \bar{h}_3) \frac{\bar{z}^{p+m}}{z} :\mathcal{O}_{h_2, \bar{h}_2}\bar{\partial}^m \mathcal{O}_{h_1+h_3-1, \bar{h}_1+\bar{h}_3+p}: (0,0),
+\end{aligned}
+\end{equation}
+and similarly demand covariance term-by-term. We find that the result gives exactly the same result as our integral prescription \eqref{generalizedwick}.
 
 
 \section{It's just Complex Analysis!}
+
+
+
+
+
 
 
 \section{TODO}
@@ -605,6 +663,5 @@ Explain why bulk physics constraints $\Delta_3$. Mention in particular that this
 \bibliographystyle{utphys}
 
 \end{document}
-
 
 
