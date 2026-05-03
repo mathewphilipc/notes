@@ -75,7 +75,64 @@ TODO
 TODO
 
 \subsection{Asymptotically Flat Space}
-TODO
+We start in (3+1)-dimensional Minkowski space $(\R^4, \eta)$. Take the Minkowski metric in spherical coordinates \begin{equation}
+ds^2 = - dt^2 + dr^2 + r^2 (d \theta^2 + \sin^2 \theta d \phi^2)
+\end{equation}
+and introduce retarded and advanced null coordinates \begin{equation}
+(u,v) = (t - r, t + r)
+\end{equation}
+to find \begin{equation}\label{uvflat}
+ds^2 = - du dv + \frac{1}{4} (u-v)^2 (d \theta^2 + \sin^2 \theta d \phi^2).
+\end{equation}
+Outgoing radiation lives at $v \to \infty$ for fixed $(u,\theta, \phi)$, so in order to studying the asymptotic behavior of outgoing radiation (semiclassically, that of photons and gluons or even gravitons) we would like to compactify our spacetime, decorating it with a boundary on which this limit lives. Unfortunately our metric has a coordinate singularity in that limit. This can be seen directly from \eqref{uvflat}, or predicted on geometrical grounds - if we naively introduce a compactifying coordinate system with a boundary at infinity, many pairs of distinct points at infinity are infinitely far apart as measured by the flat bulk metric. So we know in advance that, if our program can be realized, any compactifying coordinate transformation will need to be accompanied by a Weyl transform. Identical comments apply to incoming radiation, which emerges from the region $u \to \infty$. When we take either of $u, v \to \infty$ while fixing the other and both of $(\theta, \phi)$, we find coordinate divergences like $\mathcal{O}(u^2)$ or $\mathcal{O}(v^2)$, respectively. A natural spherically symmetric guess for an appropriate Weyl-transformed metric would be \begin{equation}
+\tilde{g}_{ab} = \Omega^2 \eta_{ab} \mbox{ for } \Omega^2 = \frac{1}{P(u,v)}
+\end{equation}
+where $P = \mc{O}(u^2)$ at fixed $v$ and vice versa and where $P$ is strictly positive for real coordinates. We choose in particular \begin{equation}
+\tilde{g}_{ab} = \Omega^2 \eta_{ab} \mbox{ for } \Omega = \frac{4}{(1 + u^2)(1 + v^2)}
+\end{equation}
+so that $ds^2$ is finite when one or both of $u,v$ goes to $\pm \infty$. Now we play the compactification game, showing that the Weyl-transformed manifold $(\R^4, \tilde{g})$ lives naturally as an open submanifold in some larger manifold, then using the latter to identify a boundary for $(\R^4, \tilde{g})$. Concretely, we compactify $u,v$ by passing them through an inverse tangent function, then linearly recombining them back into compactifed $T,R$ coordinates as \begin{equation}
+\begin{aligned}
+T & = \tan^{-1} v + \tan^{-1} u, \\
+R & = \tan^{-1} v - \tan^{-1} u
+\end{aligned}
+\end{equation}
+In Minkowski space we have $u, v \in (-\infty, \infty)$ with $u \leq v$ but otherwise unconstrained, or equivalently in our new coordinates \begin{equation}
+\begin{aligned}
+- \pi & < T + R < \pi, \\
+- \pi & < T - R < \pi, \\
+R & \geq 0.
+\end{aligned}
+\end{equation}
+That is, the natural domain of $(T,R)$ looks like Figure 4 of \cite{Strominger:2017zoo}. Then our newly tamed and Weyl-transformed metric is \begin{equation}\label{einsteinstaticuniversemetric}
+d \tilde{s}^2 = - dT^2 + dR^2 + \sin^2 R (d \theta^2 + \sin^2 \theta d \phi^2)
+\end{equation}
+which is exactly the metric on the \textit{Einstein static universe} $\R \times S^3$ where the timelike coordinate $T$ runs along $\R$ and where $R$ plays the role of the (generalized) azimuthal angle on $S^3$. To help visualize this, we can repeat the same story in $(\R^2, \eta)$, where our initial and final metrics are \begin{equation}
+ds^2 = - dt^2 + dr^2 \xmapsto{\mbox{\scriptsize{Weyl}}} d \tilde{s}^2 = - dT^2 + dR^2
+\end{equation}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.3\textwidth]{einsteinstaticuniverse.png}
+\caption{Embedding Weyl-transformed Minkowski space $(\R^2, \tilde{g})$ inside of the Einstein static universe $\R \times S^1$.}
+\label{Fig:einsteinstaticuniverse}
+\end{figure}
+but where for lack of angular coordinates, to cover all of $\R^2$ we must take $(u,v) = (t-x, t+x)$. With this we have embedded $(\R^2, \tilde{g})$ into the (1+1)-dimension Einstein static universe $\R \times S^1$. The result is nicely illustrated by \cite{Wald:1984rg} Fig. 11.1, which we reproduce here in Fig. \ref{Fig:einsteinstaticuniverse}. Notice that in the latter, our embedding's $S^1$ factor leads us to identity $R \sim R + 2 \pi$, hence dropping the constraint $R \geq 0$. In terms of our original coordinates, identifying the two poins $R = \pm \pi$ means that the spacelike asymptotic directions $x \to \pm \infty$ correspond to the same bound on the conformally compactified boundary. One might ask if this is strictly necessary - couldn't we further unwind the Einstein static universe under the universal covering map \begin{equation}
+\R^2 \to \R \times S^1, \quad (T, R) \mapsto (T, [R \sim R + 2 \pi])
+\end{equation}
+and still have a perfectly good compactification of $(\R^2, \eta)$? Certainly, but this trick breaks above two dimensions since the $n$-sphere $S^n$ is already simply connected for $n \geq 2$. In $3+1$ dimensions with Einstein static universe metric \eqref{einsteinstaticuniversemetric} for example, the coordinates $(T, -R, \theta, \phi)$ and $(T, R, \theta + \pi, \phi)$ correspond to the same point, so we can drop the coordinate constraint $R \geq 0$ without changing anything. Similar arguments hold in other dimension, so we have the following \\
+\\
+\
+\textbf{Theorem} There exists a conformal isometry of Minkowspace space $(\R^4, \eta)$ into the open region $O$ of the Einstein static universe $(\R \times S^3, \tilde{g})$ given by the coordinate restriction $T \pm R \in (-\pi, \pi)$.
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.3\textwidth]{nullcones.png}
+\caption{The region $\bar{O}$ of the Einstein static universe, represented as two null cones joined at the base.}
+\label{Fig:nullcones}
+\end{figure}
+A final notable feature of this story is that spacelike infinity $(u,v) \to (-\infty, \infty)$ corresponds in the Einstein static universe to setting $(T,R) = (0, \pi) \equiv (0, \pm \pi)$, \textit{i.e.}, to the \textit{one-dimensional (not three-dimensional) submanifold} $\R \times \{\mbox{south pole}\}$. This meas that, in the carton depiction \ref{Fig:nullcones} (lifted directly from \cite{Wald:1984rg} Fig. 11.2) is slightly misleading: not only do future and past timelike infinities $i^\pm$ (equivalently, $R = 0$ and $T = \pm \pi$) correspond to single points, so too does spacelike infinity $i^0$ (equivalently, $R \in \pi \mathbb{Z}).$\\
+\\
+\
+Intuitively, we want to call a spacetime \textit{asymptotically flat} if we can conformally compactify it in a similar way, though with two dropped conditions. First, given the existence of stable massive objects in physically reasonable spacetimes, we won't require flatness as we go off in timelike directions, only spacelike and null. Second, we won't require that the Weyl-transformed metric have any smoothness properties at spacelike infinity, for reasons we'll see shortly.
+
 
 \subsection{Troubles with de Sitter}
 TODO
@@ -548,4 +605,6 @@ Explain why bulk physics constraints $\Delta_3$. Mention in particular that this
 \bibliographystyle{utphys}
 
 \end{document}
+
+
 
