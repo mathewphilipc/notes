@@ -648,6 +648,32 @@ and similarly demand covariance term-by-term. We find that the result gives exac
 
 
 \section{It's just Complex Analysis!}
+At the beginning of our work on \cite{Calkins:2026hpg}, we thought of the checks above (compute multicollinear limits in the bulk, then on the boundary, and compare) as non-trivial checks of the celestial holography. After all, as we emphasized above the holographic dictionary is in some sense purely representation-theoretic, and it doesn't manifestly lead to a local boundary theory. However, in the course of the work we realized we were thinking about things incorrectly: the generalized Wick theorem \eqref{generalizedwick} is not a non-trivial fact about locality properties of 2D CFTs; it is purely a fact about complex analysis in several variables. Concretely, consider the function of three complex variables \begin{equation}
+f(z_1, z_2, z_3) = \frac{1}{z_{12}^A z_{13}^B z_{23}^C} \mbox{ for } A,B,C \in \mathbb{Z}_{>0}.
+\end{equation}. 
+We can play the same games here as we did for pairwise OPEs. We defined the $:23:$ normal-ordered of $f$ by the prescription \begin{itemize}
+    \item Decompose $z_{12} = z_{13} - z_{23}$ so that $f$ becomes a function of $z_{23}, z_{13}$.
+    \item Thinking of the latter as independent variables, expand as a Laurent series in $z_{23}$.
+    \item Extract the term of order exactly $z_{23}^0$. 
+\end{itemize}
+For our exemplary function we find  \begin{equation} \label{f-normal-23}
+    \begin{split}
+        f(z_1, z_2, z_3) \Big|_{\Theta(z_{23}^0)}
+            ={A+C-1 \choose C}\frac{1}{z_{13}^{A+B+C}}.
+    \end{split}
+\end{equation}
+We define the Wick contraction $\wick{ \c {1} \c {2} }$ of $f$ to be the singular part in the Laurent series in $z_{12}$ after expanding $z_{13} = z_{12} + z_{23}$, and similarly for $\wick{ \c {1} \c {3} }$. From these we find \begin{equation}
+    \begin{split}
+        f(z_1, z_2, z_3)\Big|_{\text{singular in }z_{12}} &= \frac{1}{z_{12}^A z_{23}^{B+C}} \sum_{k=0}^{A} (-1)^k {B+k-1 \choose k} \left(\frac{z_{12}}{z_{23}}\right)^k  , \\
+        f(z_1, z_2, z_3)\Big|_{\text{singular in }z_{13}} &= \frac{(-1)^A}{z_{13}^B z_{23}^{A+C}} \sum_{k=0}^{B} {A+k-1 \choose k} \left(\frac{z_{13}}{z_{23}}\right)^k .
+    \end{split}
+\end{equation}
+Then by a direct calculation, we find that the generalized Wick theorem \begin{equation}
+\begin{aligned}
+f(z_1, z_2, z_3) \Big|_{\Theta(z_{23}^0)} \Big|_{\text{singular in }z_{13}} = \oint_{z_3} \frac{dz_2}{2 \pi i} \frac{1}{z_{23}} \left[f(z_1, z_2, z_3)\Big|_{\text{singular in }z_{12}} + f(z_1, z_2, z_3)\Big|_{\text{singular in }z_{13}}\right]
+\end{aligned}
+\end{equation}
+holds exactly. Morally, there is no essential field-theoretic content in the generalized Wick theorem \eqref{generalizedwick}, only algebraic facts about Laurent series in multiple variables. So our bulk:boundary checks could not possibly have failed. 
 
 
 
