@@ -1,0 +1,172 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+\usepackage{amssymb}
+
+\sectionfont{\fontsize{12}{12}\selectfont}
+\subsectionfont{\fontsize{12}{12}\selectfont}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\D}{\partial}
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \middle| #2 \right\rangle}
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+
+\title{Cartan's Magic Formula}
+
+\author{Mathew Calkins}
+
+\date{\today}
+
+ 
+\maketitle
+
+\abstract{Short notes on Cartan's magic formula}
+
+\tableofcontents
+
+
+
+\section{Lie Derivatives}
+Given a smooth map $F: M \to N$ between manifolds and a point $p \in M$ with image $q = F(p) \in N$, we define the pushforward map \begin{equation}
+F_*: T_p M \to T_q N
+\end{equation}
+as follows. For $v_p \in T_p M$, take any curve $\gamma: (-1,1) \to M$ in the equivalence class of $v \in T_p M$ \begin{equation}
+\gamma(0) = p, \quad \dot{\gamma}(0) = v_p
+\end{equation}
+and consider the image curve $F \circ \gamma: (-1,1) \to N$, which has $(F \circ \gamma)(0) = q$ by construction. The pushforward $F_*(v_p)$ is defined to be the equivalence class of this image curve. We define the more general bundle map $F_*: TM \to T N$ to act pointwise in this way. By taking tensor products at each point and applying linearity, this definition extends to higher powers of the respective tangent bundles.\\
+\\
+\
+Under the same assumptions we define the pullback \begin{equation}
+F^*: T_p^*(N) \to T_p^*(M)
+\end{equation}
+by the rule \begin{equation}
+F^*(\omega_q)(v_p) = \omega_q(F_*(v_p)), \quad \omega_q \in T^*_q(N).
+\end{equation}
+In the same way as the pushforward, the pullback at any one cotangent space to $N$ naturally extends to a bundle map $F^*: T^* N \to T^* M$. And as before, this extends further to higher powers of the cotangent bundles.\\
+\\
+\
+In general there is no well-defined and unique way to pullback a vector, essentially because a given vector in $T_q N$ may not be the image of any vector in $T_p M$; analogous obstructions apply to the pushforward a 1-form. However, if $F$ is a diffeomorphism (that is, a bijection which is smooth in both directions), then we can define the pullback of a vector under $F$ to be its pushforward under $F^{-1}$, and similarly for 1-forms. Taking products, this lets us push and pull tensors of arbitrary ranks in either direction.\\
+\\
+\
+Next, given any vector field $X$ on a smooth manifold $M$, we define the local flow \begin{equation}
+\varphi_X^t: M \to M, \quad \varphi_X^0(p) = p, \frac{d}{dt} \varphi_X^t(p) = X(p).
+\end{equation}
+Given a rank $(0,s)$ tensor field $T$ (that is, one built up from tensor products of the cotangent bundle), we define the Lie derivative as the linear response to pushing forward under this flow. Concretely, at a point $p \in M$ we have \begin{equation}
+\LP \mc{L}_X T \RP_p := \lim_{\varepsilon \to 0} \frac{\LP \LP \varphi_X^\varepsilon \RP^* T \RP_p - T_p}{\varepsilon} = \lim_{\varepsilon \to 0} \frac{\LP \varphi_X^\varepsilon \RP^* T_{\varphi_X^\varepsilon p} - T_p}{\varepsilon}.
+\end{equation}
+Even more concretely, this is a multilinear map on $T_p M$ which acts on vectors $v_p^{(1)}, \ldots, v_p^{(s)} \in T_p M$ as \begin{equation}
+\begin{aligned}
+\LP \mc{L}_X T \RP_p \LP v_p^{(1)}, \ldots, v_p^{(s)} \RP & = \lim_{\varepsilon \to 0} \frac{\LP \varphi_X^\varepsilon \RP^* T_{\varphi_X^\varepsilon p} \LP v_p^{(1)}, \ldots, v_p^{(s)} \RP - T_p \LP v_p^{(1)}, \ldots, v_p^{(s)} \RP}{\varepsilon} \\
+& = \lim_{\varepsilon \to 0} \frac{ T_{\varphi^\varepsilon_X (p)} \LP \LP \varphi^\varepsilon_X \RP_* \LP v_p^{(1)} \RP \cdots \LP \varphi^\varepsilon_X \RP_* \LP v_p^{(s)} \RP \RP - T_p \LP v_p^{(1)}, \ldots, v_p^{(s)} \RP}{\varepsilon}.
+\end{aligned}
+\end{equation}
+
+
+\section{$p$-forms in Coordinates}
+Consider in particular $\omega \in T^* M$ and $p \in M$. Then we have \begin{equation}
+\LP \mc{L}_X \omega \RP_p \LP v_p \RP = \lim_{\varepsilon \to 0} \frac{ \omega_{\varphi^\varepsilon_X (p)} \LP \LP \varphi^\varepsilon_X \RP_* \LP v_p \RP \RP - \omega_p \LP v_p \RP}{\varepsilon}.
+\end{equation}
+In local coordinates $x^\mu$, the nearly-identity diffeomorphism $\varphi_X^\varepsilon$ acts as \begin{equation}
+p \mapsto p', \quad x^\mu(p') = x^\mu (p) + \varepsilon X^\mu(p)
+\end{equation}
+so our the innermost object appearing in our expression for $\LP \mc{L}_X \omega \RP_p \LP v_p \RP$ has components \begin{equation}
+\LP \varphi^\varepsilon_X \RP_* \LP v_p \RP \in T_{p'}, \quad \LP \LP \varphi^\varepsilon_X \RP_* \LP v_p \RP \RP^\mu = (v_p)^\mu + \varepsilon \LP \D_\nu X^\mu \RP_p v_p^\nu  + o \LP \varepsilon^2 \RP
+\end{equation}
+while the outermost object has components \begin{equation}
+\omega_{\varphi^\varepsilon_X (p)} \equiv \omega_{p'}, \quad \LP \omega_{p'} \RP_\mu = \LP \omega_p \RP_\mu + \varepsilon \LP \D_\nu \omega_\mu \RP_p X_p^\nu + o \LP \varepsilon^2 \RP.
+\end{equation}
+Assuming enough analyticity to do the natural expansion in powers of $\varepsilon$, we therefore find \begin{equation}
+\begin{aligned}
+\LP \mc{L}_X \omega \RP_p \LP v_p \RP & = \lim_{\varepsilon \to 0} \frac{ \left[ \LP \omega_p \RP_\mu + \varepsilon \LP \D_\nu \omega_\mu \RP_p X_p^\nu  \right] \left[ (v_p)^\mu + \varepsilon \LP \D_\nu X^\mu \RP_p v_p^\nu \right] - \omega_p \LP v_p \RP}{\varepsilon} \\
+& = \LP \D_\nu \omega_\mu \RP_p X_p^\nu v_p^\mu + \LP \omega_p \RP_\mu \LP \D_\nu X^\mu \RP_p v_p^\nu \\
+& = \LP \D_\nu \omega_\mu \RP_p X_p^\nu v_p^\mu + \LP \omega_p \RP_\nu \LP \D_\mu X^\nu \RP_p v_p^\mu.
+\end{aligned}
+\end{equation}
+As this holds at an abstract point and with a general input, we have more generally \begin{equation}
+\LP \mc{L}_X \omega \RP_\mu = X^\nu \D_\nu \omega_\mu + \omega_\nu \D_\mu X^\nu .
+\end{equation}
+An identical calculation for $\omega$ a 2-form gives \begin{equation}
+\LP \mc{L}_X \omega \RP_{\mu \nu} = X^\rho \D_\rho \omega_{\mu \nu} + \omega_{\rho \nu} \D_\mu X^\rho + \omega_{\mu \rho} \D_\nu X^\rho.
+\end{equation}
+On a 3-form we find \begin{equation}
+\LP \mc{L}_X \omega \RP_{\mu_1 \mu_2 \mu_3} = X^\rho \D_\rho X_{\mu_1 \mu_2 \mu_3} + \omega_{\rho \mu_2 \mu_3} \D_{\mu_1} X^\rho + \omega_{\mu_1 \rho \mu_3} \D_{\mu_2} X^\rho + \omega_{\mu_1 \mu_2 \rho} \D_{\mu_3} X^\rho
+\end{equation}
+and so on.
+
+
+\section{The Magic Formula}
+Given a $p$-form $\omega$ and a vector $v$, we denote by $\omega \cdot v$ the $(p-1)$-form given by placing $v$ in the first slot of $\omega$. That is, \begin{equation}
+(v \cdot \omega)(A_1, \ldots, A_{p-1} ) := \omega(v, A_1, \ldots, A_{p-1} ).
+\end{equation}
+This is sometimes written $\iota_v(\omega)$, and sometimes called the interior product. As for a general tensor, recall that the components of a $p$-form in some local coordinate system are by definition the numbers they return when acting on tuples of basis vectors. \begin{equation}
+\omega_{\mu_1 \cdots \mu_p} := \omega(\D_1, \ldots, \D_p).
+\end{equation}
+To refer to basis $p$-forms, we write $[ \cdot ]$ for the averaging antisymmetrizing bracket which leaves already-antisymmetric object unchanged, \textit{e.g.}, \begin{equation}
+A_{[\mu \nu]} = \frac{A_{\mu \nu} - A_{\nu \mu}}{2!}.
+\end{equation}
+The wedge product of forms then has components \begin{equation}
+(\omega \wedge\sigma)_{\mu_1 \cdots \mu_p \nu_1 \cdots \nu_q} := \frac{(p+q)!}{p! q!} \omega_{[\mu_1 \cdots \mu_p} \sigma_{\nu_1 \cdots \nu_q]}
+\end{equation}
+and the exterior derivative of a single form has components \begin{equation}
+(d \omega)_{\mu_0 \cdots \mu_p} = (p+1)\D_{[\mu_0} \omega_{\mu_1 \cdots \mu_p]}.
+\end{equation}
+For example, at $p = 1$ we have \begin{equation}
+(d \omega)_{\mu \nu} = \D_\mu \omega_\nu - \D_\nu \omega_\mu.
+\end{equation}
+With some inspired massaging, we can therefore rearrange our expression for the Lie derivative of a 1-form as \begin{equation}
+\begin{aligned}
+\LP \mc{L}_X \omega \RP_\mu & = X^\nu \D_\nu \omega_\mu + \omega_\nu \D_\mu X^\nu \\
+\implies \LP \mc{L}_X \omega \RP(A) & = X^\nu A^\mu \D_\nu \omega_\mu + \omega_\nu A^\mu \D_\mu X^\nu \\
+& =  X^\nu A^\mu \D_\nu \omega_\mu - X^\nu A^\mu \D_\mu \omega_\nu + A^\mu \D_\mu (\omega_\nu X^\nu) \\
+& = (d \omega)(X,A) + d (X \cdot \omega) (A) \\
+& = \LP X \cdot d \omega + d (X \cdot \omega) \RP (A)
+\end{aligned}
+\end{equation}
+or without the test function \begin{equation}
+\mc{L}_X \omega = X \cdot d \omega + d (X \cdot \omega).
+\end{equation}
+This is called Cartan's magic formula. Similar checks show that it holds for general $p$-forms.
+
+
+\bibliography{bibfile}
+\bibliographystyle{utphys}
+
+\end{document}
+
+
