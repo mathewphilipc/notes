@@ -1,0 +1,141 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+\usepackage{amssymb}
+
+\sectionfont{\fontsize{12}{12}\selectfont}
+\subsectionfont{\fontsize{12}{12}\selectfont}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\D}{\partial}
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \middle| #2 \right\rangle}
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+
+\title{Asymptotic Flatness and BMS}
+
+\author{Mathew Calkins}
+
+\date{\today}
+
+ 
+\maketitle
+
+\abstract{Notes on asymptotic flatness and the BMS group.}
+
+\tableofcontents
+
+\section{Geometric preliminaries}
+Let $M$ be a four-dimensional spacetime, \textit{i.e.}, a real smooth 4-manifold endowed with a metric $g$ metric signature $(-,+,+,+)$, plus a smoothly varying choice made at every $T_p M$ as to which time-like and null vectors are future- versus past-directed. Any future-directed null geodesic which doesn't eventually get permanently trapped in an isolated system\footnote{This is deliberately loose phrasing which we'll make more precise later} is said to run off to \textit{future null infinity} $\mc{I}^+$. \textit{Past null infinity} $\mc{I}^-$ is defined analogously. We will see later that conformal compactifications let us more literally interpret $\mc{I}^\pm$ as boundary components.\\
+\\
+\
+Let $N \subset M$ be a smooth codimension-1 submanifold. For $p \in N$, a vector $n \in T_p N$ is said to be \textit{normal} to $N$ at $p$ if is is orthogonal to all vectors tangent to $N$ at $p$, \textit{i.e.}, if $\langle n, m \rangle = 0$ for all $m \in T_p N$. Conversely, given such an $n$ the tangent space $T_p N$ is exactly the set of all $m \in T_p M$ such that $\langle m, n \rangle = 0$. Just as in the Euclidean case, at fixed $p$ and $N$ such vectors form a 1-dimensional vector space. By choosing a normalization convention and a local orientation for $N$, we may therefore speak of \textit{the} normal vector $n = (n^a)$ or the corresponding normal covector $(n_a) \equiv (g_{ab} n^b) = g(n, \cdot)$. \\
+\\
+\
+$N$ is called a \textit{null hypersurface} if, at every point $p \in N$, the\footnote{Here `the' is a mild abuse of vocabulary since it relies on choices of orientation and normalization, but all such choices agree on whether $N$ is null.} normal vector $(n^a)$ is null, or equivalently if the normal covector $(n_a)$. Then from our observations above we see that $n \in T_p N$, so that $n$ is simultaneously tangent and normal to $N$ at $p$. Now we abuse notation slightly and extend $n$ to a vector field defined everywhere on $N$. Then the integral curves of $n$ are all trajectories within $N$, and cover the latter. We call these null curves the \textit{null generators} of $N$. If everything is analytically nice enough, then the set of integral curves (equivalently, the set of all equivalence classes $[p \in N]$ where $p \sim q$ iff some integral curve passes through both points) inherits the structure of a real smooth two-manifold. If this occurs, a smooth family of null generators is called a \textit{null congruence}. This smooth structure may hold in some regions but not in others. A \textit{caustic} is a point where neighboring generators intersect or focus so strongly that the inherited smooth structure breaks down.\\
+\\
+\
+Suppose we have covered $N$ by such a null congruence of null generators. A \textit{cut} of $N$ is a smooth spacelike\footnote{That is, having exclusively spacelike or vanishing tangent vectors.} 2-submanifold of $N$ which intersects each null generator exactly once in some region under consideration. Choosing a cut of a null hypersurface should be thought of as the null-geometry analogue of choosing a spatial slice of a Lorentzian manifold.\\
+\\
+\
+Why should cuts exist at all? In more algebraic terms and rephrased slightly, why should the induced metric on $N$ have signature $(0,+,+)$? Recall that, algebraically, the signature of a quadratic form $F: V \times V$ over a real vector space of finite dimensions is defined procedurally: \begin{itemize}
+    \item Pick any basis for $F$ w.r.t. which the component expression for $F$ is diagonal.
+    \item Read off the number of positive, negative, and vanishing diagonal components; this triple is the signature of $F$.
+    \item Step 1 is provably possible, and the results of Step 2 are provably independent of choices made during Step 1.
+\end{itemize}
+So the claim that $N$ has induced metric signature $(0,+,+)$ (or more precisely, that every tangent space $T_p N$ has inner product with this signature) says that there exists a basis of three vectors in $T_p N$ which are pairwise orthogonal and which are respectively null, spacelike, and spacelike. To show this, we take the first of these vectors to be $n$ itself. By definition $\langle n, m \rangle = 0$ for all $m \in T_p N$, so $n$ is null and any completion to a basis $(n, k, k')$ automatically obeys $\langle n, k \rangle = \langle n, k' \rangle = 0$; the only non-automatic constraints remaining are that $(n, k, k')$ be linearly independent (which excludes only a measure-0 set of set) and that $\langle k, k' \rangle = 0$ (which can be accomplished by subsequently applying a Gram-Schmidt procedure). What, then, can we say for sure about $k, k'$? We know that no null $A$ and timelike $B$ obey $\langle A, B \rangle = 0$, so $k, k'$ must both be null or spacelike. We also know that two nonzero null vectors $A, B$ satisfy $\langle A, B \rangle = 0$ iff one is a rescaling of the other, but $k, k'$ are both assumed linearly independent of $n$. So by elimination $k, k'$ are both spacelike, and the induced metric on $N$ must have signature $(0,+,+)$.
+\\
+\\
+\
+To build a field theory on $M$, we define a collection of fields to be fibered over $M$ plus prescribed boundary conditions\footnote{More precisely \cite{Harlow:2019yfa}, in defining a variation problem we should think of spatial and null boundary conditions as defining a theory, but leave future/past boundary conditions undefeined as these define states in the theory.} The \textit{(on- / off-)shell asymptotic phase space} of our theory is the set of all histories obeying the prescribed boundary conditions (and / but not necessarily) the equations of motion.
+
+
+\section{Bondi Gauge}
+When we must work in coordinates, it will be convenient to locally work in \textit{Bondi gauge}, which is well-adapted to studying null geodesics. Here we develop the Bondi gauge in slightly different language from the standard references \cite{Strominger:2017zoo, Sachs:1962zza, Sachs:1962wk}. First, take a null hypersurface $N$ and extend it locally to a 1-parameter family of such surfaces $\{N_u\}_u$ parametrized by a real variable $u$. This can be done in some region about a point of interest, but attempting to extend it to a smooth foliation $M = \cup_u N_u$ may run into geometric obstructions (in the form of, \textit{e.g.}, caustics) or global topological obstructions, so already our gauge choice is at most guaranteed to work only locally. This gives us our first local coordinate $u$, telling which copy of $N$ a point lives on.\\
+\\
+\
+Let $n$ be a null vector field defined near our point of interest, such that at every point $p \in N_u \subset M$ the local value $n(p) \in T_p M$ is normal and tangent to $N_u$. From $n$ we can construct null generators as described above, so that by construction every point in our region lies on exactly one generator. Now along each $N_u$ pick a cut $\Sigma_u \subset N_u$, chosen such that $N_u$ varies smoothly with $u$. Pick coordinates $(x^A)_{A = 1,2}$ along each cut $\Sigma_u$, then extend these to coordinates on $N_u$ by requiring that they be constant along each null generator; we can locally do so in such as way that $x^A$ varies smoothly with $u$. This gives us coordinates $(u, x^A)$.\\
+\\
+\
+At this point we have by construction that $u$ and $x^A$ are constant along generators, so we take the remaining coordinate $r$ to grow along generators, and to vary smoothly more generally. Since moving along a particular generator changes $r$ while leaving $(u, x^A)$ fixed, we have automatically that $\D_r$ points along the null generators, so $\D_r$ is some local rescaling of $n$. \\
+\\
+\
+What do these geometric choices tell us about the metric in components $(u, r, x^A)$? First, since $\D_r$ points along the null generators, $\D_r$ must be null, hence \begin{equation}
+g_{rr} = g(\D_r, \D_r) = 0
+\end{equation}
+Next, varying $x^A$ at fixed $(u,r)$ keeps us in the same $N_u$, so $\D_A$ is tangent to $N_u$. But $n = \D_r$ is normal to $N_u$, hence by definition orthogonal to every vector tangent to $N_u$. So we have \begin{equation}
+g_{rA} = g(\D_r, \D_A) = 0.
+\end{equation}
+Our metric thus takes the form \begin{equation}
+ds^2 = g_{uu} du^2 + 2 g_{ur} du dr + 2 g_{uA} du dx^A + g_{AB} dx^A dx^B.
+\end{equation}
+We write this coordinate system as $(x^a) = (u, r, x^A)$. For convenience we now rename our coefficients. First, from our earlier discussion of cuts, metric signature considerations ensure that $(g_{AB})$ is strictly positive-definite, hence invertible as an array. We therefore define \begin{equation}
+U^A \equiv g^{AB} g_{uB} \implies g_{uA} = g_{AB} U^B.
+\end{equation}
+Next we complete the square and further rename as \begin{equation}
+\begin{aligned}
+ds^2 & = g_{uu} du^2 + 2 g_{ur} du dr + 2 g_{AB} U^B du dx^A + g_{AB} dx^A dx^B \\
+& = \LP g_{uu}- g_{AB} U^A U^B \RP du^2 + 2 g_{ur} du dr + g_{AB} \LP U^A du + dx^A \RP \LP U^B du + dx^B \RP \\
+& \equiv - F du^2 - 2 e^\beta du dr + g_{AB} \LP U^A du + dx^A \RP \LP U^B du + dx^B \RP.
+\end{aligned}
+\end{equation}
+This is pure notation, except for the choice $g_{ur} \equiv e^\beta$ which implies $\langle \D_u, \D_r \rangle < 0$, which in turn can be enforced within remnant coordinate freedom by appropriate choice of the direction in which $u$ or $r$ increases.\\
+\\
+\
+If we further choose\footnote{This cannot in general be accomplished by a redefinition of the coordinate $r$; it constrains the possibilities for choosing $\{N_u\}$ at the start of this construction. For example, it is possible in flat Minkowski space if we take $N_u$ to be the forward lightcone of the point $(t,x,y,z) = (u,0,0,0)$ or equivalently the locus $t - r = u$ but not if we take $N_u$ to be the locus $t - x = u$.} the determinant of the induced metric on the cuts to scale like $r^4$ \begin{equation}
+\D_r \det \LP \frac{g_{AB}}{r^2} \RP = 0
+\end{equation}
+we say that $r$ has been taken to be \textit{areal} or \textit{luminosity} distance. Then we write $g_{AB} = r^2 h_{AB}$ and \begin{equation}
+ds^2 = - F du^2 - 2 e^\beta du dr + r^2 h_{AB} \LP U^A du + dx^A \RP \LP U^B du + dx^B \RP.
+\end{equation}
+Any coordinate system obeying $g_{rA} = g_{rr} = 0$ plus the luminosity distance condition is said to be in \textit{Bondi gauge}; it is left to the reader's geometric imagination that every metric in this gauge can be cooked up by the geometric story we have told here. \\
+\\
+\
+The archetypal example of a spacetime described in Bondi gauge in $3+1$ Minkowski space where, starting from some inertial coordinates $(t, \vec{x})$, we take $r = |\vec{x}|$ to be spatial distance from the original, $u = t - r$ to be retarded time, and $(x^A)$ to be any convenient set of coordinates on the celestial sphere. For example, taking $(x^A) = (\theta, \phi)$ we have \begin{equation}
+ds^2 = - du^2 - 2 du dr + r^2 (d \theta^2 + \sin^2 \theta d \phi^2).
+\end{equation}
+In studying asymptotic symmetries and celestial holography it is frequently useful to replace the angular coordinates $(\theta, \phi)$ with complex coordinates $(z, \bar{z})$ induced by, \textit{e.g.}, stereographic projection. 
+
+\bibliography{bibfile}
+\bibliographystyle{utphys}
+
+\end{document}
+
+
+
+
