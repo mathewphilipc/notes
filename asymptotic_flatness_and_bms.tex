@@ -107,7 +107,7 @@ ds^2 = g_{uu} du^2 + 2 g_{ur} du dr + 2 g_{uA} du dx^A + g_{AB} dx^A dx^B.
 We write this coordinate system as $(x^a) = (u, r, x^A)$. For convenience we now rename our coefficients. First, from our earlier discussion of cuts, metric signature considerations ensure that $(g_{AB})$ is strictly positive-definite, hence invertible as an array. We therefore define \begin{equation}
 U^A \equiv g^{AB} g_{uB} \implies g_{uA} = g_{AB} U^B.
 \end{equation}
-Next we complete the square and further rename as \begin{equation}
+Next we complete the square and further rename as \begin{equation}\label{bondigauge}
 \begin{aligned}
 ds^2 & = g_{uu} du^2 + 2 g_{ur} du dr + 2 g_{AB} U^B du dx^A + g_{AB} dx^A dx^B \\
 & = \LP g_{uu}- g_{AB} U^A U^B \RP du^2 + 2 g_{ur} du dr + g_{AB} \LP U^A du + dx^A \RP \LP U^B du + dx^B \RP \\
@@ -117,19 +117,42 @@ ds^2 & = g_{uu} du^2 + 2 g_{ur} du dr + 2 g_{AB} U^B du dx^A + g_{AB} dx^A dx^B 
 This is pure notation, except for the choice $g_{ur} \equiv e^\beta$ which implies $\langle \D_u, \D_r \rangle < 0$, which in turn can be enforced within remnant coordinate freedom by appropriate choice of the direction in which $u$ or $r$ increases.\\
 \\
 \
-If we further choose\footnote{This cannot in general be accomplished by a redefinition of the coordinate $r$; it constrains the possibilities for choosing $\{N_u\}$ at the start of this construction. For example, it is possible in flat Minkowski space if we take $N_u$ to be the forward lightcone of the point $(t,x,y,z) = (u,0,0,0)$ or equivalently the locus $t - r = u$ but not if we take $N_u$ to be the locus $t - x = u$.} the determinant of the induced metric on the cuts to scale like $r^4$ \begin{equation}
+If we further choose\footnote{This cannot in general be accomplished by a redefinition of the coordinate $r$; it constrains the possibilities for choosing $\{N_u\}$ at the start of this construction. For example, it is possible in flat Minkowski space if we take $N_u$ to be the forward lightcone of the point $(t,x,y,z) = (u,0,0,0)$ or equivalently the locus $t - r = u$ but not if we take $N_u$ to be the locus $t - x = u$.} the determinant of the induced metric on the cuts to scale like $r^4$ \begin{equation}\label{luminositydistance}
 \D_r \det \LP \frac{g_{AB}}{r^2} \RP = 0
 \end{equation}
-we say that $r$ has been taken to be \textit{areal} or \textit{luminosity} distance. Then we write $g_{AB} = r^2 h_{AB}$ and \begin{equation}
+we say that $r$ has been taken to be \textit{areal} or \textit{luminosity} distance. Integrating at fixed $(u,r)$, this implies that each fixed-$r$ surface (which by similar arguments to those given above, must have purely spatial induced metric) has surface area proportionate to $r^2$, if indeed it has finite surface area at all. Then we write $g_{AB} = r^2 h_{AB}$ and \begin{equation}
 ds^2 = - F du^2 - 2 e^\beta du dr + r^2 h_{AB} \LP U^A du + dx^A \RP \LP U^B du + dx^B \RP.
 \end{equation}
-Any coordinate system obeying $g_{rA} = g_{rr} = 0$ plus the luminosity distance condition is said to be in \textit{Bondi gauge}; it is left to the reader's geometric imagination that every metric in this gauge can be cooked up by the geometric story we have told here. \\
-\\
-\
-The archetypal example of a spacetime described in Bondi gauge in $3+1$ Minkowski space where, starting from some inertial coordinates $(t, \vec{x})$, we take $r = |\vec{x}|$ to be spatial distance from the original, $u = t - r$ to be retarded time, and $(x^A)$ to be any convenient set of coordinates on the celestial sphere. For example, taking $(x^A) = (\theta, \phi)$ we have \begin{equation}
-ds^2 = - du^2 - 2 du dr + r^2 (d \theta^2 + \sin^2 \theta d \phi^2).
+Motivated by \eqref{luminositydistance}, we sometimes write the induced spherical metric on the celestial sphere at fixed $(u,r)$ as \begin{equation}
+g_{AB} dx^A dx^B \equiv r^2 q_{AB} dx^A dx^B \implies \D_r \det (q_{AB}) = 0.
 \end{equation}
-In studying asymptotic symmetries and celestial holography it is frequently useful to replace the angular coordinates $(\theta, \phi)$ with complex coordinates $(z, \bar{z})$ induced by, \textit{e.g.}, stereographic projection. 
+Any coordinate system obeying $g_{rA} = g_{rr} = 0$ plus the luminosity distance condition is said to be in \textit{Bondi gauge}; it is left to the reader's geometric imagination that every metric in this gauge can be cooked up by the geometric story we have told here.
+The archetypal example of a spacetime described in Bondi gauge in $3+1$ Minkowski space where, starting from some inertial coordinates $(t, \vec{x})$, we take $r = |\vec{x}|$ to be spatial distance from the original, $u = t - r$ to be retarded time, and $(x^A)$ to be any convenient set of coordinates on the celestial sphere. For example, taking $(x^A) = (\theta, \phi)$ we have the Minkowski metric in Bondi coordinates \begin{equation}\label{Minkowskibondi}
+\begin{aligned}
+ds^2 & = - du^2 - 2 du dr + r^2 (d \theta^2 + \sin^2 \theta d \phi^2) \\
+& = - ds^2 - 2 du dr + 2 r^2 \gamma_{z \bar{z}} dz d \bar{z} , \quad \gamma_{z \bar{z}} \equiv \frac{2}{(1 + z \bar{z})^2} \\
+& \equiv g_{ab}^{\mbox{\tiny{MB}}} dx^a dx^b.
+\end{aligned}
+\end{equation}
+In studying asymptotic symmetries and celestial holography it is frequently useful to replace the angular coordinates $(\theta, \phi)$ with complex coordinates $(z, \bar{z})$ induced by, \textit{e.g.}, stereographic projection as we have just done.
+
+
+
+\section{Asymptotic Flatness from Fall-Off}
+We saw above that we can always fix our coordinates locally so that the conditions \eqref{bondigauge} and \eqref{luminositydistance} are satisfied. This is completely generic, and doesn't require that our spacetime obey certain geometric properties or be on-shell. One of several inequivalent (but not totally independent) definitions of asymptotic flatness is that, near future null infinity\footnote{We haven't carefully defined this, and won't until a later section on conformal compactification. Roughly speaking, $\mc{I}^+$ this is the asymptotic spacetime boundary to whichfuture-directed null rays all tend as long as they don't hit a boundary at finite affine parameter or get trapped in some compact spatial region. We assume our spacetime's geometry is such that this characterizes a single connected region. In the present construction we are demanding that there exists a certain nice chart covering the whole of this region.} $\mc{I}^+$, there exists some coordinate chart $(u,r, x^A)$ in Bondi gauge gauge such that approaching $\mc{I}^+$ is given exactly by taking $r \to \infty$ at fixed $(u, x^A)$, and where the components of the metric approach \eqref{Minkowskibondi} in that limit. Schematically, we have \begin{equation}
+g_{ab}(u, r, z, \bar{z}) = g_{ab}^{\mbox{\tiny{MB}}}(u, r, z, \bar{z}) + \mbox{(corrections strictly subleading in $r$)}.
+\end{equation}
+There are various inequivalent conventions for the rate at which we demand the corrections decay. In one reasonably well-motivated convention, we have \begin{equation}
+\begin{aligned}
+g_{rr} & = 0, \\
+\D_r \det (g_{AB} / r^2) & = 0, \\
+g_{rA} & = 0, \\
+g_{uu} & = -1 + \mc{O} \LP r^{-1} \RP, \\
+g_{ur} & = -1 + \mc{O} \LP r^{-2} \RP, \\
+g_{uA} & = \mc{O}(1), \\
+g_{AB} & = r^2 q_{AB}^{\mbox{\tiny{MB}}} + \mc{O}(r).
+\end{aligned}
+\end{equation}
 
 \bibliography{bibfile}
 \bibliographystyle{utphys}
