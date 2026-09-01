@@ -151,7 +151,60 @@ X_\xi (f) & = \delta f (X_\xi) \\
 & = \Omega^{-1} (\delta f, \delta H_\xi).
 \end{aligned}
 \end{equation}
-It is in this sense that $\delta H_\xi$ interacts with the symplectic form to generate the changes in observables (concretely, scalars on phase space) induced by phase space diffeomorphisms. 
+It is in this sense that $\delta H_\xi$ interacts with the symplectic form to generate the changes in observables (concretely, scalars on phase space) induced by phase space diffeomorphisms. Now we want to construct $H_\xi$, starting by showing that the phase space 1-form $\Omega(X_\xi)$ is indeed exactly an exterior derivative. To do so, we introduce the Noether current associated to $\xi$ \begin{equation}
+J_\xi \equiv X_\xi \cdot \Theta - \iota_\xi L.
+\end{equation}
+Here we write $\cdot$ for contraction along field arguments and $\iota$ for contraction along spacetime arguments. The result is a spacetime $(d-1)$-form and a scalar on pre-phase space. Now assume that $L$ is covariant under $\xi$, in the sense that it is built from the dynamical field $\phi^a$ and background fields $\chi^b$ in such a way that its dynamical field variation under $\xi$ (given by the action of the configuration space vector field $X_\xi L$) agrees with its naive variation under the spacetime diffeomorphism (given by the spacetime Lie derivative $\delta_\xi L \equiv \mc{L}_\xi L$). Then we have \begin{equation}
+\begin{aligned}
+d J_\xi & = d \LP X_\xi \cdot \Theta \RP - d \LP \iota_\xi L \RP.
+\end{aligned}
+\end{equation}
+Since $\Theta$ is a spacetime $(d-1)$-form while $X_\xi$ is a spacetime constant, the first spacetime exterior derivative acts as \begin{equation}
+\begin{aligned}
+d(X_\xi \cdot \Theta) & = X_\xi \cdot d \Theta \\
+& = X_\xi \cdot (\delta L - E_a \delta \phi^a ) \\
+& = X_\xi (L).
+\end{aligned}
+\end{equation}
+Meanwhile, applying Cartan's magic formula to spacetime contractions and spacetime exterior derivatives and recalling that $L$ is a spacetime top form, we have \begin{equation}
+d (\iota_\xi L) = \mc{L}_\xi L - \iota_\xi (dL) = \mc{L}_\xi L.
+\end{equation}
+Covariance of $L$ w.r.t. $\xi$ is exactly the assumption that these two terms agree, so the difference vanishes. \begin{equation}
+d J_\xi = X_\xi (L) - \mc{L}_\xi L = 0.
+\end{equation}
+With this in hand, we decompose \begin{equation}
+\delta H_\xi = - X_\xi \cdot \Omega = - X_\xi \cdot \int_\Sigma \omega, \quad \omega \equiv \delta (\Omega + \delta \ell - d C) = \delta \Theta - d \delta C
+\end{equation}
+and compute the integrand over $\Sigma$ as \begin{equation}
+\begin{aligned}
+- X_\xi \cdot \omega & = - X_\xi \cdot \delta (\Theta - dC) \\
+& = \delta (X_\xi \cdot (\Theta - dC)) - \mc{L}_{X_\xi} (\Theta - dC) \mbox{ (Cartan magic)} \\
+& = \delta (X_\xi \cdot \Theta) - \delta (X_\xi \cdot dC) - \mc{L}_{X_\xi} \Theta + \mc{L}_{X_\xi} d C \mbox{ (expand)} \\
+& = \delta J_\xi + \iota_\xi \delta L - \delta (X_\xi \cdot dC) - \mc{L}_{X_\xi} \Theta + \delta_\xi d C \mbox{ (definitions of $J_\xi$, $\delta_\xi$) }.
+\end{aligned}
+\end{equation}
+Now if $L$ is covariant, so is $\delta L = d \Theta$ on-shell, hence so is (plausibly) $\Theta$ itself\footnote{In our original construction $\Theta$ was only defined modulo shifts by a spacetime-exact top form, so the real claim is that $\Theta$ can be chosen to be covariant.}. \begin{equation}
+\begin{aligned}
+\implies - X_\xi \cdot \omega & = \delta J_\xi + \iota_\xi \delta L - \delta (X_\xi \cdot dC) - \mc{L}_\xi \Theta + \delta_\xi dC \\
+& = \delta J_\xi + \iota_\xi \delta L - \mc{L}_\xi \Theta + d \LP \delta_\xi C - \delta (X_\xi \cdot C) \RP \\
+& = \delta J_\xi + \iota_\xi (E_a \delta \phi^a + d \Theta) - \mc{L}_\xi \Theta + d \LP \delta_\xi C - \delta (X_\xi \cdot C) \RP \\
+& = \delta J_\xi + \iota_\xi  d \Theta - \mc{L}_\xi \Theta + d \LP \delta_\xi C - \delta (X_\xi \cdot C) \RP \\
+& = \delta J_\xi + d \LP \delta_\xi C - \delta (X_\xi \cdot C) - i_\xi \Theta \RP.
+\end{aligned}
+\end{equation}
+So $- X_\xi \cdot \omega$ is the sum of a field-exact object and a spacetime-exact one. Integrating over a Cauchy slice then gives \begin{equation}
+\begin{aligned}
+\delta H_\xi & = - X_\xi \cdot \tilde{\Omega} \\
+& = - \int_\Sigma X_\xi \cdot \omega \\
+& = \int_\Sigma \delta J_\xi + \int_{\D \Sigma} \LP  \mc{L}_\xi C - \delta (X_\xi \cdot C) - i_\xi \Theta \RP \\
+& = \int_\Sigma \delta J_\xi + \int_{\D \Sigma} \LP  \iota_\xi d C + d (\iota_\xi C) - \delta (X_\xi \cdot C) - i_\xi \Theta \RP \\
+& = \delta \LP \int_\Sigma J_\xi + \int_{\D \Sigma} \LP  \iota_\xi \ell - X_\xi \cdot C \RP \RP.
+\end{aligned}
+\end{equation}
+So we are done, and we can identify \begin{equation}
+H_\xi \equiv  \int_\Sigma J_\xi + \int_{\D \Sigma} \LP  \iota_\xi \ell - X_\xi \cdot C \RP + \mbox{(const)}.
+\end{equation}
+
 
 
 
