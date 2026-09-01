@@ -1,0 +1,166 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+\usepackage{amssymb}
+
+\sectionfont{\fontsize{12}{12}\selectfont}
+\subsectionfont{\fontsize{12}{12}\selectfont}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\D}{\partial}
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \middle| #2 \right\rangle}
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+
+\title{Covariant Phase Space}
+
+\author{Mathew Calkins}
+
+\date{\today}
+
+ 
+\maketitle
+
+\abstract{Notes on covariant phase space with boundaries, mostly following the notes of \cite{Harlow:2019yfa}.}
+
+\tableofcontents
+
+\section{Introduction}
+
+\section{Formalism}
+
+\subsection{Local Lagrangians}
+Assume we have fixed a $d$-dimensional spacetime $M$ with boundary components $\D M = \Gamma + \Sigma_+ - \Sigma_-$, fields $\phi^a$, and compatible choices of $L, \ell, C$ and spatial boundary conditions, inducing equations of motion $E_a = 0$. Then varying the action gives \begin{equation}
+\delta S = \int_M E_a \delta \phi^a + \int_{\Sigma_+ - \Sigma_-} \Psi, \quad \Psi \equiv \Theta + \delta \ell - dC.
+\end{equation}
+To interpret this object linear-algebraically, we introduce the configuration space \begin{equation}
+\mc{C} \equiv \mbox{configuration space} \equiv \{ \mbox{field histories }  (\phi^a) \mbox{ obeying spatial BC's}\}
+\end{equation}
+which we think of as an infinite-dimensional manifold (though we won't attempt to rigorously interpret its smooth structure). Then $S$ is a scalar field on $\mc{C}$ and $\delta S$ its exterior derivative, so the latter can be thought of as a dual vector field. $\mc{C}$ has natural subspace \begin{equation}
+\tilde{\mc{P}} \equiv \mbox{pre-phase space} \equiv \{\mbox{field histories obeying spatial BC's + equations of motions}\}.
+\end{equation}
+The prefix ``pre-" indicates that this isn't quite the space of physical solutions, as we haven't yet quotiented out by gauge symmetries. We define the \textit{pre-symplectic current} by taking the field-space exterior derivative of $\Psi$ and restricting the result to take in vectors tangent to $\tilde{\mc{P}}$. \begin{equation}
+\omega \equiv \mbox{pre-symplectic current} \equiv \delta \Psi|_{\tilde{\mc{P}}}
+\end{equation}
+$\omega$ is a 2-form field over $\tilde{\mc{P}}$ and a spacetime $(d-1)$-form field, which is local in the sense that if we expand in the natural basis \begin{equation}
+\omega = \int_M d^d x \sqrt{|g|} \int_M d^d y \sqrt{|g|} \omega_{ab}(\phi, x, y) \delta \phi^a(x) \wedge \delta \phi^b(y)
+\end{equation}
+the components $\omega_{ab} (\phi, x, y)$ depends only on the germs of $\phi$ at $x,y$. Then given any Cauchy slice $\Sigma$ (roughly, a codimension-1 submanifold of $M$ diffeomorphic to $\Sigma_+ \simeq \Sigma_-$ whose causal past and future cover the complement $M - \Sigma$) we define the pre-phase space 2-form \begin{equation}
+\tilde{\Omega} \equiv \mbox{pre-symplectic form} \equiv \int_\Sigma \omega.
+\end{equation}
+One can check explicitly that this is independent of the choice of $\Sigma$.
+
+
+
+
+
+
+\subsection{Covariant Lagrangians}
+Given a vector field of $M$ which we think of as infinitesimal, the corresponding induced variation on an arbitrary dynamical tensor field $\phi$ is given as usual by the Lie derivative \begin{equation}
+\delta_\xi \phi = \mc{L}_\xi \phi.
+\end{equation}
+If this variation respects the spatial boundary conditions, we can write the action on the dynamical fields $\phi^a$ of our theory in terms of a vector field along $\mc{C}$ \begin{equation}
+X_\xi = \int_M d^d x \sqrt{|g|} \LP \mc{L}_\xi \phi^a(x) \RP \frac{\delta}{\phi^a(x)}.
+\end{equation}
+Then individual fields vary as \begin{equation}
+\delta_\xi \phi^a(x) = X_\xi \phi^a(x).
+\end{equation}
+More generally, given some scalar field $f$ built from our dynamical fields, we have \begin{equation}
+\delta_\xi f = X_\xi f.
+\end{equation}
+Crucially, we interpret $\delta_\xi$ as the change in $f$ induced by slightly changing every dynamical field $\phi^a$, but \textit{not} changing any background fields $\xi^b$. A theory is said to be \textit{covariant} w.r.t. the spacetime vector field $\xi$ (or more often, w.r.t. some algebra of such vector fields, or a group of non-infinitesimal spacetimes diffeos which linearize to the former) if these variations respect the boundary conditions and satisfaction of the equations of motion. This is non-trivial exactly because we are varying the dynamical fields but not the background fields; if we were varying both, then covariant under the full diffeomorphism group would be automatic. Conversely, under our definitions the background fields can be thought of as breaking full diffeomorphism invariance down to some subgroup.
+
+\subsection{Diffeomorphism Charges}
+Consider some infinitesimal diffeomorphism $\xi$ and corresponding configuration-space vector field $X_\xi$, w.r.t. which our theory may or may not be covariant. We want to find a corresponding scalar function $H_\xi$ on pre-phase space such that \begin{equation}
+\delta H_\xi = - \tilde{\Omega}(X_\xi, \cdot).
+\end{equation}
+$\tilde{\Omega}$ generally has zero-modes, \textit{i.e.}, configuration space vector fields $\tilde{X}$ obeying \begin{equation}
+\tilde{X} \cdot \tilde{\Omega} \equiv \tilde{\Omega}(\tilde{X}, \cdot) = 0.
+\end{equation}
+Such zero-modes generate flows in pre-phase space $\tilde{\mc{P}}$ which we identify with gauge orbits, so that the true phase space $\mc{P}$, or equivalently the set of physically distinct solutions, is the quotient of $\tilde{\mc{P}}$ by the group $\tilde{G}$ of gauge transformations $\tilde{\mc{P}} \to \tilde{\mc{P}}$ generated by the zero-modes. \begin{equation}
+\mc{P} \equiv \mbox{phase space} = \{ \mbox{physically distinct solutions $=$ gauge orbits} \} = \tilde{\mc{P}} / \tilde{G}.
+\end{equation}
+We will assume this quotient is smooth enough that $\mc{P}$ is analytically well-behaved, with tangent vectors we identify as vectors tangent to $\tilde{\mc{P}}$ modulo addition of zero-modes. In particular, even thought $\delta H_\xi$ is a 1-form field on $\tilde{\mc{P}}$, the fact that it annihilates 0-modes means it is equally well-defined as a 1-form field on $\mc{P}$; following \cite{Harlow:2019yfa} we will abuse notation and write $\delta H_\xi$ for both 1-forms. Similarly, $\tilde{\Omega}$ is well-defined as an equivalent 2-form over $\mc{P}$, though when we interpret it as such we write it as $\Omega$ rather than $\tilde{\Omega}$. \\
+\\
+\
+Like any quadratic form, the phase-space 2-form $\tilde{\Omega}$ can be thought of as a map from vectors to 1-forms \begin{equation}
+Y \in T \mc{P} \xmapsto{\Omega} \LP X \mapsto \Omega(X,Y) \RP \in T^* \mc{P}
+\end{equation}
+or by mild abuse of notation \begin{equation}
+\Omega(Y)(X) \equiv \Omega(X,Y) \mbox{ or } \Omega(Y) \equiv \Omega( \cdot, Y)
+\end{equation}
+Note that the order in which we fill in the slots of $\Omega$ is purely convention, but does give us minus signs we must track. This map is invertible, with inverse equivalently describable as a phase space bivector $\Omega^{-1}$ acting as \begin{equation}
+\alpha \LP \Omega^{-1}(\beta) \RP \equiv \Omega^{-1}(\alpha, \beta) \mbox{ or } \Omega^{-1}(\beta) \equiv \Omega^{-1} \LP \cdot, \beta \RP.
+\end{equation}
+Observe that $\Omega, \Omega^{-1}$ are both defined so that the right-most argument is ``filled in first." $\Omega^{-1}$ being the left-inverse of $\Omega^{-1}$ has equivalent phrase in the language of quadratic forms as \begin{equation}
+\begin{aligned}
+X & = \Omega^{-1} (\Omega(X)) \\
+& = \Omega^{-1} (\Omega(\cdot, X)) \\
+& = \Omega^{-1} \LP \cdot, \Omega( \cdot, X) \RP.
+\end{aligned}
+\end{equation}
+This is slightly clearer if we let a 1-form eat $X$, so that variously \begin{equation}
+\begin{aligned}
+\alpha(X) & = \alpha (\Omega^{-1} (\Omega(X)) \\
+& = \alpha (\Omega^{-1} (\Omega( \cdot, X))) \\
+& = \alpha (\Omega^{-1} (\cdot, \Omega(\cdot, X))) \\
+& = \Omega^{-1} (\alpha, \Omega(\cdot, X)) \\
+& = \Omega^{-1} (\alpha, \Omega(X)).
+\end{aligned}
+\end{equation}
+In particular, let the relevant vector field be $X = X_\xi$ and let the 1-form be $\alpha = \delta f$, the exterior derivative of some scalar field on phase space. Then the variation of this scalar field under the phase space diffeomorphism $X_\xi$ is exactly \begin{equation}
+\begin{aligned}
+X_\xi (f) & = \delta f (X_\xi) \\
+& = \Omega^{-1} (\delta f, \Omega(X_\xi)) \\
+& = \Omega^{-1} (\delta f, \Omega( \cdot, X_\xi)) \\
+& = \Omega^{-1} (\delta f, \delta H_\xi).
+\end{aligned}
+\end{equation}
+It is in this sense that $\delta H_\xi$ interacts with the symplectic form to generate the changes in observables (concretely, scalars on phase space) induced by phase space diffeomorphisms. 
+
+
+
+
+\bibliography{bibfile}
+\bibliographystyle{utphys}
+
+\end{document}
+
+
+
+
