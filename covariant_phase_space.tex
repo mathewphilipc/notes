@@ -202,10 +202,118 @@ So $- X_\xi \cdot \omega$ is the sum of a field-exact object and a spacetime-exa
 \end{aligned}
 \end{equation}
 So we are done, and we can identify \begin{equation}
-H_\xi \equiv  \int_\Sigma J_\xi + \int_{\D \Sigma} \LP  \iota_\xi \ell - X_\xi \cdot C \RP + \mbox{(const)}.
+H_\xi \equiv  \int_\Sigma J_\xi + \int_{\D \Sigma} \LP  \iota_\xi \ell - X_\xi \cdot C \RP + \mbox{(const)}
 \end{equation}
+where the additive shift is a constant $c$-number which we typically set to $0$.
 
 
+\subsubsection{Independence of Cauchy Surface}
+Now we check that $H_\xi(\Sigma)$ is in fact independent of the choice of $\Sigma$. So consider some other choice $\Sigma'$, so that the difference is purely spatial and takes the form \begin{equation}
+\D \Sigma - \D \Sigma' = \D \Xi \subset \Gamma \mbox{ with } \Xi \subset \Gamma.
+\end{equation}
+Then the difference between $H_\xi$ defined along the two Cauchy surfaces is \begin{equation}
+\begin{aligned}
+H_\xi (\Sigma) - H_\xi(\Sigma') & = \int_{\Sigma - \Sigma'} \LP J_\xi + d \LP \iota_\xi \ell - X_\xi \cdot C \RP \RP \\
+& = \int_{\Sigma - \Sigma'} J_\xi + \int_{\D \Xi} \LP \iota_\xi \ell - X_\xi \cdot C \RP \\
+& = \int_{\Sigma - \Sigma'} J_\xi + \int_\Xi d \LP \iota_\xi \ell - X_\xi \cdot C \RP
+\end{aligned}
+\end{equation}
+To simply the integral against $J_\xi$, we denote by $\mc{M} \subset M$ the open region enclosed by $\Sigma, \Sigma', \Xi$. Carefully tracking orientations and signs, we then have \begin{equation}
+\D \mc{M} = \Sigma - \Sigma' - \Xi
+\end{equation}
+where we observe that the relative signs can be deduced by enforcing $\D^2 \mc{M} = 0$. Then since $dJ_\xi = 0$ on pre-phase space we can rewrite \begin{equation}
+\begin{aligned}
+\int_{\Sigma - \Sigma'} J_\xi = \underbrace{\int_{\D \mc{M}} J_\xi}_{\to 0} + \int_{\Xi} J_\xi
+\end{aligned}
+\end{equation}
+and we have neatly \begin{equation}
+\begin{aligned}
+H_\xi(\Sigma) - H_\xi(\Sigma') & = \int_{\Xi} \LP J_\xi + d \LP \iota_\xi \ell - X_\xi \cdot C \RP \RP  \\
+& = \int_{\Xi} \LP X_\xi \cdot \Theta - \iota_\xi \cdot L + d \LP \iota_\xi \ell - X_\xi \cdot C \RP \RP \\
+& = \int_\Xi \LP X_\xi \cdot \LP \Theta - d C \RP - \iota_\xi \cdot L + d (\iota_\xi \ell) \RP \\
+& = \int_\Xi \LP - X_\xi \cdot \delta \ell - \iota_\xi \cdot L + d (\iota_\xi \ell) \RP
+\end{aligned}
+\end{equation}
+(TODO)
+
+
+\section{Examples}
+
+\subsection{Scalar Field}
+Consider the theory of a single scalar \begin{equation}
+L = - \LP \frac{1}{2} (\nabla_\mu \phi) (\nabla^\mu \phi) + V(\phi) \RP \epsilon.
+\end{equation}
+Variation of the Lagrangian gives \begin{equation}
+\begin{aligned}
+\delta L & = - \LP ( \nabla^\mu \phi) \delta \nabla_\mu \phi + V'(\phi) \delta \phi \RP \epsilon \\
+& = \LP \nabla^\mu \nabla_\mu \phi - V'(\phi) \RP \epsilon \delta \phi - \nabla_\mu (\delta \phi \nabla^\mu \phi  ) \epsilon \\
+& \equiv E \delta \phi - d \Omega
+\end{aligned}
+\end{equation}
+where by comparison we identify \begin{equation}
+E = (\nabla^2 \phi - V'(\phi) ) \epsilon
+\end{equation}
+and \begin{equation}
+d \Theta = - \nabla_\mu (\delta \phi \nabla^\mu \phi) \epsilon = - d \LP (\delta \phi \nabla \phi) \cdot \epsilon \RP \impliedby \Theta = - \delta \phi (\nabla \phi) \cdot \epsilon \equiv \theta \cdot \epsilon.
+\end{equation}
+At this point we are giving up on $\cdot$ vs $\iota$ and write both kinds of contractions with $\cdot$, leaving disambiguation to context clues. $\ell$ can only be determined jointly with our boundary conditions, which require that \begin{equation}
+(\delta \ell + \Theta)|_\Gamma = d C
+\end{equation}
+be an exact form. The spacetime $(d-1)$-form $\Theta$ restricts to $\Gamma$ as \begin{equation}
+ \Theta|_\Gamma = n_\mu \theta^\mu \epsilon_{\D M} = n_\mu \delta \phi \nabla^\mu \phi \epsilon_{\D M}
+\end{equation}
+where $n$ is the unit normal form to $\D M$ and $\epsilon_{\D M}$ is the induced volume form on $\D M$. We can consistently take the simplest possible case with $\ell, C$ vanishing as long as $\Theta|_\Gamma$ vanishes, for which it suffices to take either Dirichlet \begin{equation}
+\delta \phi|_\Gamma = 0
+\end{equation}
+or Neumann \begin{equation}
+n^\mu \nabla_\mu \phi|_\Gamma = 0
+\end{equation}
+boundary conditions. Now we have our pre-symplectic current \begin{equation}
+\begin{aligned}
+\omega & = \delta \LP \Theta + \delta \ell - d C \RP|_{\tilde{\mc{P}}} \\
+& = \delta \Theta |_{\tilde{\mc{P}}} \\
+& = - \delta \LP \delta \phi (\nabla \phi) \cdot \epsilon \RP \\
+& = - (\nabla \delta \phi) \cdot \epsilon \wedge \delta \phi \\
+& \equiv \hat{\omega} \cdot \epsilon
+\end{aligned}
+\end{equation}
+where \begin{equation}
+\hat{\omega}^\mu = - (\nabla^\mu \delta \phi) \wedge \delta \phi 
+\end{equation}
+and where the wedge product $\wedge$ is taken in the complex over pre-phase space. Integrating this over a Cauchy surface $\Sigma$ gives the pre-symplectic form \begin{equation}
+\begin{aligned}
+\tilde{\Omega} & = - \int_\Sigma \hat{n}_\mu \hat{\omega}^\mu \epsilon_\Sigma \\
+& = - \int_\Sigma \hat{n}^\mu (\nabla_\mu \delta \phi) \wedge \delta \phi \epsilon_\Sigma
+\end{aligned}
+\end{equation}
+where $\Sigma$ has induced volume form $\epsilon_\Sigma$ and unit normal $\hat{n}$. We see that this is non-degenerate, so there are no zero-modes by which we must quotient and we have \begin{equation}
+\mc{P} = \tilde{\mc{P}}, \quad \Omega = \tilde{\Omega}.
+\end{equation}
+Now given $\xi$ we can cook up a current \begin{equation}
+J_\xi = X_\xi \cdot \Theta - \xi \cdot L
+\end{equation}
+where \begin{equation}
+X_\xi = \int_M d^d x \sqrt{|g|} (\xi \cdot d \phi)(x) \frac{\delta}{\delta \phi(x)}
+\end{equation}
+so the first term is \begin{equation}
+\begin{aligned}
+X_\xi \cdot \Theta (x) & = \LP \int_M d^d x \sqrt{|g|} (\xi \cdot d \phi)(y) \frac{\delta}{\delta \phi(y)} \RP \cdot \LP - (\nabla \phi(x)) \cdot \epsilon \delta \phi(x) \RP \\
+& = - (\mc{L}_\xi \phi)(x) (\nabla \phi \cdot \epsilon)(x) \\
+& = - \xi_\nu (\nabla^\mu \phi) (\nabla^\nu \phi) \D_\mu \cdot \epsilon
+\end{aligned}
+\end{equation}
+while the second term gives \begin{equation}
+\begin{aligned}
+- \xi \cdot L & = \frac{1}{2} \xi \cdot \left[ \LP (\nabla_\mu \phi) (\nabla^\mu \phi) + V(\phi) \RP \epsilon \right] \\
+& =  \xi_\nu g^{\mu \nu} \left[ \frac{1}{2} (\nabla_\alpha \phi) (\nabla^\alpha \phi) + V(\phi)  \right] \D_\mu \cdot \epsilon.
+\end{aligned}
+\end{equation}
+We can therefore write more nicely \begin{equation}
+J_\xi = j_\xi \cdot \epsilon
+\end{equation}
+where \begin{equation}
+j_\xi^\mu = - \xi_\nu \LP  (\nabla^\mu \phi) (\nabla^\nu \phi) -  g^{\mu \nu} \left[ \frac{1}{2} (\nabla_\alpha \phi) (\nabla^\alpha \phi) + V(\phi)  \right] \RP 
+\end{equation}
 
 
 
