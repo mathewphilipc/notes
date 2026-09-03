@@ -78,7 +78,7 @@ The prefix ``pre-" indicates that this isn't quite the space of physical solutio
 \omega \equiv \mbox{pre-symplectic current} \equiv \delta \Psi|_{\tilde{\mc{P}}}
 \end{equation}
 $\omega$ is a 2-form field over $\tilde{\mc{P}}$ and a spacetime $(d-1)$-form field, which is local in the sense that if we expand in the natural basis \begin{equation}
-\omega = \int_M d^d x \sqrt{|g|} \int_M d^d y \sqrt{|g|} \omega_{ab}(\phi, x, y) \delta \phi^a(x) \wedge \delta \phi^b(y)
+\omega = \int_M d^d x \int_M d^d y \omega_{ab}(\phi, x, y) \delta \phi^a(x) \wedge \delta \phi^b(y)
 \end{equation}
 the components $\omega_{ab} (\phi, x, y)$ depends only on the germs of $\phi$ at $x,y$. Then given any Cauchy slice $\Sigma$ (roughly, a codimension-1 submanifold of $M$ diffeomorphic to $\Sigma_+ \simeq \Sigma_-$ whose causal past and future cover the complement $M - \Sigma$) we define the pre-phase space 2-form \begin{equation}
 \tilde{\Omega} \equiv \mbox{pre-symplectic form} \equiv \int_\Sigma \omega.
@@ -95,7 +95,7 @@ Given a vector field of $M$ which we think of as infinitesimal, the correspondin
 \delta_\xi \phi = \mc{L}_\xi \phi.
 \end{equation}
 If this variation respects the spatial boundary conditions, we can write the action on the dynamical fields $\phi^a$ of our theory in terms of a vector field along $\mc{C}$ \begin{equation}
-X_\xi = \int_M d^d x \sqrt{|g|} \LP \mc{L}_\xi \phi^a(x) \RP \frac{\delta}{\phi^a(x)}.
+X_\xi = \int_M d^d x \LP \mc{L}_\xi \phi^a(x) \RP \frac{\delta}{\phi^a(x)}.
 \end{equation}
 Then individual fields vary as \begin{equation}
 \delta_\xi \phi^a(x) = X_\xi \phi^a(x).
@@ -293,11 +293,11 @@ Now given $\xi$ we can cook up a current \begin{equation}
 J_\xi = X_\xi \cdot \Theta - \xi \cdot L
 \end{equation}
 where \begin{equation}
-X_\xi = \int_M d^d x \sqrt{|g|} (\xi \cdot d \phi)(x) \frac{\delta}{\delta \phi(x)}
+X_\xi = \int_M d^d x  (\xi \cdot d \phi)(x) \frac{\delta}{\delta \phi(x)}
 \end{equation}
 so the first term is \begin{equation}
 \begin{aligned}
-X_\xi \cdot \Theta (x) & = \LP \int_M d^d x \sqrt{|g|} (\xi \cdot d \phi)(y) \frac{\delta}{\delta \phi(y)} \RP \cdot \LP - (\nabla \phi(x)) \cdot \epsilon \delta \phi(x) \RP \\
+X_\xi \cdot \Theta (x) & = \LP \int_M d^d x (\xi \cdot d \phi)(y) \frac{\delta}{\delta \phi(y)} \RP \cdot \LP - (\nabla \phi(x)) \cdot \epsilon \delta \phi(x) \RP \\
 & = - (\mc{L}_\xi \phi)(x) (\nabla \phi \cdot \epsilon)(x) \\
 & = - \xi_\nu (\nabla^\mu \phi) (\nabla^\nu \phi) \D_\mu \cdot \epsilon
 \end{aligned}
@@ -312,9 +312,50 @@ We can therefore write more nicely \begin{equation}
 J_\xi = j_\xi \cdot \epsilon
 \end{equation}
 where \begin{equation}
-j_\xi^\mu = - \xi_\nu \LP  (\nabla^\mu \phi) (\nabla^\nu \phi) -  g^{\mu \nu} \left[ \frac{1}{2} (\nabla_\alpha \phi) (\nabla^\alpha \phi) + V(\phi)  \right] \RP 
+j_\xi^\mu = - \xi_\nu \LP  (\nabla^\mu \phi) (\nabla^\nu \phi) -  g^{\mu \nu} \left[ \frac{1}{2} (\nabla_\alpha \phi) (\nabla^\alpha \phi) + V(\phi)  \right] \RP .
 \end{equation}
 
+
+\subsection{Maxwell}
+Free Maxwell theory has Lagrangian \begin{equation}
+L = - \frac{1}{2} F \wedge * F, \quad F = dA
+\end{equation}
+which in turn has variation \begin{equation} \begin{aligned}
+\delta L & = - \delta F \wedge * F \\
+& = - \delta A \wedge d * F - d (\delta A \wedge * F) \\
+& \equiv \delta A_\mu E^\mu + d \Theta
+\end{aligned}
+\end{equation}
+from which we read off \begin{equation}
+\Theta = - \delta A \wedge * F.
+\end{equation}
+If we apply Dirichlet boundary conditions \begin{equation}
+\delta A|_\Gamma = 0
+\end{equation}
+then we can consistently set $\ell$ and $C$ to $0$. Then our pre-symplectic current and forms become \begin{equation}
+\omega = \delta \Theta = - \delta A \wedge * \delta F \implies \tilde{\Omega} = - \int_\Sigma \delta A \wedge * \delta F.
+\end{equation}
+This has nontrivial zero modes, but the latter depend on our chosen boundary conditions. A candidate zero mode has general form \begin{equation}
+\tilde{X} = \int_M d^d x V_\mu(x) \frac{\delta}{\delta A_\mu}.
+\end{equation}
+To compute its contraction against $\tilde{\Omega}$ we use coordinates $(t, y)$ for $M$ and $x$ for $\Sigma$, so that \begin{equation}
+\begin{aligned}
+\tilde{X} \cdot \tilde{\Omega} &= \LP \int_M d^d y  V_\mu(y) \frac{\delta}{\delta A_\mu(y)} \RP \cdot \LP \int_\Sigma \delta A(x) \wedge * d \delta A(x) \RP \\
+& = \int_\Sigma  \int_M d^d y V_\mu(y) \frac{\delta}{\delta A_\mu(y)} \cdot \LP \delta A \wedge * d \delta A \RP \\
+& = \int_\Sigma  \LP V \wedge * d \delta A  - \delta A \wedge * d V \RP.
+\end{aligned}
+\end{equation}
+If $V$ is an exact form $V = d \lambda \implies dV = 0$, then the second term vanishes and integration by parts lets us rewrite the first as \begin{equation}
+\begin{aligned}
+\tilde{X} \cdot \tilde{\Omega} & = \int_\Sigma d \lambda \wedge * d \delta A \\
+& = \int_{\D \Sigma} \lambda *  \delta F.
+\end{aligned}
+\end{equation}
+Notice that this does not vanish in general! Our Dirichlet boundary conditions force
+\begin{equation}
+A|_\gamma \mbox{ fixed } \implies \lambda|_\Gamma = \mbox{ const}
+\end{equation}
+but the vanishing of $\tilde{X} \cdot \tilde{\Omega}$ identically on pre-phase space happens iff $\lambda|_\Gamma = 0$. So we have rediscovered the classical notion of a large gauge transformation: a transformation $A \to A + d \lambda$ on a spacetime $M \simeq \R \times \Sigma$ for $\Sigma$ compact should only be thought of as a bona fide redundancy in our enumeration of physical states when $\lambda$ vanishes along the spatial boundary; otherwise the transformation takes us to a physically distinguishable new state.
 
 
 \bibliography{bibfile}
