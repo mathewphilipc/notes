@@ -61,20 +61,20 @@
 \tableofcontents
 
 \section{Geometric preliminaries}
-Let $M$ be a four-dimensional spacetime, \textit{i.e.}, a real smooth 4-manifold endowed with a metric $g$ metric signature $(-,+,+,+)$, plus a smoothly varying choice made at every $T_p M$ as to which time-like and null vectors are future- versus past-directed. Any future-directed null geodesic which doesn't eventually get permanently trapped in an isolated system\footnote{This is deliberately loose phrasing which we'll make more precise later} is said to run off to \textit{future null infinity} $\mc{I}^+$. \textit{Past null infinity} $\mc{I}^-$ is defined analogously. We will see later that conformal compactifications let us more literally interpret $\mc{I}^\pm$ as boundary components.\\
+Let $M$ be a four-dimensional spacetime, \textit{i.e.}, a real smooth 4-manifold endowed with a metric $g$ metric signature $(-,+,+,+)$, plus a smoothly varying choice made at every $T_p M$ as to which time-like and null vectors are future- versus past-directed. Any future-directed null geodesic which doesn't eventually get permanently trapped in an isolated system\footnote{This is deliberately loose phrasing which we'll make more precise later.} is said to run off to \textit{future null infinity} $\mc{I}^+$. \textit{Past null infinity} $\mc{I}^-$ is defined analogously. We will see later that conformal compactifications let us more literally interpret $\mc{I}^\pm$ as boundary components.\\
 \\
 \
 Let $N \subset M$ be a smooth codimension-1 submanifold. For $p \in N$, a vector $n \in T_p N$ is said to be \textit{normal} to $N$ at $p$ if is is orthogonal to all vectors tangent to $N$ at $p$, \textit{i.e.}, if $\langle n, m \rangle = 0$ for all $m \in T_p N$. Conversely, given such an $n$ the tangent space $T_p N$ is exactly the set of all $m \in T_p M$ such that $\langle m, n \rangle = 0$. Just as in the Euclidean case, at fixed $p$ and $N$ such vectors form a 1-dimensional vector space. By choosing a normalization convention and a local orientation for $N$, we may therefore speak of \textit{the} normal vector $n = (n^a)$ or the corresponding normal covector $(n_a) \equiv (g_{ab} n^b) = g(n, \cdot)$. \\
 \\
 \
-$N$ is called a \textit{null hypersurface} if, at every point $p \in N$, the\footnote{Here `the' is a mild abuse of vocabulary since it relies on choices of orientation and normalization, but all such choices agree on whether $N$ is null.} normal vector $(n^a)$ is null, or equivalently if the normal covector $(n_a)$. Then from our observations above we see that $n \in T_p N$, so that $n$ is simultaneously tangent and normal to $N$ at $p$. Now we abuse notation slightly and extend $n$ to a vector field defined everywhere on $N$. Then the integral curves of $n$ are all trajectories within $N$, and cover the latter. We call these null curves the \textit{null generators} of $N$. If everything is analytically nice enough, then the set of integral curves (equivalently, the set of all equivalence classes $[p \in N]$ where $p \sim q$ iff some integral curve passes through both points) inherits the structure of a real smooth two-manifold. If this occurs, a smooth family of null generators is called a \textit{null congruence}. This smooth structure may hold in some regions but not in others. A \textit{caustic} is a point where neighboring generators intersect or focus so strongly that the inherited smooth structure breaks down.\\
+$N$ is called a \textit{null hypersurface} if, at every point $p \in N$, the\footnote{Here `the' is a mild abuse of vocabulary since defining a normal vector relies on choices of orientation and normalization, but all such choices agree on whether $N$ is null.} normal vector $(n^a)$ is null, or equivalently if the normal covector $(n_a)$. Then from our observations above we see that $n \in T_p N$, so that $n$ is simultaneously tangent and normal to $N$ at $p$. Now we abuse notation slightly and extend $n$ to a vector field defined everywhere on $N$. Then the integral curves of $n$ are all trajectories within $N$, and cover the latter. We call these null curves the \textit{null generators} of $N$. If everything is analytically nice enough, then the set of integral curves (equivalently, the set of all equivalence classes $[p \in N]$ where $p \sim q$ iff some integral curve passes through both points) inherits the structure of a real smooth two-manifold. If this occurs, a smooth family of null generators is called a \textit{null congruence}. This smooth structure may hold in some regions but not in others. A \textit{caustic} is a point where neighboring generators intersect or focus so strongly that the inherited smooth structure breaks down.\\
 \\
 \
 Suppose we have covered $N$ by such a null congruence of null generators. A \textit{cut} of $N$ is a smooth spacelike\footnote{That is, having exclusively spacelike or vanishing tangent vectors.} 2-submanifold of $N$ which intersects each null generator exactly once in some region under consideration. Choosing a cut of a null hypersurface should be thought of as the null-geometry analogue of choosing a spatial slice of a Lorentzian manifold.\\
 \\
 \
 Why should cuts exist at all? In more algebraic terms and rephrased slightly, why should the induced metric on $N$ have signature $(0,+,+)$? Recall that, algebraically, the signature of a quadratic form $F: V \times V$ over a real vector space of finite dimensions is defined procedurally: \begin{itemize}
-    \item Pick any basis for $F$ w.r.t. which the component expression for $F$ is diagonal.
+    \item Pick any basis for $V$ w.r.t. which the component expression for $F$ is diagonal.
     \item Read off the number of positive, negative, and vanishing diagonal components; this triple is the signature of $F$.
     \item Step 1 is provably possible, and the results of Step 2 are provably independent of choices made during Step 1.
 \end{itemize}
@@ -120,29 +120,44 @@ This is pure notation, except for the choice $g_{ur} \equiv e^\beta$ which impli
 If we further choose\footnote{This cannot in general be accomplished by a redefinition of the coordinate $r$; it constrains the possibilities for choosing $\{N_u\}$ at the start of this construction. For example, it is possible in flat Minkowski space if we take $N_u$ to be the forward lightcone of the point $(t,x,y,z) = (u,0,0,0)$ or equivalently the locus $t - r = u$ but not if we take $N_u$ to be the locus $t - x = u$.} the determinant of the induced metric on the cuts to scale like $r^4$ \begin{equation}\label{luminositydistance}
 \D_r \det \LP \frac{g_{AB}}{r^2} \RP = 0
 \end{equation}
-we say that $r$ has been taken to be \textit{areal} or \textit{luminosity} distance. Integrating at fixed $(u,r)$, this implies that each fixed-$r$ surface (which by similar arguments to those given above, must have purely spatial induced metric) has surface area proportionate to $r^2$, if indeed it has finite surface area at all. Then we write $g_{AB} = r^2 h_{AB}$ and \begin{equation}
-ds^2 = - F du^2 - 2 e^\beta du dr + r^2 h_{AB} \LP U^A du + dx^A \RP \LP U^B du + dx^B \RP.
-\end{equation}
+we say that $r$ has been taken to be \textit{areal} or \textit{luminosity} distance. Integrating at fixed $(u,r)$, this implies that each fixed-$r$ surface (which by similar arguments to those given above, must have purely spatial induced metric) has surface area proportionate to $r^2$, if indeed it has finite surface area at all. %Then we write $g_{AB} = r^2 h_{AB}$ and \begin{equation}
+%ds^2 = - F du^2 - 2 e^\beta du dr + r^2 h_{AB} \LP U^A du + dx^A \RP \LP U^B du + dx^B \RP.
+%\end{equation}
 Motivated by \eqref{luminositydistance}, we sometimes write the induced spherical metric on the celestial sphere at fixed $(u,r)$ as \begin{equation}
-g_{AB} dx^A dx^B \equiv r^2 q_{AB} dx^A dx^B \implies \D_r \det (q_{AB}) = 0.
+g_{AB} dx^A dx^B \equiv r^2 h_{AB} dx^A dx^B \implies \D_r \det (h_{AB}) = 0.
 \end{equation}
 Any coordinate system obeying $g_{rA} = g_{rr} = 0$ plus the luminosity distance condition is said to be in \textit{Bondi gauge}; it is left to the reader's geometric imagination that every metric in this gauge can be cooked up by the geometric story we have told here.
 The archetypal example of a spacetime described in Bondi gauge in $3+1$ Minkowski space where, starting from some inertial coordinates $(t, \vec{x})$, we take $r = |\vec{x}|$ to be spatial distance from the original, $u = t - r$ to be retarded time, and $(x^A)$ to be any convenient set of coordinates on the celestial sphere. For example, taking $(x^A) = (\theta, \phi)$ we have the Minkowski metric in Bondi coordinates \begin{equation}\label{Minkowskibondi}
 \begin{aligned}
 ds^2 & = - du^2 - 2 du dr + r^2 (d \theta^2 + \sin^2 \theta d \phi^2) \\
-& = - ds^2 - 2 du dr + 2 r^2 \gamma_{z \bar{z}} dz d \bar{z} , \quad \gamma_{z \bar{z}} \equiv \frac{2}{(1 + z \bar{z})^2} \\
-& \equiv g_{ab}^{\mbox{\tiny{MB}}} dx^a dx^b.
+& = - du^2 - 2 du dr + 2 r^2 \gamma_{z \bar{z}} dz d \bar{z} , \quad \gamma_{z \bar{z}} \equiv \frac{2}{(1 + z \bar{z})^2} \\
+& = - du^2 - 2 du dr + r^2 q_{AB} dx^A dx^B \\
+& \equiv g_{ab}^{\mbox{\tiny{MB}}} dx^a dx^b
 \end{aligned}
 \end{equation}
-In studying asymptotic symmetries and celestial holography it is frequently useful to replace the angular coordinates $(\theta, \phi)$ with complex coordinates $(z, \bar{z})$ induced by, \textit{e.g.}, stereographic projection as we have just done.
+where we write $q_{AB}$ for the standard round metric on the unit 2-sphere. In studying asymptotic symmetries and celestial holography it is frequently useful to replace the angular coordinates $(\theta, \phi)$ with complex coordinates $(z, \bar{z})$ induced by, \textit{e.g.}, stereographic projection as we have just done.
+
+
+\subsection{Bondi and Schwarzschild}
+The usual Schwarzschild metric in $3+1$ dimensions
+\begin{equation}
+ds^2 = - \LP 1 - \frac{2GM}{r} \RP dt^2 - \LP 1 - \frac{2GM}{r} \RP^{-1} dr^2 + r^2 d \Omega^2
+\end{equation}
+is the prototypical example of an on-shell solution which looks like flat space far away (along either spacelike or null paths, though not necessarily along timelike paths) from an isolated system of interest, so it ought to admit a Bondi frame which at large approaches $g^{\mbox{\tiny{MB}}}$. Indeed, in Eddington–Finkelstein coordinates it becomes \begin{equation}
+ds^2 = - \LP 1 - \frac{2GM}{r} \RP du^2 - 2 du dr + r^2 d \Omega_2^2.
+\end{equation}
+In these coordinates we have \begin{equation}
+g_{uu} = -1 + \mc{O} \LP \frac{1}{r} \RP = g_{uu}^{\mbox{\tiny{MB}}} + \mc{O} \LP \frac{1}{r} \RP
+\end{equation}
+and $g_{ab} = g_{ab}^{\mbox{\tiny{MB}}}$ otherwise. While there are other coordinate systems which respect the Bondi gauge conditions, none of them can strictly improve on this fall-off rate.
 
 
 
-\section{Asymptotic Flatness from Fall-Off}
-We saw above that we can always fix our coordinates locally so that the conditions \eqref{bondigauge} and \eqref{luminositydistance} are satisfied. This is completely generic, and doesn't require that our spacetime obey certain geometric properties or be on-shell. One of several inequivalent (but not totally independent) definitions of asymptotic flatness is that, near future null infinity\footnote{We haven't carefully defined this, and won't until a later section on conformal compactification. Roughly speaking, $\mc{I}^+$ this is the asymptotic spacetime boundary to whichfuture-directed null rays all tend as long as they don't hit a boundary at finite affine parameter or get trapped in some compact spatial region. We assume our spacetime's geometry is such that this characterizes a single connected region. In the present construction we are demanding that there exists a certain nice chart covering the whole of this region.} $\mc{I}^+$, there exists some coordinate chart $(u,r, x^A)$ in Bondi gauge gauge such that approaching $\mc{I}^+$ is given exactly by taking $r \to \infty$ at fixed $(u, x^A)$, and where the components of the metric approach \eqref{Minkowskibondi} in that limit. Schematically, we have \begin{equation}
+\section{Fall-Off Rates}
+We saw above that we can always fix our coordinates locally so that the conditions \eqref{bondigauge} and \eqref{luminositydistance} are satisfied. This is completely generic, and doesn't require that our spacetime obey certain geometric properties or be on-shell. One of several inequivalent (but not totally independent) definitions of asymptotic flatness is that, near future null infinity\footnote{We haven't carefully defined this, and won't until a later section on conformal compactification. Roughly speaking, $\mc{I}^+$ this is the asymptotic spacetime boundary to whichfuture-directed null rays all tend as long as they don't hit a boundary at finite affine parameter or get trapped in some compact spatial region. We assume our spacetime's geometry is such that this characterizes a single connected region. In the present construction we are demanding that there exists a certain nice chart covering the whole of this region.} $\mc{I}^+$, there exists some coordinate chart $(u,r, x^A)$ in Bondi gauge gauge such that approaching $\mc{I}^+$ is given exactly by taking $r \to \infty$ at fixed $(u, x^A)$, and where the components of the metric approach \eqref{Minkowskibondi} in that limit. Schematically, we would like to take \begin{equation}
 g_{ab}(u, r, z, \bar{z}) = g_{ab}^{\mbox{\tiny{MB}}}(u, r, z, \bar{z}) + \mbox{(corrections strictly subleading in $r$)}.
 \end{equation}
-There are various inequivalent conventions for the rate at which we demand the corrections decay. In one reasonably well-motivated convention, we have \begin{equation}
+There are various inequivalent conventions for the rate at which we demand the corrections decay, and it turns out that a general solution describing a finite amount of outgoing radiation does not allow every component $g_{ab}$ to literally converge to $g_{ab}^{\mbox{\tiny{MB}}}$. In one reasonably well-motivated convention, we have \begin{equation}
 \begin{aligned}
 g_{rr} & = 0, \\
 \D_r \det (g_{AB} / r^2) & = 0, \\
@@ -150,8 +165,35 @@ g_{rA} & = 0, \\
 g_{uu} & = -1 + \mc{O} \LP r^{-1} \RP, \\
 g_{ur} & = -1 + \mc{O} \LP r^{-2} \RP, \\
 g_{uA} & = \mc{O}(1), \\
-g_{AB} & = r^2 q_{AB}^{\mbox{\tiny{MB}}} + \mc{O}(r).
+g_{AB} & =  g_{AB}^{\mbox{\tiny{MB}}} + \mc{O}(r) = r^2 q_{AB} + \mc{O}(r).
 \end{aligned}
+\end{equation}
+The first three conditions for $g_{rr}, g_{rA}, g_{AB}$ are simply the Bondi gauge conditions including the requirement that $r$ be a luminosity distance. The requirement on $g_{uu}$ is the most inclusive possible polynomial fall-off; as we saw in the last example, being any more restrictive would rule out physically desirable solutions just as Schwarzschild, essentially by killing Coulombic data. $g_{AB}$ is similarly generic, being required to approach $g_{AB}^{\mbox{\tiny{MB}}} = r^2 q_{AB}$ with error having the most generous possible polynomial decay rate.\\
+\\
+\
+The fall-off conditions for $g_{ur}$ and $g_{uA}$ are slightly more subtle. It turns out that, respectively, finiteness of certain reasonable physical observables force $g_{ur}$ to approach $-1$ with inverse-quadratic error, while the equations of motion for general physically sensible solutions prevent us from saying anything more restrictive about $g_{uA}$. We follow with some comments on physical interpretations of these components, their fall-off rates, and the leading correction terms.
+
+
+
+\subsection{Angular Metric and Gravitational Wave Flux}
+Write \begin{equation}
+g_{AB} = r^2 q_{AB} + r C_{AB} + \mc{O}(1).
+\end{equation}
+This can be thought of as the induced metric on the 2-surface of fixed $(u,r)$; as noted just above, this form corresponds to the most general possible way that $g_{AB}$ can approach $g_{AB}^{\mbox{\tiny{MB}}}$ with polynomially subleading correction. We call the leading correction $C_{AB}$ the \textit{shear} and note that it is independent of $r$ by construction. This tensor is constrained by our luminosity distance gauge condition \eqref{luminositydistance}, which forces \begin{equation}
+\begin{aligned}
+0 & = \D_r \det \LP \frac{g_{AB}}{r^2} \RP \\
+& = \D_r \det \LP q_{AB} + \frac{C_{AB}}{r} + \mc{O}\LP \frac{1}{r^2} \RP \RP \\
+& = \D_r \left[ \det(q) \LP 1 + \frac{q_{AB} C^{AB}}{r} + \mc{O} \LP \frac{1}{r^2} \RP \RP \right].
+\end{aligned}
+\end{equation}
+Since $q_{AB}$ is independent of $r$, the leading-order constraint is the trace-free condition \begin{equation}
+q_{AB} C^{AB} = 0
+\end{equation}
+which we can justify calling of as a trace if we think of $C_{AB}$ as a tensor field over the unit 2-sphere $(S^2, q_{AB})$. Being real + symmetric + trace-free, $C_{AB}$ has exactly 2 independent components, corresponding physically to the two independent polarizations of gravitational waves. Indeed, one can show\footnote{TODO} that the fall-off we have chosen here is exactly the sweet spot which allows for gravitational radiation but forces the total energy flux out through a fixed-$(u,r)$ sphere to be finite. \\
+\\
+\
+We denote by $N_{AB}$ the Bondi news \begin{equation}
+N_{AB} \equiv \D_u C_{AB}.
 \end{equation}
 
 \bibliography{bibfile}
