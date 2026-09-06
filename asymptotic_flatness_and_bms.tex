@@ -196,6 +196,49 @@ We denote by $N_{AB}$ the Bondi news \begin{equation}
 N_{AB} \equiv \D_u C_{AB}.
 \end{equation}
 
+
+\subsection{Other Fall-Off Rates}
+TODO\\
+\\
+\
+At the beginning of this section we said that one of several inequivalent definitions of an asymptotically flat space was the existence of a Bondi-gauge chart near $\mathcal{I}^+$ in which the prescribed fall-off rates applied. This is true, but it is more common to further require the decay of a the \textit{Weyl tensor}, while we will define a motivate in the next section.
+
+\section{The Weyl Tensor}
+
+\subsection{Basic Properties}
+The Weyl tensor can be defined most briefly as the Riemann curvature tensor with certain traces subtracted off. In $n$ dimensions we have \begin{equation}
+\begin{aligned}
+C_{i k \ell m} & = R_{i k \ell m} + \frac{1}{n-2} (R_{i m} g_{k \ell} - R_{i \ell} g_{k m} + R_{k \ell} g_{i m} - R_{k m} g_{i \ell} ) \\
+& = \frac{1}{(n-1)(n-2)} R (g_{i \ell} g_{k m} - g_{i m} g_{k \ell}
+\end{aligned}
+\end{equation}
+(here we are using indices like $i,k,\ell,m$ as we reserve $a,b,c,d$ for Bondi-gauge coordinates). This has all of the same symmetries as the Riemann curvature tensor \begin{equation}
+\begin{aligned}
+C_{\ell m i k} & = C_{i k \ell m}, \\
+C_{k i \ell m} & = - C_{i k \ell m}, \\
+C_{i k \ell m} + C_{i \ell m k} + C_{i m k \ell} & = 0.
+\end{aligned}
+\end{equation}
+However, it differs from the Riemann curvature tensor in that all of its nontrivial traces vanish \begin{equation}
+g^{i \ell} C_{i k \ell m} = 0
+\end{equation}
+so the Weyl tensor's naive analogue of the Ricci tensor and scalar are both trivial. Furthermore, in exactly $n = 4$ dimensions the Weyl tensor is conformally invariant, in the sense that \begin{equation}
+C^i_{ \ k \ell m}[\Omega^2 g] = C^i_{ \ k \ell m}[g]
+\end{equation}
+for $\tilde{g}_{ab} = \Omega^2 g_{ab}$ a Weyl rescaling of $g$. Other index structures are not invariant, and in particular \begin{equation}
+C_{i k \ell m}[\Omega^2 g] = \Omega^2 C_{i k \ell m} [g] .
+\end{equation}
+We also observe from the trace-reversed fields \begin{equation}
+R_{ab} - \frac{1}{2} R g_{ab} = 8 \pi G T_{ab} \implies R_{ab} = 8 \pi G \LP T_{ab} - \frac{1}{2} T g_{ab} \RP
+\end{equation}
+that the Riemann and Weyl tensors agree on vacuum solutions: \begin{equation}
+\mbox{vacuum } \implies R_{ij} = R = 0 \implies C_{i k \ell m} = R_{i k \ell m}.
+\end{equation}
+So in a vacuum region, any intrinsic measurement of curvature (\textit{e.g.}, tidal forces, geodesic deviation) is equivalently a measure of the Weyl tensor. \\
+\\
+\
+In addition to certain prescribed fall-offs, a more restrictive and common definition of asymptotic flatness comes from requiring that the Weyl tensor vanish near $\mathcal{I}^+$.
+
 \bibliography{bibfile}
 \bibliographystyle{utphys}
 
