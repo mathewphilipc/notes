@@ -60,9 +60,109 @@
 
 \tableofcontents
 
-\section{Introduction}
+\section{Geometric Mechanics}
+A typical treatment of Hamiltonian mechanics takes a phase space plus a privileged choice of coordinates $q^a, p^a$ and a scalar function $H$ encoding dynamics as \begin{equation}
+\dot{q}^a = \PA{H}{p^a}, \quad \dot{p}^a = - \PA{H}{q^a}.
+\end{equation}
+Equivalently, we take any (possibly explicitly time-dependent) observable $A = A(q(t), p(t), t)$ to time-evolve as \begin{equation}
+\begin{aligned}
+\frac{dA}{dt} & = \PA{A}{t} + \PA{A}{q^a} \frac{dq^a}{dt} + \PA{A}{p^a} \frac{dp^a}{dt} \\
+& = \PA{A}{t} + \PA{A}{q^a} \PA{H}{p^a} - \PA{A}{p^a} \PA{H}{q^a} \\
+& \equiv \PA{A}{t} + \{ A, H \}
+\end{aligned}
+\end{equation}
+where we have introduced the Poisson bracket \begin{equation}
+\{A, B\} \equiv \PA{A}{q^a} \PA{B}{p^a} - \PA{A}{p^a} \PA{B}{q^a}
+\end{equation}
+and where (here and elsewhere) we will use the Einstein summation convention on index pairs. \\
+\\
+\
+This formalism is not incorrect, but in the present note we will prefer to work in the formalism of \textit{geometric mechanics}, which makes symmetries and other abstract or geometric properties manifest by lifting the usual description to a coordinate-free one. To begin with, we will take our phase space to be a real 2-manifold $\mathcal{P}$. Rather than specifying a scalar function and a bracket outright, we encode the dynamics by specifying a \textit{symplectic form} $\Omega$, \textit{i.e.}, a closed non-degenerate 2-form over $\mc{P}$. Abstractly, at any point $p \in \mc{P}$ we have \begin{equation}
+\Omega_p : T_p \mc{P} \times T_p \mc{P} \to \R, \quad (X_p, Y_p) \mapsto \Omega_p (X_p, Y_p)
+\end{equation}
+If we put a vector in, say, the second slot and leave the first open, the resulting object takes in vectors and returns scalars. \begin{equation}
+\Omega_p( \cdot, Y_p): T_p \mc{P} \to \R, \quad X_p \mapsto \Omega_p(X_p, Y_p).
+\end{equation}
+So we have cooked up a 1-form. We can thus think of $\Omega$ equivalently as a map which takes in vectors and spits out 1-forms, and by mild abuse of notation we will also call this map $\Omega$. Briefly, we have \begin{equation}
+\Omega(Y) (X) \equiv \Omega(X,Y).
+\end{equation}
+Notice that the typographical ordering of $X,Y$ is flipped across this equality. This is purely convention, but will matter for local minus signs. \\
+\\
+\
+The assumption of non-degeneracy exactly ensures that there exists an inverse map $\Omega^{-1}$ that takes 1-forms to vectors, or equivalently takes in two 1-forms and returns a scalar, or equivalently is a bivector. \begin{equation}
+\Omega^{-1} (\omega, \sigma) \in \R, \quad \omega \LP \Omega^{-1} (\sigma) \RP \equiv \Omega^{-1} (\omega, \sigma).
+\end{equation}
+This is an inverse in the literal sense that \begin{equation}
+\Omega^{-1} (\Omega(X)) = X, \quad \Omega(\Omega^{-1}(\sigma) = \sigma.
+\end{equation}
+This inverse map will be our coordinate-free implementation of a Poisson. Concretely, given any scalar function $H: \mc{P} \to \R$, we can define the vector field $X_H$ on $\mc{P}$ by the rule \begin{equation}
+X_H(f) \equiv \Omega^{-1} (\delta f, \delta H).
+\end{equation}
+Here we write $\delta$ for the exterior derivative on phase space, to disambiguate from the exterior derivative on spacetime. We define more generally \begin{equation}
+\{f, g \} \equiv \Omega^{-1} (\delta f, \delta g).
+\end{equation}
+Then $\Omega$ (by way of $\Omega^{-1}$) defined the dynamics of our theory as \begin{equation}
+\frac{df}{dt} = X_H(f) = \{f, H\}.
+\end{equation}
+We can write this just as well in terms of $\Omega$. First, take the 1-form $\delta f, \delta g$ and use $\Omega^{-1}$ to cast them to vectors. \begin{equation}
+X_f \equiv \Omega^{-1} (\delta f), \quad X_g \equiv \Omega^{-1} (\delta g)
+\end{equation}
+or equivalently \begin{equation}
+\delta f = \Omega(X_f), \quad \delta g = \Omega(X_g).
+\end{equation}
+Now we carefully manipulate all of the above definitions to find \begin{equation}
+\begin{aligned}
+\{\delta f, \delta g \} & = \Omega^{-1} (\delta f, \delta g) \\
+& = (\delta f) \LP \Omega^{-1} (\delta g) \RP  \\
+& = (\Omega (X_f)) \LP \Omega^{-1} (\Omega (X_g)) \RP \\
+& = (\Omega(X_f)) (X_g) \\
+& = \Omega(X_g, X_f).
+\end{aligned}
+\end{equation}
+We can recover the usual story in coordinates by taking \begin{equation}
+\Omega = \delta p^a \wedge \delta q^a.
+\end{equation}
+Darboux's theorem guarantees that we can always locally pick coordinates which diagonalize $\Omega$ in this sense.
+
+
+\subsection{Zero Modes and Gauge Symmetry}
+It may happen that we write down some candidate phase space $\tilde{\mc{P}}$ and corresponding symplectic form $\tilde{\Omega}$ and find that the latter is degenerate, or equivalently has zero-modes $\tilde{X}$. That is, there exists a nonzero vector field $\tilde{X}$ such that \begin{equation}
+\tilde{\Omega}(\tilde{X}, Y) = 0 \mbox{ for all } Y.
+\end{equation}
+To be sure, our story above requires that the symplectic form be invertible independently at every point in phase space, so degeneracy at even one point would be enough to throw a wrench into our business. Here we only assume that $\tilde{X}$ isn't uniformly vanishing, but it doesn't need to be everywhere nonzero. \\
+\\
+\
+In this case we will be more conservative: we will call $\tilde{\mc{P}}$ the \textit{pre-phase space} and $\tilde{\Omega}$ the \textit{pre-symplectic form}. The canonical fix is then to quotient by these zero-modes, producing a quotiented phase space and a corresponding symplectic form which is non-degenerate by construct. More concretely,  we identify any two points $\tilde{p}, \tilde{q} \in \tilde{\mc{P}}$ if they are connected by an integral curve of any 0-mode $\tilde{X}$. \\
+\\
+\
+(nice picture of integral curves and orbits)\\
+\\
+\
+We will think of these integral curves as gauge orbits, the 0-modes as generators of gauge transformations, and flowing along the curves as applying a gauge transformation $\tilde{g} \in \tilde{\mc{G}}$. Then our physical phase space is exactly the collection of gauge orbits \begin{equation}
+\mc{P} = \tilde{\mc{P}} / \tilde{G}
+\end{equation}
+and by construction $\tilde{\Omega}$ induces a well-defined a non-degenerate symplectic form $\Omega$ on $\mc{P}$. Of course this all assumes the relevant quotient structure is analytically nice enough that $\mc{P}$ is itself a smooth manifold; this isn't guaranteed, but moving forward we will assume it happens.
+
+
+\subsection{Problems}
+All of the above treating time completely differently from space. Time was the single dependent variable w.r.t. which points in phase space evolved, while phase space was thought of as the collection of all physically distinct states a system could be in at any fixed time. In fact phase space need not have anything at all to do with space at all. We are tempted to think in terms of the mechanics of massive particles, where $q$ and $p$ essentially encode positions and velocities, but we could just as well study an Ising-type model where each $q$ is the degree of excitation at a point rather than the location of a particle.\\
+\\
+\
+If we want to carry over the advantages of this formalism to the area of relativistic field theories, we ought to adapt it to treat space and time as equally as possible. To do so, we first observe that non-degeneracy of $\Omega$ and $\Omega^{-1}$ ensures that Hamiltonian time-evolution is well-defined in both directions, \textit{i.e.}, reversible. So there exists a bijection between points in phase space and solutions to the equations of motion; after picking our phase space coordinates and deciding when to start our stopwatch, one such bijection is given by \begin{equation}
+(q,p) \mapsto (q(0), p(0)).
+\end{equation}
+So from the start we can define our phase space to be the space of all on-shell solutions to our equations of motion. Since we want the whole picture to be manifestly covariant, those equations of motion will in turn arise from a Lagrangian action principle, and the Hamiltonian and symplectic form and so on will be derived objects.
+
 
 \section{Formalism}
+
+
+
+
+
+
+
+
 
 \subsection{Local Lagrangians}
 Assume we have fixed a $d$-dimensional spacetime $M$ with boundary components $\D M = \Gamma + \Sigma_+ - \Sigma_-$, fields $\phi^a$, and compatible choices of $L, \ell, C$ and spatial boundary conditions, inducing equations of motion $E_a = 0$. Then varying the action gives \begin{equation}
@@ -357,6 +457,12 @@ A|_\gamma \mbox{ fixed } \implies \lambda|_\Gamma = \mbox{ const}
 \end{equation}
 but the vanishing of $\tilde{X} \cdot \tilde{\Omega}$ identically on pre-phase space happens iff $\lambda|_\Gamma = 0$. So we have rediscovered the classical notion of a large gauge transformation: a transformation $A \to A + d \lambda$ on a spacetime $M \simeq \R \times \Sigma$ for $\Sigma$ compact should only be thought of as a bona fide redundancy in our enumeration of physical states when $\lambda$ vanishes along the spatial boundary; otherwise the transformation takes us to a physically distinguishable new state.
 
+
+\section{TODO}
+Follow-up work: \begin{itemize}
+\item BH entropy: \cite{Iyer:1994ys, Jacobson:1993xs, Donnay:2016ejv}
+\item Nice notes on corner proposal: \cite{Ciambelli:2022vot}
+\end{itemize}
 
 \bibliography{bibfile}
 \bibliographystyle{utphys}
