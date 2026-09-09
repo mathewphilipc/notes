@@ -156,6 +156,92 @@ So from the start we can define our phase space to be the space of all on-shell 
 
 \section{Formalism}
 
+\subsection{A Healthy Variational Principle}
+The ingredients needed to write down a field theory will include a $d$-dimensional spacetime $M$ with boundary components $\D M = \Gamma + \Sigma_+ - \Sigma_-$, fields $\phi^a$, and some Lagrangian density $\mc{L}$ inducing an action functional \begin{equation}
+S_{\mbox{\tiny{naive}}} [\phi] = \int_M d^d x \mc{L}(\phi; x).
+\end{equation}
+Notice that $\mc{L}$ is a spacetime $d$-form. For a local field theory, we typicallyl require that the value $\mc{L}(\phi; x)$ at some point depends on the field only through their values and derivatives at that same point, but we won't actually make use of that assumption here. We deduce the equations of motion by varying with respect to the fields, but if we do so using our naive action functional we find that (after integration by parts) the integrand has the undesirable form \begin{equation}
+\delta \mc{L} = E_a \delta \phi + d \Theta \implies \delta S_{\mbox{\tiny{naive}}} = \int_M E_a \delta \phi + \int_{\D M} \Theta
+\end{equation}
+For example, for a free field theory we find \begin{equation}
+\begin{aligned}
+\mc{L} & = \frac{1}{2} d \phi \wedge * d \phi  = \frac{1}{2} (\D_\mu \phi)(\D^\mu \phi) \\
+\implies \delta \mc{L} & = (\D_\mu \delta \phi) (\D^\mu \phi) \\
+& = d(\delta \phi) \wedge * d \phi \\
+& = - \delta \phi ( d * d \phi) + d (\delta \phi \wedge * d \phi) 
+\end{aligned}
+\end{equation}
+where our equations of motion are \begin{equation}
+0 = d * d \phi \propto \D^2 \phi.
+\end{equation}
+This is undesirable in the sense that we want the equations of motion to be equivalent to the variational condition $\delta S = 0$. When we teach our undergraduate about action principles, we typically handwave and say that we require variations to die off fast enough to ignore total derivatives, but many subjects of modern interest (compact spaces, asymptotically flat spacetimes, large gauge transformations, etc) require that we be more careful. \\
+\\
+\
+To treat this more carefully, we start with boundary conditions. Here we will treat our spatial and timelike boundaries quite differently, and in defining our theory we will only prescribe boundary conditions along $\Gamma$. In this sense our prescription treats space and time in a nice joint way in the bulk, but distinguishes them on the boundary. The spatial boundary conditions will classically define what space of $\phi$'s we restrict to in our variational problem, and quantum-mechanically tell us what space to integrate over in our path integral. We think of future or past boundary conditions as defining states within some particular theory.\\
+\\
+\
+The simplest possible example is free field theory with Dirichlet boundary conditions. We know from experience that this is a healthy theory, while in our present framework we find it gives action variations \begin{equation}
+\begin{aligned}
+\delta S & = - \int_M \delta \phi (d * d \phi) + d (\delta \phi  * d \phi) \\
+& = \int_{\Gamma + \Sigma_+ - \Sigma_- } \delta \phi * d \phi \\
+& = \int_{\Sigma_+ - \Sigma_- } \delta \phi * d \phi.
+\end{aligned}
+\end{equation}
+Following this example, we find that even with the strictest and simplest boundary conditions it is too much to ask that a healthy variational principle take the literal form $\delta S = 0$; we must relax this and demand only \begin{equation}
+\mbox{boundary conditions} \implies \delta S = \int_M E_a \delta \phi^a + \int_{\Sigma_+ - \Sigma_-} \Psi
+\end{equation}
+for some $\Psi$. Rather than writing things like ``on-shell + boundary conditions $\implies$" everywhere, moving forward we will denote \begin{equation}
+\mc{C} \equiv \mbox{configuration space} \equiv \{ \mbox{field histories }  (\phi^a) \mbox{ obeying spatial BC's}\}
+\end{equation}
+and \begin{equation}
+\tilde{\mc{P}} \equiv \mbox{pre-phase space} \equiv \{\mbox{field histories obeying spatial BC's + equations of motions}\} \subset \mc{C}.
+\end{equation}
+Exercise: what is degree of $\Psi$ in the de Rham complex on fields, and on spacetime? Answer: $\Psi$ is a 1-form on fields and a $(D-1)$-form on spacetime.\\
+\\
+\
+In general, for boundary conditions less restrictive that the Dirichlet ones we just considered, we will need to supplement out bulk action with a compensating boundary term. \begin{equation}
+\begin{aligned}
+S & = \int_M \mc{L} + \int_{\D M} \ell \\
+\implies \delta S & = \int_M E_a \delta \phi^a + \int_{\D M} (\Theta + \delta \ell).
+\end{aligned}
+\end{equation}
+The most famous example of this strategy is the Gibbons-Hawking-York term that appears in classical GR. Again, we might naively think that we ought to reverse-engineer $\ell$ such that the boundary term here vanishes along the spatial boundary when the spatial BC's are obeyed. \begin{equation}
+\mbox{Naive: } \phi \in \mc{C} \stackrel{?}{\implies} (\Theta + \delta \ell)|_{\Gamma} = 0.
+\end{equation}
+It turns out again that for our purposes (recall: our goal is that the on-shell variation should reduce to integrals over $\Sigma_\pm$) we can relax this to \begin{equation}
+\mbox{Better: } \phi \in \mc{C} \implies (\Theta + \delta \ell)|_\Gamma = dC|_\Gamma
+\end{equation}
+for some spacetime $(D-2)-$form $C$. If this holds, then we have \begin{equation}
+\begin{aligned}
+\phi \in \mc{C} \implies \delta S & = \int_M E_a \delta \phi^a + \int_{\D M} (\Theta + \delta \ell) \\
+& = \int_M E_a \delta \phi^a + \int_{\Sigma_+ - \Sigma_- } (\Theta + \delta \ell) + \int_\Gamma dC.
+\end{aligned}
+\end{equation}
+But we can rewrite by Stokes \begin{equation}
+0 = \int_{\D M} d C = \int_{\Sigma_+ - \Sigma_-} d C + \int_\Gamma dC
+\end{equation}
+so we have \begin{equation}
+\phi \in \mc{C} \implies \delta S = \int_M E_a \delta \phi^a + \int_{\Sigma_+ - \Sigma_-} (\underbrace{\Theta + \delta \ell - dC}_{\equiv \Psi}).
+\end{equation}
+
+
+\subsection{Defining a Symplectic Form}
+It turns out that this funny term $\Psi$ appearing in the integrand will have enormous physical significance. First, for field histories in the pre-phase space we define the \textit{pre-symplectic current} to be the field-space variation of $\Psi$. \begin{equation}
+\omega \equiv \mbox{pre-symplectic current} \equiv \delta \Psi|_{\tilde{\mc{P}}} = \delta (\Theta - d C)|_{\tilde{\mc{P}}}.
+\end{equation}
+Then the pre-symplectic form we defined above will be exactly the integral of this object over any Cauchy slice $\Sigma$. \begin{equation}
+\tilde{\Omega} \equiv \mbox{pre-symplectic form} = \int_\Sigma \omega.
+\end{equation}
+The reader should pause and verify that everything here type-checks: $\psi$ is a spacetime $(D-1)$-form and a field 1-form, so $\omega$ is a spacetime $(d-1)$-form and a field $2$-form, so $\tilde{\Omega}$ is a 2-form on $\tilde{\mc{P}}$.\\
+\\
+\
+By applying the boundary conditions and equations of motion we can verify that $\Omega$ has the properties we claimed a pre-symplectic form ought to have. First, it is closed as a form on  $\tilde{\mc{P}}$ because the exterior derivative squares to 0. \begin{equation}
+\delta \Omega = \int_\Sigma \delta \omega = \int_\Sigma \delta^2 \Psi = 0.
+\end{equation}
+It is also independent of our choice of Cauchy surface. To see this, we observe that $\omega$ itself is closed as a spacetime form \begin{equation}
+d \omega = \delta d \Theta = \delta (\delta \mc{L} - E_a \delta \phi^a) = \delta E_a \wedge \delta \phi^a = 0
+\end{equation}
+where we have worked modulo the equations of motion.
 
 
 
@@ -164,7 +250,17 @@ So from the start we can define our phase space to be the space of all on-shell 
 
 
 
-\subsection{Local Lagrangians}
+
+
+
+
+
+
+
+
+
+
+\section{Local Lagrangians}
 Assume we have fixed a $d$-dimensional spacetime $M$ with boundary components $\D M = \Gamma + \Sigma_+ - \Sigma_-$, fields $\phi^a$, and compatible choices of $L, \ell, C$ and spatial boundary conditions, inducing equations of motion $E_a = 0$. Then varying the action gives \begin{equation}
 \delta S = \int_M E_a \delta \phi^a + \int_{\Sigma_+ - \Sigma_-} \Psi, \quad \Psi \equiv \Theta + \delta \ell - dC.
 \end{equation}
@@ -190,7 +286,7 @@ One can check explicitly that this is independent of the choice of $\Sigma$.
 
 
 
-\subsection{Covariant Lagrangians}
+\section{Covariant Lagrangians}
 Given a vector field of $M$ which we think of as infinitesimal, the corresponding induced variation on an arbitrary dynamical tensor field $\phi$ is given as usual by the Lie derivative \begin{equation}
 \delta_\xi \phi = \mc{L}_\xi \phi.
 \end{equation}
@@ -205,7 +301,7 @@ More generally, given some scalar field $f$ built from our dynamical fields, we 
 \end{equation}
 Crucially, we interpret $\delta_\xi$ as the change in $f$ induced by slightly changing every dynamical field $\phi^a$, but \textit{not} changing any background fields $\xi^b$. A theory is said to be \textit{covariant} w.r.t. the spacetime vector field $\xi$ (or more often, w.r.t. some algebra of such vector fields, or a group of non-infinitesimal spacetimes diffeos which linearize to the former) if these variations respect the boundary conditions and satisfaction of the equations of motion. This is non-trivial exactly because we are varying the dynamical fields but not the background fields; if we were varying both, then covariant under the full diffeomorphism group would be automatic. Conversely, under our definitions the background fields can be thought of as breaking full diffeomorphism invariance down to some subgroup.
 
-\subsection{Diffeomorphism Charges}
+\section{Diffeomorphism Charges}
 Consider some infinitesimal diffeomorphism $\xi$ and corresponding configuration-space vector field $X_\xi$, w.r.t. which our theory may or may not be covariant. We want to find a corresponding scalar function $H_\xi$ on pre-phase space such that \begin{equation}
 \delta H_\xi = - \tilde{\Omega}(X_\xi, \cdot).
 \end{equation}
@@ -307,7 +403,7 @@ H_\xi \equiv  \int_\Sigma J_\xi + \int_{\D \Sigma} \LP  \iota_\xi \ell - X_\xi \
 where the additive shift is a constant $c$-number which we typically set to $0$.
 
 
-\subsubsection{Independence of Cauchy Surface}
+\subsection{Independence of Cauchy Surface}
 Now we check that $H_\xi(\Sigma)$ is in fact independent of the choice of $\Sigma$. So consider some other choice $\Sigma'$, so that the difference is purely spatial and takes the form \begin{equation}
 \D \Sigma - \D \Sigma' = \D \Xi \subset \Gamma \mbox{ with } \Xi \subset \Gamma.
 \end{equation}
