@@ -532,7 +532,7 @@ then we can consistently set $\ell$ and $C$ to $0$. Then our pre-symplectic curr
 \omega = \delta \Theta = - \delta A \wedge * \delta F \implies \tilde{\Omega} = - \int_\Sigma \delta A \wedge * \delta F.
 \end{equation}
 This has nontrivial zero modes, but the latter depend on our chosen boundary conditions. A candidate zero mode has general form \begin{equation}
-\tilde{X} = \int_M d^d x V_\mu(x) \frac{\delta}{\delta A_\mu}.
+\tilde{X} = \int_M d^d x V_\mu(x) \frac{\delta}{\delta A_\mu(x)}.
 \end{equation}
 To compute its contraction against $\tilde{\Omega}$ we use coordinates $(t, y)$ for $M$ and $x$ for $\Sigma$, so that \begin{equation}
 \begin{aligned}
@@ -551,7 +551,32 @@ Notice that this does not vanish in general! Our Dirichlet boundary conditions f
 \begin{equation}
 A|_\gamma \mbox{ fixed } \implies \lambda|_\Gamma = \mbox{ const}
 \end{equation}
-but the vanishing of $\tilde{X} \cdot \tilde{\Omega}$ identically on pre-phase space happens iff $\lambda|_\Gamma = 0$. So we have rediscovered the classical notion of a large gauge transformation: a transformation $A \to A + d \lambda$ on a spacetime $M \simeq \R \times \Sigma$ for $\Sigma$ compact should only be thought of as a bona fide redundancy in our enumeration of physical states when $\lambda$ vanishes along the spatial boundary; otherwise the transformation takes us to a physically distinguishable new state.
+but the vanishing of $\tilde{X} \cdot \tilde{\Omega}$ identically on pre-phase space happens iff $\lambda|_\Gamma = 0$. So we have rediscovered the classical notion of a large gauge transformation: a transformation $A \to A + d \lambda$ on a spacetime $M \simeq \R \times \Sigma$ for $\Sigma$ compact should only be thought of as a bona fide redundancy in our enumeration of physical states when $\lambda$ vanishes along the spatial boundary; otherwise the transformation takes us to a physically distinguishable new state. In our new language, we see that the vector fields \begin{equation}
+X_\lambda \equiv \int_M d^d y (\D_\mu \lambda(x)) \frac{\delta}{A_\mu(x)}, \quad \lambda|_\Gamma = 0
+\end{equation}
+give exactly the flows on pre-phase space by which we must quotient to form the physical phase space. \begin{equation}
+\mc{P} = \tilde{\mc{P}} / \mbox{(flows under any such $X_\lambda$)}.
+\end{equation}
+Now we have large gauge transformations on $\mc{P}$; what kind of charge generates these transformations? We are looking for an object $Q_\lambda$ which induces changes in scalar fields $f: \mc{P} \to \R$ as \begin{equation}
+X_\lambda(f) = \{f, Q_\lambda\} \equiv \Omega^{-1} \LP \delta f, \delta Q_\lambda \RP.
+\end{equation}
+Rewriting this slightly as \begin{equation}
+\delta f \cdot X_\lambda = \Omega^{-1}(\delta f, \delta Q_\lambda) = \delta f \cdot \LP \Omega^{-1}(\delta Q_\lambda) \RP
+\end{equation}
+it suffices to find $Q_\lambda$ satisfying \begin{equation}
+X_\lambda = \Omega^{-1} (\delta Q_\lambda)
+\end{equation}
+or equivalently \begin{equation}
+\delta Q_\lambda = \Omega(X_\lambda) \equiv \Omega( \cdot, X_\lambda) = - X_\lambda \cdot \Omega.
+\end{equation}
+But we have already worked out exactly this expression: for $\lambda|_\Gamma \in \R$ a nonzero constant, we have \begin{equation}
+\delta Q_\lambda = - \lambda \int_\D \Sigma * \delta F
+\end{equation}
+so we identify \begin{equation}
+Q_\lambda = - \lambda \int_\Sigma * F.
+\end{equation}
+Up to sign conventions, this is the familiar integral expression for the net electric change of a system.
+
 
 
 \section{TODO}
