@@ -226,7 +226,22 @@ so we have \begin{equation}
 
 
 \subsection{Defining a Symplectic Form}
-It turns out that this funny term $\Psi$ appearing in the integrand will have enormous physical significance. First, for field histories in the pre-phase space we define the \textit{pre-symplectic current} to be the field-space variation of $\Psi$. \begin{equation}
+It turns out that this funny term $\Psi$ appearing in the integrand will have enormous physical significance. To understand why, we return to non-covariant, non-geometric mechanics briefly. For a mechanical system with configuration space variables $q^i$, varying the action over a time interval $[t_i, t_f]$ without fixing values at the temporal endpoints gives as usual \begin{equation}
+\begin{aligned}
+S & = \int_{t_i}^{t_f} L(q(t), \dot{q}(t)) dt \\
+\implies \delta S & = \int_{t_i}^{t_f}  \underbrace{\LP \PA{L}{q^i} - \frac{d}{dt} \PA{L}{\dot{q}^i} \RP}_{\to 0 \mbox{ on-shell}} \delta q^i(t) + \left[ \PA{L}{\dot{q}^i} \delta q^i \right]_{t_i}^{t_f}
+\end{aligned}
+\end{equation}
+We write the leftover boundary term as \begin{equation}
+\Psi \equiv  \PA{L}{\dot{q}^i} \delta q^i \equiv p_i \delta q^i \in \Omega^1 \LP \tilde{\mc{P}} \RP
+\end{equation}
+where in the last expression we have observed that $\Psi$ is a 1-form on pre-phase space. If we quotient out by 0-modes as necessary to restrict to the proper phase space and $\Omega^1(\mc{P})$ take the exterior derivative w.r.t. the de Rham structure on $\mc{P}$, we find \begin{equation}
+\delta \Psi |_{\mc{P}} = \delta q^i \wedge \delta p_i
+\end{equation}
+which is exactly the familiar form of the classical-mechanical symplectic form. In our new formalism, we will do exactly the geometric + covariant version of this. In fact many of the equations will look analogous, though their meanings (since our phase space points are a priori identified with on-shell solutions rather than instantaneous Cauchy data) will be slightly different.\\
+\\
+\
+First, for field histories in the pre-phase space we define the \textit{pre-symplectic current} to be the field-space variation of $\Psi$. \begin{equation}
 \omega \equiv \mbox{pre-symplectic current} \equiv \delta \Psi|_{\tilde{\mc{P}}} = \delta (\Theta - d C)|_{\tilde{\mc{P}}}.
 \end{equation}
 Then the pre-symplectic form we defined above will be exactly the integral of this object over any Cauchy slice $\Sigma$. \begin{equation}
@@ -575,7 +590,7 @@ But we have already worked out exactly this expression: for $\lambda|_\Gamma \in
 so we identify \begin{equation}
 Q_\lambda = - \lambda \int_\Sigma * F.
 \end{equation}
-Up to sign conventions, this is the familiar integral expression for the net electric change of a system.
+Up to sign conventions, this is the familiar integral expression for the net electric change of a system. Separately, we can work out the corresponding current from our earlier formalism. We have 
 
 
 
