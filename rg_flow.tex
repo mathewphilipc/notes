@@ -1,0 +1,180 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+\usepackage{amssymb}
+
+\sectionfont{\fontsize{12}{12}\selectfont}
+\subsectionfont{\fontsize{12}{12}\selectfont}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\D}{\partial}
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \middle| #2 \right\rangle}
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+
+\title{RG Flow}
+
+\author{Mathew Calkins}
+
+\date{\today}
+
+ 
+\maketitle
+
+\abstract{Notes on RG Flow}
+
+\tableofcontents
+
+
+\section{Correlation Functions and Anomalous Dimensions}
+We consider a quantum theory of a single real bosonic field $\phi$ living on flat space. For analytic convenience we work in Euclidean signature.\\
+\\
+\
+We denote by \begin{equation}
+S_\Lambda^{\mbox{\tiny{eff}}}[\phi, g(\Lambda)] = \int_M d^d x \left[ \frac{Z_\Lambda}{2} (\D \phi)^2 + \sum_i \Lambda^{d - d_i} Z_\Lambda^{n_i / 2} g_i (\Lambda) \mc{O}_i( \phi, \D \phi) \right]
+\end{equation} the effective action governing our theory at energy scale $\Lambda$. Here the operator $\mc{O}_i$ has mass dimension $d_i$ and is homogeneous of order $n_i$ in $\phi$ and its derivatives, while $Z_\Lambda$ is by definition the coefficient in front of the otherwise canonically normalized kinetic term. Operationally, the effective action is defined by the property that any correlation function\footnote{As long as the correlation function does not probe physics near or above energy scale $\Lambda$ by, \textit{e.g.}, including operator insertions separated by a distance $\lesssim 1 / \Lambda$.} in our theory can be computed by Feynman integration as \begin{equation}
+\langle \mc{O}_1(\phi) \cdots \mc{O}_n (\phi) \rangle = \frac{\int_{\leq \Lambda} \mc{D} \phi \phi(x_1) \cdots \phi(x_n) e^{- S_\Lambda^{\mbox{\tiny{eff}}}[\phi, g(\Lambda)]}}{\int_{\leq \Lambda} \mc{D} \phi e^{- S_\Lambda^{\mbox{\tiny{eff}}}[\phi, g(\Lambda)]}}
+\end{equation} 
+where $\int_{\leq \Lambda}$ means integration over all modes with energy less than $\Lambda$, or more concretely, over all Fourier modes of norm at most $\Lambda$. In particular, the dependence of $S_\Lambda^{\mbox{\tiny{eff}}}$ on $\Lambda$ (both directly and through its dependence on $g(\Lambda)$) is constructed such that the partition function \begin{equation}
+\mc{Z} = \int_{\leq \Lambda} \mc{D} \phi e^{- S_\Lambda^{\mbox{\tiny{eff}}}[\phi, g_i(\Lambda)]}
+\end{equation}
+is independent of $\Lambda$. \\
+\\
+\
+We denote by $S_\Lambda$ the functional dependence of $S_\Lambda^{\mbox{\tiny{eff}}}$ on the canonically normalized field $\phi \sqrt{Z_\Lambda}$. That is, \begin{equation}
+\begin{aligned}
+S_\Lambda^{\mbox{\tiny{eff}}}[\phi, g(\Lambda)] & = \int_M d^d x \left[ \frac{Z_\Lambda}{2} (\D \phi)^2 + \sum_i \Lambda^{d - d_i} Z_\Lambda^{n_i / 2} g_i (\Lambda) \mc{O}_i( \phi, \D \phi) \right] \\
+& = \int_M d^d x \left[ \frac{1}{2} \LP \sqrt{Z_\Lambda} \D \phi \RP^2 + \sum_i \Lambda^{d - d_i} g_i (\Lambda) \mc{O}_i \LP \sqrt{Z_\Lambda} \phi, \sqrt{Z_\Lambda} \D \phi \RP \right] \\
+& \equiv S_\Lambda \left[ \phi \sqrt{Z_\Lambda}, g(\Lambda) \right] \\
+\implies S_\Lambda[\phi, g(\Lambda)] & = \int_M d^d x \left[ \frac{1}{2} (\D \phi)^2 + \sum_i \Lambda^{d - d_i} g_i (\Lambda) \mc{O}_i( \phi, \D \phi) \right].
+\end{aligned}
+\end{equation}
+Then $S_\Lambda[\phi, g(\Lambda)]$ has no direct dependence on $Z_\Lambda$, only on $\Lambda$ and the coupling constants $g_i(\Lambda)$. \\
+\\
+\
+Denoting by $\varphi(x) := \phi(x) \sqrt{Z_\Lambda}$ the canonically normalized field at energy scale $\Lambda$, we have \begin{equation}
+\langle \varphi(x_1) \cdots \varphi(x_n) \rangle = \frac{1}{\mc{Z}} \int_{\leq \Lambda} \mc{D} \phi \varphi(x_1) \cdots \varphi(x_n) e^{- S_\Lambda^{\mbox{\tiny{eff}}}[\phi, g(\Lambda)]} = Z_\Lambda^{n/2} \langle \phi(x_1) \cdots \phi(x_n) \rangle.
+\end{equation}
+This will be important enough to warrant its own symbol. \begin{equation}
+\Gamma_\Lambda^{(n)}( \{x_i\}, g) := \frac{\int_{\leq \Lambda} \mc{D} \phi \varphi(x_1) \cdots \varphi(x_n) e^{- S_\Lambda^{\mbox{\tiny{eff}}}[\phi, g]}}{\int_{\leq \Lambda} \mc{D} \phi e^{- S_\Lambda^{\mbox{\tiny{eff}}}[\phi, g]}}.
+\end{equation}
+Note that here we intentionally write $g$ rather than $g(\Lambda)$; the direct functional dependence of $\Gamma_\Lambda^{(n)}( \{x_i\}, g)$ is \textit{a priori} only through the Feynman integral cut-off and through the functional dependence on $\Lambda$ of $S_\Lambda^{\mbox{\tiny{eff}}}$. Of course if we take $g = g(\Lambda)$ then we acquire additional indirect dependence of $\Gamma$ on $\Lambda$ through the $\Gamma$'s dependence on $g$. Now since the $n$-point function of $\phi$ is by construction independent of $\Lambda$\footnote{Though as noted above, we cannot reliably compute it using $S_\Lambda^{\mbox{\tiny{eff}}}$ if the distances between neighboring insertions are $\lesssim 1/\Lambda$.} we have \begin{equation}
+0 = \frac{d}{d \Lambda} \langle \phi(x_1) \cdots \phi(x_n) \rangle = \frac{d}{d \Lambda} \LP Z_\Lambda^{-n/2} \Gamma_\Lambda^{(n)}( \{x_i\}, g(\Lambda)) \RP.
+\end{equation}
+Working out the chain rule then gives the \textit{Callan-Symanzik equation} \begin{equation}
+0 = \LP \Lambda \PA{}{\Lambda} + \beta_i \PA{}{g_i} + n \gamma_\phi \RP \Gamma_\Lambda^{(n)}( \{x_i\}, g(\Lambda))
+\end{equation}
+where $\beta_i$ is the beta function for the $i$th coupling constant \begin{equation}
+\beta_i := \Lambda \PA{g_i}{\Lambda}
+\end{equation}
+and $\gamma_\phi$ is the anomalous dimension of $\phi$ \begin{equation}
+\gamma_\phi := - \frac{1}{2} \Lambda \PA{\log Z_\Lambda}{\Lambda}.
+\end{equation}
+
+
+\section{Understanding the Anomalous Dimension}
+Now to better understand what the anomalous dimension is measuring, we compute \begin{equation}
+\begin{aligned}
+\Gamma_\Lambda^{(n)} (\{s x_i\}, g) & = \frac{\int_{\leq \Lambda} \mc{D} \phi \varphi(sx_1) \cdots \varphi(sx_n) e^{- S_\Lambda^{\mbox{\tiny{eff}}}[\phi, g]}}{\int_{\leq \Lambda} \mc{D} \phi e^{- S_\Lambda^{\mbox{\tiny{eff}}}[\phi, g]}} \\
+& = Z_\Lambda^{n/2} \frac{\int_{\leq \Lambda} \mc{D} \phi \phi(sx_1) \cdots \phi(sx_n) e^{- S_\Lambda^{\mbox{\tiny{eff}}}[\phi, g]}}{\int_{\leq \Lambda} \mc{D} \phi e^{- S_\Lambda^{\mbox{\tiny{eff}}}[\phi, g]}}
+\end{aligned}
+\end{equation}
+It will be nicer to write everything in terms of the canonically normalized field. We have \begin{equation}
+\begin{aligned}
+\Gamma_\Lambda^{(n)} (\{s x_i\}, g) & = \frac{\int_{\leq \Lambda} \mc{D} \phi \varphi(sx_1) \cdots \varphi(sx_n) e^{- S_\Lambda^{\mbox{\tiny{eff}}}[\phi, g]}}{\int_{\leq \Lambda} \mc{D} \phi e^{- S_\Lambda^{\mbox{\tiny{eff}}}[\phi, g]}} \\
+& = \frac{\int_{\leq \Lambda} \mc{D} \phi \varphi(sx_1) \cdots \varphi(sx_n) e^{- S_\Lambda[\varphi, g]}}{\int_{\leq \Lambda} \mc{D} \phi e^{- S_\Lambda[\varphi, g]}} \\
+& = \frac{\int_{\leq \Lambda} \mc{D} \varphi \varphi(sx_1) \cdots \varphi(sx_n) e^{- S_\Lambda[\varphi, g]}}{\int_{\leq \Lambda} \mc{D} \varphi e^{- S_\Lambda[\varphi, g]}}.
+\end{aligned}
+\end{equation}
+At the last step both the numerator and denominator are scaled by the same infinite constant which cancels (this can be made more careful in the usual way by putting everything on a finite lattice). So this is the standard correlator in the theory governed by $S_\Lambda$ at energy $\Lambda$. We can usefully rewrite the RHS by introducing a new field \begin{equation}
+\psi(x) = a \varphi(sx) \implies \D \psi(x) = as \D \varphi(sx)
+\end{equation}
+where the value of the constant $a$ will be chosen shortly for convenience. Note the order of operations on the RHS - $\D \varphi (sx)$ is $\D_y \varphi (y)$ evaluated at $y = sx$, not $\varphi(sx)$ differentiated w.r.t. $x$. Now we can rewrite our action as \begin{equation}
+\begin{aligned}
+S_\Lambda[\varphi, g] & = \int_M d^d x \left[ \frac{1}{2} (\D \varphi)^2(x) + \sum_i \Lambda^{d - d_i} g_i \mc{O}_i( \varphi(x), \D \varphi(x)) \right] \\
+& = s^d \int_M d^d x \left[ \frac{1}{2} (\D \varphi)^2(sx) + \sum_i \Lambda^{d - d_i} g_i \mc{O}_i( \varphi(sx), \D \varphi(sx)) \right] \\
+& = s^d \int_M d^d x \left[ \frac{1}{2} (as)^{-2} (\D \psi)^2(x) + \sum_i \Lambda^{d - d_i} g_i  \mc{O}_i\LP a^{-1} \psi(x), (as)^{-1} \D \psi(x) \RP \right].
+\end{aligned}
+\end{equation}
+If we now take \begin{equation}
+a = s^{(d-2)/2}
+\end{equation}
+then we have neatly \begin{equation}
+\begin{aligned}
+S_\Lambda[\varphi, g] & = \int_M d^d x \left[ \frac{1}{2} (\D \psi)^2(x)+ \sum_i \Lambda^{d - d_i} g_i \mc{O}_i\LP s^{(2-d)/2} \psi(x), s^{-d/2} \D \psi(x) \RP \right].
+\end{aligned}
+\end{equation}
+In fact, by dimensional analysis of the operators $\mc{O}_i$ we have even more nicely \begin{equation}
+\begin{aligned}
+S_\Lambda[\varphi, g] & = \int_M d^d x \left[ \frac{1}{2} (\D \psi)^2(x)+ \sum_i (s \Lambda)^{d - d_i} g_i \mc{O}_i\LP \psi(x), \D \psi(x) \RP \right] \\
+& = S_{s \Lambda}[\psi, g].
+\end{aligned}
+\end{equation}
+Notice that throughout this derivation we have intentionally written $g_i$, rather than $g_i(\Lambda)$; the logic all follows for arbitrary values of the coupling constants, no matter whether we take them to flow with $\Lambda$ or not. Now we have \begin{equation}
+\begin{aligned}
+\Gamma_\Lambda^{(n)} (\{s x_i\}, g) & = \frac{\int_{\leq \Lambda} \mc{D} \varphi \varphi(sx_1) \cdots \varphi(sx_n) e^{- S_\Lambda[\varphi, g]}}{\int_{\leq \Lambda} \mc{D} \varphi e^{- S_\Lambda[\varphi, g]}} \\
+& = \frac{\int_{\leq \Lambda} \mc{D} \varphi \varphi(sx_1) \cdots \varphi(sx_n) e^{- S_{s \Lambda}[\psi, g]}}{\int_{\leq \Lambda} \mc{D} \varphi e^{- S_{s \Lambda}[\psi, g]}} \\
+& = s^{n(2 - d)/2} \frac{\int_{\leq s \Lambda} \mc{D} \psi \psi(x_1) \cdots \psi(x_n) e^{- S_{s \Lambda}[\psi, g]}}{\int_{\leq s \Lambda} \mc{D} \psi e^{- S_{s \Lambda}[\psi, g]}}.
+\end{aligned}
+\end{equation}
+But $\psi$ on the RHS is a dummy variable, so after replacing $\psi \to \varphi$ we recognize \begin{equation}
+\Gamma_\Lambda^{(n)} (\{s x_i\}, g) = s^{n(2 - d)/2} \Gamma_{s\Lambda}^{(n)} (\{x_i\}, g)
+\end{equation}
+So far this has all held for general $g$; now we start evaluating in particular with coupling constants $g(\Lambda)$. We have by construction \begin{equation}
+\Gamma_\Lambda^{(n)} (\{x_i\}, g(\Lambda)) = Z_\Lambda^{n/2} \langle \phi(x_1) \cdots \phi(x_n) \rangle 
+\end{equation}
+for arbitrary $\Lambda$ on the LHS, hence also \begin{equation}
+\Gamma_{s\Lambda}^{(n)} (\{x_i\}, g(s\Lambda)) = Z_{s\Lambda}^{n/2}\langle \phi(x_1) \cdots \phi(x_n) \rangle .
+\end{equation}
+Combining these we get \begin{equation}
+\begin{aligned}
+\Gamma_\Lambda^{(n)} (\{x_i\}, g(\Lambda)) & =\LP \frac{Z_\Lambda}{Z_{s \Lambda}} \RP^{n/2} \Gamma_{s\Lambda}^{(n)} (\{x_i\}, g(s\Lambda)) \\
+& = \LP \frac{Z_\Lambda}{Z_{s \Lambda}} \RP^{n/2}  s^{n(d-2)/2} \Gamma_{\Lambda}^{(n)} (\{s x_i\}, g(s\Lambda)) \\
+& = \LP \frac{Z_\Lambda s^{d-2}}{Z_{s \Lambda}} \RP^{n/2} \Gamma_{\Lambda}^{(n)} (\{s x_i\}, g(s\Lambda)).
+\end{aligned}
+\end{equation}
+
+
+
+
+
+
+\bibliography{bibfile}
+\bibliographystyle{utphys}
+
+\end{document}
