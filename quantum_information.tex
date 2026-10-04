@@ -1,0 +1,127 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+\usepackage{amssymb}
+
+\sectionfont{\fontsize{12}{12}\selectfont}
+\subsectionfont{\fontsize{12}{12}\selectfont}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\D}{\partial}
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \middle| #2 \right\rangle}
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+
+\title{Quantum Information}
+
+\author{Mathew Calkins}
+
+\date{\today}
+
+ 
+\maketitle
+
+\abstract{Extremely rough notes on quantum information. Maybe these will turn into something coherent, maybe not!}
+
+\tableofcontents
+
+
+
+
+\section{POVM Measurements}
+
+\subsection{Pure States and Projective Measurements}
+As typically introduced, the quantum mechanics of pure states $\KET{\psi}$ living in a Hilbert space $\mc{H}$ connects to experiments via projective measurements. Formally, a projective measurement is described by an indexed collection of projectors \begin{equation}
+\{ \Pi_x: \mc{H} \to \mc{H} \ | \ x \in S \}, \quad S \subset \R
+\end{equation}
+which add up\footnote{Here ``addition" is meant generously to include integration.} to the identity \begin{equation}
+\sum_{x \in S} \Pi_x = \mathbf{1}
+\end{equation}
+so that they equivalently specify an internal direct sum decomposition \begin{equation}
+\mc{H} = \bigoplus_{x \in S} \mc{H}_s, \quad \mc{H}_s \equiv \Pi_x (\mc{H}).
+\end{equation}
+A projective measurement then randomly projects any prepared pure state $\KET{\psi} \in \mc{H}$ \begin{equation}
+\KET{\psi} \xmapsto{\mbox{\tiny{proj}}} \frac{\Pi_x \KET{\psi}}{\lVert \Pi_x \KET{\psi} \rVert} = \frac{\Pi_x \KET{\psi}}{\sqrt{\BRA{\psi} \Pi_x \KET{\psi}}}
+\end{equation}
+and the corresponding $x \in S$ is called the measurement outcome. Assuming WLOG that $\KET{\psi}$ is properly normalized $\IP{\psi}{\psi} = 1$, the probability of any particular outcome is given by the Born rule \begin{equation}
+\mbox{Prob}_x = \lVert \Pi_x \KET{\psi} \rVert ^2 = \BRA{\psi} \Pi_x \KET{\psi}.
+\end{equation}
+If $S \subset \R$ is anything more analytically interesting than a finite set, this object should be interpreted with care as a probability measure. For the present discussion, it suffices to imagine that $S$ is set.
+
+
+\subsection{Entangled States and POVMs}
+The above is all well and good, but the following simple and natural thought experiment suggests a more general kind of process which does not quite take the form of a projective measurement, but which intuitively warrants being called a ``measurement" of our system. Suppose we are interested in the physics of some Hilbert space $\mc{H}_A$, but that there exists a second space $\mc{H}_B$ and that we have the experimental power to perform general joint measurements. A general joint state \begin{equation}
+\KET{\Psi}_{AB} \in \mc{H}_A \otimes \mc{H}_B
+\end{equation}
+is entangled, but for our purposes it will suffice to consider a pure state \begin{equation}
+\KET{\Psi}_{AB} = \KET{\psi} \otimes \KET{\phi_{\mbox{\tiny{aux}}}}
+\end{equation}
+where we think of the second factor as an auxiliary state. Now suppose we perform a projective measurement on the joint state, described as above by a set of projectors \begin{equation}
+\{ \Pi_{AB,x} \ | \ x \in S \subset \R\}.
+\end{equation}
+The Born rule applied to the joint state gives the probability of outcome $x \in S$ as \begin{equation}
+\mbox{Prob}_x = \LP \BRA{\psi} \otimes \BRA{\phi_{\mbox{\tiny{aux}}}} \RP  \Pi_{AB,x} \LP \KET{\psi} \otimes \KET{\phi_{\mbox{\tiny{aux}}}} \RP.
+\end{equation}
+If we think of this as a function of $\KET{\psi}$ at fixed $\KET{\Phi_{\mbox{\tiny{aux}}}}$ and $\Pi_{AB,x}$, we can naturally rewrite the result as the diagonal matrix element of a quadratic form $Q_x$ on $\mc{H}$ with matrix elements \begin{equation}
+Q_x: \mc{X}_A \times \mc{H}_A \to \C, \quad \BRA{\phi} Q_x \KET{\chi} \equiv \LP \BRA{\phi} \otimes \BRA{\phi_{\mbox{\tiny{aux}}}} \RP  \Pi_{AB,x} \LP \KET{\chi} \otimes \KET{\phi_{\mbox{\tiny{aux}}}} \RP.
+\end{equation}
+The RHS is antilinear in the first argument and linear in the second, so this defines a bona fide quadratic form, and we can identify \begin{equation}
+\mbox{Prob}_x = \LP \BRA{\psi} \otimes \BRA{\phi_{\mbox{\tiny{aux}}}} \RP  \Pi_{AB,x} \LP \KET{\psi} \otimes \KET{\phi_{\mbox{\tiny{aux}}}} \RP = \BRA{\psi} Q_x \KET{\psi}.
+\end{equation}
+Recall that the polarization identity on quadratic forms \begin{equation}
+Q(u, v) = \frac{Q(u+v, u+v) - Q(u,u) - Q(v,v)}{2}
+\end{equation}
+tells us a quadratic form's entire action is fixed by its diagonal values, so knowing the value of $\BRA{\psi} Q_x \KET{\psi}$ for all $\KET{\psi} \in \mc{H}_A$ (or more weakly by linearity, just its values on unit-normalized such states) fixes $Q_x$ uniquely.\\
+\\
+\
+The defining properties of $\Pi_{AX,b}$ as a projective measurement, plus judicious use of the polarization identity, imply that each $Q_x$ is a Hermitian positive semi-definite operator\footnote{Here we are slightly redundant, as positive semi-definiteness is only defined for Hermitian operators to begin with.} \begin{equation}
+Q_x = Q_x^\dagger, \quad Q_x \geq 0
+\end{equation}
+and that the collection taken together is a decomposition of the identity \begin{equation}
+\sum_{x \in S} Q_x = \mathbf{1}_A.
+\end{equation}
+These two properties define a \textit{positive operator-valued measurement} (POVM). The reader can convince themselves that any such collection $\{Q_x\}_{x \in S}$ with these two properties can be cooked up as we did here, by a suitable choice of auxiliary state $\KET{\phi_{\mbox{\tiny{aux}}}} \in \mc{H}_B$ and joint projective measurement $\{\Pi_{AB,x} \}_{x \in S}$.
+
+
+
+\bibliography{bibfile}
+\bibliographystyle{utphys}
+
+\end{document}
+
+
