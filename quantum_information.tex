@@ -118,6 +118,51 @@ and that the collection taken together is a decomposition of the identity \begin
 These two properties define a \textit{positive operator-valued measurement} (POVM). The reader can convince themselves that any such collection $\{Q_x\}_{x \in S}$ with these two properties can be cooked up as we did here, by a suitable choice of auxiliary state $\KET{\phi_{\mbox{\tiny{aux}}}} \in \mc{H}_B$ and joint projective measurement $\{\Pi_{AB,x} \}_{x \in S}$.
 
 
+\section{Pure State Estimation, Symmetric Subspace}
+
+In the words of Michael Walter, we new address the\\
+\\
+\
+\textit{\textbf{Goal} (Pure State Estimation): Find a POVM $\{ Q_{\hat{\phi}} \}_{\hat{\phi} \in \Omega}$ on $(\C^d)^{\otimes n})$, with possible outcomes in the set \begin{equation}
+\Omega = \left\{ \rho_{\hat{\phi}} = \KET{\hat{\phi}} \BRA{\hat{\phi}} \right\}
+\end{equation} of pure states on $\C^d$, such that when we measure $\phi^{\otimes n} = \KET{\phi}^{\otimes n} \BRA{\phi}^{\otimes n}$, we obtain an outcome $\hat{\phi}$ that is ``close" to $\phi$. }\\
+\\
+\
+As a small clarification: when we talk about outcomes, we are not saying that the POVM projects down to pure states on $\C^d$. Indeed, in general a POVM does not admit an interpretation as a projector with a pure state measurement outcome. We mean that we have some collection of pure states in $\C^d$; that we are using this collection as our indexing set for the POVM; and that when our measurement returns the outcome associated with $\KET{\hat{\phi}}$, we interpret this as our best guess for the state whose $n$-fold product is our initial pre-measurement state. A well-designed such POVM at variable $n$ should have the property that, in the limit of large $n$, this procedure should yield guesses $\KET{\hat{\phi}}$ which are extremely similar to $\KET{\phi}$ extremely often. This is plausible essentially because, given two unit-normalized states $\KET{\psi}, \KET{\psi} \in \C^d$, we have \begin{equation}
+| \IP{\psi}{\xi}| < 1 \implies \left| \LP \BRA{\psi}^{\otimes n} \RP \LP \KET{\xi}^{\otimes n} \RP   \right| = | \IP{\psi}{\xi}|^n \xmapsto{n \to \infty} 0.
+\end{equation}
+So if two states are at all distinguishable, then their corresponding $n$-fold copies are very distinguishable for large enough $n$. Of course the order of predicates is important. This is a pointwise limit (for any two fixed distinct states, distinguishability goes to 1 as $n$ goes to $\infty$), not a uniform one (to the contrary, given any $n$ no matter how large, we could adversarially produce distinct states whose $n$fold products are arbitrarily hard to distinguish).
+
+
+\subsection{Continuous POVMs and the Uniform Measure}
+In order to get a typical guess $\KET{\hat{\phi}}$ which is arbitrarily close to the true state $\KET{\phi}$ at large $n$ no matter what the latter happens to be, our indexing set $\Omega \subset \C^d$ must at least contain states arbitrarily close to any possible true state. Rather than taking $\Omega$ itself to depend on $n$, we will take $\Omega$ from the state to be uncountably infinite, covering all distinct states in $\C^d$. As two states are distinct if they correspond to different rays, this means our indexing set is $\Omega \simeq \C \mathbb{P}^{d-1}$.\\
+\\
+\
+Now the correct probabilistic interpretation of our outcomes must be more explicitly measure-theoretic. A continuous POVM is specified by an indexed collection of operators on $\mc{H}$ \begin{equation}
+\{ Q_x : \mc{H} \to \mc{H} \}_{x \in \Omega}
+\end{equation}
+plus the auxiliary data of a measure $dx$ on $\Omega$.  We require as before that each operator be positive semi-definite and that the collection jointly be a decomposition of the identity \begin{equation}
+Q_x \geq 0 \ \forall x \in \Omega, \mbox{ and } \int_\Omega dx Q_x = \mathbf{1}.
+\end{equation}
+For any $\psi \in \C^d$ and $x \in \Omega$, the probability density of outcomes \begin{equation}
+p_\psi(x) = \BRA{\psi} Q_x \KET{\psi}
+\end{equation}
+gives rise to finite probabilities \begin{equation}
+\mbox{Prob}_\psi (\mbox{outcome} \in S) = \int_S dx \BRA{\psi} Q_x \KET{\psi} \mbox{ for } S \subset \Omega \mbox{ measurable}
+\end{equation}
+and expected values \begin{equation}
+\mbox{E}_\psi [f: \Omega \to \C] = \int_\Omega dx \BRA{\psi} Q_x \KET{\psi} f(x)
+\end{equation}
+So that all of the above makes analytic sense, the mapping $x \mapsto Q_x$ must be measurable.  Notice then that the mapping $Q$ which takes measurable subsets $X \subset \Omega$ to operators \begin{equation}
+Q(X) := \int_X dx Q_x
+\end{equation}
+can itself be thought of as a measure on $\Omega$ taking positive(-semidefinite)-operator values, justifying the term POVM.\\
+\\
+\
+For the particular problem of pure state estimation, even before we decide how to map states $\KET{\hat{\phi}}$ to operators $Q_{\hat{\phi}}$, we must decide on an appropriate measure. Conjugation by any fixed unitary as a symmetry of all observable physics, so any physically sensible measure must respect this symmetry. \begin{equation}
+\int d \psi f(\psi) = \int d \psi f( U \psi U^\dagger).
+\end{equation}
+Just as there is a unique rotation-invariant measure on the sphere up to overall scaling, this symmetry uniquely fixed $d \psi$ to be the \textit{Haar measure} after we fix scaling by demanding that $d \psi$ be a probability measure.
 
 \bibliography{bibfile}
 \bibliographystyle{utphys}
