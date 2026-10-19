@@ -1,0 +1,120 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+\usepackage{amssymb}
+
+\sectionfont{\fontsize{12}{12}\selectfont}
+\subsectionfont{\fontsize{12}{12}\selectfont}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\D}{\partial}
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \middle| #2 \right\rangle}
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+
+\title{Physics and Category Theory}
+
+\author{Mathew Calkins}
+
+\date{\today}
+
+ 
+\maketitle
+
+\abstract{Extremely rough notes on physics and category theory. Maybe these will turn into something coherent, maybe not!}
+
+\tableofcontents
+
+
+
+
+\section{Fusion Categories}
+
+\subsection{Basic Definitions}
+Here we mostly follow \cite{Santaniello:2026urh}. A fusion category consists of a collection $\mc{C}$ (we will use the same symbol to refer to the category itself) plus a pair of binary operations \begin{equation}
+\oplus, \otimes: \mc{C} \times \mc{C} \to \mc{C}
+\end{equation}
+which act roughly like the corresponding operations on familiar algebraic structures. Apparently there is a nice careful exposition of all this in \cite{Fuchs:2002cm}. For now, we just note that we have equalities\footnote{As we'll see in our favorite example, for this to be literal equality we may need the objects in $\mc{C}$ to be isomorphism classes of our favorite objects.} \begin{equation}
+x \oplus y = y \oplus x, \quad x \otimes y = y \otimes x, \quad (x \oplus y) \oplus z = x \oplus (y \oplus z).
+\end{equation}
+So both operations are abelian, and the direct sum is associative. The product is not generally associative, but it is up to a certain natural isomorphism which we'll describe shortly. Finally, there exists a collection $\mathscr{I}$ of so-called simple objects, with the property that any object $x \in \mc{C}$ can be decomposed uniquely as a direct sum \begin{equation}
+x = \bigoplus_{a \in \mathscr{I}} N^a a
+\end{equation}
+where necessarily\footnote{A colleague tells me that this subfield feels strongly that $0 \notin \mathbb{N}$.} $N^a \in \mathbb{Z}_{\geq 0}$. Like a basis for a vector space, this collection of simple objects is generally non-unique, though apparently its cardinality is an invariant; we call the latter the \textit{rank} of $\mc{C}$. After making of a choice of simple objects, the action of the direct product is charactized exactly by the \textit{fusion coefficients} appearing in the decompositions \begin{equation}
+a \otimes b = \bigoplus_c N^{ab}_c c
+\end{equation}
+ranging over all triples $(a,b,c)$ of simple objects. Among the simple objects there exists a distiguished unit object $1 \in \mathscr{I}$ with the property that \begin{equation}
+a \otimes 1 = 1 \otimes a = 1 \ \forall a \in \mathscr{I}.
+\end{equation}
+Morever, every $a \in \mathscr{I}$ has a unique dual $\bar{a} \in \mathscr{I}$ obeying \begin{equation}
+N_{a \bar{a}}^1 = N_{\bar{a} a}^1 = 1.
+\end{equation}
+
+\subsection{Example: Representations of a Fixed Group}
+The simplest nontrivial example of all of this arises by fixing a group $G$ and letting $\mc{C}$ consist of the representations\footnote{Modulo conjugation equivalence, if we are being careful about equality vs isomorphism} $\rho: G \to \mbox{End}(V)$ for $V$ a $\C$-linear space. Then $\oplus, \otimes$ are the usual sum and product of representations, the natural simple objects are the irreducible representations, and the fusion coefficients are Clebsch-Gordon coefficients. The unit simple object is the trivial constant scalar map \begin{equation}
+g \in G \mapsto 1 \in \C^* \simeq \mbox{End}(\C)
+\end{equation}
+The nature of dual objects requires slightly more work. Given any irrep $\rho: G \to \mbox{End}(V)$, or in the present notation $a = (V, \rho)$, the dual object is $\bar{a} = (V^*, \rho^\vee)$, where $V^*$ is the usual dual space \begin{equation}
+V^* = \{\mbox{linear maps } V \to \C\} = \mbox{End}(V,\C)
+\end{equation}
+and $\rho^\vee(g)$ is the inverse transpose, or equivalently acts on dual vectors by pulling back under the inverse, or equivalently \begin{equation}
+\rho^\vee(g) (\lambda) = \lambda \circ \rho(g^{-1}) \in V^* \mbox{ for } \lambda \in V^*.
+\end{equation}
+In matrix notation, \begin{equation}
+\rho^\vee(g) = (\rho(g^{-1}))^T.
+\end{equation}
+Now consider the product of these simple objects \begin{equation}
+a \otimes \bar{a} = (V \otimes V^*, \rho \otimes \rho^\vee).
+\end{equation}
+The canonical evaluation map \begin{equation}
+E: V \otimes V^* \to \C, \quad (v, \lambda) \mapsto \lambda(v)
+\end{equation}
+is $G$-invariant in this representation, in the sense that\footnote{Here we calculate only on product pairs, but by linearity this extends to general vectors in the product representation} \begin{equation}
+v \otimes \lambda \xmapsto{(\rho \otimes \rho^\vee)(g)} \rho(g)(v) \otimes \rho^T(g^{-1}) (\lambda) \xmapsto{E} \LP \lambda \circ \rho(g^{-1}) \RP (\rho(g) v) = \lambda(v).
+\end{equation}
+More briefly, \begin{equation}
+E \circ (\rho \otimes \rho^\vee)(g) = E.
+\end{equation}
+As already noted, finding the fusion coefficients here amounts to finding the Clebsch-Gordon coefficients. 
+
+\bibliography{bibfile}
+\bibliographystyle{utphys}
+
+\end{document}
+
+
