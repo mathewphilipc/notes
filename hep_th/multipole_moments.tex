@@ -1,0 +1,211 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+\usepackage{amssymb}
+
+\sectionfont{\fontsize{12}{12}\selectfont}
+\subsectionfont{\fontsize{12}{12}\selectfont}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\D}{\partial}
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \middle| #2 \right\rangle}
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+
+\title{Multipole Moments}
+
+\author{Mathew Calkins}
+
+\date{\today}
+
+ 
+\maketitle
+
+\abstract{Extremely rough notes on multipole moments. Maybe these will turn into something coherent, maybe not!}
+
+\tableofcontents
+
+
+
+
+\section{Harmonics}
+Legendre polynomials arise from from large-distance moments of inverse-distance potentials. In the approximation $r \equiv \left| \vec{x} \right| \gg \left| \vec{x}_0 \right| \equiv r_0$ we have \begin{equation}
+\begin{aligned}
+\frac{1}{\left| \vec{x} - \vec{x}_0 \right|} & = \frac{1}{\sqrt{r^2 + r_0^2 - 2 r r_0 \cos \gamma}} \\
+& = \frac{1}{r} \LP 1 - \frac{2r_0 \cos \gamma}{r} + \frac{r_0^2}{r^2} \RP^{-\frac{1}{2}} \\
+& = \frac{1}{r} \LP 1 - \frac{1}{2} \LP \frac{r_0^2}{r^2} - \frac{2r_0 \cos \gamma}{r} \RP + \frac{3}{8} \LP \frac{r_0^2}{r^2} - \frac{2r_0 \cos \gamma}{r} \RP^2 + \cdots  \RP \\
+& = \frac{1}{r} \LP 1 + \frac{r_0}{r} \cos \gamma + \frac{r_0^2}{r^2} \frac{3 \cos^2 \gamma - 1}{2}  + \cdots \RP \\
+& = \sum_{n=0}^\infty \frac{r_0^n}{r^{n+1}} P_n(\cos \gamma).
+\end{aligned}
+\end{equation}
+Here we intuitively think of $\vec{x}_0$ as the location of a source and $\vec{x}$ as the location of a distant probe, while $\gamma$ is the (necessarily unsigned) angle between the two position vectors. 
+
+
+
+\section{Spherical Harmonics}
+Spherical harmonics most naturally arise when solving the 3D Euclidean Laplace equation \begin{equation}
+\nabla \phi = 0, \quad \phi: \R^3 \to \R
+\end{equation}
+by the ansatz of separation of variables in spherical coordinates \begin{equation}
+\phi(r, \theta, \phi) = R(r) Y(\theta, \phi)
+\end{equation}
+whereupon the angular function equivalently obeys \begin{equation}
+- \lambda = \frac{1}{Y} \frac{1}{\sin \theta} \D_\theta \LP \sin \theta \D_\theta Y \RP + \frac{1}{Y} \frac{1}{\sin^2 \theta} \D_\phi^2 Y
+\end{equation}
+for $\lambda$ a constant also appearing in the ODE for $R$. Further separating \begin{equation}
+Y(\theta, \phi) = \Theta(\theta) \Phi(\phi)
+\end{equation}
+gives the system \begin{equation}
+\begin{aligned}
+\Phi'' & = - m^2 \Phi, \\
+\lambda \sin^2 \theta + \frac{\sin \theta}{\Theta} \frac{d}{d \theta} \LP \sin \theta \frac{d \Theta}{d \theta} \RP & = m^2
+\end{aligned}
+\end{equation}
+for $m \in \R$ an additional constant. The first equation forces $m \in \Z$. The second, plus demanding regularity at the poles $\theta = 0, \pi$, forces \begin{equation}
+\lambda = \ell(\ell + 1) \mbox{ for } \ell \in \Z, \ell \geq |m|.
+\end{equation}
+So we have a basis of solutions \begin{equation}
+Y_\ell^m (\theta, \phi) \propto e^{i m \phi} P_\ell^m (\theta), \quad m = -\ell, - \ell + 1, \ldots, \ell
+\end{equation}
+where $P_\ell^m$ are the associated Legendre polynomials. In fact, this make up exactly the complete set of  eigenfunctions of the spherical Laplacian \begin{equation}
+r^2 \nabla^2 Y_\ell^m = - \ell(\ell + 1) Y_\ell^m.
+\end{equation}
+This notation is given in a slightly ambiguous way in some presentation, leaving it unclear where we mean the 3D Euclidean Laplacian applied to a function which just happens to be $r$-independent, or the Laplacian intrinsic to $S^2$ applied to a map $S^2 \to \R$? As it turns out, these agree even in higher dimensions. To see this, take the usual curvilinear expression for the Laplacian of a scalar \begin{equation}
+\nabla^2 f = \frac{1}{\sqrt{g}} \D_a \LP \sqrt{g} g^{ab} \D_b f \RP
+\end{equation}
+and apply this to the Euclidean metric for $\R^N$ written in generalized spherical coordinates \begin{equation}
+ds^2 = dr^2 + r^2 d \Omega^2 \implies \sqrt{g} = r^{N-1}
+\end{equation}
+Considering the cases where $a,b$ are both angles, both radial, or a mixture, we find that \begin{equation}
+\nabla_{\R^N}^2 f = \frac{1}{r^{N-1}} \PA{}{r} \LP r^{N-1} \PA{f}{r} \RP + \frac{1}{r^2} \Delta^2_{S^{N-1}} f.
+\end{equation}
+So a function $f: S^2 \to \R$ is annihilated by the sphere Laplacian iff, when interpreted as a radius-independent function on $\R^N$, it is annihilated by the Euclidean Laplacian.
+
+
+
+
+\section{Harmonic Polynomials}
+Denote by $\mbox{Hom}_\ell(\R^3)$ the space of all degree-$\ell$ homogeneous polynomial functions from $\R^3$ to $\C$, and by $\mc{H}_\ell(\R^3)$ the space of all harmonic polynomial functions from $\R^3$ to $\C$ which are homogeneous of degree $\ell$. \begin{equation}
+\mc{H}_\ell(\R^3) = \{ p \in\mbox{Hom}_\ell(\R^3) \mbox{ with } \Delta p = 0 \}.
+\end{equation}
+For example, at $\ell = 0$ we get the space of all linear functions $\R^3 \to \C$. \begin{equation}
+\mc{H}_1(\R^3) = \mbox{span}_\C (x_1, x_2, x_3).
+\end{equation}
+At $\ell = 2$ we get the slightly more involved space \begin{equation}
+\begin{aligned}
+\mc{H}_2(\R^3) &  = \{ a_{11} x_1^2 + a_{22} x_2^2 + a_{33} x_3^2 a_{12} x_1 x_2 + a_{13} x_1 x_3 + a_{23} x_2 x_3 \mbox{ such that } x_1 + x_2 + x_3 = 0\} \\
+& = \mbox{span}_\C \LP x_1 x_2, x_1 x_3, x_2 x_3, x_1^2 - x_2^2, x_1^2 - x_3^2 \RP. 
+\end{aligned}
+\end{equation}
+How large is $\mc{H}_\ell(\R^3)$ in general? The space of degree-$\ell$ polynomials finds a natural basis in the space of monomials \begin{equation}
+\mbox{Hom}_\ell(\R^3) = \mbox{Span}_\C \LP \{ x_1^{a_1} x_2^{a_2} x_3^{a_3} \mbox{ with } a_1 + a_2 + a_3 = \ell \} \RP.
+\end{equation}
+Specifying such a monomial means specifying $a_1 \in \{0, 1, \ldots, \ell\}$, then specifying $a_2 \in \{\ell - a_1, \ell - a_1 + 1, \ldots, \ell\}$, after which $a_3$ is fixed. So the number of such choices is exactly \begin{equation}
+\begin{aligned}
+\dim_\C \LP \mbox{Hom}_\ell(\R^3) \RP & = \sum_{i=0}^\ell \sum_{j=\ell - i}^{\ell} 1 \\
+& = \sum_{i=0}^\ell (i+1) \\
+& = \frac{(\ell + 2)(\ell + 1)}{2}.
+\end{aligned}
+\end{equation}
+We can compute the dimension of $\mc{H}_\ell(\R^3)$ by observing that the restriction of the Laplacian to arguments of degree $\ell$ \begin{equation}
+\Delta_\ell : \mbox{Hom}_\ell(\R^3) \to \mbox{Hom}_{\ell - 2}(\R^3), \quad \ell \geq 2
+\end{equation}
+is surjective. As a low-order non-trivial example, $x^2 y^2$ can be written non-uniquely as the Laplacian \begin{equation}
+\begin{aligned}
+xy & = \Delta \LP a x^4 + b x^3 y + c x^2 y^2 + d x y^3 + e y^4 \RP \\
+& = 12 a x^3 + 6 b x y + 2 c (x^2 + y^2) + 6 d xy + 12 y^2
+\end{aligned}
+\end{equation}
+which has solutions $6(b+d) = 1$ with all other coefficients vanishing. So rank-nullity gives the dimension as \begin{equation}
+\begin{aligned}
+\dim_\C \LP \mc{H}_\ell(\R^3) \RP & = \dim_\C \LP \mbox{ker} \ \Delta_\ell \RP \\
+& = \dim_\C \LP \mbox{Hom}_\ell(\R^3) \RP - \dim_\C \LP \mbox{Hom}_{\ell - 2} (\R^3) \RP \\
+& = \frac{(\ell + 2)(\ell + 1)}{2} - \frac{\ell(\ell - 1)}{2} \\
+& = 2 \ell + 1.
+\end{aligned}
+\end{equation}
+
+
+\subsection{Restricting to the Sphere}
+We introduced these homogeneous harmonic polynomials just now because there is a cute trick for turning them into a spherical harmonic. First, observe that a degree-$\ell$ homogeneous polynomial $p: \R^3 \to \C$ gives rise in a canonical way to $P: S^2 \to \R$ as \begin{equation}
+p(\vec{x}) = r^\ell p(\hat{x}) \equiv r^\ell p(\Omega) \equiv r^\ell P(\Omega) , \quad \vec{x} = r \hat{x}.
+\end{equation}
+In one of several equivalent phrasings, $P$ is the restriction of $p$ to $S^2$. Now if $p$ is furthermore harmonic w.r.t. the Euclidean Laplacian, we can compute explicitly \begin{equation}
+\begin{aligned}
+0 & = \nabla^2_{\R^3} p (\vec{x}) \\
+& = \frac{1}{r^2} \PA{}{r} \LP r^2 \PA{(r^\ell P(\Omega))}{r} \RP + \frac{1}{r^2} \Delta^2_{S^2} (r^\ell P(\Omega)) \\
+& = \frac{P(\Omega)}{r^2} \PA{}{r} \LP r^2 \PA{(r^\ell )}{r} \RP + r^{\ell - 2} \Delta^2_{S^2} P(\Omega) \\
+& = \ell (\ell + 1) r^{\ell - 2} P(\Omega) + r^{\ell - 2} \Delta^2_{S^2} P(\Omega) \\
+\implies \Delta^2_{S^2} P(\Omega) & = - \ell (\ell + 1) P(\Omega).
+\end{aligned}
+\end{equation}
+So $P$ is an eigenfunction of the sphere Laplacian, hence is a linear combination of the level-$\ell$ spherical harmonics. So we have cooked up a linear map \begin{equation}
+\mc{H}_\ell(\R^3) \to \mbox{Span}_\C \LP Y_\ell^m \RP_{|m| \leq \ell}, \quad p \mapsto p|_{S^2} \equiv P.
+\end{equation}
+Some elementary algebraic geometry tells us this map is injective: if two polynomials $p,q: \R^3 \to \C$ of the same degree $\ell$ give rise to identical restrictions $P, Q: S^2 \to \C$, then their difference $p - q: \R^3 \to \C$ vanishes on the locus $x^2 + y^2 + z^2 - 1 = 0$. \begin{equation}
+(p - q)(\vec{x}) = 0 \mbox{ whenever } |\vec{x}| = 1.
+\end{equation}
+But $p,q$ have the same degree-$\ell$ scaling behavior by assumption, hence so does their difference, and for general $\vec{x} = r \hat{x} \in \R^3$ we have \begin{equation}
+(p - q)(\vec{x}) = r^\ell (p - q).
+\end{equation}
+So $p = q$, and as claimed our restriction map is injective. On the other hand, we have already computed the dimension of the domain and codomain of this map, finding $2 \ell + 1$ in each case. So our injective map must be an isomorphism, and we conclude that we have furnished a linear equivalence between the space of degree-$\ell$ harmonic polynomials and the degree-$\ell$ spherical harmonics when both are taken as complex vector spaces. \begin{equation}
+\therefore \mc{H}_\ell(\R^3) \simeq \mbox{Span}_\C \LP Y_\ell^m \RP_{|m| \leq \ell}
+\end{equation}
+
+
+
+
+
+
+\section{Rotational Irreps}
+Let $V_\ell$ denote the $(2\ell + 1)$-dimensional representation of $SO(3)$, on which the squared total-angular-momentum Casimir acts as \begin{equation}
+L^2 = - \ell (\ell + 1) \mathbf{1}_{2 \ell + 1}, \quad \ell \in \Z_{\geq 0}
+\end{equation}
+and the individual generators have matrix elements \begin{equation}
+\begin{aligned}
+[L_x]_{ij} & = \frac{1}{2} (\delta_{i, j+1} + \delta_{i+1,j})
+\end{aligned}
+\end{equation}
+
+
+\bibliography{bibfile}
+\bibliographystyle{utphys}
+
+\end{document}
+
+
