@@ -63,20 +63,6 @@
 
 
 
-\section{Harmonics}
-Legendre polynomials arise from from large-distance moments of inverse-distance potentials. In the approximation $r \equiv \left| \vec{x} \right| \gg \left| \vec{x}_0 \right| \equiv r_0$ we have \begin{equation}
-\begin{aligned}
-\frac{1}{\left| \vec{x} - \vec{x}_0 \right|} & = \frac{1}{\sqrt{r^2 + r_0^2 - 2 r r_0 \cos \gamma}} \\
-& = \frac{1}{r} \LP 1 - \frac{2r_0 \cos \gamma}{r} + \frac{r_0^2}{r^2} \RP^{-\frac{1}{2}} \\
-& = \frac{1}{r} \LP 1 - \frac{1}{2} \LP \frac{r_0^2}{r^2} - \frac{2r_0 \cos \gamma}{r} \RP + \frac{3}{8} \LP \frac{r_0^2}{r^2} - \frac{2r_0 \cos \gamma}{r} \RP^2 + \cdots  \RP \\
-& = \frac{1}{r} \LP 1 + \frac{r_0}{r} \cos \gamma + \frac{r_0^2}{r^2} \frac{3 \cos^2 \gamma - 1}{2}  + \cdots \RP \\
-& = \sum_{n=0}^\infty \frac{r_0^n}{r^{n+1}} P_n(\cos \gamma).
-\end{aligned}
-\end{equation}
-Here we intuitively think of $\vec{x}_0$ as the location of a source and $\vec{x}$ as the location of a distant probe, while $\gamma$ is the (necessarily unsigned) angle between the two position vectors. 
-
-
-
 \section{Spherical Harmonics}
 Spherical harmonics most naturally arise when solving the 3D Euclidean Laplace equation \begin{equation}
 \nabla \phi = 0, \quad \phi: \R^3 \to \R
@@ -102,7 +88,10 @@ for $m \in \R$ an additional constant. The first equation forces $m \in \Z$. The
 So we have a basis of solutions \begin{equation}
 Y_\ell^m (\theta, \phi) \propto e^{i m \phi} P_\ell^m (\theta), \quad m = -\ell, - \ell + 1, \ldots, \ell
 \end{equation}
-where $P_\ell^m$ are the associated Legendre polynomials. In fact, this make up exactly the complete set of  eigenfunctions of the spherical Laplacian \begin{equation}
+where $P_\ell^m$ are the associated Legendre polynomials. In that case, for summations over basis solutions converging at large $r$, the radial function is then \begin{equation}
+R(r) \propto \frac{1}{r^{\ell + 1}}.
+\end{equation}
+We can say more about the functions $Y$, namely that they make up exactly the complete set of  eigenfunctions of the spherical Laplacian \begin{equation}
 r^2 \nabla^2 Y_\ell^m = - \ell(\ell + 1) Y_\ell^m.
 \end{equation}
 This notation is given in a slightly ambiguous way in some presentation, leaving it unclear where we mean the 3D Euclidean Laplacian applied to a function which just happens to be $r$-independent, or the Laplacian intrinsic to $S^2$ applied to a map $S^2 \to \R$? As it turns out, these agree even in higher dimensions. To see this, take the usual curvilinear expression for the Laplacian of a scalar \begin{equation}
@@ -264,6 +253,34 @@ This contraction is sensitive only to the part of $P$ which is totally symmetric
 so $P_T$ is harmonic iff $P$ is trace-free\footnote{Note that since $P$ is totally symmetric, there is no ambiguity in which pairing of indices we are using for the trace; any one pairing vanishes iff every pairing vanishes.}. So we have yet another equivalence \begin{equation}
 P_T \in \mc{H}_\ell(\R^3) \leftrightarrow P \in \mbox{Sym}_0^\ell(\C^3) \equiv \{ \mbox{symmetric traceless rank-$\ell$ polynomials over $\C^3$}\}.
 \end{equation}
+
+
+\section{Multipole Moments}
+Legendre polynomials arise from from large-distance moments of inverse-distance potentials. In the approximation $r \equiv \left| \vec{x} \right| \gg \left| \vec{x}_0 \right| \equiv r_0$ we have \begin{equation}
+\begin{aligned}
+\frac{1}{\left| \vec{x} - \vec{x}_0 \right|} & = \frac{1}{\sqrt{r^2 + r_0^2 - 2 r r_0 \cos \gamma}} \\
+& = \frac{1}{r} \LP 1 - \frac{2r_0 \cos \gamma}{r} + \frac{r_0^2}{r^2} \RP^{-\frac{1}{2}} \\
+& = \frac{1}{r} \LP 1 - \frac{1}{2} \LP \frac{r_0^2}{r^2} - \frac{2r_0 \cos \gamma}{r} \RP + \frac{3}{8} \LP \frac{r_0^2}{r^2} - \frac{2r_0 \cos \gamma}{r} \RP^2 + \cdots  \RP \\
+& = \frac{1}{r} \LP 1 + \frac{r_0}{r} \cos \gamma + \frac{r_0^2}{r^2} \frac{3 \cos^2 \gamma - 1}{2}  + \cdots \RP \\
+& = \sum_{n=0}^\infty \frac{r_0^n}{r^{n+1}} P_n(\cos \gamma).
+\end{aligned}
+\end{equation}
+Here we intuitively think of $\vec{x}_0$ as the location of a source and $\vec{x}$ as the location of a distant probe, while $\gamma$ is the (necessarily unsigned) angle between the two position vectors. More generally, given a compactly supported source $\rho: \R^3 \to \R$ for the Poisson equation \begin{equation}
+\nabla^2_{\R^3} \phi = \rho
+\end{equation}
+we can expand in components, organizing our result in according to scaling w.r.t. $r$, to find \begin{equation}
+\begin{aligned}
+\phi(\vec{x}) & = \int_{\R^3} d^3 \vec{x}' \frac{\rho(\vec{x}')}{|\vec{x} - \vec{x}'|} \\
+& = \int_{\R^3} d^3 \vec{x}' \rho(\vec{x}') \frac{1}{r} \LP 1 - \frac{2r' \cos \gamma}{r} + \frac{{r'}^2}{r^2} \RP^{-\frac{1}{2}} \\
+& = \int_{\R^3} d^3 \vec{x}' \rho(\vec{x}') \frac{1}{r} \LP 1 + \frac{{r'}^2 - 2 \vec{x} \cdot \vec{x}'}{r^2} \RP^{-\frac{1}{2}} \\
+& = \int_{\R^3} d^3 \vec{x}' \rho(\vec{x}') \frac{1}{r} \LP 1 - \frac{1}{2 r^2} \LP {r'}^2 - 2 \vec{x} \cdot \vec{x}' \RP + \frac{3}{8r^4} \LP {r'}^2 - 2 \vec{x} \cdot \vec{x}' \RP^2 + \cdots \RP \\
+& = \int_{\R^3} d^3 \vec{x}' \rho(\vec{x}') \frac{1}{r} \LP 1 + \frac{\vec{x} \cdot \vec{x}'}{r^2} - \frac{{r'}^2}{2r^2}  + \frac{3 (\vec{x} \cdot \vec{x}')^2}{2 r^4} + \mc{O} \LP \frac{1}{r^3} \RP \RP \\
+& = \int_{\R^3} d^3 \vec{x}' \rho(\vec{x}')  \LP \frac{1}{r} + \frac{x_i' x_i}{r^3}  + \frac{\LP 3 x'_i x'_j  - {r'}^2 \delta_{ij} \RP x_i x_j}{2 r^5} + \mc{O} \LP \frac{1}{r^3} \RP \RP \\
+& \equiv \frac{Q}{r} + \frac{Q_i x_i}{r^3} + \frac{Q_{ij} x_i x_j}{2 r^5} + \frac{Q_{ijk} x_i x_j x_k}{3! r^7} + \cdots 
+\end{aligned}
+\end{equation}
+This is a decomposition in harmonics! TBD.
+
 
 
 
