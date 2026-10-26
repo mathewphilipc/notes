@@ -331,7 +331,49 @@ we find \begin{equation}
 
 
 
-
+\section{Shifting the Origin}
+Take a harmonic function with expansion as above, but now interpret the coefficients as a function of the base point about which we expand, which in our first analysis was exactly the origin. Then we have slightly more explicitly \begin{equation}
+\phi(\vec{x})  = \frac{Q(0)}{r} + \frac{Q_i(0) x_i}{r^3} + \frac{Q_{ij}(0) x_i x_j}{2 r^5} + \frac{Q_{ijk}(0) x_i x_j x_k}{3! r^7} + \cdots.
+\end{equation}
+About a more general expansion point $\vec{y}$, we have \begin{equation}
+\phi(\vec{x})  = \frac{Q(\vec{y})}{|\vec{x} - \vec{y}|} + \frac{Q_i(\vec{y}) (x_i - y_i)}{|\vec{x} - \vec{y}|^3} + \frac{Q_{ij}(\vec{y}) (x_i - y_i) (x_j - y_j)}{2 |\vec{x} - \vec{y}|^5} + \frac{Q_{ijk}(\vec{y}) (x_i - y_i)(x_j - y_j)(x_k - y_k)}{3! |\vec{x} - \vec{y}|^7} + \cdots.
+\end{equation}
+On the other hand, if we expand \begin{equation}
+\begin{aligned}
+\frac{1}{r^n} & = \frac{1}{|(\vec{x} - \vec{y}) + \vec{y}|^n} \\
+& = \frac{1}{|\vec{x} - \vec{y}|^n} + \frac{a^{(n)}_i y_i}{|\vec{x} - \vec{y}|^{n+1}} + \frac{a^{(n)}_{ij} y_i y_j}{|\vec{x} - \vec{y}|^{n+2}} + \cdots
+\end{aligned}
+\end{equation}
+(the exact coefficients aren't important) then our expansion about the origin tells us that we can write\footnote{Here $I$ is a multi-index.} each $Q_{I_\ell} (\vec{y})$ as a function of the $Q_{J_{\ell}} (0)$'s for $\ell' \leq \ell$. For example, $Q_{ij}(\vec{y})$ is a linear combination of $Q_0(0), Q_i(0), Q_{ij}(0)$. Conversely, $Q_{ij}(0)$ contributes to $Q_{i_1 \cdots i_\ell}(\vec{y})$ for all $\ell \geq 2$.\\
+\\
+\
+Now we think of $Q_{I_\ell} \equiv Q_{i_1 \cdots i_\ell}$ as a tensor field over $\R^3$, assigning a tensor value at each\footnote{Really, each $\vec{y}$ large enough for convergence.} $\vec{y} \in \R^3$.  This has the peculiar property that, if we know $Q_{I_\ell}(\vec{y})$ for all $\vec{y} \in \R^3$, this fixes the same data for all lower $Q_{I_{\ell'}}$ with $\ell' < \ell$. Conversely, knowing all $Q_{I_{\ell'}}$ at just one fixed point fixes $Q_{I_\ell}$ as a tensor field. So knowing all moments up to level $\ell$ at one fixed point is equivalent to knowing $Q_{I_\ell}$ everywhere. \\
+\\
+\
+This action of translation linearly mixes up up the $Q$'s with coefficients determined only by the relative positions of the two base points, and in such a way that each new level-$\ell$ charge only gets contributions from the old charges at level $\leq \ell$. Algebraically, this means we have a representation of the group of 3D translations (composed in the usual way by vector addition) schematically of the form \begin{equation}
+\begin{bmatrix}
+Q(\vec{y}) \\
+Q_i (\vec{y}) \\
+Q_{ij} (\vec{y}) \\
+\vdots
+\end{bmatrix} = \begin{bmatrix}
+\# Q(\vec{x}) \\
+\# Q(\vec{x}) + \# Q_i(\vec{x}) \\
+\# Q(\vec{x}) + \# Q_i(\vec{x}) + \# Q_{ij}(\vec{x}) \\
+\vdots
+\end{bmatrix} = \begin{bmatrix}
+\# & 0 & 0 & \cdots \\
+\# & \# & 0 & \cdots \\
+\# & \# & \# & \cdots \\
+\vdots & \vdots & \vdots & & \ddots
+\end{bmatrix} \begin{bmatrix}
+Q(\vec{x}) \\
+Q_i (\vec{x}) \\
+Q_{ij} (\vec{x}) \\
+\vdots
+\end{bmatrix}
+\end{equation}
+where the black-boxed coefficients $\#$  are dressed with appropriate indices and depend only $\vec{x} - \vec{y}$. 
 
 \bibliography{bibfile}
 \bibliographystyle{utphys}
