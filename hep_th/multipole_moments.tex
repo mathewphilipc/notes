@@ -86,7 +86,7 @@ for $m \in \R$ an additional constant. The first equation forces $m \in \Z$. The
 \lambda = \ell(\ell + 1) \mbox{ for } \ell \in \Z, \ell \geq |m|.
 \end{equation}
 So we have a basis of solutions \begin{equation}
-Y_\ell^m (\theta, \phi) \propto e^{i m \phi} P_\ell^m (\theta), \quad m = -\ell, - \ell + 1, \ldots, \ell
+Y_\ell^m (\theta, \phi) \propto e^{i m \phi} P_\ell^m (\cos \theta), \quad m = -\ell, - \ell + 1, \ldots, \ell
 \end{equation}
 where $P_\ell^m$ are the associated Legendre polynomials. In that case, for summations over basis solutions converging at large $r$, the radial function is then \begin{equation}
 R(r) \propto \frac{1}{r^{\ell + 1}}.
@@ -275,11 +275,60 @@ we can expand in components, organizing our result in according to scaling w.r.t
 & = \int_{\R^3} d^3 \vec{x}' \rho(\vec{x}') \frac{1}{r} \LP 1 + \frac{{r'}^2 - 2 \vec{x} \cdot \vec{x}'}{r^2} \RP^{-\frac{1}{2}} \\
 & = \int_{\R^3} d^3 \vec{x}' \rho(\vec{x}') \frac{1}{r} \LP 1 - \frac{1}{2 r^2} \LP {r'}^2 - 2 \vec{x} \cdot \vec{x}' \RP + \frac{3}{8r^4} \LP {r'}^2 - 2 \vec{x} \cdot \vec{x}' \RP^2 + \cdots \RP \\
 & = \int_{\R^3} d^3 \vec{x}' \rho(\vec{x}') \frac{1}{r} \LP 1 + \frac{\vec{x} \cdot \vec{x}'}{r^2} - \frac{{r'}^2}{2r^2}  + \frac{3 (\vec{x} \cdot \vec{x}')^2}{2 r^4} + \mc{O} \LP \frac{1}{r^3} \RP \RP \\
-& = \int_{\R^3} d^3 \vec{x}' \rho(\vec{x}')  \LP \frac{1}{r} + \frac{x_i' x_i}{r^3}  + \frac{\LP 3 x'_i x'_j  - {r'}^2 \delta_{ij} \RP x_i x_j}{2 r^5} + \mc{O} \LP \frac{1}{r^3} \RP \RP \\
-& \equiv \frac{Q}{r} + \frac{Q_i x_i}{r^3} + \frac{Q_{ij} x_i x_j}{2 r^5} + \frac{Q_{ijk} x_i x_j x_k}{3! r^7} + \cdots 
+& = \int_{\R^3} d^3 \vec{x}' \rho(\vec{x}')  \LP \frac{1}{r} + \frac{x_i' x_i}{r^3}  + \frac{\LP 3 x'_i x'_j  - {r'}^2 \delta_{ij} \RP x_i x_j}{2 r^5} + \mc{O} \LP \frac{1}{r^4} \RP \RP \\
+& \equiv \frac{Q}{r} + \frac{Q_i x_i}{r^3} + \frac{Q_{ij} x_i x_j}{2 r^5} + \frac{Q_{ijk} x_i x_j x_k}{3! r^7} + \cdots.
 \end{aligned}
 \end{equation}
-This is a decomposition in harmonics! TBD.
+Notice that this implicit definition of that $Q's$ in terms of their results after contraction against $x$ strings leaves exactly enough ambiguity to WLOG take the Q's to be totally symmetric; we will take this as a further part of their definition. As a sanity check, we can explicitly compute the Euclidean Laplacian of this expression. In fact all terms exhibit the same behavior here, as exemplified by the fourth one: \begin{equation}
+\begin{aligned}
+\nabla^2_{\R^3} \frac{Q_{ijk} x_i x_j x_k}{3! r^7} & = \delta_{ab} \PA{^2}{x_a x_b} \LP \frac{Q_{ijk} x_i x_j x_k}{3! r^7} \RP \\
+& =  \delta_{ab} \PA{}{x_a} \LP \frac{Q_{bjk} x_j x_k}{2! r^7}  - \frac{7 Q_{ijk} x_i x_j x_k x_b}{3! r^9} \RP \\
+& = \delta_{ab} \LP \frac{Q_{ba k} x_k}{r^7} - \frac{7 Q_{bjk} x_j x_k x_a}{2! r^9} - \frac{7 Q_{ajk} x_j x_k x_b}{2! r^9} - \frac{7 Q_{ijk} x_i x_j x_k \delta_{ab}}{3! r^9} + \frac{63 Q_{ijk} x_i x_j x_k x_a x_b}{3! r^{11}} \RP \\
+& = \frac{Q_{aa k} x_k}{r^7} - \frac{7 Q_{ajk} x_j x_k x_a}{2! r^9} - \frac{7 Q_{ajk} x_j x_k x_a}{2! r^9} - \frac{7 Q_{ijk} x_i x_j x_k}{2! r^9} + \frac{63 Q_{ijk} x_i x_j x_k}{3! r^9} \\
+& = \frac{Q_{aak} x_k}{r^7}.
+\end{aligned}
+\end{equation}
+In general, we have \begin{equation}
+\begin{aligned}
+\nabla^2_{\R^3} \phi(\vec{x}) & = \delta^{ab} \PA{^2}{x_a x_b} \LP \frac{Q}{r} + \frac{Q_i x_i}{r^3} + \frac{Q_{ij} x_i x_j}{2 r^5} + \frac{Q_{ijk} x_i x_j x_k}{3! r^7} + \cdots \RP \\
+& = \frac{Q_{aa}}{r^5} + \frac{Q_{aai}x_i}{r^7} + \frac{Q_{aaij} x_i x_j}{2! r^9} + \cdots + \frac{Q_{aa i_3 \cdots i_{\ell}} x_{i_3} \cdots x_{i_\ell}}{(\ell - 2)! r^{2 \ell + 1}} + \cdots .
+\end{aligned}
+\end{equation}
+If we are being careful this calculation has a restricted domain of validity. First, we have quietly assumed that $\vec{x} \neq 0$, since more generally \begin{equation}
+\nabla^2 \LP \frac{1}{r} \RP = - 4 \pi \delta^{(3)}(\vec{x}).
+\end{equation}
+More interestingly, we know that $\phi(\vec{x})$ is harmonic away from the compact-by-assumption support of $\rho$, which implies that all of the traces must vanish. \begin{equation}
+Q_{aa i_3 \cdots i_\ell} = 0.
+\end{equation}
+But this implies our series expansion for $\nabla^2_{\R^3} \phi(\vec{x})$ vanishes uniformly. So it must be that the domain of validity of this series expansion (which we generically expect to be limited to sufficiently large $r$ anyway for convergence reasons) is at most the exterior of the support of $\rho$, since inside this support we generally have $\nabla^2_{\R^3} \phi(\vec{x}) = \rho(\vec{x}) \neq 0$. So our series expansion holds exactly, but only for sufficiently large $r$. \\
+\\
+\
+In fact we never needed to talk about $\rho$; it was just a way of cooking up a function $\phi$ which, at large distances, is harmonic and decaying. Any scalar function which is harmonic and polynomial-decaying at large $r$ can be written \begin{equation}
+\phi(\vec{x}) = \sum_{\ell = 0}^\infty \frac{Q_{i_1 \cdots i_\ell} x_{i_1} \cdots x_{i_\ell}}{r^{2 \ell + 1}} \mbox{ at sufficiently large } r
+\end{equation}
+where \begin{equation}
+\nabla_{\R^3} \phi(\vec{x}) = 0 \mbox{ at large $r$} \implies Q_{aa i_3 \cdots i_\ell} = 0.
+\end{equation}
+Pulling out factor of $r$ as $\vec{x} = r \hat{x}$ lets us map each level-$\ell$ multipole is mapped invertibly to a combination of level-$\ell$ spherical harmonic, and we get the whole nice story above. For example, in the normalization \begin{equation}
+Y_{\ell m} = e^{i m \phi} P_\ell ^m(\cos \theta)
+\end{equation}
+and by comparison with the $\ell = 1$ associated Legendre polynomials \begin{equation}
+\begin{aligned}
+P_1^{-1} (x) & = \frac{1}{2} (1 - x^2)^{\frac{1}{2}}, \\
+P_1^0 (x) & = x, \\
+P_1^1 (x) & = - (1 - x^2)^{\frac{1}{2}}
+\end{aligned}
+\end{equation}
+we find \begin{equation}
+\begin{aligned}
+\frac{Q_i x_i}{r^3} & = \frac{ Q_1 \sin \theta \cos \phi + Q_2 \sin \theta \sin \phi+ Q_3 \cos \theta}{r^2} \\
+%& = \frac{Q_1 \sin \theta \frac{e^{i \phi} + e^{- i \phi}}{2}  - i Q_2 \sin \theta \frac{e^{i \phi} - e^{- i \phi}}{2} + Q_3 \cos \theta}{r^2} \\
+& = \frac{e^{i \phi} \frac{Q_1  - i Q_2 }{2} \sin \theta + e^{- i \phi} \frac{Q_1  + i Q_2 }{2}\sin \theta + Q_3 \cos \theta}{r^2 } \\
+& = \frac{Q_3 P_1^0(\cos \theta) - e^{i \phi} \frac{Q_1 - i Q_2}{2} P_1^1(\cos \theta) + e^{- i \phi} (Q_1 + i Q_2) P_1^{-1} (\cos \theta)}{r^2} \\
+& = \frac{(Q_1 + i Q_2) Y_{1 -1} (\theta, \phi) + Q_3 Y_{10} (\theta, \phi) - \frac{Q_1 - i Q_2}{2} Y_{11}(\theta, \phi)}{r^2}.
+\end{aligned}
+\end{equation}
+
 
 
 
