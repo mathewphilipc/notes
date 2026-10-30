@@ -375,9 +375,68 @@ Q_{ij} (\vec{x}) \\
 \end{equation}
 where the black-boxed coefficients $\#$  are dressed with appropriate indices and depend only $\vec{x} - \vec{y}$. 
 
-\bibliography{bibfile}
-\bibliographystyle{utphys}
+
+\section{Multipole Moments as Conformal Killing Tensors}
+
+We take our space $V$ to be the complement in $\R^3$ of some smooth, solid region which is topologically a solid ball, which we think of as the subtracted-off support of the source charge density. Topologically, $V$ is then $S^2 \times \R$. Let $\varphi$ be any harmonic function on $V$. Write the metric on $V$ as $h_{ab}$, and let $\xi = \xi^a \D_a$ be a conformal Killing vector \begin{equation}
+\nabla_{(a} \xi_{b)} = \frac{1}{3} h_{ab} \nabla^m \xi_m
+\end{equation}
+where we take the good convention for symmetrizing \begin{equation}
+A_{(ab)} \equiv \frac{1}{2} (A_{ab} + A_{ba}).
+\end{equation}
+Then for all $s \geq 0$, the dual vector field $U^{(s)} = U_m dx^m$ with components \begin{equation}
+U^{(s)}_m = \xi^{a_1} \cdots \xi^{a_s} \nabla_m \nabla_{a_1} \cdots \nabla_{a_s} \varphi
+\end{equation}
+is harmonic. To see this, we repeatedly use commutativity of covariant derivatives in flat space to compute directly \begin{equation}
+\begin{aligned}
+\nabla^m U^{(s)}_m & = s (\nabla^m \xi^{a_1}) \cdots \xi^{a_s} \nabla_m \nabla_{a_1} \cdots \nabla_{a_s} \varphi + \xi^{a_1} \cdots \xi^{a_s} \nabla^m \nabla_m \nabla_{a_1} \cdots \nabla_{a_s} \varphi \\
+& = s (\nabla^{(m} \xi^{a_1)}) \cdots \xi^{a_s} \nabla_{a_2} \cdots \nabla_{a_s} \nabla_m \nabla_{a_1} \varphi + \xi^{a_1} \cdots \xi^{a_s}  \nabla_{a_1} \cdots \nabla_{a_s} \underbrace{\nabla^m \nabla_m \varphi}_{=0} \\
+& = \frac{s}{3} h^{ma_1} \cdots \xi^{a_s} \nabla_{a_2} \cdots \nabla_{a_s} \nabla_m \nabla_{a_1} \varphi \\
+& = \frac{s}{3} \cdots \xi^{a_s} \nabla_{a_2} \cdots \nabla_{a_s} \underbrace{\nabla_m \nabla^m \varphi}_{=0}.
+\end{aligned}
+\end{equation}
+Then as long as $K$ any outward-oriented smooth surface homeomorphic to $S^2$ and enclosing the ``hole" in $V$, the integral \begin{equation}
+Q^{(s)} \equiv Q^{(s)}[\xi] \equiv \frac{1}{4 \pi} \int_K U^{(s)}
+\end{equation}
+is independent of the particular choice of $K$. This integral therefore associates a real number to any conformal Killing vector; we note that the latter form a real 10-dimensional Lie algebra (3 translations, 3 rotations, 3 special conformal transformations, plus dilatation). Geroch \cite{Geroch:1970cc} claims that ``This collection ($s = 0, 1,2, \ldots$) of multilinear
+mappings contains precisely the information of the multipole moments of $\varphi$." To make this clearer, we denote by $\mc{C}$ the real vector space of conformal Killing vectors. As just mentioned, this has a natural basis \begin{equation}
+\{\varepsilon_\alpha\}_{\alpha = 1}^{10} \{\varepsilon_1, \ldots, \varepsilon_{10} \} = \{\mbox{translations, rotations, SCTs, dilatation}\}
+\end{equation}
+though there are infinitely many other choices, and all of the following will be agnostic w.r.t. the choice of basis. Crucially, here $\alpha$ (and moving forward, other Greek indices) enumerate basis elements and components in this finite-dimensional space; they are not tensor field indices. In the mildly unfortunate notation used by \cite{Geroch:1970cc}, we accordingly expand as, \textit{e.g.}, \begin{equation}
+\xi = \xi^\alpha \varepsilon_\alpha \in \mc{C}.
+\end{equation}
+If we extend the mapping $Q^{(s)}$ in the unique totally symmetric way to take in $s$ independent conformal Killing vectors \begin{equation}
+Q^{(s)}: \mc{C} \otimes \cdots \otimes \mc{C} \to \R, \quad Q^{(s)}[\xi_1, \ldots, \xi_s] \equiv \frac{1}{4 \pi} \int_K \xi_1^{a_1} \cdots \xi_s^{a_s} \nabla_m \nabla_{a_1} \cdots \nabla_{a_s} \varphi
+\end{equation}
+the result can be thought of as a symmetric $s$-tensor over $\mc{C}$, with action in $\mc{C}$-components written as \begin{equation}
+Q^{(s)}[\xi_1, \ldots, \xi_s] = Q^{(s)}_{\alpha_1 \cdots \alpha_s} \xi_1^{\alpha_1} \cdots \xi_s^{\alpha_s} \equiv Q_{\alpha_1 \cdots \alpha_s} \xi_1^{\alpha_1} \cdots \xi_s^{\alpha_s} \in \R
+\end{equation}
+where the presence of $s$ indices lets us drop the superscript $(s)$ without fear of ambiguity. The corresponding intrinsic object is the totally symmetric rank-$s$ covariant tensor \begin{equation}
+Q_{\alpha_1 \cdots \alpha_s} (\varepsilon*)^{\alpha_1} \cdots (\varepsilon*)^{\alpha_s} \in \bigotimes^s_{\mbox{\tiny{sym}}} \mc{C}^*
+\end{equation}
+A major goal of this exposition is to explain how these $Q$'s relate to the usual symmetric tensors which characterize the multipole expansion of $\varphi$. \cite{Geroch:1970cc} claims that the former totally characterizes the latter, which from all of our earlier work is immensely plausible.\\
+\\
+\
+The CKVs are richer than just a vector space, as they form a Lie algebra under vector field commutation. In any basis, we have associated structure constants \begin{equation}
+([\xi, \xi'])^\mu = C^\mu_{\alpha \beta} \xi^\alpha {\xi'}^\beta
+\end{equation}
+from which we can built the usual Killing form \begin{equation}
+G_{\alpha \beta} \equiv - C^\mu _{\ \nu \alpha} C^\nu _{ \ \mu \beta}.
+\end{equation}
+A concrete calculation using the known structure of the CKVs of $\R^3$ show that this symmetric quadratic form is non-singular, with signature $(+,+,+,+,+,+,-,-,-,-)$. We write the corresponding inverse metric with components $G^{\alpha \beta}$. With this we can raise the $\mc{C}$-indices to product a totally symmetric rank-$s$ contravariant tensor \begin{equation}
+Q^{\alpha_1 \cdots \alpha_s} \epsilon_{\alpha_1} \cdots \varepsilon_{\alpha_s} \in \bigotimes^s_{\mbox{\tiny{sym}}} \mc{C}.
+\end{equation}
+The linear space of such tensors is spanned by uniform strings $\xi \otimes \cdots \otimes \xi$ for $\xi \in \mc{C}$. The number of linearly independent such strings will be written as $D_s$ (the particular value is unimportant here; maybe we'll add it as an appendix). In any case we can therefore write (perhaps excessively verbosely) \begin{equation}
+\begin{aligned}
+Q^{\alpha_1 \cdots \alpha_s} & = \sum_{i=1}^{D_s} \xi_i^{\alpha_1} \cdots \xi_i^{\alpha_s} \\
+\implies Q^{\alpha_1 \cdots \alpha_s} \epsilon_{\alpha_1} \cdots \varepsilon_{\alpha_s} & = \sum_{i=1}^{D_s} \xi_i^{\alpha_1} \cdots \xi_i^{\alpha_s} \epsilon_{\alpha_1} \cdots \varepsilon_{\alpha_s} \\
+& = \sum_{i=1}^{D_s} \xi_i \otimes \cdots \otimes \xi_i \in \bigotimes^s_{\mbox{\tiny{sym}}} \mc{C}.
+\end{aligned}
+\end{equation}
+To this we can associate the rank-$s$ contravariant spatial object, namely the tensor field with components \begin{equation}
+Q^{a_1 \cdots a_s}(x) = \sum_{i = 1}^D \xi_i^{a_1} (x) \cdots \xi_i^{a_s} (x).
+\end{equation}
+
+
 
 \end{document}
-
-
