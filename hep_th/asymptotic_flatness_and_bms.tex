@@ -142,7 +142,16 @@ and still have a perfectly good compactification of $(\R^2, \eta)$? Certainly, b
 A final notable feature of this story is that spacelike infinity $(u,v) \to (-\infty, \infty)$ corresponds in the Einstein static universe to setting $(T,R) = (0, \pi) \equiv (0, \pm \pi)$, \textit{i.e.}, to the \textit{one-dimensional (not three-dimensional) submanifold} $\R \times \{\mbox{south pole}\}$. This meas that, in the carton depiction \ref{Fig:nullcones} (lifted directly from \cite{Wald:1984rg} Fig. 11.2) is slightly misleading: not only do future and past timelike infinities $i^\pm$ (equivalently, $R = 0$ and $T = \pm \pi$) correspond to single points, so too does spacelike infinity $i^0$ (equivalently, $R \in \pi \mathbb{Z}).$\\
 \\
 \
-Intuitively, we want to call a spacetime \textit{asymptotically flat} if we can conformally compactify it in a similar way, though with two dropped conditions. First, given the existence of stable massive objects in physically reasonable spacetimes, we won't require flatness as we go off in timelike directions, only spacelike and null. Second, we won't require that the Weyl-transformed metric have any smoothness properties at spacelike infinity, for reasons we'll see shortly.
+Intuitively, we want to call a spacetime \textit{asymptotically flat} if we can conformally compactify it in a similar way, though with two dropped conditions. First, given the existence of stable massive objects in physically reasonable spacetimes, we won't require flatness as we go off in timelike directions, only spacelike and null. Second, we won't require that the Weyl-transformed metric have any smoothness properties at spacelike infinity, essentially for the same reason that it is too much to expect smoothness of the $A$ and $F$ near spatial infinity \cite{Strominger:2017zoo}.\\
+\\
+\
+In the present note we will relax things even further. We will only ask that, near $\mathcal{I}^+$, there should exist a Weyl factor $\Omega^2$ so that the unphysical rescaled metric $\tilde{g} = \Omega^2 g$ makes the region near $\mathcal{I}^+$ isometric to the interior of a manifold-with-boundary having exactly $\mathcal{I}^+$ itself as the boundary. We further demand that $\Omega = 0$ only at $\mathcal{I}^+$, while $\tilde{\nabla} \Omega|_{\mc{I}^+} \neq 0$.
+
+
+
+
+
+
 
 
 \section{Bondi Gauge}
@@ -239,7 +248,7 @@ The fall-off conditions for $g_{ur}$ and $g_{uA}$ are slightly more subtle. It t
 Write \begin{equation}
 g_{AB} = r^2 q_{AB} + r C_{AB} + \mc{O}(1).
 \end{equation}
-This can be thought of as the induced metric on the 2-surface of fixed $(u,r)$; as noted just above, this form corresponds to the most general possible way that $g_{AB}$ can approach $g_{AB}^{\mbox{\tiny{MB}}}$ with polynomially subleading correction. We call the leading correction $C_{AB}$ the \textit{shear} and note that it is independent of $r$ by construction. This tensor is constrained by our luminosity distance gauge condition \eqref{luminositydistance}, which forces \begin{equation}
+This can be thought of as the induced metric on the 2-surface of fixed $(u,r)$; as noted just above, this form corresponds to the most general possible way that $g_{AB}$ can approach $g_{AB}^{\mbox{\tiny{MB}}}$ with polynomially subleading corrections. We call the leading correction $C_{AB}$ the \textit{shear} and note that it is independent of $r$ by construction. This tensor is constrained by our luminosity distance gauge condition \eqref{luminositydistance}, which forces \begin{equation}
 \begin{aligned}
 0 & = \D_r \det \LP \frac{g_{AB}}{r^2} \RP \\
 & = \D_r \det \LP q_{AB} + \frac{C_{AB}}{r} + \mc{O}\LP \frac{1}{r^2} \RP \RP \\
@@ -249,12 +258,41 @@ This can be thought of as the induced metric on the 2-surface of fixed $(u,r)$; 
 Since $q_{AB}$ is independent of $r$, the leading-order constraint is the trace-free condition \begin{equation}
 q_{AB} C^{AB} = 0
 \end{equation}
-which we can justify calling of as a trace if we think of $C_{AB}$ as a tensor field over the unit 2-sphere $(S^2, q_{AB})$. Being real + symmetric + trace-free, $C_{AB}$ has exactly 2 independent components, corresponding physically to the two independent polarizations of gravitational waves. Indeed, one can show\footnote{TODO} that the fall-off we have chosen here is exactly the sweet spot which allows for gravitational radiation but forces the total energy flux out through a fixed-$(u,r)$ sphere to be finite. \\
+which we can justify thinking of as a trace if we think of $C_{AB}$ as a tensor field over the unit 2-sphere $(S^2, q_{AB})$. Being real + symmetric + trace-free, $C_{AB}$ has exactly 2 independent components, corresponding physically to the two independent polarizations of gravitational waves. Indeed, one can show\footnote{TODO} that the fall-off we have chosen here is exactly the sweet spot which allows for gravitational radiation but forces the total energy flux out through a fixed-$(u,r)$ sphere to be finite. \\
 \\
 \
-We denote by $N_{AB}$ the Bondi news \begin{equation}
-N_{AB} \equiv \D_u C_{AB}.
+Let's do this in more detail and out to higher order.  We write \begin{equation}
+g_{AB} = r^2 q_{AB} + r C_{AB} + D_{AB} + r^{-1} E_{AB} + \mc{O} \LP \frac{1}{r^2} \RP.
 \end{equation}
+In all of the following, we raise and lower transverse indices with the leading metric $q$, and just in the next block we move to index-free matrix notation. Our areal distance condition says the following quantity must be independent of $r$. \begin{equation}
+\begin{aligned}
+\det \LP \frac{g}{r^2} \RP & = \det \LP q + r^{-1} C + r^{-2} D + r^{-3} E + \mc{O} \LP r^{-4} \RP \RP \\
+& = \det (q) \det \LP 1 + r^{-1} q^{-1} C + r^{-2} q^{-1} D + r^{-3} q^{-1} E + \mc{O} \LP r^{-4} \RP \RP \\
+& = \det(q) \exp \mbox{Tr} \log \LP 1 + r^{-1} q^{-1} C + r^{-2} q^{-1} D + r^{-3} q^{-1} E + \mc{O} \LP r^{-4} \RP \RP \\
+& = \det (q) \exp \mbox{Tr} \Bigg[ r^{-1} q^{-1} C + r^{-2} q^{-1} D + r^{-3} q^{-1} E \\
+& \quad - \frac{1}{2} \LP r^{-1} q^{-1} C + r^{-2} q^{-1} D + r^{-3} q^{-1} E \RP ^2 \\
+& \quad + \frac{1}{3} \LP r^{-1} q^{-1} C + r^{-2} q^{-1} D + r^{-3} q^{-1} E \RP^3 + \mc{O} \LP r^{-4} \RP \Bigg] \\
+& = \det(q) \exp \mbox{Tr} \Bigg[ r^{-1} q^{-1} C + r^{-2} \LP q^{-1} D - \frac{1}{2} q^{-1} C q^{-1} C \RP \\
+& \quad + r^{-3} \LP q^{-1} E - \frac{1}{2} \LP q^{-1} C q^{-1} D + q^{-1} D q^{-1} C \RP + \frac{1}{3} (q^{-1} C)^3 \RP + \mc{O} \LP r^{-4} \RP \Bigg].
+\end{aligned}
+\end{equation}
+At leading order, $r$-independence gives variously \begin{equation}
+0 = \mbox{Tr} \LP q^{-1} C \RP = q^{AB} C_{AB} = C^A_{ \ A}.
+\end{equation}
+At first subleading order we find \begin{equation}
+0 = D^A_{ \ A} - \frac{1}{2} C^{AB}C_{AB}.
+\end{equation}
+At SSL order we find \begin{equation}
+0 = E^A_{ \ A} - C^{AB}D_{AB} + \frac{1}{3} C^A_{ \ B} C^B_{ \ C} C^C_{ \ A}.
+\end{equation}
+In fact, for a mixed-rank $2 \times 2$ matrix $C$ we have \begin{equation}
+\mbox{Tr}(C) = 0 \implies \mbox{Tr} \LP C^3 \RP = 0
+\end{equation}
+so at SSL order we have slightly more simply \begin{equation}
+0 = E^A_{ \ A} - C^{AB}D_{AB}.
+\end{equation}
+
+
 
 
 \subsection{Other Fall-Off Rates}
@@ -298,6 +336,8 @@ So in a vacuum region, any intrinsic measurement of curvature (\textit{e.g.}, ti
 \\
 \
 In addition to certain prescribed fall-offs, a more restrictive and common definition of asymptotic flatness comes from requiring that the Weyl tensor vanish near $\mathcal{I}^+$.
+
+
 
 \bibliography{bibfile}
 \bibliographystyle{utphys}
