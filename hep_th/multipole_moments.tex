@@ -377,7 +377,6 @@ where the black-boxed coefficients $\#$  are dressed with appropriate indices an
 
 
 \section{Multipole Moments as Conformal Killing Tensors}
-
 We take our space $V$ to be the complement in $\R^3$ of some smooth, solid region which is topologically a solid ball, which we think of as the subtracted-off support of the source charge density. Topologically, $V$ is then $S^2 \times \R$. Let $\varphi$ be any harmonic function on $V$. Write the metric on $V$ as $h_{ab}$, and let $\xi = \xi^a \D_a$ be a conformal Killing vector \begin{equation}
 \nabla_{(a} \xi_{b)} = \frac{1}{3} h_{ab} \nabla^m \xi_m
 \end{equation}
@@ -412,7 +411,7 @@ the result can be thought of as a symmetric $s$-tensor over $\mc{C}$, with actio
 Q^{(s)}[\xi_1, \ldots, \xi_s] = Q^{(s)}_{\alpha_1 \cdots \alpha_s} \xi_1^{\alpha_1} \cdots \xi_s^{\alpha_s} \equiv Q_{\alpha_1 \cdots \alpha_s} \xi_1^{\alpha_1} \cdots \xi_s^{\alpha_s} \in \R
 \end{equation}
 where the presence of $s$ indices lets us drop the superscript $(s)$ without fear of ambiguity. The corresponding intrinsic object is the totally symmetric rank-$s$ covariant tensor \begin{equation}
-Q_{\alpha_1 \cdots \alpha_s} (\varepsilon*)^{\alpha_1} \cdots (\varepsilon*)^{\alpha_s} \in \bigotimes^s_{\mbox{\tiny{sym}}} \mc{C}^*
+Q_{\alpha_1 \cdots \alpha_s} (\varepsilon*)^{\alpha_1} \cdots (\varepsilon*)^{\alpha_s} \in \bigotimes^s_{\mbox{\tiny{sym}}} \mc{C}^* 
 \end{equation}
 A major goal of this exposition is to explain how these $Q$'s relate to the usual symmetric tensors which characterize the multipole expansion of $\varphi$. \cite{Geroch:1970cc} claims that the former totally characterizes the latter, which from all of our earlier work is immensely plausible.\\
 \\
@@ -420,7 +419,7 @@ A major goal of this exposition is to explain how these $Q$'s relate to the usua
 The CKVs are richer than just a vector space, as they form a Lie algebra under vector field commutation. In any basis, we have associated structure constants \begin{equation}
 ([\xi, \xi'])^\mu = C^\mu_{\alpha \beta} \xi^\alpha {\xi'}^\beta
 \end{equation}
-from which we can built the usual Killing form \begin{equation}
+from which we can built the usual Killing form \begin{equation}\label{killingform}
 G_{\alpha \beta} \equiv - C^\mu _{\ \nu \alpha} C^\nu _{ \ \mu \beta}.
 \end{equation}
 A concrete calculation using the known structure of the CKVs of $\R^3$ show that this symmetric quadratic form is non-singular, with signature $(+,+,+,+,+,+,-,-,-,-)$. We write the corresponding inverse metric with components $G^{\alpha \beta}$. With this we can raise the $\mc{C}$-indices to product a totally symmetric rank-$s$ contravariant tensor \begin{equation}
@@ -438,5 +437,124 @@ Q^{a_1 \cdots a_s}(x) = \sum_{i = 1}^D \xi_i^{a_1} (x) \cdots \xi_i^{a_s} (x).
 \end{equation}
 
 
+
+
+
+\section{Conformal Killing Tensors and Trace Subtraction}
+Per \cite{Geroch:1970cc} appendix A, a conformal Kiling vector $P = P^a \D_a$ may be defined as a vector field such that, for any null geodesic with affine tangent vector $\ell = \ell^a \D_a$, $\ell_a P^a$ is constant along the geodesic. Why is that consistent with other definitions? An null geodesic affinely parametrized as $x(\lambda)$ has affine tangent vector \begin{equation}
+\ell^a = \frac{dx^a}{d \lambda}
+\end{equation}
+and the geodesic condition is variously \begin{equation}
+0 = \frac{D}{d \lambda} \frac{dx^a}{d \lambda} = \ell^b \nabla_b \ell^a = \LP \nabla_\ell \ell \RP^a.
+\end{equation}
+$\ell_a P^a = \langle \ell, P \rangle = g(\ell, P)$ is then constant along the curve iff \begin{equation}
+\begin{aligned}
+0 & = \nabla_\ell g(\ell, P) = \ell^a \nabla_a (\ell_b P^b) = \ell^a \LP P^b \nabla_a \ell_b + \ell^b \nabla_a P_b \RP.
+\end{aligned}
+\end{equation}
+Still not clear, but in our space of interest we have no null vectors anyway! In this case, \cite{Geroch:1970cc} says we simply take a conformal Killing tensor to be any tensor $P^{a_1 \cdots a_s}$ such that \begin{equation}
+\nabla^{(m} P^{a_1 \cdots a_s)} = h^{(m a_1} T^{a_2 \cdots a_s)}
+\end{equation}
+for some $T$. Does this agree with our definition of a CKV? At $s = 1$ it reduces to \begin{equation}
+\nabla^{(m} P^{a)} = h^{ma} T
+\end{equation}
+for $T$ some scalar, which we can solve for by taking the trace \begin{equation}
+T = \frac{1}{3} h_{ab} \nabla^{(a} P^{b)} = \frac{1}{3} h_{ab} \nabla^a P^b = \frac{1}{3} \nabla_a P^a
+\end{equation}
+So this is equivalent to the CKV definition \begin{equation}
+\nabla_{(a} P_{b)} = \frac{1}{3} h_{ab} \nabla_c P^c.
+\end{equation}
+What about $s = 2$? There we have \begin{equation}
+\nabla^{(m} P^{a b)} = h^{(ma} T^{b)}
+\end{equation}
+Can we think of this in terms of being killed by trace subtraction? Given a totally symmetric tensor $A$, the trace \begin{equation}
+t_a \equiv h^{bc} A_{abc}
+\end{equation}
+is independent of the pair of indices we choose to contract. Naively trace-subtracting $A$ gives \begin{equation}
+{A'}^{abc} = A^{abc} - \frac{1}{n} h^{ab} t^c
+\end{equation}
+which is trace-free only necessarily in $ab$. \begin{equation}
+g_{ab} {A'}^{abc}  = h_{ab} A^{abc} - \frac{1}{n} h^{ab} h_{ab} t_c = t_c - t_c = 0.
+\end{equation}
+The fix is to symmetrize in the subtracted-off term \begin{equation}
+A_{TF}^{abc} = A^{abc} - \# h^{(ab} t^{c)}
+\end{equation}
+where $\#$ is a coefficient TBD. We can fix it by demanding that the RHS has the desired vanishing trace. \begin{equation}
+\begin{aligned}
+h_{ab} A^{abc}  & = \# h_{ab} h^{(ab} t^{c)} \\
+\implies t^c & = \frac{\#}{3} h_{ab} \LP h^{ab} t^c + h^{ac} t^b + h^{bc} t^a \RP \\
+& = \frac{\#}{3} \LP n t^c + t^c + t^c \RP \\
+\implies \# & = \frac{3}{n + 2}
+\end{aligned}
+\end{equation}
+so bonafide trace-subtracted tensor is \begin{equation}
+A_{TF}^{abc} = A^{abc} -\frac{3}{n+2} h^{(ab} t^{c)} = A^{abc} - \frac{h^{ab} t^c + h^{ac} t^b + h^{bc} t^a}{n+2}.
+\end{equation}
+So we see that, in $s = 2$ and by identical logic for higher ranks, \cite{Geroch:1970cc}'s definition is indeed a pure-trace property. More generally, our trace term looks like \begin{equation}
+t_{a_3 \cdots a_s} \equiv h^{a_1 a_2} A_{a_1 a_2 \cdots a_s},
+\end{equation}
+our symmetric trace-subtracted tensor should be \begin{equation}
+A_{\mbox{\tiny{TF}}}^{a_1 \cdots a_s} \stackrel{?}{=} A^{a_1 \cdots a_s} - \# h^{(a_1 a_2} t^{a_3 \cdots a_s)},
+\end{equation}
+and the coefficient is found (after carefully enumerating the distinct types of contractions resulting from pairing up $h$ against the symmetrized product $ht$) as \begin{equation}
+\begin{aligned}
+t^{a_3 \cdots a_s} & = h_{ab} A^{ab a_3 \cdots a_s} \\
+& = \# h_{ab} h^{(a b} t^{a_3 \cdots a_s)} \\
+& = \# h_{ab} \frac{2! (s-2)! h^{ab} t^{a_3 \cdots a_s} +  2! 2(s-2)(s-2)! h^{b( a_3} t^{(a_4 a_5 \cdots a_s) a} + (s-2)(s-3) (s-2)!h^{(a_3 a_4} t^{a_5 \cdots a_s) a b}}{s!} \\
+& = \# h_{ab} \frac{2 h^{ab} t^{a_3 \cdots a_s} +  4(s-2) h^{b (a_3} t^{a_4 a_5 \cdots a_s) a} + (s-2)(s-3) h^{(a_3 a_4} t^{a_5 \cdots a_s) a b}}{s(s-1)} \\
+& = \# \frac{2 n t^{a_3 \cdots a_s} +  4 (s-2) t^{a_3 a_4 a_5 \cdots a_s} + (s-2)(s-3) h_{ab}  h^{(a_3 a_4} t^{a_5 \cdots a_s) a b} }{s(s-1)}.
+\end{aligned}
+\end{equation}
+This is slightly funny! It's not clear what to do with this last term, which isn't obviously proportionate to $t^{a_3 \cdots a_s}$, but rather to the metric times a second-traced object, and which only appears for $s \geq 4$. There is nothing wrong in our calculation, rather our trace-subtraction method was too naive for $s = 4$, roughly because the trace itself can have a nonzero trace. Said in a different order, for $s \geq 4$ we find that our hoped trace-free difference has trace \begin{equation}
+\begin{aligned}
+& h_{ab} \LP A^{a b a_3 \cdots a_s} - \# h^{(ab} t^{a_3 \cdots a_s)} \RP \\
+& = t^{a_3 \cdots a_s} - \# \frac{2 n t^{a_3 \cdots a_s} +  4 (s-2) t^{a_3 a_4 a_5 \cdots a_s} + (s-2)(s-3) h_{ab}  h^{(a_3 a_4} t^{a_5 \cdots a_s) a b} }{s(s-1)} \\
+& = t^{a_3 \cdots a_s} - \# \frac{2 n  +  4 s - 8}{s(s-1)}t^{a_3 a_4 a_5 \cdots a_s}  - \# \frac{h_{ab}  h^{(a_3 a_4} t^{a_5 \cdots a_s) a b} }{s(s-1)}.
+\end{aligned}
+\end{equation}
+So no choice of $\#$ actually gives a trace-free result. For $s = 4$ exactly, it suffices to add just one secondary-trace term into our ansatz \begin{equation}
+A_{\mbox{\tiny{TF}}}^{a b c d} \stackrel{?}{=} A^{abcd} - \alpha h^{(ab} t^{cd)} - \beta h^{(ab} h^{cd)} t'
+\end{equation}
+where $t'$ is the second-trace \begin{equation}
+t' \equiv h_{ab} t^{ab} = h_{ab} h_{cd} A^{abcd}.
+\end{equation}
+Demanding that the trace of this quantity give zero gives the condition \begin{equation}
+\begin{aligned}
+t^{cd} & = h_{ab} A^{abcd} \\
+& = \alpha h_{ab} h^{(ab} t^{cd)} + \beta h_{ab} h^{(ab} h^{cd)} t' \\
+& = \alpha h_{ab} \frac{4 h^{ab} t^{cd} + 16 h^{ac} t^{bd} + 4h^{cd} t^{ab}}{4!} + \beta h_{ab} \frac{8 h^{ab} h^{cd} + 16 h^{ac} h^{bd}}{4!} t' \\
+& = \alpha \frac{n t^{cd} + 4 t^{cd} + h^{cd} t'}{3!} + \beta \frac{n h^{cd} + 2 h^{cd}}{3} t' \\
+& = \alpha \frac{n+4}{6} t^{cd} + \LP \frac{\alpha}{3!} + \frac{\beta(n + 2)}{3} \RP t'
+\end{aligned}
+\end{equation}
+from which we read off the solution \begin{equation}
+\alpha = \frac{6}{n+4}, \quad \beta = - \frac{\alpha}{2n + 4} = - \frac{3}{(n+2)(n+4)}.
+\end{equation}
+At $s = 4$ our trace-subtracted object is therefore \begin{equation}
+A^{abcd}_{\mbox{\tiny{TF}}} = A^{abcd} - \frac{6}{n+4} h^{(ab} t^{cd)} + \frac{3}{(n+2)(n+4)} h^{(ab} h^{cd)} t'.
+\end{equation}
+If we repeat the above story in a slightly different order, we find that we can still think of \cite{Geroch:1970cc}'s condition as saying that a tensor if a CKV iff its symmetric derivative is trace-free. For a general-spin symmetric tensor, the trace-subtracted version is \begin{equation}
+A^{a_1 \cdots a_s}_{\mbox{\tiny{TF}}} = A^{a_1 \cdots a_s} + \# h^{(a_1 a_2} \LP \mbox{Tr} A \RP^{a_3 \cdots a_s)} + \# h^{(a_1 a_2} h^{a_3 a_4} \LP \mbox{Tr}^2 A \RP^{a_5 \cdots a_s)} + \cdots
+\end{equation}
+for $\#$ coefficients depending only on $n$ and $s$, which we don't need for our argument and so will black-box. In terms of the (notable symmetric and associated operation) $\cap$ used by \cite{Geroch:1970cc}, this is \begin{equation}
+A_{\mbox{\tiny{TF}}} = A + \# h \cap  \mbox{Tr} A + \# h \cap h \cap \mbox{Tr}^2 A + \cdots
+\end{equation}
+In fact all of the correction terms on the RHS are unique. More precisely, given any totally symmetric $A$ of rank $s$, there exists a unique totally symmetric $U$ of rank $s - 2$ such that \begin{equation}
+A^{a_1 \cdots a_s} = A^{a_1 \cdots a_s}_{\mbox{\tiny{TF}}} + h^{(a_1 a_2} U^{a_3 \cdots a_s)}.
+\end{equation}
+or equivalently \begin{equation}
+A = A_{\mbox{\tiny{TF}}} + h \cap U.
+\end{equation}
+Uniqueness of $U$ given $A$ immediately implies $A_{\mbox{\tiny{TF}}}$ is likewise unique. To say that $A$ is pure-trace, therefore, is to say that its trace-free part vanishes, or equivalently that $A$ has the form \begin{equation}
+A \mbox{ ``pure trace"} \implies A = 0 + h \cap U.
+\end{equation}
+But this is exactly \cite{Geroch:1970cc}'s condition on the symmetric derivative \begin{equation}
+\nabla^{(m} P^{a b \cdots c)} = h^{(ma} T^{b \cdots c)}
+\end{equation}
+for some totally symmetric $T$.
+
+
+\bibliography{bibfile}
+\bibliographystyle{utphys}
 
 \end{document}
