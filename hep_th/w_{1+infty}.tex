@@ -1,0 +1,109 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+\usepackage{amssymb}
+
+\sectionfont{\fontsize{12}{12}\selectfont}
+\subsectionfont{\fontsize{12}{12}\selectfont}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\D}{\partial}
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \middle| #2 \right\rangle}
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+
+\title{Gravitation $w_{1 + \infty}$ Symmetry}
+
+\author{Mathew Calkins}
+
+\date{\today}
+
+ 
+\maketitle
+
+\abstract{Extremely rough notes on gravitation $w_{1 + \infty}$ symmetry. Maybe these will turn into something coherent, maybe not!}
+
+\tableofcontents
+
+
+
+
+\section{$w_{1 + \infty}$ and the Celestial Sphere}
+Scratch notes following \cite{Strominger:2021mtt}.
+
+
+\subsection{Gravity}
+Denote by $G^+_\Delta(z, \bar{z})$ the celestial dual to a positive-helicity\footnote{TODO: Comment on choice to restrict to positive-helicity sector.} bulk graviton. The authors of \cite{Guevara:2021abz} find by analyzing bulk collinear limits that two such operators have OPE \begin{equation}\label{gravitonOPE}
+G_{\Delta_1}^+ (z_1, \bar{z}_1) G_{\Delta_2}^+ (z_2, \bar{z}_2) = - \frac{\kappa}{2} \frac{1}{z_{12}} \sum_{n =0 }^\infty B(\Delta_1 - 1 + n, \Delta_2 - 1) \frac{\bar{z}_{12}^{n+1}}{n!} \bar{\D}^n G^+_{\Delta_1 + \Delta_2} (z_2, \bar{z}_2) + \mc{O}\LP z_{12}^0 \RP.
+\end{equation}
+Here $B$ is the Beta function \begin{equation}
+B(x,y) = \frac{\Gamma(x) \Gamma(y)}{\Gamma(x+y)}
+\end{equation}
+holomorphic poles\footnote{TODO: Comment more on this choice.}. These operators have conformal spin $s = +2$ and scaling weights $\Delta$, hence conformal weights \begin{equation}
+\LP h, \bar{h} \RP = \LP \frac{\Delta + s}{2}, \frac{\Delta - s}{2} \RP = \LP \frac{\Delta}{2} + 1, \frac{\Delta}{2} - 1 \RP.
+\end{equation}
+These operators are, by definition, the result of Mellin-transformating a bulk scattering amplitude of gravitons, necessarily in an asymptotically flat spacetime, to produce a boundary correlation function. \begin{equation}
+\langle G_\Delta^\pm(z, \bar{z}) \cdots \rangle \equiv \int_0^\infty \frac{d \omega}{\omega} \omega^\Delta \cdots \mc{A} \LP \omega \hat{p}(z, \bar{z}),  \cdots \RP.
+\end{equation}
+From the well-known property of Mellin transformations \begin{equation}
+\int_0^\infty \frac{d \omega}{\omega} \omega^\Delta \LP \lim_{\omega \to 0} \omega f(w) \RP = \lim_{\Delta \to 1} (\Delta - 1) \int_0^\infty \frac{d \omega}{\omega} \omega^\Delta \omega f(w)
+\end{equation}
+we see that a bulk amplitude involving a soft graviton \begin{equation}
+\lim_{\omega \to 0} \omega \mc{A} \LP \omega \hat{p}(z, \bar{z}),  \cdots \RP
+\end{equation}
+corresponds on the boundary to taking the limit \begin{equation}
+\lim_{\Delta \to 1} (\Delta - 1) G_\Delta^+(z, \bar{z}).
+\end{equation}
+This nicely agrees with \eqref{gravitonOPE}, which we see has an order-one pole at $\Delta_i = 1$, rendering this limit finite. In fact we see it has a tower of order-one poles at $\Delta_i = 1, 0, -1, \ldots$. We therefore define more generally \begin{equation}
+H^k(z, \bar{z}) \equiv \lim_{\varepsilon \to 0} \varepsilon G_{k + \varepsilon}^+(z, \bar{z}), \ k \in \Z.
+\end{equation}
+We will shortly find that these live in a shortened representation, so that only a subset of $k$ values give a nonzero result.\\
+\\
+\
+These objects turn out to generate an interesting algebra. We first expand in the antiholomorphic coordinate \begin{equation}
+H^k(z, \bar{z}) = \sum_n \frac{H_n^k(z)}{\bar{z}^{n + \frac{k-2}{2}}}
+\end{equation}
+where the shift in the powers of $\bar{z}$ is required by $H^k$ having a nonzero antiholomorphic conformal weight. Again, we will find that the relevant values of $n$ are limited. We now interpret the objects $H_n^k(z)$ as holomorphic currents on the boundary. 
+
+
+\bibliography{bibfile}
+\bibliographystyle{utphys}
+
+\end{document}
+
+
