@@ -1,0 +1,169 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+
+\sectionfont{\fontsize{12}{12}\selectfont}
+\subsectionfont{\fontsize{12}{12}\selectfont}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\partial}
+
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+
+\title{Notes on Soft Gluons}
+
+\author{Mathew Calkins}
+
+\date{\today}
+
+ 
+\maketitle
+
+\abstract{Some notes on soft gluons}
+
+
+
+\section{Positive-Helicity Gluons}
+Following \cite{Guevara:2021abz}, we start with the all-positive-helicity celestial gluon OPE \begin{equation}\label{allplusgluonope}
+O_{\Delta_1}^{a,+}(z_1, \bar{z}_1) O_{\Delta_2}^{b,+}(z_2, \bar{z}_2) \sim \frac{-i f^{ab}_{ \ \ c}}{z_{12}} B(\Delta_1 - 1, \Delta_2 - 1) O_{\Delta_1 + \Delta_2 - 1}^{c,+}(z_2, \bar{z}_2) 
+\end{equation}
+where $\sim$ means we are working modulo regular and descendant terms. The latter are fixed by special conformal symmetry \cite{Himwich:2021dau}, and we have more strongly \begin{equation}
+O_{\Delta_1}^{a,+}(z_1, \bar{z}_1) O_{\Delta_1}^{b,+}(z_2, \bar{z}_2) = \sum_{m=0}^\infty \frac{-i f^{ab}_{ \ \ c}}{z_{12}} \frac{\bar{z}_{12}^m}{m!} B(\Delta_1 - 1 + m , \Delta_2 - 1) \bar{\D}^m O_{\Delta_1 + \Delta_2 - 1}^{c,+}(z_2, \bar{z}_2) + \mbox{reg}(z_{12}, \bar{z}_{12}). 
+\end{equation} 
+At the cost of breaking manifest $\mbox{Vir}_L \otimes \mbox{Vir}_R$ symmetry down to manifest $\mbox{Vir}_L \otimes SL(2,\R)_R$ symmetry, we mode-expand our operators as \begin{equation}
+O^{a,+}_k(z, \bar{z}) = \sum_{n \in \Z} \frac{O^{a,+}_{k,n}(z)}{\bar{z}^{n + \frac{k-1}{2}}}
+\end{equation}
+where the rational structure is forced by these operators having weights \begin{equation}
+\LP h, \overline{h} \RP = \LP \frac{\Delta + 1}{2}, \frac{\Delta - 1}{2} \RP.
+\end{equation}
+We then define the conformally soft modes to be the limits of these operators as the conformal weight approaches integer values. Here we must appropriately regularized to compensate for the simple poles \begin{equation}
+\mbox{Res}(\Gamma, -n) = \frac{(-1)^n}{n!} \mbox{ for } n = 0, 1, 2, \cdots 
+\end{equation}
+or equivalently \begin{equation}
+\Gamma(-n + \epsilon) = \frac{(-1)^n}{n! \epsilon} + \mbox{reg}(\epsilon)
+\end{equation}
+for $n \in \N$. So the natural definition for these modes is \begin{equation}
+R_{k,n}^a(z) := \lim_{\epsilon \to 0} \epsilon O^{a,+}_{k + \epsilon, n}(z).
+\end{equation}
+We can see from our original OPE that this limit vanishes (or more specifically, has purely regular OPE against positive-helicity gluons)\footnote{If we expand to a larger algebra of operators, such as mixed-helicity gluons or even the tree-level Einstein-Yang-Mills, will some of the operators effectively become newly nonzero? Certainly as we consider different interaction vertices with different values of $p$ the condition $k \in 1 - \N$ could increment or decrement.}  unless $k \in 1 - \N$. It turns out that the same notion of vanishing forces \begin{equation}
+\frac{k-1}{2} \leq n \leq \frac{1-k}{2}.
+\end{equation}
+To show this, we can explicitly compute the relevant OPE and show it vanishes for $k$ outside of this range. Afterwards we will reinterpret this fact in more representation-theoretic language. 
+
+\subsection{$OR$ OPE}
+We begin with the integral representation \begin{equation}
+O^{a,+}_k(z, \bar{z}) = \sum_{n \in \Z} \frac{O^{a,+}_{k,n}(z)}{\bar{z}^{n + \frac{k-1}{2}}} \implies O^{a,+}_{k,n}(z) = \oint \frac{d \bar{z}}{2 \pi i} \bar{z}^{n + \frac{k-3}{2} } O^{a,+}_k(z, \bar{z})
+\end{equation}
+and plug this into our full OPE to to find \begin{equation}
+\begin{aligned}
+R^a_{k,n} (z_1) O^{b,+}_{\Delta_2} (z_2, \bar{z}_2) & = \lim_{\epsilon \to 0} \epsilon O^{a,+}_{k + \epsilon} (z_1) O^{b,+}_{\Delta_2} (z_2, \bar{z}_2) \\
+& = \lim_{\epsilon \to 0} \epsilon \oint \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k + \epsilon - 3}{2} } O^{a,+}_{k + \epsilon} (z_1, \bar{z}_1)  O^{b,+}_{\Delta_2} (z_2, \bar{z}_2) \\
+% & =  \lim_{\epsilon \to 0} \epsilon \oint \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k + \epsilon - 3}{2} } \LP - i f^{ab}_{ \ \ c} \sum_{m=0}^\infty \frac{B(k + \epsilon - 1 + m, \Delta_2 - 1)}{m!} \frac{\bar{z}_{12}^m}{z_{12}} \bar{\D}^m O^{c,+}_{k + \epsilon + \Delta_2 - 1}(z_2, \bar{z}_2) \RP \\
+& =  \frac{- i f^{ab}_{ \ \ c}}{z_{12}} \sum_{m=0}^\infty \frac{1}{m!} \lim_{\epsilon \to 0} \epsilon B(k + \epsilon - 1 + m, \Delta_2 - 1)  \LP \bar{\D}^m O^{c,+}_{k + \epsilon + \Delta_2 - 1}(z_2, \bar{z}_2)\RP  \oint \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k + \epsilon - 3}{2} } \bar{z}_{12}^m
+\end{aligned}
+\end{equation}
+This last contour \begin{equation}
+\begin{aligned}
+\oint \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k + \epsilon - 3}{2} } \bar{z}_{12}^m & = \sum_{\ell = 0}^m \begin{pmatrix} m \\ \ell \end{pmatrix} (- \bar{z}_2)^{m - \ell}  \oint \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k + \epsilon - 3}{2} } \bar{z}_1^\ell \\
+%& = \sum_{\ell = 0}^m \begin{pmatrix} m \\ \ell \end{pmatrix} (- \bar{z}_2)^{m - \ell} \delta_{n + \frac{k + \epsilon - 3}{2} + \ell = -1}
+\end{aligned}
+\end{equation}
+gives a nonzero result exactly when \begin{equation}
+n + \frac{k + \epsilon - 3}{2} + \ell = -1
+\end{equation}
+for some $\ell$ ranging from $0$ to $m$. But this appears in a sum over all $m \in \N$, so we get a nonzero result only at most $k,n$ satisfy \begin{equation}
+n + \frac{k + \epsilon - 1}{2} \leq 0 \xmapsto{\epsilon \to 0} n \leq \frac{1-k}{2}
+\end{equation}
+so we have recovered half of our claimed bound on $n$. Plugging in the result of our contour integral gives \begin{equation}
+\begin{aligned}
+& R^a_{k,n} (z_1) O^{b,+}_{\Delta_2} (z_2, \bar{z}_2) \\
+%& = \frac{- i f^{ab}_{ \ \ c}}{z_{12}} \sum_{m=0}^\infty \frac{1}{m!} \lim_{\epsilon \to 0} \epsilon B(k + \epsilon - 1 + m, \Delta_2 - 1)  \LP \bar{\D}^m O^{c,+}_{k + \epsilon + \Delta_2 - 1}(z_2, \bar{z}_2)\RP  \oint \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k + \epsilon - 3}{2} } \bar{z}_{12}^m \\
+%& = \frac{- i f^{ab}_{ \ \ c}}{z_{12}} \sum_{m=0}^\infty \frac{1}{m!} \lim_{\epsilon \to 0} \epsilon B(k + \epsilon - 1 + m, \Delta_2 - 1)  \LP \bar{\D}^m O^{c,+}_{k + \epsilon + \Delta_2 - 1}(z_2, \bar{z}_2)\RP  \sum_{\ell = 0}^m \begin{pmatrix} m \\ \ell \end{pmatrix} (- \bar{z}_2)^{m - \ell} \delta_{n + \frac{k + \epsilon - 3}{2} + \ell = -1} \\
+& = \frac{- i f^{ab}_{ \ \ c}}{z_{12}} \sum_{m=0}^\infty \sum_{\ell = 0}^m \frac{(- \bar{z}_2)^{m - \ell}}{\ell! (m-\ell)!} \lim_{\epsilon \to 0} \delta_{n + \frac{k + \epsilon - 1}{2} + \ell = 0} \epsilon B(k + \epsilon - 1 + m, \Delta_2 - 1) \bar{\D}^m O^{c,+}_{k + \epsilon + \Delta_2 - 1}(z_2, \bar{z}_2).
+\end{aligned}
+\end{equation}
+Assuming the limit $\epsilon \to 0$ of $O^{c,+}_{k + \epsilon + \Delta_2 - 1}$ is nonsingular\footnote{This is true for general $\Delta_2 \in \C$, but by the present calculation it fails for a discrete set of values, so in multiparticle calculations this limit will be more involved.}, only the simple pole from the beta function contributes to the overall $\epsilon$ limit, and we have slightly more simply \begin{equation}
+\begin{aligned}
+& R^a_{k,n} (z_1) O^{b,+}_{\Delta_2} (z_2, \bar{z}_2) \\
+% & = \frac{- i f^{ab}_{ \ \ c}}{z_{12}} \sum_{m=0}^\infty \sum_{\ell = 0}^m \frac{(- \bar{z}_2)^{m - \ell}}{\ell! (m-\ell)!} \delta_{n + \frac{k- 1}{2} + \ell = 0} \bar{\D}^m O^{c,+}_{k + \Delta_2 - 1}(z_2, \bar{z}_2) \lim_{\epsilon \to 0}  \epsilon B(k + \epsilon - 1 + m, \Delta_2 - 1) \\
+& = \frac{- i f^{ab}_{ \ \ c}}{z_{12}} \sum_{m=0}^\infty \sum_{\ell = 0}^m \frac{(- \bar{z}_2)^{m - \ell}}{\ell! (m-\ell)!} \delta_{n + \frac{k- 1}{2} + \ell = 0} \bar{\D}^m O^{c,+}_{k + \Delta_2 - 1}(z_2, \bar{z}_2) \lim_{\epsilon \to 0}  \epsilon \frac{\Gamma(k + \epsilon - 1 + m) \Gamma(\Delta_2 - 1)}{\Gamma( k + \epsilon + m + \Delta_2 - 2)} 
+\end{aligned}
+\end{equation}
+Again appealing to genericity\footnote{Again note that this can't be assumed as simply for the analogous multiparticle calculation.} of $\Delta_2 \in \C$, only the first term in the denominator contributes to our limit, and we have \begin{equation}
+\begin{aligned}
+& R^a_{k,n} (z_1) O^{b,+}_{\Delta_2} (z_2, \bar{z}_2) \\
+& = \frac{- i f^{ab}_{ \ \ c}}{z_{12}} \sum_{m=0}^\infty \sum_{\ell = 0}^m \frac{(- \bar{z}_2)^{m - \ell}}{\ell! (m-\ell)!} \frac{\Gamma(\Delta_2 - 1)}{\Gamma( k + m + \Delta_2 - 2)} \delta_{n + \frac{k- 1}{2} + \ell = 0} \bar{\D}^m O^{c,+}_{k + \Delta_2 - 1}(z_2, \bar{z}_2) \lim_{\epsilon \to 0} \epsilon \Gamma(k + \epsilon - 1 + m) \\
+& = \frac{- i f^{ab}_{ \ \ c}}{z_{12}} \sum_{m=0}^\infty \sum_{\ell = 0}^m \frac{(- \bar{z}_2)^{m - \ell}}{\ell! (m-\ell)!} \frac{\Gamma(\Delta_2 - 1)}{\Gamma( k + m + \Delta_2 - 2)} \delta_{n + \frac{k- 1}{2} + \ell = 0} \bar{\D}^m O^{c,+}_{k + \Delta_2 - 1}(z_2, \bar{z}_2) \lim_{\epsilon \to 0} \epsilon \Gamma(k + \epsilon - 1 + m) 
+\end{aligned}
+\end{equation}
+From the last term we see that we get a nonzero result only necessarily when $m \leq 1 - k $. But this effectively truncates our descendant sum as \begin{equation}
+\begin{aligned}
+& R^a_{k,n} (z_1) O^{b,+}_{\Delta_2} (z_2, \bar{z}_2) \\
+& = \frac{- i f^{ab}_{ \ \ c}}{z_{12}} \sum_{m=0}^{1-k} \sum_{\ell = 0}^m \frac{(- \bar{z}_2)^{m - \ell}}{\ell! (m-\ell)!} \frac{\Gamma(\Delta_2 - 1)}{\Gamma( k + m + \Delta_2 - 2)} \delta_{n + \frac{k- 1}{2} + \ell = 0} \bar{\D}^m O^{c,+}_{k + \Delta_2 - 1}(z_2, \bar{z}_2) \lim_{\epsilon \to 0} \epsilon \Gamma(k + \epsilon - 1 + m) 
+\end{aligned}
+\end{equation}
+and implies in particular $\ell \leq 1 -k$. So within our sum and on the support of our Kronecker delta we have 
+\begin{equation}
+1 - k \geq \ell = -n - \frac{k-1}{2} \implies  n \geq \frac{k - 1}{2} 
+\end{equation}
+and we have the second half of our bound.\\
+\\
+\
+We could finish this calculation, but beyond proving these bounds on $n$ the real prize is the RR OPE, so we move on.
+
+\subsection{$RR$ OPE}
+Now we compute the OPE where both particles are conformally soft. Plugging in the definitions above\footnote{And ignoring the regular part of the associated OPE, which is an assumption we should carefully revisit} \begin{equation}
+\begin{aligned}
+& R^a_{k_1,n_1} (z_1) R^b_{k_2,n_2} (z_2) \\
+& = \LP \lim_{\epsilon_1 \to 0} \epsilon_1 \oint \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k_1 + \epsilon_1 - 3}{2} } O^{a,+}_{k_1 + \epsilon_1} (z_1, \bar{z}_1) \RP \LP \lim_{\epsilon_2 \to 0} \epsilon_2 \oint \frac{d \bar{z}_2}{2 \pi i} \bar{z}_2^{n + \frac{k_2 + \epsilon_2 - 3}{2} } O^{b,+}_{k_2 + \epsilon_2} (z_2, \bar{z}_2) \RP \\
+& = \lim_{\epsilon_1, \epsilon_2 \to 0} \epsilon_1 \epsilon_2 \oint \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k_1 + \epsilon_1 - 3}{2} } \oint \frac{d \bar{z}_2}{2 \pi i} \bar{z}_2^{n + \frac{k_2 + \epsilon_2 - 3}{2} }  O^{a,+}_{k_1 + \epsilon_1} (z_1, \bar{z}_1)  O^{b,+}_{k_2 + \epsilon_2} (z_2, \bar{z}_2) \\
+& = \lim_{\epsilon_1, \epsilon_2 \to 0} \epsilon_1 \epsilon_2 \oint \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k_1 + \epsilon_1 - 3}{2} } \oint \frac{d \bar{z}_2}{2 \pi i} \bar{z}_2^{n + \frac{k_2 + \epsilon_2 - 3}{2} }  \LP \sum_{m=0}^\infty \frac{-i f^{ab}_{ \ \ c}}{z_{12}} \frac{\bar{z}_{12}^m}{m!} B(k_1 + \epsilon_1 - 1 + m , k_2 + \epsilon_2 - 1) \bar{\D}^m O_{k_1 + \epsilon_1 + k_2 + \epsilon_2 - 1}^{c,+}(z_2, \bar{z}_2) \RP \\
+& = \sum_{m=0}^\infty \frac{-i f^{ab}_{ \ \ c}}{z_{12}} \lim_{\epsilon_1, \epsilon_2 \to 0} \epsilon_1 \epsilon_2 \frac{B(k_1 + \epsilon_1 - 1 + m , k_2 + \epsilon_2 - 1)}{m!} \oint \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k_1 + \epsilon_1 - 3}{2} } \oint \frac{d \bar{z}_2}{2 \pi i} \bar{z}_2^{n + \frac{k_2 + \epsilon_2 - 3}{2} } \bar{z}_{12}^m  \bar{\D}^m O_{k_1 + \epsilon_1 + k_2 + \epsilon_2 - 1}^{c,+}(z_2, \bar{z}_2).
+\end{aligned}
+\end{equation}
+We expect the double limit to be subtle.\\
+\\
+\
+We can evaluate in integral w.r.t. $\bar{z}_2$ as 
+
+
+
+
+
+
+
+
+\bibliography{bibfile}
+\bibliographystyle{utphys}
+
+\end{document}
