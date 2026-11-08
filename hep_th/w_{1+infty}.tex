@@ -62,12 +62,51 @@
 
 
 
+\section{BMS Invariance of Gravitational Scattering}
+
+\subsection{The Phase Space of Interest}
+Any 3+1-dimensional spacetime can be locally put into Bondi gauge \begin{equation}
+ds^2 = - U du^2 - 2 e^{2 \beta} du dr + g_{AB} (dx^A - U^A du )(dx^B - U^B du)
+\end{equation}
+subject to the areal distance condition \begin{equation}
+\D_r \det \LP \frac{g_{AB}}{r^2} \RP = 0.
+\end{equation}
+An asymptotically flat spacetime can, near future null infinity, be more strongly put into coordinates such that \begin{equation}\label{futureafmetric}
+\begin{aligned}
+ds^2 & = - du^2 - 2 du dr + 2 r^2 \gamma_{z \bar{z}} dz d \bar{z} \\
+& \quad + \frac{2m_B}{r} du^2 + r C_{zz} dz^2 + r C_{\bar{z} \bar{z}} d \bar{z}^2 - 2 U_z du dz - 2 U_{\bar{z}} du d \bar{z} + \cdots.
+\end{aligned}
+\end{equation}
+If we rewrite the tranverse / angular coordinates $(z, \bar{z})$ as $(x^A)$, we have equivalently  \begin{equation}
+\begin{aligned}
+ds^2 & = \LP - 1 + \frac{ 2m_B(u, z, \bar{z})}{r} + \mc{O} \LP \frac{1}{r^2} \RP \RP du^2 - 2 \LP 1 + \mc{O} \LP \frac{1}{r^2} \RP \RP du dr \\
+& \quad + \LP r^2 q_{AB}(u, x) + r C_{AB}(u, x) + \mc{O} (1) \RP dx^A dx^B \\
+& \quad -2 \LP U_z(u, z, \bar{z}) + \mc{O} \LP \frac{1}{r} \RP \RP du dz + \mbox{c.c.}
+\end{aligned}
+\end{equation}
+Here $q_{AB}$ is the leading-order transverse metric \begin{equation}
+2 r^2 \gamma_{z \bar{z}} dz d \bar{z} = q_{AB} dx^A dx^B
+\end{equation}
+and the areal distance condition forces the shear $C_{AB}$ to be traceless w.r.t. this metric\footnote{Plus an infinite tower of additional conditions at subleading order in $r$} \begin{equation}
+q_{AB} C^{AB} = 0 
+\end{equation}
+which is exactly why we have no $C_{z \bar{z}}$ terms. Observe that this is very nearly the statement that the components of the metric are the flat-space Bondi components plus the most general polynomial decay; the only strengthenings are the traceless shear condition coming from the areal distance gauge choice, plus the slightly strong fall-off on $g_{ur}$ which turns out to come from insting on finite energy flux\footnote{Is this the right observable?} through future null infinity $\mc{I}^+$. In fact we will need to make further restrictions, namely \begin{equation}
+U_z = - \frac{1}{2} D^z C_{zz}
+\end{equation}
+and the conjugated equation. These come from insisting that the Weyl tensor decay sufficiently quickly near $\mc{I}^+$, which is necessary for a conformal compactification. In fact this condition give a tower of additional constraints at further subleading order in $r$, but we won't need to examine those for this work.\\
+\\
+\
+The above discussion has a few subtle quantifiers, so we phrase our phase space of interest carefully. First, we assume we have some reasonable formal definition of future null infinity $\mc{I}^+$, which should roughly be ``where null rays eventually end up, if they don't hit a singularity or get trapped first." We assume that $\mc{I}^+ \simeq S^2 \times \R$, as is the case for flat Minkowski. A spacetime is then asymptotically flat if there exist Bondi-gauge coordinates $(u,r,z, \bar{z})$ near $\mc{I}^+$ such that the the metric falls off as described above\footnote{Plus further constraints at subleading orders which, again, we won't need here.}, plus a corresponding set of coordinates near past null infinity $\mc{I}^-$ with the analogous properties. Our phase space is exactly the set of asymptotically flat spacetimes in 3+1 dimensions. 
+
+
+
+
 
 \section{$w_{1 + \infty}$ and the Celestial Sphere}
 Scratch notes following \cite{Strominger:2021mtt}.
 
 
-\subsection{Gravity}
+\subsection{Conformally Soft Gravitons}
 Denote by $G^+_\Delta(z, \bar{z})$ the celestial dual to a positive-helicity\footnote{TODO: Comment on choice to restrict to positive-helicity sector.} bulk graviton. The authors of \cite{Guevara:2021abz} find by analyzing bulk collinear limits that two such operators have OPE \begin{equation}\label{gravitonOPE}
 G_{\Delta_1}^+ (z_1, \bar{z}_1) G_{\Delta_2}^+ (z_2, \bar{z}_2) = - \frac{\kappa}{2} \frac{1}{z_{12}} \sum_{n =0 }^\infty B(\Delta_1 - 1 + n, \Delta_2 - 1) \frac{\bar{z}_{12}^{n+1}}{n!} \bar{\D}^n G^+_{\Delta_1 + \Delta_2} (z_2, \bar{z}_2) + \mc{O}\LP z_{12}^0 \RP.
 \end{equation}
@@ -98,8 +137,29 @@ We will shortly find that these live in a shortened representation, so that only
 These objects turn out to generate an interesting algebra. We first expand in the antiholomorphic coordinate \begin{equation}
 H^k(z, \bar{z}) = \sum_n \frac{H_n^k(z)}{\bar{z}^{n + \frac{k-2}{2}}}
 \end{equation}
-where the shift in the powers of $\bar{z}$ is required by $H^k$ having a nonzero antiholomorphic conformal weight. Again, we will find that the relevant values of $n$ are limited. We now interpret the objects $H_n^k(z)$ as holomorphic currents on the boundary. 
+where the shift in the powers of $\bar{z}$ is required by $H^k$ having a nonzero antiholomorphic conformal weight. Again, we will find that the relevant values of $n$ are limited. We now interpret the objects $H_n^k(z)$ as holomorphic currents on the boundary. It will be illustrative to note the equivalent integral representation \begin{equation}
+H_n^k(z) = \oint_0 \frac{d \bar{z}}{2 \pi i} \bar{z}^{n + \frac{k}{2} - 2} H^k(z, \bar{z}).
+\end{equation}
 
+
+\subsection{Shortened Representations}
+To understand how these currents work, we compute their OPEs against celestial gravitons. Using the results of the last section, we find \begin{equation}
+\begin{aligned}
+H^k_n(z_1) G_\Delta^+(z_2, \bar{z}_2) & = \oint_0 \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k}{2} - 2} H^k(z_1, \bar{z}_1) G_\Delta^+(z_2, \bar{z}_2) \\
+& = \lim_{\varepsilon \to 0} \varepsilon \oint_0 \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k}{2} - 2} G_{k + \varepsilon}^+(z_1, \bar{z}_1) G_\Delta^+(z_2, \bar{z}_2) \\
+& = \lim_{\varepsilon \to 0} \varepsilon \oint_0 \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k}{2} - 2} \LP  - \frac{\kappa}{2} \frac{1}{z_{12}} \sum_{n =0 }^\infty B(k + \epsilon - 1 + n, \Delta - 1) \frac{\bar{z}_{12}^{n+1}}{n!} \bar{\D}^n G^+_{k + \epsilon + \Delta} (z_2, \bar{z}_2) + \mc{O}\LP z_{12}^0 \RP \RP \\
+& = - \frac{\kappa}{2} \frac{1}{z_{12}} \lim_{\varepsilon \to 0} \varepsilon \sum_{n =0 }^\infty \frac{1}{n!} B(k + \epsilon - 1 + n, \Delta - 1) \bar{\D}^n G^+_{k + \epsilon + \Delta} (z_2, \bar{z}_2)  \oint_0 \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k}{2} - 2} \bar{z}_{12}^{n+1} + \mc{O} \LP z_{12}^0 \RP.
+\end{aligned}
+\end{equation}
+The innermost integral can be evaluated by binomial expansion as \begin{equation}
+\begin{aligned}
+\oint_0 \frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k}{2} - 2} (\bar{z}_1 - \bar{z}_2)^{n+1} & = \sum_{\ell = 0}^{n+1} \begin{pmatrix} n + 1 \\ \ell \end{pmatrix} (- \bar{z}_2)^{n + 1 - \ell} \oint_0 \underbrace{\frac{d \bar{z}_1}{2 \pi i} \bar{z}_1^{n + \frac{k}{2} - 2} \bar{z}_1^\ell}_{=\delta_{n + \ell + \frac{k}{2} - 2, 0}} \\
+& = \sum_{\ell = 0}^{n+1} \frac{(n+1)!}{\ell! (n + 1 - \ell)!} (- \bar{z}_2)^{n + 1 - \ell} \delta_{n + \ell + \frac{k}{2}, 2}.
+\end{aligned}
+\end{equation}
+For $k, n$ such that this is ever nonzero, the only contributing term in the sum is \begin{equation}
+\ell = 2 - n - \frac{k}{2} \implies \begin{pmatrix} n + 1 \\ \ell \end{pmatrix} = \frac{(n+1)!}{\LP 2 - n - \frac{k}{2} \RP! \LP 2n + \frac{k}{2} - 1\RP}
+\end{equation}
 
 \bibliography{bibfile}
 \bibliographystyle{utphys}
