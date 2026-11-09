@@ -99,7 +99,62 @@ and the conjugated equation. These come from insisting that the Weyl tensor deca
 The above discussion has a few subtle quantifiers, so we phrase our phase space of interest carefully. First, we assume we have some reasonable formal definition of future null infinity $\mc{I}^+$, which should roughly be ``where null rays eventually end up, if they don't hit a singularity or get trapped first." We assume that $\mc{I}^+ \simeq S^2 \times \R$, as is the case for flat Minkowski. A spacetime is then asymptotically flat if there exist Bondi-gauge coordinates $(u,r,z, \bar{z})$ near $\mc{I}^+$ such that the the metric falls off as described above\footnote{Plus further constraints at subleading orders which, again, we won't need here.}, plus a corresponding set of coordinates near past null infinity $\mc{I}^-$ with the analogous properties. Our phase space is exactly the set of asymptotically flat spacetimes in 3+1 dimensions. 
 
 
-
+\subsection{Supertranslations}
+We are interested in diffeomorphisms which preserve the form of the metric \eqref{futureafmetric}. As a side note, it is nearly universal in physics, when discussing a map in coordinates of the form $x \mapsto x'$, to fail to distinguish between a mere change of coordinates and a diffeomorphism. Even more unfortunately, it is common especially in classical literature to always speak of coordinate changes. This is wrong! A coordinate change is always a trivial thing to do, while a diffeomorphism moves points around in spacetime. Here we truly are goin to perform diffeomorphisms while maintaining a fixed coordinate system, so that $x'(x)$ means ``the coordinates of the image of the point which had coordinates $x$. This distinguish doesn't matter if we just want to shut up and calculate, but we do not.\\
+\\
+\
+Now as usual in physics, we simplify by studying infinitesimal diffeomorphisms, or equivalently pushforwards under vector fields $\xi = \xi^a \D_a$ w.r.t. whose components we linearize. For now we want $\xi$ to have at most $\mc{O}(1)$ norm near $\mc{I}^+$ (we want these fields to generalize translations; soon we will relax this condition to get a generalization of rotations and boosts). So we will require \begin{equation}
+\xi^u, \xi^r \in \mc{O}(1), \quad \xi^z, \xi^{\bar{z}} \in \mc{O} \LP \frac{1}{r} \RP
+\end{equation}
+or more explicitly \begin{equation}
+\begin{aligned}
+\xi^u(u,r,z,\bar{z}) & = \sum_{n=0}^\infty \frac{\xi^{r(n)}(u, z, \bar{z})}{r^n}, & \xi^r(u,r,z,\bar{z}) & = \sum_{n=0}^\infty \frac{\xi^{u(n)}(u, z, \bar{z})}{r^n}, \\
+\xi^z(u,r,z,\bar{z}) & = \sum_{n=1}^\infty \frac{\xi^{z(n)}(u, z, \bar{z})}{r^n}, & \xi^{\bar{z}} (u,r,z,\bar{z}) & = \sum_{n=1}^\infty \frac{\xi^{\bar{z}(n)}(u, z, \bar{z})}{r^n}
+\end{aligned}
+\end{equation}
+In general, the variation of the metric (or any other same-rank tensor) under an infinitesimal diffeomorphism $V$ is given by \begin{equation}
+\delta_V g_{ab} = \mc{L}_V g_{ab} = V^c \D_c g_{ab} + g_{ac} \D_b V^c + g_{bc} \D_a V^c.
+\end{equation}
+For a metric of the form considered here, we have for example \begin{equation}
+\begin{aligned}
+\delta_\xi g_{uu} & = \xi^c \D_c g_{uu} + 2 g_{uc} \D_u \xi^c \\
+& = \LP \xi^r \D_r + \xi^u \D_u + \xi^z \D_z + \xi^{\bar{z}} \D_{\bar{z}} \RP g_{uu} \\
+& \quad + 2 g_{uu} \D_u \xi^u + 2 g_{ur} \D_u \xi^r + 2 g_{uz} \D_u \xi^z + 2 g_{u \bar{z}} \D_u \xi^{\bar{z}} \\
+& = 2 g_{uu} \D_u \xi^u + 2 g_{ur} \D_u \xi^r + \mc{O} \LP \frac{1}{r} \RP \\
+& = - 2 \D_u \xi^u + - 2 \D_u \xi^r + \mc{O} \LP \frac{1}{r} \RP.
+\end{aligned}
+\end{equation}
+Here we have assumed the pre-variation metric $g_{ab}$ has the form considered above. Similarly, \begin{equation}
+\begin{aligned}
+\delta_\xi g_{uz} & = \xi^c \D_c g_{uz} + g_{uc} \D_z \xi^c + g_{zc} \D_u \xi^c \\
+& = \xi^u \D_u g_{uz} + g_{uu} \D_z \xi^u + g_{ur} \D_z \xi^r + g_{zu} \D_u \xi^u + \mc{O} \LP \frac{1}{r} \RP \\
+& = - \xi^u \D_u U_z - \D_z \xi^u - \D_z \xi^r - U_z \D_u \xi^u + \mc{O} \LP \frac{1}{r} \RP
+\end{aligned}
+\end{equation}
+Further similar calculations give \begin{equation}
+\begin{aligned}
+\mc{L}_\xi g_{ur} & = - \D_u \xi^u + \mc{O} \LP \frac{1}{r} \RP, \\
+\mc{L}_\xi g_{zr} & = r^2 \gamma_{z \bar{z}} \D_r \xi^{\bar{z}} - \D_z \xi^u + \mc{O} \LP \frac{1}{r} \RP, \\
+\mc{L}_\xi g_{z \bar{z}} & = r \gamma_{z \bar{z}} \left[ 2 \xi^r + r D_z \xi^z + r D_{\bar{z}} \xi^{\bar{z}} \right] + \mc{O}(1).
+\end{aligned}
+\end{equation}
+Less interestingly, \begin{equation}
+\begin{aligned}
+\delta_\xi g_{rr} & = \mc{O} \LP \frac{1}{r} \RP.
+\end{aligned}
+\end{equation}
+We want to determine which vector fields $\xi$ respect the fall-offs and the Bondi gauge conditions. For example, maintaining the condition \begin{equation}
+g_{ur} = -1 + \mc{O} \LP \frac{1}{r} \RP
+\end{equation}
+forces \begin{equation}
+- \D_u \xi^u = \mc{O} \LP \frac{1}{r} \RP 
+\end{equation}
+hence \begin{equation}
+\xi^u(u, r, z, \bar{z}) = f(z, \bar{z}) + \mc{O} \LP \frac{1}{r} \RP
+\end{equation}
+for some function $f$ on $S^2$. Applying the result of the conditions (and carefully tracking Christofells in manipulating the sphere-covariant derivatives $D_z, D_{\bar{z}}$) gives us the general solution \begin{equation}
+\xi = \xi^a \D_a = f \xi_u - \frac{1}{r} \LP D^z f \D_z + D^{\bar{z}} f \D_{\bar{z}} \RP + D^z D_z f \D_r + \mbox{(componentwise-subleading terms)}
+\end{equation}
 
 
 \section{$w_{1 + \infty}$ and the Celestial Sphere}
