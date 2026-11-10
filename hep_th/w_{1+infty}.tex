@@ -155,6 +155,55 @@ hence \begin{equation}
 for some function $f$ on $S^2$. Applying the result of the conditions (and carefully tracking Christofells in manipulating the sphere-covariant derivatives $D_z, D_{\bar{z}}$) gives us the general solution \begin{equation}
 \xi = \xi^a \D_a = f \xi_u - \frac{1}{r} \LP D^z f \D_z + D^{\bar{z}} f \D_{\bar{z}} \RP + D^z D_z f \D_r + \mbox{(componentwise-subleading terms)}
 \end{equation}
+We can convince ourselves that this moves us between genuinely distinguishable physical states using the language of scattering. For example, suppose we have a scattering process with two outgoing massless states (photons, for simplicity) which hit $\mc{I}^+$ simultaneously at $u = 0$ but at different angles $(z_i, \bar{z}_i)_{i=1,2}$. Then supertranslating everything around under any $f$ with $f(z_1, \bar{z}_1) \neq f(z_2, \bar{z}_2)$ gives a new history where the null states exit non-simultaneously.\\
+\\
+\
+Under such a variation, the Bondi data changes as \begin{equation}
+\begin{aligned}
+\delta_f N_{zz} & = f \D_u N_{zz}, \\
+\delta_f m_B & = f \D_u m_b + \frac{1}{4} \left[ N^{zz} D_z^2 f + 2 D_z N^{zz} D_z f + \mbox{c.c.} \right], \\
+\delta_f C_{zz} & = f \D_u C_{zz} - 2 D_z^2 f.
+\end{aligned}
+\end{equation}
+To gain some more intuition for how these work, we suppose our initial spacetime is flat Minkowski space, with $m_b = N_{zz} = C_{zz} = 0$. We have not yet performed a canonical analysis, but in whatever formalization you like this should be thought of as a vacuum state of (semi)classical gravity. In this case we have \begin{equation}
+\begin{aligned}
+\delta_f N_{zz} & = 0, \\
+\delta_f m_B & = 0, \\
+\delta_f C_{zz} & = 2 D_z^2 f.
+\end{aligned}
+\end{equation}
+In fact, it turns out that vanishing of Riemann curvature forces \begin{equation}
+C_{zz} = - 2 D_z^2 C
+\end{equation}
+for some scalar field $C$ on $\mc{I}^+$, so we have more neatly \begin{equation}
+\delta C = f.
+\end{equation}
+There are nice words we can put around this: supertranslation is a physical symmetry taking us from one vacuum to another physically distinguishable one, and $C$ is the Goldstone boson associated with this degeneracy. Observe that $C$ is only defined modulo shifts \begin{equation}
+C \simeq C + \mbox{Ker}(D_z^2)
+\end{equation}
+But this kernel contains the $\ell = 0, 1$ modes on $S^2$, which are exactly the $f$'s corresponding to rigid bulk translation. So we see that bulk rigid translations does not shift $C$. Should we think of these, too, as large gauge transformations? Or are they only large for $\ell \geq 2$?
+
+
+\subsection{Abstract Comments}
+Now some more abstract comments. First, any vector field $\xi$ of the form just discussed may be call a supertranslation, but really we are interested in the bona fide physical symmetries that take us between physically distinguishable states. By this criterion, any two such vector fields $\xi, \xi'$ with the same $f$ but which disagree at lower order in $r$ are the same up to a small gauge transformation; typically when we refer to a ``supertranslation" we really mean such an equivalence class, or equivalently the induced physical symmetry. The supertranslations (or really, the finite transformations induced by exponentiating the vector fields $\xi$) form an abelian group isomorphic to $C^\infty(S^2)$ under addition. \begin{equation}
+(\mbox{supertranslations}) \simeq C^\infty(S^2).
+\end{equation} 
+If we drop the requirement that $|\xi|^2 \in \mc{O}(1)$, we get a larger group that now includes \textit{superrotations}, and we call the whole thing BMS$_+$. Recall that the Poincar\'{e} group has the semidirect product structure \begin{equation}
+\mbox{(Poincar\'{e})} \simeq SO(3,1) \rtimes \R^4
+\end{equation}
+where by $\R^4$ we mean the additive group of rigid translations. Given an abstract group isomorphic to Poincar\'{e}, we can uniquely identify the $\R^4$ as the maximal abelian subgroup; this is taken to itself under conjugation by a Lorentz transformation, so there is no ambiguity (physically, any two observers will agree on which transformations are translations). On the other hand, there are many non-canonically-isomorphic copies of $SO(3,1)$, related by conjugation. Equivalently, two observers will agree on which transformations are in $SO(3,1)$ iff they agree on the spacetime origin $p$, as their copy is exactly the group $SO(3,1)_p$ of Poincar\'{e} transformations fixing $p$.\\
+\\
+\
+Something similar happens here. BMS$_+$ transformations (that is, BMS transformations performed near $\mc{I}^+$) have the same semidirect product structure, except that the abelian group of translations has been enlarged to include all supertranslations. \begin{equation}
+\mbox{BMS}_+ = (\mbox{Lorentz}) \rtimes (\mbox{supertranslations}) \simeq SO(3,1) \rtimes C^\infty(S^2).
+\end{equation}
+As before, we can uniquely identify the supertranslation subgroup, but there are many distinct subgroups isomorphic to $SO(3,1)$ and no observer-independent way of picking out a canonical one.
+
+
+
+
+
+\section{Soft Graviton Currents}
 
 
 \section{$w_{1 + \infty}$ and the Celestial Sphere}
