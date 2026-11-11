@@ -162,9 +162,15 @@ Under such a variation, the Bondi data changes as \begin{equation}
 \begin{aligned}
 \delta_f N_{zz} & = f \D_u N_{zz}, \\
 \delta_f m_B & = f \D_u m_b + \frac{1}{4} \left[ N^{zz} D_z^2 f + 2 D_z N^{zz} D_z f + \mbox{c.c.} \right], \\
-\delta_f C_{zz} & = f \D_u C_{zz} - 2 D_z^2 f.
+\delta_f C_{zz} & = f \D_u C_{zz} - 2 D_z^2 f
 \end{aligned}
 \end{equation}
+where we have also induced the Bondi news \begin{equation}
+N_{AB} \equiv \D_u C_{AB}
+\end{equation}
+which encodes gravitational waves.\\
+\\
+\
 To gain some more intuition for how these work, we suppose our initial spacetime is flat Minkowski space, with $m_b = N_{zz} = C_{zz} = 0$. We have not yet performed a canonical analysis, but in whatever formalization you like this should be thought of as a vacuum state of (semi)classical gravity. In this case we have \begin{equation}
 \begin{aligned}
 \delta_f N_{zz} & = 0, \\
@@ -200,10 +206,30 @@ Something similar happens here. BMS$_+$ transformations (that is, BMS transforma
 As before, we can uniquely identify the supertranslation subgroup, but there are many distinct subgroups isomorphic to $SO(3,1)$ and no observer-independent way of picking out a canonical one.
 
 
+\subsection{Cauchy Data}
+At leading order, our solution is characterized by $C_{zz}, N_{zz}, m_B$ and their complex conjugates, all of which are maps from $\mc{I}^+ \simeq S^2 \times \R$. These are not all independent, of course. For one, we have by definition \begin{equation}
+N_{zz}(u, z, \bar{z}) = \D_u C_{zz} (u, z, \bar{z}).
+\end{equation}
+It turns out that $N_{zz}$ can be any function, constrained at most to decay fast enough at $u \to \pm \infty$ if we want our solution to corresponding to a scattering process with finite-energy incoming and outgoing states. In fact, the two real degrees of freedom living in the symmetric + traceless tensor $N_{AB}$ correspond exactly to the two polarizations of outgoing gravitational radiation. So we take the function $N_{zz}(u, z, \bar{z})$ as our first independent piece of Cauchy data. \\
+\\
+\
+Given $N_{zz}$, $C_{zz}$ is determined  up to an integration constant which we freely take to live at $\mc{I}^+_-$, the asymptotic past of $\mc{I}^-$. We have already argued that vanishing curvature forces $C_{zz}$ to be exact in the sense that \begin{equation}
+C_{zz} = - 2 D_z^2 C
+\end{equation}
+so the only Cauchy data living in $C_{zz}$ not already present in $N_zz$ is the scalar $C(z, \bar{z})|_{\mc{I}^+_-}$. Finally, the Bondi mass $m_B(u, z, \bar{z})$ turns out to be almost completely constrained by the Einstein equations. In particular, the $uu$ component of the Einstein equations can be expanding in powers of $r$, yielding at leading order\footnote{This is reasonably notation; the object is exactly the density outgoing flux of energy through $\mc{I}^+$ per solid angle and per retarded time.} \begin{equation}
+\D_u m_B = \frac{1}{4} \left[ D_z^2 N^{zz} + D_{\bar{z}}^2 N^{\bar{z} \bar{z}} \right] - \tau_{uu}, \quad \tau_{uu} \equiv \frac{1}{4} N_{zz} N^{zz} + 4 \pi G \lim_{r \to \infty} \left[ r^2 T_{uu} ^M \right].
+\end{equation} 
+So given $N_{zz}$, its conjugate, and a known distribution of matter, $m_B$ is determined up to an integration constant which we again take WLOG to be the values at $u = - \infty$. In short, we have \begin{equation}
+(\mbox{leading Cauchy data}) = \left\{ N_{zz}(u, z, \bar{z}), C(z, \bar{z})|_{\mc{I}^+_-}, m_B(z, \bar{z})|_{\mc{I}^+_-} \right\}.
+\end{equation}
+If we go to subleading order we get an infinite tower of further independent data, even after solving for the constraints implies by the Einstein equations. This is treated systematically by \cite{Barnich:2010eb} and more recently by \cite{Geiller:2024bgf}.
 
 
 
-\section{Soft Graviton Currents}
+
+
+
+
 
 
 \section{$w_{1 + \infty}$ and the Celestial Sphere}
