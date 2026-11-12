@@ -228,7 +228,17 @@ If we go to subleading order we get an infinite tower of further independent dat
 
 
 
-
+\subsection{Scattering and Matching Conditions}
+All of the above analysis near $\mc{I}^+$ holds just as well near $\mc{I}^-$. Naively, it might seem that we could apply a BMS$_+$ transformation, and a simultaneous independent BMS$_-$ transformation, and this would take us from one symmetry to another (generally physically distinct) solution. But this cannot be right. For one, \cite{Strominger:2017zoo} notes that the gravitational scattering problem would be ill-posed, even if expressed in terms of purely small-gauge-invariant objects. More bluntly, in pure gravity the total outgoing flux of energy can be expressed as \begin{equation}
+E_{\mbox{\tiny{out}}} \propto \int_{\mc{I}^+ } du d^2 z \gamma_{z \bar{z}} N_{zz} N^{zz}
+\end{equation}
+which changes under a generic supertranslation. If independent pairs of transformation in BMS$_+ \times$ BMS$_-$ were symmetries, we could transform solutions that respect energy conservation to solutions that don't. It must be that applying a BMS$_+$ transformation is only a symmetry if we simultaneously apply a compensating BMS$_-$ transformation, or equivalently that the physical symmetries are some diagonal subgroup of BMS$_+ \times$ BMS$_-$; equivalently, it must be that choosing a BMS frame near one of $\mc{I}^+\pm$ fixes the other.\\
+\\
+\
+In flat Minkowski space, we have the rule that $(z, \bar{z})$ in advanced and retarded coordinates refer to antipodally related points; in all popular treatments of gravity waves / perturbative gravity / weak-field gravity this is what is quietly done anyway by working in a fixed Minkowski background. \cite{Strominger:2013jfa} argues that this choice is equivalent to demanding \begin{equation}
+C(z, \bar{z})|_{\mc{I}^+_-} = C(z, \bar{z})|_{\mc{I}^-_+}, \quad m_B(z, \bar{z})|_{\mc{I}^+_-} = m_B(z, \bar{z})|_{\mc{I}^-_+}
+\end{equation}
+and that this is likely the only Lorentz- and CPT-invariant choice.
 
 
 
