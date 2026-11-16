@@ -242,6 +242,42 @@ and that this is likely the only Lorentz- and CPT-invariant choice.
 
 
 
+
+
+`\section{Charges, Currents, and Holography}
+
+\subsection{Conserved Charges}
+\cite{Strominger:2017zoo} claims that the charge generating supertranslations is \begin{equation}
+Q_f^\pm = \frac{1}{4 \pi G} \int_{\mc{I}^\pm_\mp} d^2 z \gamma_{z \bar{z}} f m_B
+\end{equation}
+so that our matching conditions imply conservation law \begin{equation}
+Q_f^+ = Q_f^-
+\end{equation}
+and that this all follows ``closely the gauge theory discussion." Need to review this. The treatment in \cite{Strominger:2013jfa} ignores the IR modes, which is annoying. Anyway, the canonical analysis gives those charges. Using the same leading-$uu$ constraint as before, we can rewrite \begin{equation}
+\begin{aligned}
+Q_f^+ & = \frac{1}{4 \pi G} \int_{\mc{I}^+} du d^2 z \gamma_{z \bar{z}} f \left[ \tau_{uu} - \frac{1}{4} \LP D_z^2 N^{zz} + D_{\bar{z}}^2 N^{\bar{z} \bar{z}} \RP \right], \\
+Q_f^- & = \frac{1}{4 \pi G} \int_{\mc{I}^-} dv d^2 z \gamma_{z \bar{z}} f \left[ \tau_{vv} - \frac{1}{4} \LP D_z^2 N^{zz} + D_{\bar{z}}^2 N^{\bar{z} \bar{z}} \RP \right].
+\end{aligned}
+\end{equation}
+Asserting equality for arbitrary $f$ is the same as asserting equality for \begin{equation}
+f(z, \bar{z}) = \delta^{(2)}(z - w, \bar{z} - \bar{w})
+\end{equation}
+for arbitrary $(w, \bar{w})$, so we localize $f$ to find \begin{equation}
+\begin{aligned}
+\frac{1}{4 \pi G} \int_{\mc{I}^+} du \gamma_{z \bar{z}} \left[ \tau_{uu} - \frac{1}{4} \LP D_z^2 N^{zz} + D_{\bar{z}}^2 N^{\bar{z} \bar{z}} \RP \right] = \frac{1}{4 \pi G} \int_{\mc{I}^-} d^2 z \gamma_{z \bar{z}} \left[ \tau_{vv} - \frac{1}{4} \LP D_z^2 N^{zz} + D_{\bar{z}}^2 N^{\bar{z} \bar{z}} \RP \right].
+\end{aligned}
+\end{equation}
+This is a very surprising result! It looks almost like conservation of energy (recall that $\tau$ gives the density of energy flux through $\mc{I}^\pm$), but instead of asserting that some quantity integrated over all of $\mc{I}^+$ agrees with a corresponding quantity over $\mc{I}^-$, we are equating two fluxes just through some particular angle. Second, we have an extra term between $\tau$ on each side. So here we must be more precise: $\tau$ captures the energy flux due to radiation and matter, but there are extra deep-IR contributions to energy flux missed by that accounting, namely those associated with 0-modes of gravitational radiation. This last equality says that energy is conserved in scattering of gravitational radiation and matter, but only if we include the 0-modes. As long as we account for this, energy is not just globally conserved, but conserved at every angle. \cite{Strominger:2013jfa} puts it very nicely: \\
+\\
+\
+\textit{This conservation law relies crucially on the linear soft-graviton contribution to the unintegrated Bondi energy $m_B(z, \bar{z})$. The soft graviton contribution is a total derivative on the sphere and so does not contribute to the total integrated Bondi energy.}\\
+\\
+\
+So the idea is that totally energy across all of $S^2$ (equivalently, the integral above for constant $f$) is conserved no matter whether we include the soft contributions (whose contribution vanishes after integration), but we get stronger $S^2$-local conservation if we do our accounting more carefully.
+
+
+
+
 \section{$w_{1 + \infty}$ and the Celestial Sphere}
 Scratch notes following \cite{Strominger:2021mtt}.
 
