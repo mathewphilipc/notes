@@ -278,6 +278,78 @@ So the idea is that totally energy across all of $S^2$ (equivalently, the integr
 
 
 
+\subsection{Soft Gravitons}
+To massage our new conservation law into the form of a soft theorem, we revert to general $f$ and integrate by parts on the second term to find \begin{equation}
+\frac{1}{16 \pi G} \int_{\mc{I}^+} du d^2 z \gamma_{z \bar{z}} f \LP D_z^2 N^{zz} + D_{\bar{z}}^2 N^{\bar{z} \bar{z}} \RP = \lim_{\omega \to 0} \frac{1}{32 \pi G} \int_{\mc{I}^+} du d^2 z \gamma_{z \bar{z}} \LP e^{i \omega u} + e^{- i \omega u} \RP \LP D_z^2 f N^{zz} + D_{\bar{z}}^2 f  N^{\bar{z} \bar{z}} \RP.
+\end{equation}
+When we quantize, $N^{zz}, N^{\bar{z} \bar{z}}$ are exactly the modes which create and annihilate gravitons, and by restoring explicitly the factors of $e^{\pm i \omega u}$ we see that this operator in the quantum theory inserts zero-energy gravitons with metric polarization tensor $D_z^2 f$.\\
+\\
+\
+On the other hand, the integrals against $f \tau_{uu}$ and $f \tau_{vv}$ compute the total outgoing and incoming energy of hard excitations, weighted by $f \in C^\infty(S^2)$. We can therefore naturally reinterpret this symmetry in the language of scattering amplitudes. In that language, a conserved charge $Q$ generating a symmetry has the property \begin{equation}
+\BRA{\mbox{out}} [S, Q] \KET{\mbox{in}} = 0.
+\end{equation}
+Suppose our in state corresponds to a collection of particles with energies $E_k^{\mbox{\tiny{in}}}$, whose spatial momenta pierce the celestial sphere $S^2$ at points with coordinates $z_k^{\mbox{\tiny{in}}}$. \begin{equation}
+\KET{\mbox{in}} = \KET{E_1^{\mbox{\tiny{in}}}, z_1^{\mbox{\tiny{in}}}; E_2^{\mbox{\tiny{in}}}, z_2^{\mbox{\tiny{in}}}; \ldots }.
+\end{equation}
+Then our conserved charge $Q_f$'s first term inserts a soft graviton with polarization $D_z^2 f$ and the second computes the $f$-weighted incoming energy. \begin{equation}
+Q_f \KET{\mbox{in}} = \mc{O}_f \KET{\mbox{in}} + \sum_k E^{\mbox{\tiny{in}}}_k f(z^{\mbox{\tiny{in}}}_k) \KET{\mbox{in}}
+\end{equation}
+and our conservation law in $S$-matrix language becomes \begin{equation}
+\BRA{\mc{O}_f \mbox{ out}} S \KET{\mbox{in}} - \BRA{\mbox{out}} S \KET{\mc{O}_f \mbox{ in}} = \LP \sum_k E^{\mbox{\tiny{in}}}_k f(z^{\mbox{\tiny{in}}}_k) - \sum_k E^{\mbox{\tiny{out}}}_k f(z^{\mbox{\tiny{out}}}_k) \RP \BRA{\mbox{out}} S \KET{\mbox{in}}
+\end{equation}
+Finally, we take $f(w, \bar{w}) = (z - w)^{-1}$ to find \begin{equation}
+\BRA{\mbox{ out}} : P_z(z, \bar{z}) S: \KET{\mbox{in}} = \LP \sum_k \frac{E^{\mbox{\tiny{in}}}_k }{z - z^{\mbox{\tiny{in}}}_k} - \sum_k \frac{E^{\mbox{\tiny{out}}}_k}{z - z^{\mbox{\tiny{out}}}_k} \RP \BRA{\mbox{out}} S \KET{\mbox{in}}
+\end{equation}
+where $: \ :$ denotes time-ordering and $P_z$ is the current \begin{equation}
+\begin{aligned}
+P_z & = \frac{1}{16 \pi G} \int_{\mc{I}^+} du d^2 w \gamma_{w \bar{w}} \frac{1}{z - w} \LP D_w^2 N^{ww} + D_{\bar{w}}^2 N^{\bar{w} \bar{w}} \RP - \LP \mc{I}^- \mbox{ term} \RP \\
+& = \frac{1}{16 \pi G} \int_{\mc{I}^+} du d^2 w \gamma_{w \bar{w}} \frac{1}{z - w} \D_u \LP D_w^2  C^{ww} + D_{\bar{w}}^2  C^{\bar{w} \bar{w}} \RP - \LP \mc{I}^- \mbox{ term} \RP \\
+& = -\frac{1}{8 \pi G} \int_{\mc{I}^+} du d^2 w \gamma_{w \bar{w}} \frac{1}{z - w} \D_u \LP D_w  U^w + D_{\bar{w}}  U^{\bar{w}} \RP - \LP \mc{I}^- \mbox{ term} \RP \\
+& = -\frac{1}{8 \pi G} \int_{\mc{I}^+} du d^2 w \frac{1}{z - w} \D_u \LP \D_w  U_{\bar{w}} + \D_{\bar{w}}  U_w \RP - \LP \mc{I}^- \mbox{ term} \RP \\
+& = -\frac{1}{8 \pi G} \int_{\mc{I}^+} d^2 w \frac{1}{z - w} \left. \LP \D_w  U_{\bar{w}} + \D_{\bar{w}}  U_w \RP \right|_{\mc{I}^+_\pm} - \LP \mc{I}^- \mbox{ term} \RP
+\end{aligned}
+\end{equation}
+where in the last step we have used the identity \begin{equation}
+\begin{aligned}
+ D_w U^w & = \D_w U^w + \Gamma^w_{ \ w w} U^w \\
+ & = \D_w \LP \gamma^{-1} U_{\bar{w}} \RP + \LP \gamma^{-1} \D_w \gamma \RP \gamma^{-1} U_{\bar{w}} \\
+ & = \gamma^{-1} \D_w U_{\bar{w}} - \gamma^{-2} \LP \D_w \gamma \RP U_{\bar{w}} + \gamma^{-2} \LP \D_w \gamma \RP U_{\bar{w}} \\
+ & = \gamma^{-1} \D_w U_{\bar{w}} \\
+ \implies \gamma_{w \bar{w}} D_w U^w = \D_w U_{\bar{w}}.
+\end{aligned}
+\end{equation}
+Now we pull one more hopefully not-too-ad hoc condition out of the canonical analysis: the right boundary conditions for the shear $C_{zz} = - 2\D_z U_z$ turn out to be the vanishing curl condition at the endpoints \begin{equation}
+\begin{aligned}
+0 = \left[ \D_z U_{\bar{z}} - \D_{\bar{z}} U_z \right]_{\mc{I}^+_\pm} = -2 \left[ \D_z^2 C_{\bar{z} \bar{z}} - \D_{\bar{z}}^2 C_{zz} \right]_{\mc{I}^+_\pm}
+\end{aligned}
+\end{equation}
+and \begin{equation}
+N_{zz} |_{\mc{I}^+_\pm} = 0.
+\end{equation}
+If these words mean anything to you, this is equivalent to demanding that the Weyl tensor $\Psi_2$ have vanishing imaginary part at the given endpoint. In any case, our current becomes \begin{equation}
+\begin{aligned}
+P_z & = -\frac{1}{4 \pi G} \int_{\mc{I}^+} d^2 w \frac{1}{z - w} \left. \D_{\bar{w}}  U_w \right|_{\mc{I}^+_\pm} - \LP \mc{I}^- \mbox{ term} \RP \\
+& = - \frac{1}{2 G} \LP U_z | _{\mc{I}^+_\pm} - V_z |_{\mc{I}^-_\pm} \RP \\
+& = - \frac{1}{2 G} \LP \int_{-\infty}^{\infty} du \D_u U_z - \int_{-\infty}^{\infty} du \D_u V_z \RP
+\end{aligned}
+\end{equation}
+Just as we can expand a gauge field as $A_z$ near $mc{I}^\pm$ to get creation and annihilator operators for incoming our outgoing photons, $U_z, V_z$ insert and remove soft graviton. So $P_z$ is a soft annihilation operator, antisymmetrized in whether we insert incoming or outgoing. Meanwhile, if we parametrize null momenta as \begin{equation}
+q = \frac{1}{1 + z \bar{z}} \LP 1 + z \bar{z}, z + \bar{z}, -i (z - \bar{z}), 1 - z \bar{z} \RP
+\end{equation}
+and polarization vectors as \begin{equation}
+\varepsilon^+ = \frac{1}{\sqrt{2}} \LP \bar{z}, 1 -i, - \bar{z} \RP, \quad \varepsilon^- = \frac{1}{\sqrt{2}} \LP z, 1, i, -w \RP
+\end{equation}
+with polarization tensors given as the exterior product \begin{equation}
+\varepsilon^{\pm \mu \nu} = \varepsilon^{\pm \mu} \varepsilon^{\pm \nu}
+\end{equation}
+and let the algebra dust settle, then our expression above becomes exactly \begin{equation}
+\BRA{\mbox{ out}} : P_z(z, \bar{z}) S: \KET{\mbox{in}} = \LP \sum_k \frac{E^{\mbox{\tiny{in}}}_k }{z - z^{\mbox{\tiny{in}}}_k} - \sum_k \frac{E^{\mbox{\tiny{out}}}_k}{z - z^{\mbox{\tiny{out}}}_k} \RP \BRA{\mbox{out}} S \KET{\mbox{in}}
+\end{equation}
+
+
+
+
+
 \section{$w_{1 + \infty}$ and the Celestial Sphere}
 Scratch notes following \cite{Strominger:2021mtt}.
 
