@@ -164,6 +164,58 @@ For the particular problem of pure state estimation, even before we decide how t
 \end{equation}
 Just as there is a unique rotation-invariant measure on the sphere up to overall scaling, this symmetry uniquely fixed $d \psi$ to be the \textit{Haar measure} after we fix scaling by demanding that $d \psi$ be a probability measure.
 
+
+
+
+\section{Classical Compression}
+Suppose Alice has in hand a message of length $N$ consisting only of H's and T's, produced by repeatedly flipping a weighted coin which lands heads-up with probability $p$ and tails-up with probability $q = 1- p$. Alice wanted to send this message to Bob in some compressed way that doesn't actually require sending $N$ independent bits. This is possible if Alice and Bob both knows how this length-$N$ string was generate, in particular knows the value of $p$, as does Alice, and are willing to tolerate some small amount of error. We want to cook up a compression scheme. To evaluate such a scheme, we will only care about the per-message bits Alice must send Bob, ignoring any bits stored in writing down the compression and decompression dictionaries to begin with. This is sensible if, for example, Alice and Bob want to send a very large number of messages. We will also mostly only care about the large-$N$ performance. \\
+\\
+\
+More concretely, we are going to pick a fix $\varepsilon$ independent of $N$, and restrict our compression protocol to messages which are \textit{$\varepsilon$-typical}, in the sense that the fraction of heads is within $\varepsilon$ of $p$. The number of such strings is smaller than $2^N$, so as long as Alice and Bob agree to a dictionary ahead of times, she can communicate such a message to him using a number of bits equal to the base 2 log of the number of such messages; for atypical messages, the compression scheme will simply send an error message. The probability of a random such string of length $N$ being $\varepsilon$-typical in this sense is \begin{equation}
+\mbox{Prob} \LP \left| \frac{k}{n} - p \right| > \varepsilon \RP = \mc{O} \LP \frac{1}{N} \RP
+\end{equation}
+so at large $N$ the failure probability decays like $N^{-1}$. Not bad! This means that the fraction of random strings that our encoding scheme can handle goes to 1 as $N \to \infty$. The actual dictionary doesn't matter here; all that is left is to determine how many length-$N$ strings are $\varepsilon$-typical.
+
+
+
+
+The trick here is that, while in principle there are $2^N$ distinct length-$N$ messages, at large $N$ nearly all random messages will be such that the fraction of heads is nearly $p$; we call such messages \textit{typical}. The number of strings of length $N$ with exactly $Np$ heads\footnote{Here we assume $Np$ is an integer; this isn't true for general $N,p$ of course, but for sufficiently large $N$ we can make it true by an arbitrary small rounding of $p$.} is \begin{equation}
+\begin{pmatrix}
+N  \\ Np
+\end{pmatrix} = \frac{N!}{(Np)! (N(1-p))!}.
+\end{equation}
+From the Stirling approximation \begin{equation}
+n! \sim \sqrt{2 \pi n} \LP \frac{n}{e} \RP^n
+\end{equation}
+we have roughly \begin{equation}
+\begin{aligned}
+\begin{pmatrix}
+N  \\ Np
+\end{pmatrix} & \sim \frac{\sqrt{2 \pi N} \LP \frac{N}{e} \RP^N}{\sqrt{2 \pi Np} \LP \frac{Np}{e} \RP^{Np} \sqrt{2 \pi N(1-p)} \LP \frac{N(1-p)}{e} \RP^{N(1-p)}}.
+\end{aligned}
+\end{equation}
+Actually, it's easier to get what turns out to be an asymptotically tight upper bound. This is the sensible direction from which to bound, as it will in turn give an upper bound on the number of bits needed to compress a length-$N$ random string, which is equivalently a lower bound on the performance of our asymptotically lossless compression scheme. To get this easy upper bound, we take the binomial expansion \begin{equation}
+\begin{aligned}
+1 & = (x + (1-x))^n \\
+& = \sum_{\ell = 0}^N \begin{pmatrix} N \\ \ell \end{pmatrix} x^\ell (1-x)^{N - \ell} \\
+& \geq \begin{pmatrix} n \\ k \end{pmatrix} x^k (1-x)^{N - k}
+\end{aligned}
+\end{equation}
+where in the last step we have chosen some $k \in \{0, 1, \ldots, n\}$ and assumed $x \in [0,1]$. Setting $x = k/N = p$ gives \begin{equation}
+\begin{aligned}
+\begin{pmatrix} N \\ k \end{pmatrix} & \leq x^{-k} (1-x)^{k-N} \\
+& = \LP \frac{k}{N} \RP^{-k} \LP 1 - \frac{k}{N} \RP^{N - k} \\
+& = 2^{-k \log_2 \LP \frac{k}{N} \RP - (N-k) \log_2 \LP 1 - \frac{k}{N} \RP } \\
+& = 2^{N \left[ p \log_2 ( p ) - (N-k) \log_2 \LP 1 - p \RP \right]} \\
+& \equiv 2^{-kN h_2(p)}
+\end{aligned}
+\end{equation}
+where $h_2$ is the \textit{(binary) Shannon entropy function} \begin{equation}
+h_2(p) \equiv - p \log_2 p - (1-p) \log_2 (1-p).
+\end{equation}
+
+
+
 \bibliography{bibfile}
 \bibliographystyle{utphys}
 
