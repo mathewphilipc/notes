@@ -1,0 +1,95 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{graphicx}           % Graphics package
+\usepackage{amsmath} 
+\usepackage{mathrsfs}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[textheight=9in, textwidth=7.5in, letterpaper]{geometry}
+\usepackage[makeroom]{cancel}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{empheq}
+\usepackage{appendix}
+\usepackage{enumerate} 
+\usepackage{simpler-wick}
+\usepackage{amssymb}
+
+\sectionfont{\fontsize{12}{12}\selectfont}
+\subsectionfont{\fontsize{12}{12}\selectfont}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\D}{\partial}
+\newcommand{\KET}[1]{\left| #1 \right\rangle }
+\newcommand{\BRA}[1]{\left\langle #1 \right| }
+\newcommand{\IP}[2]{\left\langle #1 \middle| #2 \right\rangle}
+\newcommand{\PA}[2]{\frac{\partial #1}{\partial #2}}
+
+
+
+%%%%%%%%%%%%%%%%---------------------MOST USEFUL COMMAND EVER---------------------%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fixme}[1]{{\bf {\color{red}[#1]}}}
+\newcommand{\draftmode}{\usepackage[notref,notcite]{showkeys}}
+\providecommand*\showkeyslabelformat[1]{\normalfont\sffamily\footnotesize#1}
+
+%%%%%%%%%%%%%%%
+
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+
+\title{Supercritical Bernoulli Clusters}
+
+\author{Mathew Calkins}
+
+\date{\today}
+
+ 
+\maketitle
+
+\abstract{Extremely rough notes on phase transition for strongly correlated percolation models on supercritical Bernoulli clusters, mostly following the identically named arXiv:2609.08882.}
+
+\tableofcontents
+
+
+
+
+\section{Introduction}
+\subsection{Notation}
+We consider $\Z^{d \geq 3}$ as a graph with standard edges $\mathbb{E}_d$, the latter endowed with weights $(\omega_e)_{e \in \E_d}$. These will be i.i.d. Bernoulli with parameter $p$, taking values in $\{0,1\}$. We denote by $\Q_d$ this measure on $\{0,1\}^{\E_d}$. We assume $p > p_c(d)$, where \begin{equation}
+p_c(d) := \mbox{sup} \left\{ p \in [0,1] \ | \ \Q_p [0 \leftrightarrow \infty] \right\}
+\end{equation}
+and where the event $0 \leftrightarrow $ is shorthand for the event in which the induced graph found by deleting edges with weight 0 \begin{equation}
+\LP Z^d, \{ e \in \E_d \ | \ \omega_e = 1 \} \RP
+\end{equation}
+has an infinite connected component. Equivalently, we assume the $p$ is sufficiently large that the probability $\mc{Q}_p[0 \leftrightarrow \infty]$ is nonzero. It is well-known that for such a $p$, there exists a (necessarily measurable) subset $\tilde{\Omega}_0$ with $\Q_p$-probability 1 such that every $\omega \in \tilde{\Omega}_0$ has induced graph with a unique infinite connected component; we call the latter the \textit{infinite cluster} and denote it by $\mc{C}_\infty$. Intuitively, once $p$ becomes sufficiently large the probability of an infinite cluster jumps from 0 to 1, in which case it has a single connected component also with probability 1. This cluster naturally forms a graph $\LP \mc{C}_\infty, \E_\infty \RP$.
+
+
+\subsection{First Result}
+We introduce a continuous-time random walk on $\mc{C}_\infty$ by the instruction that the walker spend a random time $t > 0$ at any site before instantaneously jumping to a uniformly randomly chosen neighboring site, with wait time $t$ following probability density $e^{-t}$. This induces a Gaussian free field in the usual way by taking configurations \begin{equation}
+\varphi: \mc{C}_\infty \to \R \mbox{ sometimes written } \LP \varphi_x \RP_{x \in \mc{C}_\infty}
+\end{equation}
+to be a multivariate zero-centered Gaussian with covariances governed by the Green's function for the random walk. That is, \begin{equation}
+\E_\omega^G [\varphi_x \varepsilon_y] = g^\omega(x, y) \mathbf{1}_{x, y \in \mc{C}_\infty}, \quad x, y \in \Z^d
+\end{equation}
+where we make the canonical trivial extension of this rule to $\Z^d$ by declaring $\varphi_x = 0$ for any $x \in \Z^d$. Here the Green's function is the expected number of times a walker starting at the first argument passes through the second argument, normalized by the number of immediate neighbors of the latter. \begin{equation}
+g^\omega(x, y) := \frac{1}{\omega_y} E_x^\omega \left[ \int_0^\infty \mathbf{1}_{X_t = y} dt \right] = \frac{1}{\omega_y} \int_0^\infty P_x^\omega (X_t = y) dt.
+\end{equation}
+
+\bibliography{bibfile}
+\bibliographystyle{utphys}
+
+\end{document}
+
+
